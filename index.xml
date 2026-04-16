@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Ashour Blog</title><link>https://Mostafa-Ashour.github.io/</link><description>Recent content on Ashour Blog</description><generator>Hugo</generator><language>en-us</language><copyright>&lt;a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener"&gt;CC BY-NC 4.0&lt;/a&gt;</copyright><lastBuildDate>Thu, 16 Apr 2026 21:46:20 +0200</lastBuildDate><atom:link href="https://Mostafa-Ashour.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>Working With IDS IPS</title><link>https://Mostafa-Ashour.github.io/posts/2026/04/working-with-ids-ips/</link><pubDate>Thu, 16 Apr 2026 21:46:20 +0200</pubDate><guid>https://Mostafa-Ashour.github.io/posts/2026/04/working-with-ids-ips/</guid><description>&lt;h1 id="introduction-to-idsips"&gt;Introduction To IDS/IPS&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;em&gt;&lt;strong&gt;Network security monitoring (NSM)&lt;/strong&gt;&lt;/em&gt; relies on &lt;code&gt;Intrusion Detection Systems (IDS)&lt;/code&gt; and &lt;code&gt;Intrusion Prevention Systems (IPS)&lt;/code&gt; to:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Identify potential Threats.&lt;/li&gt;
+&lt;li&gt;Mitigate their impact.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;An &lt;code&gt;Intrusion Detection System (IDS)&lt;/code&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Monitors network or system activity for malicious behavior and policy violations.&lt;/li&gt;
+&lt;li&gt;Reporting to a management station to provide network visibility.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;While an &lt;code&gt;IDS&lt;/code&gt; alerts to intrusions, it does not prevent them.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The IDS operates in two main modes:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Signature-Based Detection.&lt;/li&gt;
+&lt;li&gt;Anomaly-Based Detection.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;In &lt;code&gt;signature-based detection&lt;/code&gt;:&lt;/p&gt;</description></item></channel></rss>
