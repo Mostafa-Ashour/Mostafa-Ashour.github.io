@@ -1,4 +1,4 @@
-baseURL = "https://Mostafa-Ashour.github.io"
+baseURL = "baseURL = "https://mostafa-ashour.github.io/"
 title   = "Ashour Blog"
 languageCode = "en-us"
 theme = "hello-friend-ng"
