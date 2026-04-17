@@ -1,20 +1,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>Working With IDS IPS on Ashour Blog</title>
-        <link>http://localhost:1313/posts/working-with-ids-ips/</link>
+        <link>https://mostafa-ashour.github.io/posts/working-with-ids-ips/</link>
         <description>Recent content in Working With IDS IPS on Ashour Blog</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
         <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
         <lastBuildDate>Fri, 17 Apr 2026 14:33:33 +0200</lastBuildDate>
-        <atom:link href="http://localhost:1313/posts/working-with-ids-ips/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="https://mostafa-ashour.github.io/posts/working-with-ids-ips/index.xml" rel="self" type="application/rss+xml" />
         
         <item>
             <title>Zeek</title>
-            <link>http://localhost:1313/posts/2026/04/zeek/</link>
+            <link>https://mostafa-ashour.github.io/posts/2026/04/zeek/</link>
             <pubDate>Fri, 17 Apr 2026 14:34:26 +0200</pubDate>
             
-            <guid>http://localhost:1313/posts/2026/04/zeek/</guid>
+            <guid>https://mostafa-ashour.github.io/posts/2026/04/zeek/</guid>
             <description>&lt;h1 id=&#34;zeek-fundamentals&#34;&gt;Zeek Fundamentals&lt;/h1&gt;
 &lt;ul&gt;
 &lt;li&gt;
@@ -452,10 +452,10 @@ post.1dbcb3f1b.37467121d5.456c54f2.blue.letsgohunt.online
         
         <item>
             <title>Suricata</title>
-            <link>http://localhost:1313/posts/2026/04/suricata/</link>
+            <link>https://mostafa-ashour.github.io/posts/2026/04/suricata/</link>
             <pubDate>Fri, 17 Apr 2026 14:34:19 +0200</pubDate>
             
-            <guid>http://localhost:1313/posts/2026/04/suricata/</guid>
+            <guid>https://mostafa-ashour.github.io/posts/2026/04/suricata/</guid>
             <description>&lt;h1 id=&#34;suricata-fundamentals&#34;&gt;Suricata Fundamentals&lt;/h1&gt;
 &lt;ul&gt;
 &lt;li&gt;
@@ -1926,10 +1926,10 @@ post.1dbcb3f1b.37467121d5.456c54f2.blue.letsgohunt.online
         
         <item>
             <title>Snort</title>
-            <link>http://localhost:1313/posts/2026/04/snort/</link>
+            <link>https://mostafa-ashour.github.io/posts/2026/04/snort/</link>
             <pubDate>Fri, 17 Apr 2026 14:34:05 +0200</pubDate>
             
-            <guid>http://localhost:1313/posts/2026/04/snort/</guid>
+            <guid>https://mostafa-ashour.github.io/posts/2026/04/snort/</guid>
             <description>&lt;h1 id=&#34;snort-fundamentals&#34;&gt;Snort Fundamentals&lt;/h1&gt;
 &lt;ul&gt;
 &lt;li&gt;Snort is an open-source intrusion detection system (IDS) and intrusion prevention system (IPS) that can also function as a packet logger/sniffer, similar to Suricata.&lt;/li&gt;

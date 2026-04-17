@@ -1,20 +1,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>Posts on Ashour Blog</title>
-        <link>http://localhost:1313/posts/</link>
+        <link>https://mostafa-ashour.github.io/posts/</link>
         <description>Recent content in Posts on Ashour Blog</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
         <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
         <lastBuildDate>Fri, 17 Apr 2026 14:34:26 +0200</lastBuildDate>
-        <atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="https://mostafa-ashour.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
         
         <item>
             <title>Working With IDS IPS</title>
-            <link>http://localhost:1313/posts/working-with-ids-ips/</link>
+            <link>https://mostafa-ashour.github.io/posts/working-with-ids-ips/</link>
             <pubDate>Fri, 17 Apr 2026 14:33:33 +0200</pubDate>
             
-            <guid>http://localhost:1313/posts/working-with-ids-ips/</guid>
+            <guid>https://mostafa-ashour.github.io/posts/working-with-ids-ips/</guid>
             <description>&lt;h1 id=&#34;introduction-to-idsips&#34;&gt;Introduction To IDS/IPS&lt;/h1&gt;
 &lt;ul&gt;
 &lt;li&gt;

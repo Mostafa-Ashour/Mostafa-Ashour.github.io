@@ -2,39 +2,39 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Untagged on Ashour Blog</title>
-    <link>http://localhost:1313/tags/untagged/</link>
+    <link>https://mostafa-ashour.github.io/tags/untagged/</link>
     <description>Recent content in Untagged on Ashour Blog</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-    <lastBuildDate>Thu, 17 Apr 2025 14:34:26 +0200</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/untagged/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 17 Apr 2026 14:34:26 +0200</lastBuildDate>
+    <atom:link href="https://mostafa-ashour.github.io/tags/untagged/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Zeek</title>
-      <link>http://localhost:1313/posts/2025/04/zeek/</link>
-      <pubDate>Thu, 17 Apr 2025 14:34:26 +0200</pubDate>
-      <guid>http://localhost:1313/posts/2025/04/zeek/</guid>
+      <link>https://mostafa-ashour.github.io/posts/2026/04/zeek/</link>
+      <pubDate>Fri, 17 Apr 2026 14:34:26 +0200</pubDate>
+      <guid>https://mostafa-ashour.github.io/posts/2026/04/zeek/</guid>
       <description>&lt;h1 id=&#34;zeek-fundamentals&#34;&gt;Zeek Fundamentals&lt;/h1&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;Zeek is an open-source network traffic analyzer used to detect suspicious or malicious activity by scrutinizing network traffic.&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;Beyond security, it aids in troubleshooting network issues and performing network measurements.&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;Once deployed, Zeek provides defensive cybersecurity teams with extensive log files detailing network activity, including connection records and application-layer transcripts (e.g., DNS, HTTP).&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;Zeek also offers built-in functions for analyzing and detecting network activities.&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;Zeek&amp;rsquo;s powerful scripting language allows users to create custom scripts, similar to Suricata rules, enabling adaptable network analysis and intrusion detection.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Suricata</title>
-      <link>http://localhost:1313/posts/2025/04/suricata/</link>
-      <pubDate>Thu, 17 Apr 2025 14:34:19 +0200</pubDate>
-      <guid>http://localhost:1313/posts/2025/04/suricata/</guid>
+      <link>https://mostafa-ashour.github.io/posts/2026/04/suricata/</link>
+      <pubDate>Fri, 17 Apr 2026 14:34:19 +0200</pubDate>
+      <guid>https://mostafa-ashour.github.io/posts/2026/04/suricata/</guid>
       <description>&lt;h1 id=&#34;suricata-fundamentals&#34;&gt;Suricata Fundamentals&lt;/h1&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;Suricata is a robust, open-source network security engine for IDS, IPS, and NSM.&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;Developed and maintained by the OISF, it showcases the power of community-led, non-profit projects.&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;Suricata dissect/analyze all network traffic to find potential malicious activity.&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;It can broadly:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Assess the network&amp;rsquo;s health/condition.&lt;/li&gt;&#xA;&lt;li&gt;Also investigate specific application-level interactions.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;Suricata uses a detailed set of rules to guide its analysis, helping it identify possible threats.&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;It is designed for high-speed performance on standard and specialized hardware, making it a very efficient tool.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Snort</title>
-      <link>http://localhost:1313/posts/2025/04/snort/</link>
-      <pubDate>Thu, 17 Apr 2025 14:34:05 +0200</pubDate>
-      <guid>http://localhost:1313/posts/2025/04/snort/</guid>
+      <link>https://mostafa-ashour.github.io/posts/2026/04/snort/</link>
+      <pubDate>Fri, 17 Apr 2026 14:34:05 +0200</pubDate>
+      <guid>https://mostafa-ashour.github.io/posts/2026/04/snort/</guid>
       <description>&lt;h1 id=&#34;snort-fundamentals&#34;&gt;Snort Fundamentals&lt;/h1&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Snort is an open-source intrusion detection system (IDS) and intrusion prevention system (IPS) that can also function as a packet logger/sniffer, similar to Suricata.&lt;/li&gt;&#xA;&lt;li&gt;It inspects network traffic to identify and log all activity, providing a comprehensive view and detailed logs of application layer transactions.&lt;/li&gt;&#xA;&lt;li&gt;Snort requires rule sets to define inspection parameters and identify specific items of interest.&lt;/li&gt;&#xA;&lt;li&gt;It is designed to operate efficiently on both general-purpose and custom hardware.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;snort-operation-modes&#34;&gt;Snort Operation Modes&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Snort typically operates in the following modes:&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Inline IDS/IPS.&lt;/li&gt;&#xA;&lt;li&gt;Passive IDS.&lt;/li&gt;&#xA;&lt;li&gt;Network-based IDS.&lt;/li&gt;&#xA;&lt;li&gt;Host-based IDS (however, Snort is not ideally a host-based IDS. We would recommend opting for more specialized tools for this.)&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;&lt;strong&gt;According to &lt;a href=&#34;https://docs.snort.org/start/inspection&#34;&gt;Snort&amp;rsquo;s documentation&lt;/a&gt;&lt;/strong&gt;:&lt;/p&gt;</description>
     </item>
     <item>
       <title>Working With IDS IPS</title>
-      <link>http://localhost:1313/posts/working-with-ids-ips/</link>
-      <pubDate>Thu, 17 Apr 2025 14:33:33 +0200</pubDate>
-      <guid>http://localhost:1313/posts/working-with-ids-ips/</guid>
+      <link>https://mostafa-ashour.github.io/posts/working-with-ids-ips/</link>
+      <pubDate>Fri, 17 Apr 2026 14:33:33 +0200</pubDate>
+      <guid>https://mostafa-ashour.github.io/posts/working-with-ids-ips/</guid>
       <description>&lt;h1 id=&#34;introduction-to-idsips&#34;&gt;Introduction To IDS/IPS&lt;/h1&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;em&gt;&lt;strong&gt;Network security monitoring (NSM)&lt;/strong&gt;&lt;/em&gt; relies on &lt;code&gt;Intrusion Detection Systems (IDS)&lt;/code&gt; and &lt;code&gt;Intrusion Prevention Systems (IPS)&lt;/code&gt; to:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Identify potential Threats.&lt;/li&gt;&#xA;&lt;li&gt;Mitigate their impact.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;An &lt;code&gt;Intrusion Detection System (IDS)&lt;/code&gt;:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Monitors network or system activity for malicious behavior and policy violations.&lt;/li&gt;&#xA;&lt;li&gt;Reporting to a management station to provide network visibility.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;While an &lt;code&gt;IDS&lt;/code&gt; alerts to intrusions, it does not prevent them.&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;The IDS operates in two main modes:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Signature-Based Detection.&lt;/li&gt;&#xA;&lt;li&gt;Anomaly-Based Detection.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;In &lt;code&gt;signature-based detection&lt;/code&gt;:&lt;/p&gt;</description>
     </item>
   </channel>
