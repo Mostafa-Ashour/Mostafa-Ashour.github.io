@@ -6,8 +6,180 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
         <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-        <lastBuildDate>Fri, 17 Apr 2026 14:33:33 +0200</lastBuildDate>
+        <lastBuildDate>Thu, 17 Apr 2025 14:34:26 +0200</lastBuildDate>
         <atom:link href="https://mostafa-ashour.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+        
+        <item>
+            <title>Working With IDS IPS</title>
+            <link>https://mostafa-ashour.github.io/posts/working-with-ids-ips/</link>
+            <pubDate>Thu, 17 Apr 2025 14:33:33 +0200</pubDate>
+            
+            <guid>https://mostafa-ashour.github.io/posts/working-with-ids-ips/</guid>
+            <description>&lt;h1 id=&#34;introduction-to-idsips&#34;&gt;Introduction To IDS/IPS&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;em&gt;&lt;strong&gt;Network security monitoring (NSM)&lt;/strong&gt;&lt;/em&gt; relies on &lt;code&gt;Intrusion Detection Systems (IDS)&lt;/code&gt; and &lt;code&gt;Intrusion Prevention Systems (IPS)&lt;/code&gt; to:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Identify potential Threats.&lt;/li&gt;
+&lt;li&gt;Mitigate their impact.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;An &lt;code&gt;Intrusion Detection System (IDS)&lt;/code&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Monitors network or system activity for malicious behavior and policy violations.&lt;/li&gt;
+&lt;li&gt;Reporting to a management station to provide network visibility.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;While an &lt;code&gt;IDS&lt;/code&gt; alerts to intrusions, it does not prevent them.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The IDS operates in two main modes:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Signature-Based Detection.&lt;/li&gt;
+&lt;li&gt;Anomaly-Based Detection.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;In &lt;code&gt;signature-based detection&lt;/code&gt;:&lt;/p&gt;</description>
+            <content type="html"><![CDATA[<h1 id="introduction-to-idsips">Introduction To IDS/IPS</h1>
+<ul>
+<li>
+<p><em><strong>Network security monitoring (NSM)</strong></em> relies on <code>Intrusion Detection Systems (IDS)</code> and <code>Intrusion Prevention Systems (IPS)</code> to:</p>
+<ul>
+<li>Identify potential Threats.</li>
+<li>Mitigate their impact.</li>
+</ul>
+</li>
+<li>
+<p>An <code>Intrusion Detection System (IDS)</code>:</p>
+<ul>
+<li>Monitors network or system activity for malicious behavior and policy violations.</li>
+<li>Reporting to a management station to provide network visibility.</li>
+</ul>
+</li>
+<li>
+<p>While an <code>IDS</code> alerts to intrusions, it does not prevent them.</p>
+</li>
+<li>
+<p>The IDS operates in two main modes:</p>
+<ul>
+<li>Signature-Based Detection.</li>
+<li>Anomaly-Based Detection.</li>
+</ul>
+</li>
+<li>
+<p>In <code>signature-based detection</code>:</p>
+<ul>
+<li>The IDS recognizes bad patterns, such as malware signatures and previously identified attack patterns.</li>
+<li>However, this method is limited to only known threats.</li>
+</ul>
+</li>
+<li>
+<p>For this reason, <code>anomaly-based detection</code> is implemented:</p>
+<ul>
+<li>Which establishes a baseline of normal behavior and sends an alert when it detects behavior deviating from this baseline.</li>
+<li>It&rsquo;s a more proactive approach but is susceptible to false positives, hence why both methods are used to balance each other out.</li>
+</ul>
+</li>
+<li>
+<p>An <code>IPS</code>, positioned behind the firewall, actively prevents detected threats, providing an additional layer of protection by not only alerting to intrusions but also actively stops them from entering.</p>
+</li>
+<li>
+<p>An <code>IPS</code> also operates in a similar mode to IDS, offering both <code>signature-based</code> and <code>anomaly-based detection</code>.</p>
+</li>
+<li>
+<p>Once a potential threat is detected, it takes actions such as:</p>
+<ul>
+<li>Dropping malicious packets.</li>
+<li>Blocking network traffic.</li>
+<li>Resetting the connection.</li>
+</ul>
+</li>
+<li>
+<p>The goal is to interrupt or halt activities that are deemed dangerous to our network or against our policy.</p>
+</li>
+<li>
+<p>IDS and IPS are typically deployed on the internal network side, behind the firewall, to:</p>
+<ul>
+<li>Maximize visibility of relevant traffic.</li>
+<li>Effectively protect resources.</li>
+</ul>
+</li>
+<li>
+<p><em><strong>Intrusion Detection Systems (IDS)</strong></em>:</p>
+<ul>
+<li>Passively monitor network traffic for threats and generate alerts.</li>
+<li>Positioned behind the firewall, they analyze traffic that has bypassed initial defenses, focusing on complex threats.</li>
+</ul>
+</li>
+<li>
+<p><em><strong>Intrusion Prevention Systems (IPS)</strong></em>:</p>
+<ul>
+<li>Actively block detected threats.</li>
+<li>Deployed inline, typically directly behind the firewall, IPS do both monitor and block malicious traffic.</li>
+</ul>
+</li>
+<li>
+<p>Intrusion Detection/Prevention Systems (IDS/IPS) deployment depends on network requirements and traffic monitoring needs.</p>
+</li>
+<li>
+<p>These systems can be implemented at the host level (HIDS/HIPS) to monitor individual host traffic for suspicious activity.</p>
+</li>
+<li>
+<p>Placement of these systems is integral to a defense-in-depth strategy.</p>
+</li>
+<li>
+<p>The specific architecture will vary based on:</p>
+<ul>
+<li>Network characteristics/nature.</li>
+<li>Data sensitivity.</li>
+<li>The threat landscape.</li>
+</ul>
+</li>
+</ul>
+<h2 id="idsips-updates">IDS/IPS Updates</h2>
+<ul>
+<li>
+<p>Moreover, to ensure these systems perform at their best, consistently:</p>
+<ul>
+<li>Update them with the latest threat signatures.</li>
+<li>Fine-tune their anomaly detection algorithms.</li>
+</ul>
+</li>
+<li>
+<p>This requires a diligent, ongoing effort from our security team, but it&rsquo;s absolutely essential given the continually evolving threat landscape.</p>
+</li>
+<li>
+<p>Security Information and Event Management (SIEM) systems are also crucial.</p>
+</li>
+<li>
+<p>By aggregating logs from IDS/IPS and other network devices, SIEMs:</p>
+<ul>
+<li>Correlate events and use advanced analytics to detect complex attacks.</li>
+<li>Providing a unified security view for rapid threat response.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h1 id="suricata">Suricata</h1>
+<ul>
+<li><a href="/posts/2025/04/suricata/">Suricata</a>.</li>
+</ul>
+<hr>
+<h1 id="snort">Snort</h1>
+<ul>
+<li><a href="/posts/2025/04/snort/">Snort</a>.</li>
+</ul>
+<hr>
+<h1 id="zeek">Zeek</h1>
+<ul>
+<li><a href="/posts/2025/04/zeek/">Zeek</a>.</li>
+</ul>
+<hr>
+]]></content>
+        </item>
         
     </channel>
 </rss>

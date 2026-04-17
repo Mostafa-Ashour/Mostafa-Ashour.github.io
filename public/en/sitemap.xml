@@ -2,8 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://mostafa-ashour.github.io/about/</loc>
+    <lastmod>2026-04-17T13:57:08+02:00</lastmod>
+  </url><url>
     <loc>https://mostafa-ashour.github.io/</loc>
-    <lastmod>2026-04-17T14:33:33+02:00</lastmod>
+    <lastmod>2026-04-17T13:57:08+02:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="fr"
@@ -16,10 +19,35 @@
                 />
   </url><url>
     <loc>https://mostafa-ashour.github.io/posts/</loc>
-    <lastmod>2026-04-17T14:33:33+02:00</lastmod>
+    <lastmod>2025-04-17T14:34:26+02:00</lastmod>
   </url><url>
-    <loc>https://mostafa-ashour.github.io/about/</loc>
-    <lastmod>2026-04-17T13:57:08+02:00</lastmod>
+    <loc>https://mostafa-ashour.github.io/tags/</loc>
+    <lastmod>2025-04-17T14:34:26+02:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="fr"
+                href="https://mostafa-ashour.github.io/fr/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-us"
+                href="https://mostafa-ashour.github.io/tags/"
+                />
+  </url><url>
+    <loc>https://mostafa-ashour.github.io/tags/untagged/</loc>
+    <lastmod>2025-04-17T14:34:26+02:00</lastmod>
+  </url><url>
+    <loc>https://mostafa-ashour.github.io/posts/2025/04/zeek/</loc>
+    <lastmod>2025-04-17T14:34:26+02:00</lastmod>
+  </url><url>
+    <loc>https://mostafa-ashour.github.io/posts/2025/04/suricata/</loc>
+    <lastmod>2025-04-17T14:34:19+02:00</lastmod>
+  </url><url>
+    <loc>https://mostafa-ashour.github.io/posts/2025/04/snort/</loc>
+    <lastmod>2025-04-17T14:34:05+02:00</lastmod>
+  </url><url>
+    <loc>https://mostafa-ashour.github.io/posts/working-with-ids-ips/</loc>
+    <lastmod>2025-04-17T14:33:33+02:00</lastmod>
   </url><url>
     <loc>https://mostafa-ashour.github.io/categories/</loc>
     <xhtml:link
@@ -43,18 +71,6 @@
                 rel="alternate"
                 hreflang="en-us"
                 href="https://mostafa-ashour.github.io/series/"
-                />
-  </url><url>
-    <loc>https://mostafa-ashour.github.io/tags/</loc>
-    <xhtml:link
-                rel="alternate"
-                hreflang="fr"
-                href="https://mostafa-ashour.github.io/fr/tags/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-us"
-                href="https://mostafa-ashour.github.io/tags/"
                 />
   </url>
 </urlset>

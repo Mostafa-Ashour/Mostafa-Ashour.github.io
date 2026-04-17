@@ -1,6 +1,6 @@
 ---
 title: "Zeek"
-date: 2026-04-17T14:34:26+02:00
+date: 2025-04-17T14:34:26+02:00
 draft: false
 toc: false
 images:

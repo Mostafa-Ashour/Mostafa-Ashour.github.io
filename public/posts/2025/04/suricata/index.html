@@ -1,485 +1,195 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-    <channel>
-        <title>Working With IDS IPS on Ashour Blog</title>
-        <link>https://mostafa-ashour.github.io/posts/working-with-ids-ips/</link>
-        <description>Recent content in Working With IDS IPS on Ashour Blog</description>
-        <generator>Hugo -- gohugo.io</generator>
-        <language>en-us</language>
-        <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-        <lastBuildDate>Thu, 17 Apr 2025 14:33:33 +0200</lastBuildDate>
-        <atom:link href="https://mostafa-ashour.github.io/posts/working-with-ids-ips/index.xml" rel="self" type="application/rss+xml" />
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="Mostafa Ashour ">
+<meta name="description" content="Suricata Fundamentals Suricata is a robust, open-source network security engine for IDS, IPS, and NSM.
+Developed and maintained by the OISF, it showcases the power of community-led, non-profit projects.
+Suricata dissect/analyze all network traffic to find potential malicious activity.
+It can broadly:
+Assess the network&rsquo;s health/condition. Also investigate specific application-level interactions. Suricata uses a detailed set of rules to guide its analysis, helping it identify possible threats.
+It is designed for high-speed performance on standard and specialized hardware, making it a very efficient tool.
+" />
+<meta name="keywords" content=", untagged" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="" />
+<link rel="canonical" href="https://mostafa-ashour.github.io/posts/2025/04/suricata/" />
+
+
+    <title>
         
-        <item>
-            <title>Zeek</title>
-            <link>https://mostafa-ashour.github.io/posts/2025/04/zeek/</link>
-            <pubDate>Thu, 17 Apr 2025 14:34:26 +0200</pubDate>
-            
-            <guid>https://mostafa-ashour.github.io/posts/2025/04/zeek/</guid>
-            <description>&lt;h1 id=&#34;zeek-fundamentals&#34;&gt;Zeek Fundamentals&lt;/h1&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;Zeek is an open-source network traffic analyzer used to detect suspicious or malicious activity by scrutinizing network traffic.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Beyond security, it aids in troubleshooting network issues and performing network measurements.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Once deployed, Zeek provides defensive cybersecurity teams with extensive log files detailing network activity, including connection records and application-layer transcripts (e.g., DNS, HTTP).&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Zeek also offers built-in functions for analyzing and detecting network activities.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Zeek&amp;rsquo;s powerful scripting language allows users to create custom scripts, similar to Suricata rules, enabling adaptable network analysis and intrusion detection.&lt;/p&gt;</description>
-            <content type="html"><![CDATA[<h1 id="zeek-fundamentals">Zeek Fundamentals</h1>
-<ul>
-<li>
-<p>Zeek is an open-source network traffic analyzer used to detect suspicious or malicious activity by scrutinizing network traffic.</p>
-</li>
-<li>
-<p>Beyond security, it aids in troubleshooting network issues and performing network measurements.</p>
-</li>
-<li>
-<p>Once deployed, Zeek provides defensive cybersecurity teams with extensive log files detailing network activity, including connection records and application-layer transcripts (e.g., DNS, HTTP).</p>
-</li>
-<li>
-<p>Zeek also offers built-in functions for analyzing and detecting network activities.</p>
-</li>
-<li>
-<p>Zeek&rsquo;s powerful scripting language allows users to create custom scripts, similar to Suricata rules, enabling adaptable network analysis and intrusion detection.</p>
-</li>
-<li>
-<p>Unlike signature-based IDSs, Zeek&rsquo;s script ability and ability to run on standard hardware facilitate:</p>
-<ul>
-<li>Semantic misuse detection.</li>
-<li>Anomaly detection.</li>
-<li>Behavioral analysis.</li>
-</ul>
-</li>
-</ul>
-<h2 id="zeeks-operation-modes">Zeek&rsquo;s Operation Modes</h2>
-<ul>
-<li>Zeek operates in the following modes.</li>
-</ul>
-<h4 id="fully-passive-traffic-analysis">Fully passive traffic analysis</h4>
-<ul>
-<li>Zeek acts like a silent observer on a network tap or span port, meaning it monitors traffic without interfering with the flow of data.</li>
-<li>This ensures that even if Zeek experiences a failure, your network connectivity remains completely unaffected.</li>
-</ul>
-<h4 id="libpcap-interface-for-packet-capture"><code>libpcap</code> interface for packet capture</h4>
-<ul>
-<li>Zeek uses the standard <code>libpcap</code> library to &ldquo;listen&rdquo; to the network interface, allowing it to capture raw data packets directly from the hardware.</li>
-<li>It translates these messy, raw packets into high-level, readable logs that describe network events (like HTTP requests or TLS handshakes).</li>
-</ul>
-<h4 id="real-time-and-offline-eg-pcap-based-analysis">Real-time and offline (e.g., PCAP-based) analysis</h4>
-<ul>
-<li>It can analyze live traffic as it happens to provide instant visibility, or it can ingest recorded <strong>PCAP files</strong> for forensic investigations.</li>
-<li>This allows security teams to &ldquo;rewind the tape&rdquo; and analyze past security incidents with the same depth as live events.</li>
-</ul>
-<h4 id="cluster-support-for-large-scale-deployments">Cluster support for large-scale deployments</h4>
-<ul>
-<li>To handle massive amounts of data (like a 100Gbps backbone), Zeek can be distributed across multiple servers in a cluster.</li>
-<li>A &ldquo;manager&rdquo; node coordinates the work, while multiple &ldquo;worker&rdquo; nodes split the traffic load, ensuring the system stays performant under heavy pressure.</li>
-</ul>
-<h2 id="zeeks-architecture">Zeek&rsquo;s Architecture</h2>
-<ul>
-<li>Zeek&rsquo;s architecture comprises two primary components:
-<ul>
-<li>The <code>event engine</code> (or core).
-<ul>
-<li>The <code>script interpreter</code>.</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h4 id="event-engine">Event Engine</h4>
-<ul>
-<li>
-<p>Think of the <strong>Event Engine</strong> as a neutral translator.</p>
-</li>
-<li>
-<p>It sits between:</p>
-<ul>
-<li>The raw, messy data of the network.</li>
-<li>The human-readable reports you actually want to see.</li>
-</ul>
-</li>
-<li>
-<p>The <em><strong>Event Engine</strong></em>:</p>
-<ul>
-<li>Processes incoming network data.</li>
-<li>Then Converts it into meaningful events.</li>
-</ul>
-</li>
-<li>
-<p>In Zeek, these events describe network activity without making any judgments or interpretations.</p>
-</li>
-<li>
-<p>They simply tell us what is happening.</p>
-</li>
-<li>
-<p>For example:</p>
-<ul>
-<li>An HTTP request is turned into an <code>http_request</code> event.</li>
-<li>This event includes all the details of the request but doesn&rsquo;t analyze it or determine if it&rsquo;s malicious, such as checking if a port is associated with malware.</li>
-</ul>
-</li>
-</ul>
-<h4 id="script-interpreter">Script Interpreter</h4>
-<ul>
-<li>Zeek&rsquo;s script interpreter analyzes network traffic using event handlers written in the Zeek scripting language.</li>
-<li>These scripts implement the site&rsquo;s security policy by defining actions to be taken upon detection of certain events.</li>
-<li>Zeek&rsquo;s core queues events for processing in the order they are received.</li>
-<li>Most events are defined in <code>.bif</code> files within the <code>/scripts/base/bif/plugins/ directory</code>.</li>
-<li>Refer to: <a href="https://docs.zeek.org/en/stable/scripts/base/bif">https://docs.zeek.org/en/stable/scripts/base/bif/</a> for more information.</li>
-</ul>
-<h2 id="zeek-logs">Zeek Logs</h2>
-<ul>
-<li>
-<p>When Zeek analyzes a PCAP file offline, it saves logs to the current directory.</p>
-</li>
-<li>
-<p>Common Zeek logs include:</p>
-<ul>
-<li><code>conn.log</code>—This log provides details about IP, TCP, UDP, and ICMP connections.</li>
-<li><code>dns.log</code>—Here, you&rsquo;ll find the details of DNS queries and responses.</li>
-<li><code>http.log</code>—This log captures the details of HTTP requests and responses.</li>
-<li><code>ftp.log</code>—Details of FTP requests and responses are logged here.</li>
-<li><code>smtp.log</code>—This log covers SMTP transactions, such as sender and recipient details.</li>
-</ul>
-</li>
-<li>
-<p>For example, the <code>http.log</code> contains valuable data such as:</p>
-<ul>
-<li><code>host</code>—The HTTP domain/IP.</li>
-<li><code>uri</code>—The HTTP URI.</li>
-<li><code>referrer</code>—The referrer of the HTTP request.</li>
-<li><code>user_agent</code>—The client&rsquo;s user agent.</li>
-<li><code>status_code</code>—The HTTP status code.</li>
-</ul>
-</li>
-<li>
-<p>For a more exhaustive list of common Zeek logs and their respective fields, refer to the following resource: <a href="https://docs.zeek.org/en/master/logs/index.html">https://docs.zeek.org/en/master/logs/index.html</a></p>
-</li>
-<li>
-<p>Zeek, by default:</p>
-<ul>
-<li>Compresses log files hourly using <code>gzip</code>.</li>
-<li>Archives them in <code>YYYY-MM-DD</code> directories.</li>
-</ul>
-</li>
-<li>
-<p>For working with these compressed logs, consider using tools like <code>gzcat</code> or <code>zgrep</code>.</p>
-</li>
-<li>
-<p>You can find examples on how to work with gzip-compressed Zeek logs at this link: <a href="https://blog.rapid7.com/2016/06/02/working-with-bro-logs-queries-by-example/">https://blog.rapid7.com/2016/06/02/working-with-bro-logs-queries-by-example/</a></p>
-</li>
-<li>
-<p>While standard Unix commands like <code>cat</code> and <code>grep</code> can process Zeek logs, Zeek provides the <code>zeek-cut</code> utility.</p>
-</li>
-<li>
-<p>This tool:</p>
-<ul>
-<li>Accepts Zeek log files as standard input via pipelines or stream redirection.</li>
-<li>Outputs specified columns.</li>
-</ul>
-</li>
-<li>
-<p>If you&rsquo;re interested in exploring Zeek examples, use cases, and learning the basics of writing Zeek scripts, take a look at the following link: <a href="https://docs.zeek.org/en/stable/examples/index.html">https://docs.zeek.org/en/stable/examples/index.html</a></p>
-</li>
-<li>
-<p>For a quick start guide to Zeek, refer to the following link: <a href="https://docs.zeek.org/en/stable/quickstart/index.html">https://docs.zeek.org/en/stable/quickstart/index.html</a></p>
-</li>
-</ul>
-<h2 id="zeek-key-features">Zeek Key Features</h2>
-<ul>
-<li>Network activity logging.</li>
-<li>Application protocol analysis (HTTP, DNS, FTP, etc.).</li>
-<li>File content inspection.</li>
-<li>IPv6 support.</li>
-<li>Tunnel detection.</li>
-<li>Protocol sanity checks.</li>
-<li>IDS-like pattern matching.</li>
-<li>Powerful scripting for analysis and network state management.</li>
-<li>Structured ASCII logs with ElasticSearch/DataSeries backends.</li>
-<li>Real-time external input integration.</li>
-<li>External C library for Zeek events.</li>
-<li>External process triggering.</li>
-</ul>
-<hr>
-<h1 id="intrusion-detection-with-zeek">Intrusion Detection With Zeek</h1>
-<ul>
-<li>Zeek, formerly Bro, is a powerful and flexible network security monitoring tool that provides deep insights into network traffic.</li>
-<li>Its rich logs and extensive scripting capabilities enable customized intrusion detection and continuous improvement of our security posture.</li>
-</ul>
-<h2 id="intrusion-detection-with-zeek-example-1-detecting-beaconing-malware">Intrusion Detection With Zeek Example 1: Detecting Beaconing Malware</h2>
-<ul>
-<li>
-<p>Beaconing is a malware communication method/process where it periodically contacts its command and control (C2) server:</p>
-<ul>
-<li>To receive instructions.</li>
-<li>For data exfiltration.</li>
-</ul>
-</li>
-<li>
-<p>Analyzing connection logs (<code>conn.log</code>) for:</p>
-<ul>
-<li>Repetitive connections to the same destination IP or domain.</li>
-<li>Constant data size.</li>
-<li>Connection timing.</li>
-</ul>
-</li>
-<li>
-<p>This will look for patterns in outbound traffic, and reveal potential beaconing behavior.</p>
-</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>/usr/local/zeek/bin/zeek -C -r /home/htb-student/pcaps/psempire.pcap
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>cat conn.log
-</span></span></code></pre></div><p><img src="./attachments/zeek_example_1_1.png" alt="zeek_example_1_1"></p>
-<table>
-  <thead>
-      <tr>
-          <th><strong>Field</strong></th>
-          <th><strong>Value</strong></th>
-          <th><strong>What it means</strong></th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>ts</strong></td>
-          <td><code>1511269439.125289</code></td>
-          <td><strong>The Timestamp:</strong> Exactly when the connection started (in Unix time).</td>
-      </tr>
-      <tr>
-          <td><strong>uid</strong></td>
-          <td><code>CuQYC98rE69BBb7jb</code></td>
-          <td><strong>Unique ID:</strong> A &ldquo;tracking number&rdquo; Zeek gives this specific conversation so you can find it in other logs (like the <code>http.log</code>).</td>
-      </tr>
-      <tr>
-          <td><strong>id.orig_h</strong></td>
-          <td><code>192.168.56.14</code></td>
-          <td><strong>Originator (Source):</strong> The IP address of the device that started the connection (the &ldquo;caller&rdquo;).</td>
-      </tr>
-      <tr>
-          <td><strong>id.resp_h</strong></td>
-          <td><code>51.15.197.127</code></td>
-          <td><strong>Responder (Destination):</strong> The IP address that answered the request (the &ldquo;receiver&rdquo;).</td>
-      </tr>
-      <tr>
-          <td><strong>id.resp_p</strong></td>
-          <td><code>80</code></td>
-          <td><strong>Port:</strong> They connected on Port 80, which is the standard port for <strong>unencrypted web traffic (HTTP).</strong></td>
-      </tr>
-      <tr>
-          <td><strong>proto</strong></td>
-          <td><code>tcp</code></td>
-          <td><strong>Protocol:</strong> They used TCP, which is like a &ldquo;certified mail&rdquo; delivery system for data.</td>
-      </tr>
-      <tr>
-          <td><strong>duration</strong></td>
-          <td><code>2.186789</code></td>
-          <td><strong>Time Spent:</strong> The entire conversation lasted about <strong>2.18 seconds.</strong></td>
-      </tr>
-      <tr>
-          <td><strong>orig_bytes</strong></td>
-          <td><code>204</code></td>
-          <td><strong>Data Sent:</strong> The source device sent <strong>204 bytes</strong> (likely a small web request).</td>
-      </tr>
-      <tr>
-          <td><strong>resp_bytes</strong></td>
-          <td><code>5557</code></td>
-          <td><strong>Data Received:</strong> The destination sent back <strong>5,557 bytes</strong> (likely the actual webpage content).</td>
-      </tr>
-      <tr>
-          <td><strong>conn_state</strong></td>
-          <td><code>SF</code></td>
-          <td><strong>Status:</strong> &ldquo;SF&rdquo; stands for <strong>S</strong>ynchronize and <strong>F</strong>inished. This means the connection started and ended perfectly with no errors.</td>
-      </tr>
-  </tbody>
-</table>
-<ul>
-<li>
-<p>Traffic to <code>51.15.197.127:80</code> occurs approximately every 5 seconds, suggesting malware beaconing.</p>
-</li>
-<li>
-<p>The <code>psempire.pcap</code> file contains traffic related to PowerShell Empire, which beacons every 5 seconds by default.</p>
-</li>
-<li>
-<p>Using this filter in Wireshark, will make the 5 seconds span more clear.</p>
-</li>
-</ul>
-<pre tabindex="0"><code>http &amp;&amp; ip.src == 192.168.56.14
-</code></pre><p><img src="./attachments/zeek_example_1_2.png" alt="zeek_example_1"></p>
-<h2 id="intrusion-detection-with-zeek-example-2-detecting-dns-exfiltration">Intrusion Detection With Zeek Example 2: Detecting DNS Exfiltration</h2>
-<ul>
-<li>Zeek aids in detecting data exfiltration, which is often difficult to identify due to its resemblance/mimicking to normal network traffic.</li>
-<li>Zeek&rsquo;s deeper network traffic analysis allows for the identification of unusual data transfers. Specifically, <code>files.log</code> can reveal large data volumes sent to atypical external destinations or over non-standard ports.</li>
-<li>The <code>http.log</code> and <code>dns.log</code> can expose covert (hidden or invisible) exfiltration channels like DNS tunneling or suspicious HTTP POST requests.</li>
-<li>Additionally, Zeek&rsquo;s file reassembly capability, irrespective of the protocol, helps determine the type/nature of exfiltrated data.</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>/usr/local/zeek/bin/zeek -C -r /home/htb-student/pcaps/dnsexfil.pcapng
-</span></span></code></pre></div><ul>
-<li>Let&rsquo;s extract the requested (sub)domains using <code>zeek-cut</code>.</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>cat dns.log | /usr/local/zeek/bin/zeek-cut query | cut -d . -f1-7
-</span></span></code></pre></div><pre tabindex="0"><code>safebrowsing.google.com
-456c54f2.blue.letsgohunt.online
-456c54f2.blue.letsgohunt.online
-wpad.windomain.local
-456c54f2.blue.letsgohunt.online
-www.180.0c9a5671.456c54f2.blue.letsgohunt.online
-www.1204192da26d109d4.1c9a5671.456c54f2.blue.letsgohunt.online
-www.11a1855b98d2b71c3.2c9a5671.456c54f2.blue.letsgohunt.online
-www.1f5e94740470d0157.9c9a5671.456c54f2.blue.letsgohunt.online
-www.114cbea690a81874a.ac9a5671.456c54f2.blue.letsgohunt.online
-www.10db7634eade0b736.bc9a5671.456c54f2.blue.letsgohunt.online
-www.1d5aee37e1c25ba02.cc9a5671.456c54f2.blue.letsgohunt.online
-cdn.5600553f0.456c54f2.blue.letsgohunt.online
-cdn.d600553f0.456c54f2.blue.letsgohunt.online
-cdn.e600553f0.456c54f2.blue.letsgohunt.online
-cdn.f600553f0.456c54f2.blue.letsgohunt.online
-cdn.10600553f0.456c54f2.blue.letsgohunt.online
-post.140.0346c53ab.456c54f2.blue.letsgohunt.online
-post.10bb13b53.1346c53ab.456c54f2.blue.letsgohunt.online
-post.104fb3984.2346c53ab.456c54f2.blue.letsgohunt.online
-post.1bdfe1d1e.3346c53ab.456c54f2.blue.letsgohunt.online
-post.19f3acfa6.4346c53ab.456c54f2.blue.letsgohunt.online
-kohaqbopxlq.windomain.local
-kohaqbopxlq.windomain.local
-456c54f2.blue.letsgohunt.online
-wpad.windomain.local
-456c54f2.blue.letsgohunt.online
-456c54f2.blue.letsgohunt.online
-cdn.013821c34.456c54f2.blue.letsgohunt.online
-cdn.b13821c34.456c54f2.blue.letsgohunt.online
-cdn.c13821c34.456c54f2.blue.letsgohunt.online
-456c54f2.blue.letsgohunt.online
-456c54f2.blue.letsgohunt.online
-456c54f2.blue.letsgohunt.online
-456c54f2.blue.letsgohunt.online
-post.1dbcb3f1b.37467121d5.456c54f2.blue.letsgohunt.online
----SNIP---
-</code></pre><ul>
-<li>
-<p>Command Explanation:</p>
-<ul>
-<li><code>cat dns.log</code>—This opens the Zeek DNS log file and feeds its raw text into the next part of the command.</li>
-<li><code>| /usr/local/zeek/bin/zeek-cut query</code>—This uses Zeek’s specialized tool to isolate and extract only the <code>query</code> column while ignoring all other metadata like timestamps or IP addresses.</li>
-<li><code>| cut -d . -f1-7</code>—This uses the period as a separator to keep only the first seven segments of each domain name, effectively stripping off any trailing data.</li>
-</ul>
-</li>
-<li>
-<p>The domain <code>letsgohunt.online</code> has a high number of subdomains, similar to cloud providers.</p>
-</li>
-<li>
-<p>However, it&rsquo;s worth noting that interactions with dozens or even hundreds of subdomains are generally not considered typical behavior.</p>
-</li>
-</ul>
-<h2 id="intrusion-detection-with-zeek-example-3-detecting-tls-exfiltration">Intrusion Detection With Zeek Example 3: Detecting TLS Exfiltration</h2>
-<ul>
-<li>Let&rsquo;s now go over an example of detecting data exfiltration over TLS.</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>/usr/local/zeek/bin/zeek -C -r &lt;path-to-pcap-file&gt;
-</span></span></code></pre></div><ul>
-<li>
-<p>Let&rsquo;s narrow things down by using <code>zeek-cut</code> one more time.</p>
-</li>
-<li>
-<p><strong>One-liner source</strong>: <a href="https://www.activecountermeasures.com/">activecountermeasures</a></p>
-</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>cat conn.log | /usr/local/zeek/bin/zeek-cut id.orig_h id.resp_h orig_bytes | sort | grep -v -e <span style="color:#e6db74">&#39;^$&#39;</span> | grep -v <span style="color:#e6db74">&#39;-&#39;</span> | datamash -g 1,2 sum <span style="color:#ae81ff">3</span> | sort -k <span style="color:#ae81ff">3</span> -rn | head -10
-</span></span></code></pre></div><pre tabindex="0"><code>10.0.10.100     192.168.151.181 270775912
-10.0.10.100     10.0.10.1       0
-</code></pre><ul>
-<li>
-<p><code>cat conn.log</code>—This command reads the <code>conn.log</code> file, which Zeek generates to record network connections.</p>
-</li>
-<li>
-<p><code>/usr/local/zeek/bin/zeek-cut id.orig_h id.resp_h orig_bytes</code>—we&rsquo;re extracting the following fields:</p>
-<ul>
-<li><code>id.orig_h</code> (originating host).</li>
-<li><code>id.resp_h</code> (responding host).</li>
-<li><code>orig_bytes</code> (number of bytes sent by the originating host).</li>
-</ul>
-</li>
-<li>
-<p><code>sort</code>—Sort arranges the output from the previous command, defaulting to ascending order based on the first field (<code>id.orig_h</code> in our case).</p>
-</li>
-<li>
-<p><code>grep -v -e '^$'</code>—Filters out empty lines:</p>
-<ul>
-<li><code>-v</code> inverts the selection (it will show you everything except empty lines).</li>
-<li><code>-e</code> enables regular expression matching, and <code>^$</code> matches empty lines.</li>
-</ul>
-</li>
-<li>
-<p><code>grep -v '-'</code>—This command filters lines containing a dash (<code>-</code>), which in Zeek logs typically indicates a missing value or undefined field.</p>
-</li>
-<li>
-<p><code>datamash -g 1,2 sum 3</code>—<code>datamash</code> is a command-line tool for numeric, textual, and statistical operations. The option <code>-g 1,2 sum 3</code> groups the output by the first two fields (originating and responding host IP addresses) and calculates the sum of the third field (bytes sent) for each group.</p>
-</li>
-<li>
-<p><code>sort -k 3 -rn</code>—Sorts the output by the numerical value of the third field (sum of <code>orig_bytes</code> for each IP address pair) (<code>-k 3</code>) in descending order (<code>-rn</code>).</p>
-</li>
-<li>
-<p><code>head -10</code>—This command displays the top 10 IP address pairs ranked by total bytes sent from originating to responding host.</p>
-</li>
-<li>
-<p>Approximately <code>270 MB</code> of data was sent to <code>192.168.151.181</code>.</p>
-</li>
-</ul>
-<h2 id="intrusion-detection-with-zeek-example-4-detecting-psexec">Intrusion Detection With Zeek Example 4: Detecting PsExec</h2>
-<ul>
-<li>
-<p>PsExec, a Sysinternals tool, is commonly used for remote administration in Active Directory environments, but its powerful capabilities also make it a favorite preference of adversaries for remote code execution attacks.</p>
-</li>
-<li>
-<p>To illustrate a typical attack sequence, let&rsquo;s consider this:</p>
-<ul>
-<li>An attacker transfers the binary file <code>PSEXESVC.exe</code> to a target machine using the <code>ADMIN$</code> share, a special shared folder used in Windows networks, via the SMB (Server Message Block) protocol.</li>
-<li>Following this, the attacker remotely launches this file as a temporary service by utilizing the <code>IPC$</code> share, another special shared resource that enables Inter-Process Communication.</li>
-</ul>
-</li>
-<li>
-<p>We can identify SMB transfers and the typical use of <code>PsExec</code> using Zeek&rsquo;s <code>smb_files.log</code>, <code>dce_rpc.log</code>, and <code>smb_mapping.log</code>.</p>
-</li>
-</ul>
-<hr>
-]]></content>
-        </item>
+            Suricata :: Ashour Blog  — Hello Friend NG Theme
         
-        <item>
-            <title>Suricata</title>
-            <link>https://mostafa-ashour.github.io/posts/2025/04/suricata/</link>
-            <pubDate>Thu, 17 Apr 2025 14:34:19 +0200</pubDate>
+    </title>
+
+
+
+
+
+  <link rel="stylesheet" href="https://mostafa-ashour.github.io/main.min.7289daf2e88ea2c7b253a51cc5794c7cc17e7aeb7295a19d978db764a5862f25.css" integrity="sha256-cona8uiOoseyU6UcxXlMfMF&#43;eutylaGdl423ZKWGLyU=" crossorigin="anonymous">
+
+
+
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="https://mostafa-ashour.github.io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://mostafa-ashour.github.io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://mostafa-ashour.github.io/favicon-16x16.png">
+    <link rel="manifest" href="https://mostafa-ashour.github.io/site.webmanifest">
+    <link rel="mask-icon" href="https://mostafa-ashour.github.io/safari-pinned-tab.svg" color="">
+    <link rel="shortcut icon" href="https://mostafa-ashour.github.io/favicon.ico">
+    <meta name="msapplication-TileColor" content="">
+
+
+
+  <meta itemprop="name" content="Suricata">
+  <meta itemprop="description" content="Suricata Fundamentals Suricata is a robust, open-source network security engine for IDS, IPS, and NSM.
+Developed and maintained by the OISF, it showcases the power of community-led, non-profit projects.
+Suricata dissect/analyze all network traffic to find potential malicious activity.
+It can broadly:
+Assess the network’s health/condition. Also investigate specific application-level interactions. Suricata uses a detailed set of rules to guide its analysis, helping it identify possible threats.
+It is designed for high-speed performance on standard and specialized hardware, making it a very efficient tool.">
+  <meta itemprop="datePublished" content="2025-04-17T14:34:19+02:00">
+  <meta itemprop="dateModified" content="2025-04-17T14:34:19+02:00">
+  <meta itemprop="wordCount" content="8340">
+  <meta itemprop="image" content="https://mostafa-ashour.github.io/">
+  <meta itemprop="keywords" content="Untagged">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://mostafa-ashour.github.io/">
+  <meta name="twitter:title" content="Suricata">
+  <meta name="twitter:description" content="Suricata Fundamentals Suricata is a robust, open-source network security engine for IDS, IPS, and NSM.
+Developed and maintained by the OISF, it showcases the power of community-led, non-profit projects.
+Suricata dissect/analyze all network traffic to find potential malicious activity.
+It can broadly:
+Assess the network’s health/condition. Also investigate specific application-level interactions. Suricata uses a detailed set of rules to guide its analysis, helping it identify possible threats.
+It is designed for high-speed performance on standard and specialized hardware, making it a very efficient tool.">
+
+
+
+    <meta property="og:url" content="https://mostafa-ashour.github.io/posts/2025/04/suricata/">
+  <meta property="og:site_name" content="Ashour Blog">
+  <meta property="og:title" content="Suricata">
+  <meta property="og:description" content="Suricata Fundamentals Suricata is a robust, open-source network security engine for IDS, IPS, and NSM.
+Developed and maintained by the OISF, it showcases the power of community-led, non-profit projects.
+Suricata dissect/analyze all network traffic to find potential malicious activity.
+It can broadly:
+Assess the network’s health/condition. Also investigate specific application-level interactions. Suricata uses a detailed set of rules to guide its analysis, helping it identify possible threats.
+It is designed for high-speed performance on standard and specialized hardware, making it a very efficient tool.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-04-17T14:34:19+02:00">
+    <meta property="article:modified_time" content="2025-04-17T14:34:19+02:00">
+    <meta property="article:tag" content="Untagged">
+    <meta property="og:image" content="https://mostafa-ashour.github.io/">
+
+
+
+
+
+
+    <meta property="article:published_time" content="2025-04-17 14:34:19 &#43;0200 EET" />
+
+
+
+
+
+
+
+
+
+
+
+
+    </head>
+
+    
+        <body>
+    
+    
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="https://mostafa-ashour.github.io/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">&gt;</span>
+            <span class="logo__text ">
+                mostafa@ashour:~$</span>
+            <span class="logo__cursor" style=
+                  "
+                   
+                   ">
+            </span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+                <nav class="menu">
+    <ul class="menu__inner">
+                <li><a href="https://mostafa-ashour.github.io/about/">About</a></li>
             
-            <guid>https://mostafa-ashour.github.io/posts/2025/04/suricata/</guid>
-            <description>&lt;h1 id=&#34;suricata-fundamentals&#34;&gt;Suricata Fundamentals&lt;/h1&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;Suricata is a robust, open-source network security engine for IDS, IPS, and NSM.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Developed and maintained by the OISF, it showcases the power of community-led, non-profit projects.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Suricata dissect/analyze all network traffic to find potential malicious activity.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;It can broadly:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Assess the network&amp;rsquo;s health/condition.&lt;/li&gt;
-&lt;li&gt;Also investigate specific application-level interactions.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Suricata uses a detailed set of rules to guide its analysis, helping it identify possible threats.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;It is designed for high-speed performance on standard and specialized hardware, making it a very efficient tool.&lt;/p&gt;</description>
-            <content type="html"><![CDATA[<h1 id="suricata-fundamentals">Suricata Fundamentals</h1>
+                <li><a href="https://mostafa-ashour.github.io/posts/">Posts</a></li>
+            
+        <ul class="submenu">
+            <li class="dropdown">
+                <a href="javascript:void(0)" class="dropbtn">en</a>
+                <div class="dropdown-content">
+                        
+                </div>
+            </li>
+        </ul>
+    </ul>
+</nav>
+
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+        </span>
+    </span>
+</header>
+
+
+            
+  <div class="content">
+    <main class="post">
+
+      <div class="post-info">
+        <p>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+            40 minutes
+          
+
+          
+        </p>
+      </div>
+
+      <article>
+        <h1 class="post-title">
+          <a href="https://mostafa-ashour.github.io/posts/2025/04/suricata/">Suricata</a>
+        </h1>
+
+        
+
+        
+
+        
+
+        <div class="post-content">
+          <h1 id="suricata-fundamentals">Suricata Fundamentals</h1>
 <ul>
 <li>
 <p>Suricata is a robust, open-source network security engine for IDS, IPS, and NSM.</p>
@@ -1921,1508 +1631,213 @@ Name: stamus/lateral
 10/20/2021-17:10:25.311929  [**] [1:1002:1] Sliver C2 SSL [**] [Classification: (null)] [Priority: 3] {TCP} 10.10.20.101:53234 -&gt; 23.152.0.91:443
 ---SNIP---
 </code></pre><hr>
-]]></content>
-        </item>
+
+        </div>
+      </article>
+
+      <hr />
+
+      <div class="post-info">
         
-        <item>
-            <title>Snort</title>
-            <link>https://mostafa-ashour.github.io/posts/2025/04/snort/</link>
-            <pubDate>Thu, 17 Apr 2025 14:34:05 +0200</pubDate>
+    <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg>
+
+        <span class="tag"><a href="https://mostafa-ashour.github.io/tags/untagged/">untagged</a></span>
+        
+    </p>
+
+        
+
+        <p>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+            <line x1="16" y1="13" x2="8" y2="13"></line>
+            <line x1="16" y1="17" x2="8" y2="17"></line>
+            <polyline points="10 9 9 9 8 9"></polyline>
+          </svg>
+          8340 Words
+        </p>
+
+        <p>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+            <line x1="16" y1="2" x2="16" y2="6"></line>
+            <line x1="8" y1="2" x2="8" y2="6"></line>
+            <line x1="3" y1="10" x2="21" y2="10"></line>
+          </svg>
+          
+            2025-04-17 14:34
+          
+
+           
             
-            <guid>https://mostafa-ashour.github.io/posts/2025/04/snort/</guid>
-            <description>&lt;h1 id=&#34;snort-fundamentals&#34;&gt;Snort Fundamentals&lt;/h1&gt;
-&lt;ul&gt;
-&lt;li&gt;Snort is an open-source intrusion detection system (IDS) and intrusion prevention system (IPS) that can also function as a packet logger/sniffer, similar to Suricata.&lt;/li&gt;
-&lt;li&gt;It inspects network traffic to identify and log all activity, providing a comprehensive view and detailed logs of application layer transactions.&lt;/li&gt;
-&lt;li&gt;Snort requires rule sets to define inspection parameters and identify specific items of interest.&lt;/li&gt;
-&lt;li&gt;It is designed to operate efficiently on both general-purpose and custom hardware.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;snort-operation-modes&#34;&gt;Snort Operation Modes&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;Snort typically operates in the following modes:
-&lt;ul&gt;
-&lt;li&gt;Inline IDS/IPS.&lt;/li&gt;
-&lt;li&gt;Passive IDS.&lt;/li&gt;
-&lt;li&gt;Network-based IDS.&lt;/li&gt;
-&lt;li&gt;Host-based IDS (however, Snort is not ideally a host-based IDS. We would recommend opting for more specialized tools for this.)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;According to &lt;a href=&#34;https://docs.snort.org/start/inspection&#34;&gt;Snort&amp;rsquo;s documentation&lt;/a&gt;&lt;/strong&gt;:&lt;/p&gt;</description>
-            <content type="html"><![CDATA[<h1 id="snort-fundamentals">Snort Fundamentals</h1>
-<ul>
-<li>Snort is an open-source intrusion detection system (IDS) and intrusion prevention system (IPS) that can also function as a packet logger/sniffer, similar to Suricata.</li>
-<li>It inspects network traffic to identify and log all activity, providing a comprehensive view and detailed logs of application layer transactions.</li>
-<li>Snort requires rule sets to define inspection parameters and identify specific items of interest.</li>
-<li>It is designed to operate efficiently on both general-purpose and custom hardware.</li>
-</ul>
-<h2 id="snort-operation-modes">Snort Operation Modes</h2>
-<ul>
-<li>Snort typically operates in the following modes:
-<ul>
-<li>Inline IDS/IPS.</li>
-<li>Passive IDS.</li>
-<li>Network-based IDS.</li>
-<li>Host-based IDS (however, Snort is not ideally a host-based IDS. We would recommend opting for more specialized tools for this.)</li>
-</ul>
-</li>
-</ul>
-<p><strong>According to <a href="https://docs.snort.org/start/inspection">Snort&rsquo;s documentation</a></strong>:</p>
-<p>&ldquo;With certain DAQ modules, Snort is able to utilize two different modes of operation: <code>passive</code> and <code>inline</code>. <code>Passive mode</code> gives Snort the ability to observe and detect traffic on a network interface, but it prevents outright blocking of traffic. <code>Inline mode</code> on the other hand, does give Snort the ability to block traffic if a particular packet warrants such an event.</p>
-<p>Snort will infer the particular mode of operation based on the options used at the command line. For example, reading from a pcap file with the <code>-r</code> option or listening on an interface with <code>-i</code> will cause Snort to run in passive mode by default. If the DAQ supports inline, however, then users can specify the <code>-Q</code> flag to run Snort inline.</p>
-<p>One DAQ module that supports inline mode is <code>afpacket</code>, which is a module that gives Snort access to packets received on Linux network devices.&rdquo;</p>
-<h2 id="snort-architecture">Snort Architecture</h2>
-<ul>
-<li>In order for Snort to transition from a simple packet sniffer to a robust IDS, several key components were added:
-<ul>
-<li><code>Preprocessor</code>.</li>
-<li><code>Detection Engine</code>.</li>
-<li><code>Logging and Alerting System</code>.</li>
-<li>Various <code>Output modules</code>.</li>
-</ul>
-</li>
-</ul>
-<ol>
-<li>The packet sniffer extracts network traffic, decodes packet structures, and forwards raw packets to the <code>Preprocessors</code>.</li>
-<li><code>Snort Preprocessors</code> analyze packets to identify their type or behavior, utilizing plugins like the HTTP preprocessor or the <code>port_scan</code> preprocessor. These plugins, configured in <code>snort.lua</code>, pass their findings to the <code>Detection Engine</code>.</li>
-<li>The <code>Detection Engine</code> compares packets against a predefined rule set. Matches trigger information to be sent to the Logging and Alerting System.</li>
-<li>The <code>Logging and Alerting System</code> and <code>Output modules</code> record events or trigger alerts based on rule actions. Logs are typically stored in <code>syslog</code>, <code>unified2</code> formats, or directly in a database. Output modules are configured in <code>snort.lua</code>.</li>
-</ol>
-<ul>
-<li>Snort high-level architecture
-<img src="./attachments/Snort_high-level_architecture.png" alt="Snort_high-level_architecture"></li>
-</ul>
-<h2 id="snort-configuration--validating-snorts-configuration">Snort Configuration &amp; Validating Snort&rsquo;s Configuration</h2>
-<ul>
-<li>
-<p>Snort 3 offers pre-configured <code>snort.lua</code> and <code>snort_defaults.lua</code> files for quick and easy setup, providing a standard configuration framework for users.</p>
-</li>
-<li>
-<p>The <code>snort.lua</code> file serves as the principal configuration file for Snort.</p>
-</li>
-<li>
-<p>This file contains the following sections:</p>
-<ul>
-<li>Network variables</li>
-<li>Decoder configuration</li>
-<li>Base detection engine configuration</li>
-<li>Dynamic library configuration</li>
-<li>Preprocessor configuration</li>
-<li>Output plugin configuration</li>
-<li>Rule set customization</li>
-<li>Preprocessor and decoder rule set customization</li>
-<li>Shared object rule set customization</li>
-</ul>
-</li>
-<li>
-<p>Let&rsquo;s browse the <code>snort.lua</code> file residing in this section&rsquo;s target as follows.</p>
-</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sudo more /root/snorty/etc/snort/snort.lua
-</span></span></code></pre></div><pre tabindex="0"><code>---------------------------------------------------------------------------
--- Snort++ configuration
----------------------------------------------------------------------------
+          
+        </p>
+      </div>
+        <hr />
+        <div class="sharing-buttons">
+          
+<a class="resp-sharing-button__link" href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fmostafa-ashour.github.io%2fposts%2f2025%2f04%2fsuricata%2f" target="_blank" rel="noopener" aria-label="" title="Share on facebook">
+  <div class="resp-sharing-button resp-sharing-button--facebook resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+    </div>
+  </div>
+</a>
 
--- there are over 200 modules available to tune your policy.
--- many can be used with defaults w/o any explicit configuration.
--- use this conf as a template for your specific configuration.
 
--- 1. configure defaults
--- 2. configure inspection
--- 3. configure bindings
--- 4. configure performance
--- 5. configure detection
--- 6. configure filters
--- 7. configure outputs
--- 8. configure tweaks
+<a class="resp-sharing-button__link" href="https://twitter.com/intent/tweet/?url=https%3a%2f%2fmostafa-ashour.github.io%2fposts%2f2025%2f04%2fsuricata%2f" target="_blank" rel="noopener" aria-label="" title="Share on twitter">
+  <div class="resp-sharing-button resp-sharing-button--twitter resp-sharing-button--small">
+      <div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg>
+    </div>
+  </div>
+</a>
 
----------------------------------------------------------------------------
--- 1. configure defaults
----------------------------------------------------------------------------
 
--- HOME_NET and EXTERNAL_NET must be set now
--- setup the network addresses you are protecting
-HOME_NET = &#39;any&#39;
+<a class="resp-sharing-button__link" href="https://www.tumblr.com/widgets/share/tool?posttype=link&amp;title=Suricata&amp;caption=Suricata&amp;canonicalUrl=https%3a%2f%2fmostafa-ashour.github.io%2fposts%2f2025%2f04%2fsuricata%2f" target="_blank" rel="noopener" aria-label="" title="Share on tumblr">
+  <div class="resp-sharing-button resp-sharing-button--tumblr resp-sharing-button--small">
+    <div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.563 24c-5.093 0-7.031-3.756-7.031-6.411V9.747H5.116V6.648c3.63-1.313 4.512-4.596 4.71-6.469C9.84.051 9.941 0 9.999 0h3.517v6.114h4.801v3.633h-4.82v7.47c.016 1.001.375 2.371 2.207 2.371h.09c.631-.02 1.486-.205 1.936-.419l1.156 3.425c-.436.636-2.4 1.374-4.156 1.404h-.178l.011.002z"/></svg>
+    </div>
+  </div>
+</a>
 
--- set up the external network addresses.
--- (leave as &#34;any&#34; in most situations)
-EXTERNAL_NET = &#39;any&#39;
 
-include &#39;snort_defaults.lua&#39;
+<a class="resp-sharing-button__link" href="mailto:?subject=Suricata&amp;body=https%3a%2f%2fmostafa-ashour.github.io%2fposts%2f2025%2f04%2fsuricata%2f" target="_self" rel="noopener" aria-label="" title="Share via email">
+  <div class="resp-sharing-button resp-sharing-button--email resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+    </div>
+  </div>
+</a>
 
----------------------------------------------------------------------------
--- 2. configure inspection
----------------------------------------------------------------------------
 
--- mod = { } uses internal defaults
--- you can see them with snort --help-module mod
+<a class="resp-sharing-button__link" href="https://pinterest.com/pin/create/button/?url=https%3a%2f%2fmostafa-ashour.github.io%2fposts%2f2025%2f04%2fsuricata%2f&amp;media=https%3a%2f%2fmostafa-ashour.github.io%2fposts%2f2025%2f04%2fsuricata%2f;description=Suricata" target="_blank" rel="noopener" aria-label="" title="Share on pinterest">
+  <div class="resp-sharing-button resp-sharing-button--pinterest resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.162-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.401.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.354-.629-2.758-1.379l-.749 2.848c-.269 1.045-1.004 2.352-1.498 3.146 1.123.345 2.306.535 3.55.535 6.607 0 11.985-5.365 11.985-11.987C23.97 5.39 18.592.026 11.985.026L12.017 0z"/></svg>
+    </div>
+  </div>
+</a>
 
--- mod = default_mod uses external defaults
--- you can see them in snort_defaults.lua
 
--- the following are quite capable with defaults:
+<a class="resp-sharing-button__link" href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fmostafa-ashour.github.io%2fposts%2f2025%2f04%2fsuricata%2f&amp;title=Suricata&amp;summary=Suricata&amp;source=https%3a%2f%2fmostafa-ashour.github.io%2fposts%2f2025%2f04%2fsuricata%2f" target="_blank" rel="noopener" aria-label="" title="Share on linkedin">
+  <div class="resp-sharing-button resp-sharing-button--linkedin resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+    </div>
+  </div>
+</a>
 
-stream = { }
-stream_ip = { }
-stream_icmp = { }
-stream_tcp = { }
-stream_udp = { }
-stream_user = { }
-stream_file = { }
----SNIP---
-</code></pre><ul>
-<li>Enabling and fine-tuning Snort <code>modules</code> is a significant aspect of the configuration process.</li>
-<li>To explore the complete list and get a brief description of all Snort 3 modules, you can use the following command.</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>snort --help-modules
-</span></span></code></pre></div><pre tabindex="0"><code>ack (ips_option): rule option to match on TCP ack numbers
-active (basic): configure responses
-address_space_selector (policy_selector): configure traffic processing based on address space
-alert_csv (logger): output event in csv format
-alert_fast (logger): output event with brief text format
-alert_full (logger): output event with full packet dump
-alert_json (logger): output event in json format
-alert_syslog (logger): output event to syslog
-alert_talos (logger): output event in Talos alert format
----SNIP---
-</code></pre><ul>
-<li>These modules are enabled and configured in the <code>snort.lua</code> configuration file using Lua table formats/literals.</li>
-<li>If a module is set up as an empty table, it means it&rsquo;s using its built-in &ldquo;default&rdquo; settings.</li>
-<li>You can use the following command to see these default settings.</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>snort --help-config arp_spoof
-</span></span></code></pre></div><pre tabindex="0"><code>ip4 arp_spoof.hosts[].ip: host ip address
-mac arp_spoof.hosts[].mac: host mac address
-</code></pre><ul>
-<li>Passing (and validating) configuration files to Snort can be done as follows.</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>snort -c /root/snorty/etc/snort/snort.lua --daq-dir /usr/local/lib/daq
-</span></span></code></pre></div><pre tabindex="0"><code>--------------------------------------------------
-o&#34;)~   Snort++ 3.1.64.0
---------------------------------------------------
-Loading /root/snorty/etc/snort/snort.lua:
-Loading snort_defaults.lua:
-Finished snort_defaults.lua:
-        output
-        ips
-        classifications
-        references
-        binder
-        file_id
-        ftp_server
-        smtp
-        port_scan
-        gtp_inspect
-        dce_smb
-        s7commplus
-        modbus
-        ssh
-        active
-        alerts
-        daq
-        decode
-        host_cache
-        host_tracker
-        hosts
-        network
-        packets
-        process
-        search_engine
-        so_proxy
-        stream_icmp
-        normalizer
-        stream
-        stream_ip
-        stream_tcp
-        stream_udp
-        stream_user
-        stream_file
-        arp_spoof
-        back_orifice
-        dns
-        imap
-        netflow
-        pop
-        rpc_decode
-        sip
-        ssl
-        telnet
-        cip
-        dnp3
-        iec104
-        mms
-        dce_tcp
-        dce_udp
-        dce_http_proxy
-        dce_http_server
-        ftp_client
-        ftp_data
-        http_inspect
-        http2_inspect
-        file_policy
-        js_norm
-        appid
-        wizard
-        trace
-Finished /root/snorty/etc/snort/snort.lua:
-Loading file_id.rules_file:
-Loading file_magic.rules:
-Finished file_magic.rules:
-Finished file_id.rules_file:
---------------------------------------------------
-ips policies rule stats
-              id  loaded  shared enabled    file
-               0     208       0     208    /root/snorty/etc/snort/snort.lua
---------------------------------------------------
-rule counts
-       total rules loaded: 208
-               text rules: 208
-            option chains: 208
-            chain headers: 1
---------------------------------------------------
-service rule counts          to-srv  to-cli
-                  file_id:      208     208
-                    total:      208     208
---------------------------------------------------
-fast pattern groups
-                to_server: 1
-                to_client: 1
---------------------------------------------------
-search engine (ac_bnfa)
-                instances: 2
-                 patterns: 416
-            pattern chars: 2508
-               num states: 1778
-         num match states: 370
-             memory scale: KB
-             total memory: 68.5879
-           pattern memory: 18.6973
-        match list memory: 27.3281
-        transition memory: 22.3125
-appid: MaxRss diff: 3084
-appid: patterns loaded: 300
---------------------------------------------------
-pcap DAQ configured to passive.
 
-Snort successfully validated the configuration (with 0 warnings).
-o&#34;)~   Snort exiting
-</code></pre><ul>
-<li>Snort 3 needs to know the location of <code>LibDAQ</code>.</li>
-<li><code>LibDAQ</code>, or the &ldquo;Data Acquisition Library,&rdquo; is a layer that simplifies how modules connect to/communicate with network data sources (both hardware and software).</li>
-</ul>
-<h2 id="snort-inputs">Snort Inputs</h2>
-<ul>
-<li>To observe Snort in action, the easiest method is to execute it against a packet capture file.</li>
-<li>By providing the name of the pcap file as an argument to the <code>-r</code> option in the command line, Snort will process the file accordingly.</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sudo snort -c /root/snorty/etc/snort/snort.lua --daq-dir /usr/local/lib/daq -r &lt;path-to-pcap-file&gt;icmp.pcap
-</span></span></code></pre></div><pre tabindex="0"><code>--------------------------------------------------
-o&#34;)~   Snort++ 3.1.64.0
---------------------------------------------------
-Loading /root/snorty/etc/snort/snort.lua:
-Loading snort_defaults.lua:
-Finished snort_defaults.lua:
----SNIP---
-Finished /root/snorty/etc/snort/snort.lua:
-Loading file_id.rules_file:
-Loading file_magic.rules:
-Finished file_magic.rules:
-Finished file_id.rules_file:
---------------------------------------------------
-ips policies rule stats
-              id  loaded  shared enabled    file
-               0     208       0     208    /root/snorty/etc/snort/snort.lua
---------------------------------------------------
-rule counts
-       total rules loaded: 208
-               text rules: 208
-            option chains: 208
-            chain headers: 1
---------------------------------------------------
-service rule counts          to-srv  to-cli
-                  file_id:      208     208
-                    total:      208     208
---------------------------------------------------
-fast pattern groups
-                to_server: 1
-                to_client: 1
---------------------------------------------------
-search engine (ac_bnfa)
-                instances: 2
-                 patterns: 416
-            pattern chars: 2508
-               num states: 1778
-         num match states: 370
-             memory scale: KB
-             total memory: 68.5879
-           pattern memory: 18.6973
-        match list memory: 27.3281
-        transition memory: 22.3125
-appid: MaxRss diff: 3024
-appid: patterns loaded: 300
---------------------------------------------------
-pcap DAQ configured to read-file.
-Commencing packet processing
-++ [0] /home/htb-student/pcaps/icmp.pcap
--- [0] /home/htb-student/pcaps/icmp.pcap
---------------------------------------------------
-Packet Statistics
---------------------------------------------------
-daq
-                    pcaps: 1
-                 received: 8
-                 analyzed: 8
-                    allow: 8
-                 rx_bytes: 592
---------------------------------------------------
-codec
-                    total: 8            (100.000%)
-                      eth: 8            (100.000%)
-                    icmp4: 8            (100.000%)
-                     ipv4: 8            (100.000%)
---------------------------------------------------
-Module Statistics
---------------------------------------------------
-appid
-                  packets: 8
-        processed_packets: 8
-           total_sessions: 1
---------------------------------------------------
-binder
-                new_flows: 1
-                 inspects: 1
---------------------------------------------------
-detection
-                 analyzed: 8
---------------------------------------------------
-port_scan
-                  packets: 8
-                 trackers: 2
---------------------------------------------------
-stream
-                    flows: 1
---------------------------------------------------
-stream_icmp
-                 sessions: 1
-                      max: 1
-                  created: 1
-                 released: 1
---------------------------------------------------
-Summary Statistics
---------------------------------------------------
-timing
-                  runtime: 00:00:00
-                  seconds: 0.033229
-                 pkts/sec: 241
-o&#34;)~   Snort exiting
-</code></pre><ul>
-<li>Snort also has the capability to listen on active network interfaces.</li>
-<li>To specify this behavior, you can utilize the <code>-i</code> option followed by the names of the interfaces on which Snort should run.</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sudo snort -c /root/snorty/etc/snort/snort.lua --daq-dir /usr/local/lib/daq -i ens160
-</span></span></code></pre></div><pre tabindex="0"><code>--------------------------------------------------
-o&#34;)~   Snort++ 3.1.64.0
---------------------------------------------------
-Loading /root/snorty/etc/snort/snort.lua:
-Loading snort_defaults.lua:
-Finished snort_defaults.lua:
----SNIP---
-Finished /root/snorty/etc/snort/snort.lua:
-Loading file_id.rules_file:
-Loading file_magic.rules:
-Finished file_magic.rules:
-Finished file_id.rules_file:
---------------------------------------------------
-ips policies rule stats
-              id  loaded  shared enabled    file
-               0     208       0     208    /root/snorty/etc/snort/snort.lua
---------------------------------------------------
-rule counts
-       total rules loaded: 208
-               text rules: 208
-            option chains: 208
-            chain headers: 1
---------------------------------------------------
-service rule counts          to-srv  to-cli
-                  file_id:      208     208
-                    total:      208     208
---------------------------------------------------
-fast pattern groups
-                to_server: 1
-                to_client: 1
---------------------------------------------------
-search engine (ac_bnfa)
-                instances: 2
-                 patterns: 416
-            pattern chars: 2508
-               num states: 1778
-         num match states: 370
-             memory scale: KB
-             total memory: 68.5879
-           pattern memory: 18.6973
-        match list memory: 27.3281
-        transition memory: 22.3125
-appid: MaxRss diff: 2820
-appid: patterns loaded: 300
---------------------------------------------------
-pcap DAQ configured to passive.
-Commencing packet processing
-++ [0] ens160
-^C** caught int signal
-== stopping
--- [0] ens160
---------------------------------------------------
-Packet Statistics
---------------------------------------------------
-daq
-                 received: 33
-                 analyzed: 33
-                    allow: 33
-                     idle: 9
-                 rx_bytes: 2756
---------------------------------------------------
-codec
-                    total: 33           (100.000%)
-                 discards: 2            (  6.061%)
-                      arp: 13           ( 39.394%)
-                      eth: 33           (100.000%)
-                    icmp4: 12           ( 36.364%)
-                    icmp6: 3            (  9.091%)
-                     ipv4: 17           ( 51.515%)
-                     ipv6: 3            (  9.091%)
-                      tcp: 5            ( 15.152%)
---------------------------------------------------
-Module Statistics
---------------------------------------------------
-appid
-                  packets: 18
-        processed_packets: 16
-          ignored_packets: 2
-           total_sessions: 3
---------------------------------------------------
-arp_spoof
-                  packets: 13
---------------------------------------------------
-binder
-              raw_packets: 15
-                new_flows: 3
-                 inspects: 18
---------------------------------------------------
-detection
-                 analyzed: 33
---------------------------------------------------
-port_scan
-                  packets: 20
-                 trackers: 8
---------------------------------------------------
-stream
-                    flows: 3
---------------------------------------------------
-stream_icmp
-                 sessions: 2
-                      max: 2
-                  created: 2
-                 released: 2
---------------------------------------------------
-stream_tcp
-                 sessions: 1
-                      max: 1
-                  created: 1
-                 released: 1
-             instantiated: 1
-                   setups: 1
-            data_trackers: 1
-              segs_queued: 1
-            segs_released: 1
-                 max_segs: 1
-                max_bytes: 64
---------------------------------------------------
-tcp
-        bad_tcp4_checksum: 2
---------------------------------------------------
-Appid Statistics
---------------------------------------------------
-detected apps and services
-              Application: Services   Clients    Users      Payloads   Misc       Referred
-                  unknown: 1          0          0          0          0          0
---------------------------------------------------
-Summary Statistics
---------------------------------------------------
-process
-                  signals: 1
---------------------------------------------------
-timing
-                  runtime: 00:00:25
-                  seconds: 25.182182
-                 pkts/sec: 1
-o&#34;)~   Snort exiting
-</code></pre><h2 id="snort-rules">Snort Rules</h2>
-<ul>
-<li>
-<p>Snort rules, similar to Suricata rules, consist of a <code>Rule Header</code> and <code>Rule Options</code>.</p>
-</li>
-<li>
-<p>Despite their similarities, we recommend consulting <a href="https://docs.snort.org/">https://docs.snort.org/</a> and <a href="https://docs.suricata.io/en/latest/rules/differences-from-snort.html">https://docs.suricata.io/en/latest/rules/differences-from-snort.html</a> for Snort rule writing guidance.</p>
-</li>
-<li>
-<p>The latest Snort rules are available on the Snort or Emerging Threats websites.</p>
-</li>
-<li>
-<p>In Snort deployments, rules can be directly integrated into the <code>snort.lua</code> configuration file using the <code>ips</code> module.</p>
-</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sudo vim /root/snorty/etc/snort/snort.lua
-</span></span></code></pre></div><pre tabindex="0"><code>---SNIP---
-ips =
-{
-    -- use this to enable decoder and inspector alerts
-    --enable_builtin_rules = true,
+<a class="resp-sharing-button__link" href="https://reddit.com/submit/?url=https%3a%2f%2fmostafa-ashour.github.io%2fposts%2f2025%2f04%2fsuricata%2f&amp;resubmit=true&amp;title=Suricata" target="_blank" rel="noopener" aria-label="" title="Share on reddit">
+  <div class="resp-sharing-button resp-sharing-button--reddit resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm5.01 4.744c.688 0 1.25.561 1.25 1.249a1.25 1.25 0 0 1-2.498.056l-2.597-.547-.8 3.747c1.824.07 3.48.632 4.674 1.488.308-.309.73-.491 1.207-.491.968 0 1.754.786 1.754 1.754 0 .716-.435 1.333-1.01 1.614a3.111 3.111 0 0 1 .042.52c0 2.694-3.13 4.87-7.004 4.87-3.874 0-7.004-2.176-7.004-4.87 0-.183.015-.366.043-.534A1.748 1.748 0 0 1 4.028 12c0-.968.786-1.754 1.754-1.754.463 0 .898.196 1.207.49 1.207-.883 2.878-1.43 4.744-1.487l.885-4.182a.342.342 0 0 1 .14-.197.35.35 0 0 1 .238-.042l2.906.617a1.214 1.214 0 0 1 1.108-.701zM9.25 12C8.561 12 8 12.562 8 13.25c0 .687.561 1.248 1.25 1.248.687 0 1.248-.561 1.248-1.249 0-.688-.561-1.249-1.249-1.249zm5.5 0c-.687 0-1.248.561-1.248 1.25 0 .687.561 1.248 1.249 1.248.688 0 1.249-.561 1.249-1.249 0-.687-.562-1.249-1.25-1.249zm-5.466 3.99a.327.327 0 0 0-.231.094.33.33 0 0 0 0 .463c.842.842 2.484.913 2.961.913.477 0 2.105-.056 2.961-.913a.361.361 0 0 0 .029-.463.33.33 0 0 0-.464 0c-.547.533-1.684.73-2.512.73-.828 0-1.979-.196-2.512-.73a.326.326 0 0 0-.232-.095z"/></svg>
+    </div>
+  </div>
+</a>
 
-    -- use include for rules files; be sure to set your path
-    -- note that rules files can include other rules files
-    -- (see also related path vars at the top of snort_defaults.lua)
 
-    { variables = default_variables, include = &#39;/home/htb-student/local.rules&#39; }
-}
----SNIP---
-</code></pre><ul>
-<li>Snort automatically loads &ldquo;included&rdquo; rules.</li>
-<li>Alternatively, rules can be incorporated directly from the command line using:
-<ul>
-<li>The <code>-R</code> option to specify a single specific rules file to be utilized by snort.</li>
-<li>the <code>--rule-path</code> option to specify a path to the directory containing rules files. This enables us to provide Snort with a directory containing multiple rules files.</li>
-</ul>
-</li>
-</ul>
-<h2 id="snort-outputs">Snort Outputs</h2>
-<p>In our Snort deployment, we may encounter a significant amount of data.
-To provide a summary of the core output types, let&rsquo;s explore the key aspects:</p>
-<ul>
-<li>
-<p><code>Basic Statistics</code>—Upon shutdown, Snort generates various counts based on the configuration and processed traffic. This includes:</p>
-<ul>
-<li><code>Packet Statistics</code>—It includes information from the DAQ and decoders, such as the number of received packets and UDP packets.</li>
-<li><code>Module Statistics</code>—Each module keeps track of activity through peg counts, indicating the frequency of observed or performed actions. Examples include the count of processed HTTP GET requests and trimmed TCP reset packets.</li>
-<li><code>File Statistics</code>—This section provides a breakdown of file types, bytes, and signatures.</li>
-<li><code>Summary Statistics</code>—It encompasses the total runtime for packet processing, packets per second, and, if configured, profiling data.</li>
-</ul>
-</li>
-<li>
-<p><code>Alerts</code>—When rules are configured, it is necessary to enable alerting (using the <code>-A</code> option) to view the details of detection events. There are multiple types of alert outputs available, including:</p>
-<ul>
-<li><code>-A cmg</code>—This option combines <code>-A fast -d -e</code> and displays alert information along with packet headers and payload.</li>
-<li><code>-A u2</code>—This option is equivalent to <code>-A unified2</code> and logs events and triggering packets in a binary file, which can be used for post-processing with other tools.</li>
-<li><code>-A csv</code>—This option outputs fields in comma-separated value format, providing customization options and facilitating pcap analysis.</li>
-<li><em><strong>Main Objective</strong></em>—the <code>-A</code> option is used to enable and control how detection alerts are displayed or logged, allowing you to view and analyze security events in different output formats.</li>
-</ul>
-</li>
-<li>
-<p>To discover the available alert types, we can execute the following command.</p>
-</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>snort --list-plugins | grep logger
-</span></span></code></pre></div><pre tabindex="0"><code>logger::alert_csv v0 static
-logger::alert_fast v0 static
-logger::alert_full v0 static
-logger::alert_json v0 static
-logger::alert_syslog v0 static
-logger::alert_talos v0 static
-logger::alert_unixsock v0 static
-logger::log_codecs v0 static
-logger::log_hext v0 static
-logger::log_pcap v0 static
-logger::unified2 v0 static
-</code></pre><ul>
-<li>
-<p><code>Performance Statistics</code>—In addition to the outputs above, the <code>perf_monitor</code> module can be configured to capture a customizable set of <code>peg</code> counts during runtime. This data can be used by an external program to monitor Snort&rsquo;s activity without interrupting its operations. Furthermore, the <code>profiler</code> module tracks time and space usage by modules and rules, which helps optimize system performance. The profiler output is displayed under <code>Summary Statistics</code> during shutdown.</p>
-</li>
-<li>
-<p>Let&rsquo;s see an example of the <code>cmg</code> output.</p>
-</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sudo snort -c /root/snorty/etc/snort/snort.lua --daq-dir /usr/local/lib/daq -r &lt;path-to-pcap-file&gt;/icmp.pcap -A cmg
-</span></span></code></pre></div><pre tabindex="0"><code>--------------------------------------------------
-o&#34;)~   Snort++ 3.1.64.0
---------------------------------------------------
-Loading /root/snorty/etc/snort/snort.lua:
-Loading snort_defaults.lua:
-Finished snort_defaults.lua:
---SNIP---
-Finished /root/snorty/etc/snort/snort.lua:
-Loading file_id.rules_file:
-Loading file_magic.rules:
-Finished file_magic.rules:
-Finished file_id.rules_file:
-Loading /home/htb-student/local.rules:
-Finished /home/htb-student/local.rules:
---------------------------------------------------
-ips policies rule stats
-              id  loaded  shared enabled    file
-               0     209       0     209    /root/snorty/etc/snort/snort.lua
---------------------------------------------------
-rule counts
-       total rules loaded: 209
-               text rules: 209
-            option chains: 209
-            chain headers: 2
---------------------------------------------------
-port rule counts
-             tcp     udp    icmp      ip
-     any       0       0       1       0
-   total       0       0       1       0
---------------------------------------------------
-service rule counts          to-srv  to-cli
-                  file_id:      208     208
-                    total:      208     208
---------------------------------------------------
-fast pattern groups
-                to_server: 1
-                to_client: 1
---------------------------------------------------
-search engine (ac_bnfa)
-                instances: 2
-                 patterns: 416
-            pattern chars: 2508
-               num states: 1778
-         num match states: 370
-             memory scale: KB
-             total memory: 68.5879
-           pattern memory: 18.6973
-        match list memory: 27.3281
-        transition memory: 22.3125
-appid: MaxRss diff: 3024
-appid: patterns loaded: 300
---------------------------------------------------
-pcap DAQ configured to read-file.
-Commencing packet processing
-++ [0] /home/htb-student/pcaps/icmp.pcap
-06/19-08:45:56.838904 [**] [1:1000001:1] &#34;ICMP test&#34; [**] [Classification: Generic ICMP event] [Priority: 3] {ICMP} 192.168.158.139 -&gt; 174.137.42.77
-00:0C:29:34:0B:DE -&gt; 00:50:56:E0:14:49 type:0x800 len:0x4A
-192.168.158.139 -&gt; 174.137.42.77 ICMP TTL:128 TOS:0x0 ID:55107 IpLen:20 DgmLen:60
-Type:8  Code:0  ID:512   Seq:8448  ECHO
+<a class="resp-sharing-button__link" href="https://www.xing.com/app/user?op=share;url=https%3a%2f%2fmostafa-ashour.github.io%2fposts%2f2025%2f04%2fsuricata%2f;title=Suricata" target="_blank" rel="noopener" aria-label="" title="Share on xing">
+  <div class="resp-sharing-button resp-sharing-button--xing resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M18.188 0c-.517 0-.741.325-.927.66 0 0-7.455 13.224-7.702 13.657.015.024 4.919 9.023 4.919 9.023.17.308.436.66.967.66h3.454c.211 0 .375-.078.463-.22.089-.151.089-.346-.009-.536l-4.879-8.916c-.004-.006-.004-.016 0-.022L22.139.756c.095-.191.097-.387.006-.535C22.056.078 21.894 0 21.686 0h-3.498zM3.648 4.74c-.211 0-.385.074-.473.216-.09.149-.078.339.02.531l2.34 4.05c.004.01.004.016 0 .021L1.86 16.051c-.099.188-.093.381 0 .529.085.142.239.234.45.234h3.461c.518 0 .766-.348.945-.667l3.734-6.609-2.378-4.155c-.172-.315-.434-.659-.962-.659H3.648v.016z"/></svg>
+    </div>
+  </div>
+</a>
 
-snort.raw[32]:
-- - - - - - - - - - - -  - - - - - - - - - - - -  - - - - - - - - -
-61 62 63 64 65 66 67 68  69 6A 6B 6C 6D 6E 6F 70  abcdefgh ijklmnop
-71 72 73 74 75 76 77 61  62 63 64 65 66 67 68 69  qrstuvwa bcdefghi
-- - - - - - - - - - - -  - - - - - - - - - - - -  - - - - - - - - -
 
-06/19-08:45:57.055699 [**] [1:1000001:1] &#34;ICMP test&#34; [**] [Classification: Generic ICMP event] [Priority: 3] {ICMP} 174.137.42.77 -&gt; 192.168.158.139
-00:50:56:E0:14:49 -&gt; 00:0C:29:34:0B:DE type:0x800 len:0x4A
-174.137.42.77 -&gt; 192.168.158.139 ICMP TTL:128 TOS:0x0 ID:30433 IpLen:20 DgmLen:60
-Type:0  Code:0  ID:512  Seq:8448  ECHO REPLY
+<a class="resp-sharing-button__link" href="whatsapp://send?text=Suricata%20https%3a%2f%2fmostafa-ashour.github.io%2fposts%2f2025%2f04%2fsuricata%2f" target="_blank" rel="noopener" aria-label="" title="Share on whatsapp">
+  <div class="resp-sharing-button resp-sharing-button--whatsapp resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+    </div>
+  </div>
+</a>
 
-snort.raw[32]:
-- - - - - - - - - - - -  - - - - - - - - - - - -  - - - - - - - - -
-61 62 63 64 65 66 67 68  69 6A 6B 6C 6D 6E 6F 70  abcdefgh ijklmnop
-71 72 73 74 75 76 77 61  62 63 64 65 66 67 68 69  qrstuvwa bcdefghi
-- - - - - - - - - - - -  - - - - - - - - - - - -  - - - - - - - - -
 
-06/19-08:45:57.840049 [**] [1:1000001:1] &#34;ICMP test&#34; [**] [Classification: Generic ICMP event] [Priority: 3] {ICMP} 192.168.158.139 -&gt; 174.137.42.77
-00:0C:29:34:0B:DE -&gt; 00:50:56:E0:14:49 type:0x800 len:0x4A
-192.168.158.139 -&gt; 174.137.42.77 ICMP TTL:128 TOS:0x0 ID:55110 IpLen:20 DgmLen:60
-Type:8  Code:0  ID:512   Seq:8704  ECHO
+<a class="resp-sharing-button__link" href="https://news.ycombinator.com/submitlink?u=https%3a%2f%2fmostafa-ashour.github.io%2fposts%2f2025%2f04%2fsuricata%2f&amp;t=Suricata" target="_blank" rel="noopener" aria-label="" title="Share on hacker news">
+  <div class="resp-sharing-button resp-sharing-button--hackernews resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M0 24V0h24v24H0zM6.951 5.896l4.112 7.708v5.064h1.583v-4.972l4.148-7.799h-1.749l-2.457 4.875c-.372.745-.688 1.434-.688 1.434s-.297-.708-.651-1.434L8.831 5.896h-1.88z"/></svg>
+    </div>
+  </div>
+</a>
 
-snort.raw[32]:
-- - - - - - - - - - - -  - - - - - - - - - - - -  - - - - - - - - -
-61 62 63 64 65 66 67 68  69 6A 6B 6C 6D 6E 6F 70  abcdefgh ijklmnop
-71 72 73 74 75 76 77 61  62 63 64 65 66 67 68 69  qrstuvwa bcdefghi
-- - - - - - - - - - - -  - - - - - - - - - - - -  - - - - - - - - -
 
----SNIP---
+<a class="resp-sharing-button__link" href="https://telegram.me/share/url?text=Suricata&amp;url=https%3a%2f%2fmostafa-ashour.github.io%2fposts%2f2025%2f04%2fsuricata%2f" target="_blank" rel="noopener" aria-label="" title="Share on telegram">
+  <div class="resp-sharing-button resp-sharing-button--telegram resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+    </div>
+  </div>
+</a>
 
-06/19-08:46:00.042354 [**] [1:1000001:1] &#34;ICMP test&#34; [**] [Classification: Generic ICMP event] [Priority: 3] {ICMP} 174.137.42.77 -&gt; 192.168.158.139
-00:50:56:E0:14:49 -&gt; 00:0C:29:34:0B:DE type:0x800 len:0x4A
-174.137.42.77 -&gt; 192.168.158.139 ICMP TTL:128 TOS:0x0 ID:30453 IpLen:20 DgmLen:60
-Type:0  Code:0  ID:512  Seq:9216  ECHO REPLY
+        </div>
 
-snort.raw[32]:
-- - - - - - - - - - - -  - - - - - - - - - - - -  - - - - - - - - -
-61 62 63 64 65 66 67 68  69 6A 6B 6C 6D 6E 6F 70  abcdefgh ijklmnop
-71 72 73 74 75 76 77 61  62 63 64 65 66 67 68 69  qrstuvwa bcdefghi
-- - - - - - - - - - - -  - - - - - - - - - - - -  - - - - - - - - -
-
--- [0] /home/htb-student/pcaps/icmp.pcap
---------------------------------------------------
-Packet Statistics
---------------------------------------------------
-daq
-                    pcaps: 1
-                 received: 8
-                 analyzed: 8
-                    allow: 8
-                 rx_bytes: 592
---------------------------------------------------
-codec
-                    total: 8            (100.000%)
-                      eth: 8            (100.000%)
-                    icmp4: 8            (100.000%)
-                     ipv4: 8            (100.000%)
---------------------------------------------------
-
----SNIP---
-
-Summary Statistics
---------------------------------------------------
-timing
-                  runtime: 00:00:00
-                  seconds: 0.042473
-                 pkts/sec: 188
-o&#34;)~   Snort exiting
-</code></pre><ul>
-<li>The same command but using a <code>.rules</code> files that may not be &ldquo;included&rdquo; in <code>snort.lua</code> is the following.</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sudo snort -c /root/snorty/etc/snort/snort.lua --daq-dir /usr/local/lib/daq -r /home/htb-student/pcaps/icmp.pcap -R &lt;path-to-pcap-file&gt;local.rules -A cmg
-</span></span></code></pre></div><pre tabindex="0"><code>--------------------------------------------------
---------------------------------------------------
-Loading /root/snorty/etc/snort/snort.lua:
-Loading snort_defaults.lua:
-Finished snort_defaults.lua:
---SNIP---
-Finished /root/snorty/etc/snort/snort.lua:
-Loading file_id.rules_file:
-Loading file_magic.rules:
-Finished file_magic.rules:
-Finished file_id.rules_file:
-Loading /home/htb-student/local.rules:
-Finished /home/htb-student/local.rules:
---------------------------------------------------
-ips policies rule stats
-             id  loaded  shared enabled    file
-              0     209       0     209    /root/snorty/etc/snort/snort.lua
---------------------------------------------------
-rule counts
-      total rules loaded: 209
-              text rules: 209
-           option chains: 209
-           chain headers: 2
---------------------------------------------------
-port rule counts
-            tcp     udp    icmp      ip
-    any       0       0       1       0
-  total       0       0       1       0
---------------------------------------------------
-service rule counts          to-srv  to-cli
-                 file_id:      208     208
-                   total:      208     208
---------------------------------------------------
-fast pattern groups
-               to_server: 1
-               to_client: 1
---------------------------------------------------
-search engine (ac_bnfa)
-               instances: 2
-                patterns: 416
-           pattern chars: 2508
-              num states: 1778
-        num match states: 370
-            memory scale: KB
-            total memory: 68.5879
-          pattern memory: 18.6973
-       match list memory: 27.3281
-       transition memory: 22.3125
-appid: MaxRss diff: 3024
-appid: patterns loaded: 300
---------------------------------------------------
-pcap DAQ configured to read-file.
-Commencing packet processing
-++ [0] /home/htb-student/pcaps/icmp.pcap
-06/19-08:45:56.838904 [**] [1:1000001:1] &#34;ICMP test&#34; [**] [Classification: Generic ICMP event] [Priority: 3] {ICMP} 192.168.158.139 -&gt; 174.137.42.77
-00:0C:29:34:0B:DE -&gt; 00:50:56:E0:14:49 type:0x800 len:0x4A
-192.168.158.139 -&gt; 174.137.42.77 ICMP TTL:128 TOS:0x0 ID:55107 IpLen:20 DgmLen:60
-Type:8  Code:0  ID:512   Seq:8448  ECHO
-
-snort.raw[32]:
-- - - - - - - - - - - -  - - - - - - - - - - - -  - - - - - - - - -
-61 62 63 64 65 66 67 68  69 6A 6B 6C 6D 6E 6F 70  abcdefgh ijklmnop
-71 72 73 74 75 76 77 61  62 63 64 65 66 67 68 69  qrstuvwa bcdefghi
-- - - - - - - - - - - -  - - - - - - - - - - - -  - - - - - - - - -
-
----SNIP---
-
-06/19-08:46:00.042354 [**] [1:1000001:1] &#34;ICMP test&#34; [**] [Classification: Generic ICMP event] [Priority: 3] {ICMP} 174.137.42.77 -&gt; 192.168.158.139
-00:50:56:E0:14:49 -&gt; 00:0C:29:34:0B:DE type:0x800 len:0x4A
-174.137.42.77 -&gt; 192.168.158.139 ICMP TTL:128 TOS:0x0 ID:30453 IpLen:20 DgmLen:60
-Type:0  Code:0  ID:512  Seq:9216  ECHO REPLY
-
-snort.raw[32]:
-- - - - - - - - - - - -  - - - - - - - - - - - -  - - - - - - - - -
-61 62 63 64 65 66 67 68  69 6A 6B 6C 6D 6E 6F 70  abcdefgh ijklmnop
-71 72 73 74 75 76 77 61  62 63 64 65 66 67 68 69  qrstuvwa bcdefghi
-- - - - - - - - - - - -  - - - - - - - - - - - -  - - - - - - - - -
-
--- [0] /home/htb-student/pcaps/icmp.pcap
---------------------------------------------------
-Packet Statistics
---------------------------------------------------
-daq
-                   pcaps: 1
-                received: 8
-                analyzed: 8
-                   allow: 8
-                rx_bytes: 592
---------------------------------------------------
-codec
-                   total: 8            (100.000%)
-                     eth: 8            (100.000%)
-                   icmp4: 8            (100.000%)
-                    ipv4: 8            (100.000%)
---------------------------------------------------
-Module Statistics
---------------------------------------------------
-appid
-                 packets: 8
-       processed_packets: 8
-          total_sessions: 1
---------------------------------------------------
-binder
-               new_flows: 1
-                inspects: 1
---------------------------------------------------
-detection
-                analyzed: 8
-              hard_evals: 8
-                  alerts: 8
-            total_alerts: 8
-                  logged: 8
---------------------------------------------------
-port_scan
-                 packets: 8
-                trackers: 2
---------------------------------------------------
-search_engine
-        qualified_events: 8
---------------------------------------------------
-stream
-                   flows: 1
---------------------------------------------------
-stream_icmp
-                sessions: 1
-                     max: 1
-                 created: 1
-                released: 1
---------------------------------------------------
-Summary Statistics
---------------------------------------------------
-timing
-                 runtime: 00:00:00
-                 seconds: 0.042473
-                pkts/sec: 188
-o&#34;)~   Snort exiting
-</code></pre><h2 id="snort-key-features">Snort Key Features</h2>
-<ul>
-<li>Key features that bolster Snort&rsquo;s effectiveness include:
-<ul>
-<li>Deep packet inspection, packet capture, and logging</li>
-<li>Intrusion detection</li>
-<li>Network Security Monitoring</li>
-<li>Anomaly detection</li>
-<li>Support for multiple tenants</li>
-<li>Both IPv6 and IPv4 are supported</li>
-</ul>
-</li>
-</ul>
-<hr>
-<h1 id="snort-rule-development">Snort Rule Development</h1>
-<ul>
-<li>
-<p>Snort rules are powerful tools for identifying/flagging potential malicious network activity.</p>
-</li>
-<li>
-<p>While similar to Suricata rules in their structure (header and options), we recommend studying Snort rule writing using the following resources: <a href="https://docs.snort.org/">https://docs.snort.org/</a>, <a href="https://docs.suricata.io/en/latest/rules/differences-from-snort.html">https://docs.suricata.io/en/latest/rules/differences-from-snort.html</a>.</p>
-</li>
-<li>
-<p>Let&rsquo;s move forward and explore some examples of crafting Snort rules to counter real-world malware threats.</p>
-</li>
-</ul>
-<h2 id="snort-rule-development-example-1-detecting-ursnif-inefficiently">Snort Rule Development Example 1: Detecting Ursnif (Inefficiently)</h2>
-<pre tabindex="0"><code>alert tcp any any -&gt; any any (msg:&#34;Possible Ursnif C2 Activity&#34;; flow:established,to_server; content:&#34;/images/&#34;, depth 12; content:&#34;_2F&#34;; content:&#34;_2B&#34;; content:&#34;User-Agent|3a 20|Mozilla/4.0 (compatible|3b| MSIE 8.0|3b| Windows NT&#34;; content:!&#34;Accept&#34;; content:!&#34;Cookie|3a|&#34;; content:!&#34;Referer|3a|&#34;; sid:1000002; rev:1;)
-</code></pre><ul>
-<li>
-<p>This Snort rule detects a variation of <a href="https://www.fortinet.com/blog/threat-research/ursnif-variant-spreading-word-document">Ursnif</a> malware but is inefficient due to missed HTTP sticky buffers.</p>
-</li>
-<li>
-<p>It operates on established, client-to-server TCP connections (<code>flow:established,to_server;</code>).</p>
-</li>
-<li>
-<p>The rule searches for:</p>
-<ul>
-<li>&ldquo;<code>/images/</code>&rdquo; within the first 12 bytes of the payload (<code>content:&quot;/images/&quot;, depth 12;</code>).</li>
-<li>&ldquo;<code>_2F</code>&rdquo; and &ldquo;<code>_2B</code>&rdquo; anywhere in the payload (<code>content:&quot;_2F&quot;;</code> and <code>content:&quot;_2B&quot;;</code>).</li>
-</ul>
-</li>
-<li>
-<p>It also identifies a specific <code>User-Agent</code> string, using hexadecimal representations for &ldquo;<code>:</code>&rdquo; and &ldquo;<code>;</code>&rdquo; (<code>content:&quot;User-Agent|3a 20|Mozilla/4.0 (compatible|3b| MSIE 8.0|3b| Windows NT&quot;;</code>).</p>
-</li>
-<li>
-<p>Finally, it checks for the absence of &ldquo;<code>Accept</code>&rdquo;, &ldquo;<code>Cookie:</code>&rdquo;, and &ldquo;<code>Referer:</code>&rdquo; HTTP headers (<code>content:!&quot;Accept&quot;; content:!&quot;Cookie|3a|&quot;; content:!&quot;Referer|3a|&quot;;</code>).</p>
-</li>
-<li>
-<p>Run Snort against the <code>ursnif.pcap</code> file.</p>
-</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sudo snort -c /root/snorty/etc/snort/snort.lua --daq-dir /usr/local/lib/daq -R &lt;path-to-rule-file&gt;/local.rules -r &lt;path-to-pcap-file&gt;/ursnif.pcap -A cmg
-</span></span></code></pre></div><pre tabindex="0"><code>--------------------------------------------------
-o&#34;)~   Snort++ 3.1.64.0
---------------------------------------------------
-Loading /root/snorty/etc/snort/snort.lua:
-Loading snort_defaults.lua:
-Finished snort_defaults.lua:
-        hosts
----SNIP---
-        host_tracker
-Finished /root/snorty/etc/snort/snort.lua:
-Loading file_id.rules_file:
-Loading file_magic.rules:
-Finished file_magic.rules:
-Finished file_id.rules_file:
-Loading /home/htb-student/local.rules:
-Finished /home/htb-student/local.rules:
-Loading rule args:
-Loading /home/htb-student/local.rules:
-Finished /home/htb-student/local.rules:
-Finished rule args:
---------------------------------------------------
-ips policies rule stats
-              id  loaded  shared enabled    file
-               0     210       2     210    /root/snorty/etc/snort/snort.lua
---------------------------------------------------
-rule counts
-       total rules loaded: 210
-          duplicate rules: 2
-               text rules: 210
-            option chains: 210
-            chain headers: 5
---------------------------------------------------
-port rule counts
-             tcp     udp    icmp      ip
-     any       1       0       1       0
-   total       1       0       1       0
---------------------------------------------------
-service rule counts          to-srv  to-cli
-                  file_id:      208     208
-                    total:      208     208
---------------------------------------------------
-fast pattern groups
-                      any: 2
-                to_server: 1
-                to_client: 1
---------------------------------------------------
-search engine (ac_bnfa)
-                instances: 3
-                 patterns: 417
-            pattern chars: 2566
-               num states: 1836
-         num match states: 371
-             memory scale: KB
-             total memory: 70.9639
-           pattern memory: 18.792
-        match list memory: 27.8125
-        transition memory: 23.9844
-appid: MaxRss diff: 3024
-appid: patterns loaded: 300
---------------------------------------------------
-pcap DAQ configured to read-file.
-Commencing packet processing
-++ [0] /home/htb-student/pcaps/ursnif.pcap
-07/21-19:27:47.161230 [**] [1:1000002:1] &#34;Possible Ursnif C2 Activity&#34; [**] [Priority: 0] {TCP} 10.10.10.104:49191 -&gt; 192.42.116.41:80
-00:1F:E2:10:8B:C9 -&gt; 00:0C:29:C9:67:00 type:0x800 len:0x18C
-10.10.10.104:49191 -&gt; 192.42.116.41:80 TCP TTL:128 TOS:0x0 ID:20640 IpLen:20 DgmLen:382 DF
-***AP*** Seq: 0x12E06BB  Ack: 0xE061E225  Win: 0x4029  TcpLen: 20
-
-snort.raw[342]:
-- - - - - - - - - - - -  - - - - - - - - - - - -  - - - - - - - - -
-47 45 54 20 2F 69 6D 61  67 65 73 2F 70 32 52 55  GET /ima ges/p2RU
-52 68 5F 32 2F 42 6B 32  76 72 31 4F 59 52 46 31  Rh_2/Bk2 vr1OYRF1
-57 47 75 35 6E 67 5F 32  46 73 66 73 2F 57 4F 57  WGu5ng_2 Fsfs/WOW
-72 47 54 45 54 79 4B 2F  37 4D 7A 4D 5F 32 42 6E  rGTETyK/ 7MzM_2Bn
-47 5A 51 52 32 6A 73 67  50 2F 73 5F 32 42 70 53  GZQR2jsg P/s_2BpS
-34 31 4B 37 41 67 2F 4F  75 4A 6A 51 66 41 61 63  41K7Ag/O uJjQfAac
-32 64 2F 76 6D 46 5F 32  46 31 4B 42 50 72 4B 5F  2d/vmF_2 F1KBPrK_
-32 2F 46 36 36 38 32 64  67 64 69 61 47 31 7A 75  2/F6682d gdiaG1zu
-56 43 7A 37 47 68 64 2F  62 4C 37 36 57 66 35 71  VCz7Ghd/ bL76Wf5q
-64 71 77 56 35 76 7A 52  2F 32 65 31 41 38 79 42  dqwV5vzR /2e1A8yB
-49 64 6B 6D 49 5F 32 42  2F 6F 67 79 7A 4E 55 57  IdkmI_2B /ogyzNUW
-33 47 72 2F 67 4B 42 5A  57 58 78 2E 67 69 66 20  3Gr/gKBZ WXx.gif
-48 54 54 50 2F 31 2E 31  0D 0A 55 73 65 72 2D 41  HTTP/1.1 ..User-A
-67 65 6E 74 3A 20 4D 6F  7A 69 6C 6C 61 2F 34 2E  gent: Mo zilla/4.
-30 20 28 63 6F 6D 70 61  74 69 62 6C 65 3B 20 4D  0 (compa tible; M
-53 49 45 20 38 2E 30 3B  20 57 69 6E 64 6F 77 73  SIE 8.0;  Windows
-20 4E 54 20 36 2E 31 29  0D 0A 48 6F 73 74 3A 20   NT 6.1) ..Host:
-62 6C 75 65 77 61 74 65  72 73 74 6F 6E 65 2E 72  bluewate rstone.r
-75 0D 0A 43 6F 6E 6E 65  63 74 69 6F 6E 3A 20 4B  u..Conne ction: K
-65 65 70 2D 41 6C 69 76  65 0D 0A 43 61 63 68 65  eep-Aliv e..Cache
-2D 43 6F 6E 74 72 6F 6C  3A 20 6E 6F 2D 63 61 63  -Control : no-cac
-68 65 0D 0A 0D 0A                                 he....
-- - - - - - - - - - - -  - - - - - - - - - - - -  - - - - - - - - -
-
--- [0] /home/htb-student/pcaps/ursnif.pcap
---------------------------------------------------
-Packet Statistics
---------------------------------------------------
-daq
-                    pcaps: 1
-                 received: 49
-                 analyzed: 49
-                    allow: 49
-                 rx_bytes: 5925
---------------------------------------------------
-codec
-                    total: 49           (100.000%)
-                      eth: 49           (100.000%)
-                     ipv4: 49           (100.000%)
-                      tcp: 16           ( 32.653%)
-                      udp: 33           ( 67.347%)
---------------------------------------------------
-Module Statistics
---------------------------------------------------
-appid
-                  packets: 49
-        processed_packets: 49
-           total_sessions: 15
-       service_cache_adds: 5
-             bytes_in_use: 760
-             items_in_use: 5
---------------------------------------------------
-back_orifice
-                  packets: 33
---------------------------------------------------
-binder
-                new_flows: 12
-          service_changes: 2
-                 inspects: 12
---------------------------------------------------
-detection
-                 analyzed: 49
-             raw_searches: 2
-          cooked_searches: 1
-             pkt_searches: 3
-            file_searches: 1
-                   alerts: 1
-             total_alerts: 1
-                   logged: 1
---------------------------------------------------
-dns
-                  packets: 19
-                 requests: 12
-                responses: 7
---------------------------------------------------
-file_id
-              total_files: 1
-          total_file_data: 304
-     max_concurrent_files: 1
---------------------------------------------------
-http_inspect
-                    flows: 2
-                    scans: 9
-              reassembles: 9
-              inspections: 9
-                 requests: 2
-                responses: 2
-             get_requests: 1
-            post_requests: 1
-           request_bodies: 1
-  max_concurrent_sessions: 2
-              total_bytes: 1603
---------------------------------------------------
-port_scan
-                  packets: 49
-                 trackers: 7
---------------------------------------------------
-search_engine
-               max_queued: 1
-            total_flushed: 2
-            total_inserts: 2
-             total_unique: 2
-     non_qualified_events: 1
-         qualified_events: 1
-           searched_bytes: 2192
---------------------------------------------------
-stream
-                    flows: 12
-             total_prunes: 7
-idle_prunes_proto_timeout: 7
---------------------------------------------------
-stream_tcp
-                 sessions: 2
-                      max: 2
-                  created: 2
-                 released: 2
-             instantiated: 2
-                   setups: 2
-                 restarts: 2
-             syn_trackers: 2
-              segs_queued: 4
-            segs_released: 4
-                segs_used: 4
-          rebuilt_packets: 9
-            rebuilt_bytes: 1627
-                     syns: 2
-                 syn_acks: 2
-                   resets: 2
-                 max_segs: 1
-                max_bytes: 981
---------------------------------------------------
-stream_udp
-                 sessions: 10
-                      max: 10
-                  created: 13
-                 released: 13
-                 timeouts: 3
-              total_bytes: 1964
---------------------------------------------------
-wizard
-                tcp_scans: 2
-                 tcp_hits: 2
-                udp_scans: 3
-               udp_misses: 3
---------------------------------------------------
-Appid Statistics
---------------------------------------------------
-detected apps and services
-              Application: Services   Clients    Users      Payloads   Misc       Referred
-                  unknown: 11         9          0          2          0          0
---------------------------------------------------
-Summary Statistics
---------------------------------------------------
-timing
-                  runtime: 00:00:00
-                  seconds: 0.039200
-                 pkts/sec: 1250
-                Mbits/sec: 1
-o&#34;)~   Snort exiting
-</code></pre><h2 id="snort-rule-development-example-2-detecting-cerber">Snort Rule Development Example 2: Detecting Cerber</h2>
-<pre tabindex="0"><code>alert udp $HOME_NET any -&gt; $EXTERNAL_NET any (msg:&#34;Possible Cerber Check-in&#34;; dsize:9; content:&#34;hi&#34;, depth 2, fast_pattern; pcre:&#34;/^[af0-9]{7}$/R&#34;; detection_filter:track by_src, count 1, seconds 60; sid:2816763; rev:4;)
-</code></pre><ul>
-<li>
-<p>The Snort rule above is designed to detect certain variations of <a href="https://blog.checkpoint.com/research/14959/">Cerber</a> malware.</p>
-</li>
-<li>
-<p>Let&rsquo;s break down the important parts of this rule to understand its workings.</p>
-</li>
-<li>
-<p><code>$HOME_NET any -&gt; $EXTERNAL_NET any</code> signifies the rule applies to any <code>UDP</code> traffic going from any port in the home network to any port on external networks.</p>
-</li>
-<li>
-<p><code>dsize:9;</code>: This is a condition that restricts the rule to UDP datagrams that have a payload data size of exactly <code>9</code> bytes.</p>
-</li>
-<li>
-<p><code>content:&quot;hi&quot;, depth 2, fast_pattern;</code>: This checks the payload&rsquo;s first <code>2</code> bytes for the string <code>hi</code>. The <code>fast_pattern</code> modifier makes the pattern matcher search for this pattern before any others in the rule, optimizing the rule&rsquo;s performance.</p>
-</li>
-<li>
-<p><code>pcre:&quot;/^[af0-9]{7}$/R&quot;;</code>: This stands for Perl Compatible Regular Expressions. The rule is looking for seven hexadecimal characters (from the set <code>a-f</code> and <code>0-9</code>) starting at the beginning of the payload (after the <code>hi</code>), and this should be the complete payload (signified by the <code>$</code> end anchor).</p>
-</li>
-<li>
-<p><code>detection_filter:track by_src, count 1, seconds 60;</code>: The <code>detection_filter</code> keyword in Snort rule language is used to suppress alerts unless a certain threshold of matched events occurs within a specified time frame. In this rule, the filter is set to track by source IP (<code>by_src</code>), with a count of <code>1</code> and within a time frame of <code>60</code> seconds. This means that the rule will trigger an alert only if it matches more than one event (specifically, more than count events which is <code>1</code> here) from the same source IP address within <code>60</code> seconds.</p>
-</li>
-<li>
-<p>To test this Snort rule, add it in a file called <code>local.rules</code>, then run Snort against the <code>cerber.pcap</code> file.</p>
-</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sudo snort -c /root/snorty/etc/snort/snort.lua --daq-dir /usr/local/lib/daq -R &lt;path-to-rules-file&gt; -r &lt;path-to-pcap-file&gt; -A cmg
-</span></span></code></pre></div><pre tabindex="0"><code>--------------------------------------------------
-o&#34;)~   Snort++ 3.1.64.0
---------------------------------------------------
-Loading /root/snorty/etc/snort/snort.lua:
-Loading snort_defaults.lua:
-Finished snort_defaults.lua:
-        output
----SNIP---
-        trace
-Finished /root/snorty/etc/snort/snort.lua:
-Loading file_id.rules_file:
-Loading file_magic.rules:
-Finished file_magic.rules:
-Finished file_id.rules_file:
-Loading /home/htb-student/local.rules:
-Finished /home/htb-student/local.rules:
-Loading rule args:
-Loading /home/htb-student/local.rules:
-Finished /home/htb-student/local.rules:
-Finished rule args:
---------------------------------------------------
-ips policies rule stats
-              id  loaded  shared enabled    file
-               0     210       2     210    /root/snorty/etc/snort/snort.lua
---------------------------------------------------
-rule counts
-       total rules loaded: 210
-          duplicate rules: 2
-               text rules: 210
-            option chains: 210
-            chain headers: 5
---------------------------------------------------
-port rule counts
-             tcp     udp    icmp      ip
-     any       0       1       1       0
-   total       0       1       1       0
---------------------------------------------------
-service rule counts          to-srv  to-cli
-                  file_id:      208     208
-                    total:      208     208
---------------------------------------------------
-fast pattern groups
-                      any: 2
-                to_server: 1
-                to_client: 1
---------------------------------------------------
-search engine (ac_bnfa)
-                instances: 3
-                 patterns: 417
-            pattern chars: 2511
-               num states: 1781
-         num match states: 371
-             memory scale: KB
-             total memory: 69.8359
-           pattern memory: 18.7383
-        match list memory: 27.3828
-        transition memory: 23.3398
-appid: MaxRss diff: 3024
-appid: patterns loaded: 300
---------------------------------------------------
-pcap DAQ configured to read-file.
-Commencing packet processing
-++ [0] /home/htb-student/pcaps/cerber.pcap
-07/22-02:17:56.486663 [**] [1:2816763:4] &#34;Possible Cerber Check-in&#34; [**] [Priority: 0] {UDP} 10.0.2.15:1046 -&gt; 31.184.234.1:6892
-08:00:27:A9:8C:97 -&gt; 52:54:00:12:35:02 type:0x800 len:0x3C
-10.0.2.15:1046 -&gt; 31.184.234.1:6892 UDP TTL:128 TOS:0x0 ID:83 IpLen:20 DgmLen:37
-Len: 9
-
-snort.raw[9]:
-- - - - - - - - - - - -  - - - - - - - - - - - -  - - - - - - - - -
-68 69 30 30 37 32 38 39  35                       hi007289 5
-- - - - - - - - - - - -  - - - - - - - - - - - -  - - - - - - - - -
-
-07/22-02:17:56.486795 [**] [1:2816763:4] &#34;Possible Cerber Check-in&#34; [**] [Priority: 0] {UDP} 10.0.2.15:1046 -&gt; 31.184.234.2:6892
-08:00:27:A9:8C:97 -&gt; 52:54:00:12:35:02 type:0x800 len:0x3C
-10.0.2.15:1046 -&gt; 31.184.234.2:6892 UDP TTL:128 TOS:0x0 ID:84 IpLen:20 DgmLen:37
-Len: 9
-
-snort.raw[9]:
-- - - - - - - - - - - -  - - - - - - - - - - - -  - - - - - - - - -
-68 69 30 30 37 32 38 39  35                       hi007289 5
----SNIP---
--- [0] /home/htb-student/pcaps/cerber.pcap
---------------------------------------------------
-Packet Statistics
---------------------------------------------------
-daq
-                    pcaps: 1
-                 received: 1035
-                 analyzed: 1035
-                    allow: 1035
-                 rx_bytes: 65672
---------------------------------------------------
-codec
-                    total: 1035         (100.000%)
-                      eth: 1035         (100.000%)
-                     ipv4: 1035         (100.000%)
-                      tcp: 9            (  0.870%)
-                      udp: 1026         ( 99.130%)
---------------------------------------------------
-Module Statistics
---------------------------------------------------
-appid
-                  packets: 1035
-        processed_packets: 1035
-           total_sessions: 1026
-       service_cache_adds: 514
-             bytes_in_use: 78128
-             items_in_use: 514
---------------------------------------------------
-back_orifice
-                  packets: 514
---------------------------------------------------
-binder
-                new_flows: 1026
-          service_changes: 1
-                 inspects: 1026
---------------------------------------------------
-detection
-                 analyzed: 1035
-             raw_searches: 1026
-             pkt_searches: 1026
-            file_searches: 1
-                   alerts: 511
-             total_alerts: 511
-                   logged: 511
---------------------------------------------------
-dns
-                  packets: 2
-                 requests: 1
-                responses: 1
---------------------------------------------------
-file_id
-              total_files: 1
-          total_file_data: 164
-     max_concurrent_files: 1
---------------------------------------------------
-http_inspect
-                    flows: 1
-                    scans: 5
-              reassembles: 5
-              inspections: 5
-                 requests: 1
-                responses: 1
-             get_requests: 1
-  max_concurrent_sessions: 1
-              total_bytes: 462
---------------------------------------------------
-pcre
-               pcre_rules: 2
-              pcre_native: 2
---------------------------------------------------
-port_scan
-                  packets: 1035
-                 trackers: 516
---------------------------------------------------
-search_engine
-               max_queued: 1
-            total_flushed: 512
-            total_inserts: 512
-             total_unique: 512
-     non_qualified_events: 1
-         qualified_events: 511
-           searched_bytes: 17146
---------------------------------------------------
-stream
-                    flows: 1026
---------------------------------------------------
-stream_tcp
-                 sessions: 1
-                      max: 1
-                  created: 1
-                 released: 1
-             instantiated: 1
-                   setups: 1
-                 restarts: 1
-             syn_trackers: 1
-              segs_queued: 2
-            segs_released: 2
-                segs_used: 2
-          rebuilt_packets: 5
-            rebuilt_bytes: 474
-                     syns: 1
-                 syn_acks: 1
-                     fins: 1
-                 max_segs: 1
-                max_bytes: 435
---------------------------------------------------
-stream_udp
-                 sessions: 1025
-                      max: 1025
-                  created: 1025
-                 released: 1025
-              total_bytes: 16982
---------------------------------------------------
-wizard
-                tcp_scans: 1
-                 tcp_hits: 1
-                udp_scans: 1024
-               udp_misses: 1024
---------------------------------------------------
-Appid Statistics
---------------------------------------------------
-detected apps and services
-              Application: Services   Clients    Users      Payloads   Misc       Referred
-                  unknown: 2          1          0          1          0          0
---------------------------------------------------
-Summary Statistics
---------------------------------------------------
-timing
-                  runtime: 00:01:11
-                  seconds: 71.153373
-                 pkts/sec: 15
-o&#34;)~   Snort exiting
-</code></pre><ul>
-<li>When using Wireshark to apply this rule, the used filter:</li>
-</ul>
-<pre tabindex="0"><code>udp &amp;&amp; udp.length == 17 &amp;&amp; udp contains &#34;hi&#34;
-</code></pre><p><img src="./attachments/suricata_example_2_1.png" alt="suricata_example_2_1"></p>
-<ul>
-<li>You&rsquo;ll notice that nearly half of the traffic is duplicates of each other:
-<ul>
-<li>All have length 9.</li>
-<li>From same source to a destination sequential subnet.</li>
-<li>And contain the same message data—<code>hi0072895</code>.</li>
-</ul>
-</li>
-</ul>
-<h2 id="snort-rule-development-example-3-detecting-patchwork">Snort Rule Development Example 3: Detecting Patchwork</h2>
-<pre tabindex="0"><code>alert http $HOME_NET any -&gt; $EXTERNAL_NET any (msg:&#34;OISF TROJAN Targeted AutoIt FileStealer/Downloader CnC Beacon&#34;; flow:established,to_server; http_method; content:&#34;POST&#34;; http_uri; content:&#34;.php?profile=&#34;; http_client_body; content:&#34;ddager=&#34;, depth 7; http_client_body; content:&#34;&amp;r1=&#34;, distance 0; http_header; content:!&#34;Accept&#34;; http_header; content:!&#34;Referer|3a|&#34;; sid:10000006; rev:1;)
-</code></pre><h4 id="the-who-and-where">The &ldquo;Who and Where&rdquo;</h4>
-<ul>
-<li>
-<p><strong><code>alert http $HOME_NET any -&gt; $EXTERNAL_NET any</code></strong>—This tells the system to watch for HTTP traffic (web traffic) leaving your internal network (<code>$HOME_NET</code>) and heading out to the internet (<code>$EXTERNAL_NET</code>).</p>
-</li>
-<li>
-<p><strong><code>flow:established,to_server</code></strong>—This ignores the initial connection handshake (the 3-way handshake) and only looks at the actual data being sent from the infected computer to the attacker&rsquo;s Command &amp; Control (C2) server.</p>
-</li>
-</ul>
-<h4 id="packet-content">Packet Content</h4>
-<ul>
-<li>For this rule to trigger, the web request must meet <strong>all</strong> of the following criteria.</li>
-<li>If even one is missing, the rule stays silent:</li>
-</ul>
-<h5 id="1-the-method-and-location">1. The Method and Location</h5>
-<ul>
-<li><strong><code>http_method; content:&quot;POST&quot;;</code></strong>—The malware isn&rsquo;t just &ldquo;looking&rdquo; at a page; it’s &ldquo;posting&rdquo; data (uploading information).</li>
-<li><strong><code>http_uri; content:&quot;.php?profile=&quot;;</code></strong>—The destination URL on the attacker&rsquo;s server must end in <code>.php?profile=</code>. This is a common way for malware to send &ldquo;ID&rdquo; info about the infected computer.</li>
-</ul>
-<h5 id="2-the-body-the-cargo">2. The Body (The &ldquo;Cargo&rdquo;)</h5>
-<ul>
-<li>The rule looks inside the data being uploaded (<code>http_client_body</code>) for specific markers:
-<ul>
-<li><strong><code>content:&quot;ddager=&quot;, depth 7;</code></strong>—The very first 7 bytes of the data must be <code>ddager=</code>. This is likely a hardcoded variable name the attacker used in their code.</li>
-<li><strong><code>content:&quot;&amp;r1=&quot;, distance 0;</code></strong>—Immediately following the first variable, it looks for <code>&amp;r1=</code>. This structure is typical for a web form sending multiple pieces of stolen data.</li>
-</ul>
-</li>
-</ul>
-<h5 id="3-the-missing-headers-the-stealth-check">3. The &ldquo;Missing&rdquo; Headers (The Stealth Check)</h5>
-<ul>
-<li>
-<p>This is the most clever part of the rule.</p>
-</li>
-<li>
-<p>Legitimate web browsers almost always send certain &ldquo;headers&rdquo; to identify themselves.</p>
-</li>
-<li>
-<p>This malware is poorly coded or trying to be minimal, so the rule looks for the <strong>absence</strong> of these headers:</p>
-<ul>
-<li><strong><code>content:!&quot;Accept&quot;;</code></strong>—It triggers if the <code>Accept</code> header is <strong>missing</strong>.</li>
-<li><strong><code>content:!&quot;Referer|3a|&quot;;</code></strong>—It triggers if the <code>Referer</code> header (which shows which site you came from) is <strong>missing</strong>.</li>
-</ul>
-</li>
-<li>
-<p>Invest some time in scrutinizing both the <code>patchwork.pcap</code> file using <code>Wireshark</code> and this rule to comprehend how it works.</p>
-</li>
-<li>
-<p>Wireshark Applied Filter:</p>
-</li>
-</ul>
-<pre tabindex="0"><code>http &amp;&amp; ip.src == 192.168.1.37 &amp;&amp; http.request.method == POST &amp;&amp; http.request.uri contains &#34;.php?profile=&#34; &amp;&amp; http.file_data contains &#34;ddager=&#34; &amp;&amp; http.file_data contains &#34;&amp;r1=&#34; &amp;&amp; !http.accept &amp;&amp; !http.referer
-</code></pre><p><img src="./attachments/snort_example_3_1.png" alt="snort_example_3_1.png"></p>
-<h2 id="snort-rule-development-example-4-detecting-patchwork-ssl">Snort Rule Development Example 4: Detecting Patchwork (SSL)</h2>
-<pre tabindex="0"><code>alert tcp $EXTERNAL_NET any -&gt; $HOME_NET any (msg:&#34;Patchwork SSL Cert Detected&#34;; flow:established,from_server; content:&#34;|55 04 03|&#34;; content:&#34;|08|toigetgf&#34;, distance 1, within 9; classtype:trojan-activity; sid:10000008; rev:1;)
-</code></pre><ul>
-<li>
-<p><code>flow:established,from_server;</code>—Matches established traffic flows originating from the server.</p>
-</li>
-<li>
-<p><code>content:&quot;|55 04 03|&quot;;</code>—Searches for the hex sequence <code>55 04 03</code>, representing the ASN.1 tag for the &ldquo;common name&rdquo; field in an X.509 certificate (often the domain name).</p>
-</li>
-<li>
-<p><code>content:&quot;|08|toigetgf&quot;, distance 1, within 9;</code>: Locates the string <code>toigetgf</code> starting 1 byte after the previous content match, within a 9-byte window.</p>
-</li>
-<li>
-<p>Wireshark filter used:</p>
-</li>
-</ul>
-<pre tabindex="0"><code>tls.handshake.certificate &amp;&amp; frame contains 55:04:03 &amp;&amp; frame contains 6f:69:67:65:74:67:66
-</code></pre><p><img src="./attachments/snort_example_4_1.png" alt="snort_example_4_1.png"></p>
-<hr>
-]]></content>
-        </item>
+      
+    <div class="pagination">
         
-    </channel>
-</rss>
+
+        <div class="pagination__buttons">
+            
+            <span class="button previous">
+                <a href="https://mostafa-ashour.github.io/posts/2025/04/zeek/">
+                    <span class="button__icon">←</span>
+                    <span class="button__text">Zeek</span>
+                </a>
+            </span>
+            
+
+            
+            <span class="button next">
+                <a href="https://mostafa-ashour.github.io/posts/2025/04/snort/">
+                    <span class="button__text">Snort</span>
+                    <span class="button__icon">→</span>
+                </a>
+            </span>
+            
+        </div>
+    </div>
+
+
+      
+
+      
+
+      
+
+    </main>
+  </div>
+
+
+            
+                <footer class="footer">
+    
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>&copy; 2026</span>
+            <span><a href="https://mostafa-ashour.github.io/">Mostafa Ashour</a></span>
+            <span><a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a></span>
+            
+            
+        </div>
+    </div>
+    
+    
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>Powered by <a href="https://github.com/Mostafa-Ashour">Ashour</a></span><span>Made with &#10084; by <a href="https://www.linkedin.com/in/mostafa-ashour-b82b0524b">Mostafa Ashour</a></span>
+        </div>
+    </div>
+    
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+<script type="text/javascript" src="https://mostafa-ashour.github.io/bundle.min.08b680078a3cf9c69e3dd217a5aa52cfddd4a1d850f8cdff127fdd7421a71f8b2b474be69386f67819edace92273916e7230c9054f38107db9dc6730b3530ab5.js" integrity="sha512-CLaAB4o8&#43;caePdIXpapSz93UodhQ&#43;M3/En/ddCGnH4srR0vmk4b2eBntrOkic5FucjDJBU84EH253Gcws1MKtQ=="></script>
+
+
+
+
+    </body>
+</html>
