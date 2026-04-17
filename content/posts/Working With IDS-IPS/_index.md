@@ -1,7 +1,7 @@
 ---
 title: "Working With IDS IPS"
 date: 2026-04-17T14:33:33+02:00
-draft: true
+draft: false
 toc: false
 images:
 tags:
