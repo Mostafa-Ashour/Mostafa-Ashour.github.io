@@ -210,7 +210,7 @@
 </ol>
 <ul>
 <li>Snort high-level architecture
-<img src="./attachments/Snort_high-level_architecture.png" alt="Snort_high-level_architecture"></li>
+<img src="http://localhost:1313/Working%20With%20IDS-IPS/attachments/Snort_high-level_architecture.png" alt="Snort_high-level_architecture"></li>
 </ul>
 <h2 id="snort-configuration--validating-snorts-configuration">Snort Configuration &amp; Validating Snort&rsquo;s Configuration</h2>
 <ul>
@@ -1558,7 +1558,7 @@ o&#34;)~   Snort exiting
 <li>When using Wireshark to apply this rule, the used filter:</li>
 </ul>
 <pre tabindex="0"><code>udp &amp;&amp; udp.length == 17 &amp;&amp; udp contains &#34;hi&#34;
-</code></pre><p><img src="./attachments/suricata_example_2_1.png" alt="suricata_example_2_1"></p>
+</code></pre><p><img src="http://localhost:1313/Working%20With%20IDS-IPS/attachments/suricata_example_2_1.png" alt="suricata_example_2_1"></p>
 <ul>
 <li>You&rsquo;ll notice that nearly half of the traffic is duplicates of each other:
 <ul>
@@ -1621,7 +1621,7 @@ o&#34;)~   Snort exiting
 </li>
 </ul>
 <pre tabindex="0"><code>http &amp;&amp; ip.src == 192.168.1.37 &amp;&amp; http.request.method == POST &amp;&amp; http.request.uri contains &#34;.php?profile=&#34; &amp;&amp; http.file_data contains &#34;ddager=&#34; &amp;&amp; http.file_data contains &#34;&amp;r1=&#34; &amp;&amp; !http.accept &amp;&amp; !http.referer
-</code></pre><p><img src="./attachments/snort_example_3_1.png" alt="snort_example_3_1.png"></p>
+</code></pre><p><img src="http://localhost:1313/Working%20With%20IDS-IPS/attachments/snort_example_3_1.png" alt="snort_example_3_1.png"></p>
 <h2 id="snort-rule-development-example-4-detecting-patchwork-ssl">Snort Rule Development Example 4: Detecting Patchwork (SSL)</h2>
 <pre tabindex="0"><code>alert tcp $EXTERNAL_NET any -&gt; $HOME_NET any (msg:&#34;Patchwork SSL Cert Detected&#34;; flow:established,from_server; content:&#34;|55 04 03|&#34;; content:&#34;|08|toigetgf&#34;, distance 1, within 9; classtype:trojan-activity; sid:10000008; rev:1;)
 </code></pre><ul>
@@ -1639,7 +1639,7 @@ o&#34;)~   Snort exiting
 </li>
 </ul>
 <pre tabindex="0"><code>tls.handshake.certificate &amp;&amp; frame contains 55:04:03 &amp;&amp; frame contains 6f:69:67:65:74:67:66
-</code></pre><p><img src="./attachments/snort_example_4_1.png" alt="snort_example_4_1.png"></p>
+</code></pre><p><img src="http://localhost:1313/Working%20With%20IDS-IPS/attachments/snort_example_4_1.png" alt="snort_example_4_1.png"></p>
 <hr>
 
         </div>

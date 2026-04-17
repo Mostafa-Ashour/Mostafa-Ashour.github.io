@@ -1,6 +1,6 @@
 ---
 title: "Snort"
-date: 2025-04-17T14:34:05+02:00
+date: 2026-04-17T14:34:05+02:00
 draft: false
 toc: false
 images:
@@ -45,7 +45,7 @@ One DAQ module that supports inline mode is `afpacket`, which is a module that 
 4. The `Logging and Alerting System` and `Output modules` record events or trigger alerts based on rule actions. Logs are typically stored in `syslog`, `unified2` formats, or directly in a database. Output modules are configured in `snort.lua`.
 
 - Snort high-level architecture
-![Snort_high-level_architecture](./attachments/Snort_high-level_architecture.png)
+![Snort_high-level_architecture](/Working%20With%20IDS-IPS/attachments/Snort_high-level_architecture.png)
 
 ## Snort Configuration & Validating Snort's Configuration
 
@@ -1377,7 +1377,7 @@ o")~   Snort exiting
 ```
 udp && udp.length == 17 && udp contains "hi"
 ```
-![suricata_example_2_1](./attachments/suricata_example_2_1.png)
+![suricata_example_2_1](/Working%20With%20IDS-IPS/attachments/suricata_example_2_1.png)
 - You'll notice that nearly half of the traffic is duplicates of each other:
   - All have length 9.
   - From same source to a destination sequential subnet.
@@ -1424,7 +1424,7 @@ alert http $HOME_NET any -> $EXTERNAL_NET any (msg:"OISF TROJAN Targeted AutoIt 
 ```
 http && ip.src == 192.168.1.37 && http.request.method == POST && http.request.uri contains ".php?profile=" && http.file_data contains "ddager=" && http.file_data contains "&r1=" && !http.accept && !http.referer
 ```
-![snort_example_3_1.png](./attachments/snort_example_3_1.png)
+![snort_example_3_1.png](/Working%20With%20IDS-IPS/attachments/snort_example_3_1.png)
 
 ## Snort Rule Development Example 4: Detecting Patchwork (SSL)
 
@@ -1440,6 +1440,6 @@ alert tcp $EXTERNAL_NET any -> $HOME_NET any (msg:"Patchwork SSL Cert Detected";
 ```
 tls.handshake.certificate && frame contains 55:04:03 && frame contains 6f:69:67:65:74:67:66
 ```
-![snort_example_4_1.png](./attachments/snort_example_4_1.png)
+![snort_example_4_1.png](/Working%20With%20IDS-IPS/attachments/snort_example_4_1.png)
 
 ---

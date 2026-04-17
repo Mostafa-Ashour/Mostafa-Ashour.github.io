@@ -1,6 +1,6 @@
 ---
 title: "Zeek"
-date: 2025-04-17T14:34:26+02:00
+date: 2026-04-17T14:34:26+02:00
 draft: false
 toc: false
 images:
@@ -152,7 +152,7 @@ tags:
 ```shell
 cat conn.log
 ```
-![zeek_example_1_1](./attachments/zeek_example_1_1.png)
+![zeek_example_1_1](/Working%20With%20IDS-IPS/attachments/zeek_example_1_1.png)
 
 | **Field**      | **Value**           | **What it means**                                                                                                                   |
 | -------------- | ------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
@@ -174,7 +174,7 @@ cat conn.log
 ```
 http && ip.src == 192.168.56.14
 ```
-![zeek_example_1](./attachments/zeek_example_1_2.png)
+![zeek_example_1](/Working%20With%20IDS-IPS/attachments/zeek_example_1_2.png)
 
 
 ## Intrusion Detection With Zeek Example 2: Detecting DNS Exfiltration

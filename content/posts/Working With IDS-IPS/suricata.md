@@ -1,6 +1,6 @@
 ---
 title: "Suricata"
-date: 2025-04-17T14:34:19+02:00
+date: 2026-04-17T14:34:19+02:00
 draft: false
 toc: false
 images:
@@ -80,7 +80,7 @@ tags:
 ```shell
 ls -lah /etc/suricata/rules/
 ```
-```
+```txt
 total 27M
 drwxr-xr-x 2 root root 4.0K Jun 28 12:10 .
 drwxr-xr-x 3 root root 4.0K Jul  4 14:44 ..
@@ -124,7 +124,7 @@ drwxr-xr-x 3 root root 4.0K Jul  4 14:44 ..
 ```shell
 more /etc/suricata/rules/emerging-malware.rules
 ```
-```
+```txt
 # Emerging Threats
 #
 # This distribution may contain rules under two different licenses.
@@ -191,7 +191,7 @@ threats.net/2008348; classtype:trojan-activity; sid:2008348; rev:2; metadata:cre
 ```shell
 more /etc/suricata/suricata.yaml
 ```
-```
+```txt
 %YAML 1.1
 ---
 
@@ -251,7 +251,7 @@ sudo vim /etc/suricata/suricata.yaml
 ```shell
 suricata -r /home/htb-student/pcaps/suspicious.pcap
 ```
-```
+```txt
 5/7/2023 -- 13:35:51 - <Notice> - This is Suricata version 6.0.13 RELEASE running in USER mode
 5/7/2023 -- 13:35:51 - <Notice> - all 3 packet processing threads, 4 management threads initialized, engine started.
 5/7/2023 -- 13:35:51 - <Notice> - Signal Received.  Stopping engine.
@@ -302,7 +302,7 @@ sudo iptables -I FORWARD -j NFQUEUE
 ```shell
 sudo suricata -q 0
 ```
-```
+```txt
 5/7/2023 -- 13:52:38 - <Notice> - This is Suricata version 6.0.13 RELEASE running in SYSTEM mode
 5/7/2023 -- 13:52:39 - <Notice> - all 4 packet processing threads, 4 management threads initialized, engine started.
 ```
@@ -311,7 +311,7 @@ sudo suricata -q 0
 ```shell
 sudo suricata -i ens160
 ```
-```
+```txt
 5/7/2023 -- 13:53:35 - <Notice> - This is Suricata version 6.0.13 RELEASE running in SYSTEM mode
 5/7/2023 -- 13:53:35 - <Notice> - all 1 packet processing threads, 4 management threads initialized, engine started.
 ```
@@ -319,7 +319,7 @@ sudo suricata -i ens160
 ```shell
 sudo suricata --af-packet=ens160
 ```
-```
+```txt
 5/7/2023 -- 13:54:34 - <Notice> - This is Suricata version 6.0.13 RELEASE running in SYSTEM mode
 5/7/2023 -- 13:54:34 - <Notice> - all 1 packet processing threads, 4 management threads initialized, engine started.
 ```
@@ -330,7 +330,7 @@ sudo suricata --af-packet=ens160
 ```shell
 sudo tcpreplay -i ens160 <path-to-pcap-file>/suspicious.pcap
 ```
-```
+```txt
 ^C User interrupt...
 sendpacket_abort
 Actual: 730 packets (663801 bytes) sent in 22.84 seconds
@@ -427,7 +427,7 @@ cat /var/log/suricata/old_eve.json | jq -c 'select(.event_type == "dns")' | head
 ```shell
 cat /var/log/suricata/old_fast.log
 ```
-```
+```txt
 07/06/2023-08:34:35.003163  [**] [1:1:0] Known bad DNS lookup, possible Dridex infection [**] [Classification: (null)] [Priority: 3] {UDP} 10.9.24.101:51833 -> 10.9.24.1:53
 ```
 
@@ -435,7 +435,7 @@ cat /var/log/suricata/old_fast.log
 ```shell
 cat /var/log/suricata/old_stats.log
 ```
-```
+```txt
 ------------------------------------------------------------------------------------
 Date: 7/6/2023 -- 08:34:24 (uptime: 0d, 00h 00m 08s)
 ------------------------------------------------------------------------------------
@@ -476,7 +476,7 @@ flow.memuse                                   | Total                     | 7394
 	- set `version` to `2`.
 	- `enabled` to `yes`.
 	- `force-filestore` to `yes`.
-```
+```txt
 file-store:
   version: 2
   enabled: yes
@@ -506,7 +506,7 @@ suricata -r <path-to-pcap-file>/vm-2.pcap
 cd filestore
 find . -type f
 ```
-```
+```txt
 ./fb/fb20d18d00c806deafe14859052072aecfb9f46be6210acfce80289740f2e20e
 ./21/214306c98a3483048d6a69eec6bf3b50497363bc2c98ed3cd954203ec52455e5
 ./21/21742fc621f83041db2e47b0899f5aea6caa00a4b67dbff0aae823e6817c5433
@@ -528,7 +528,7 @@ find . -type f
 cd filestore
 xxd ./21/21742fc621f83041db2e47b0899f5aea6caa00a4b67dbff0aae823e6817c5433 | head
 ```
-```
+```txt
 00000000: 4d5a 9000 0300 0000 0400 0000 ffff 0000  MZ..............
 00000010: b800 0000 0000 0000 4000 0000 e907 0000  ........@.......
 00000020: 0000 0000 0000 0000 0000 0000 0000 0000  ................
@@ -549,7 +549,7 @@ xxd ./21/21742fc621f83041db2e47b0899f5aea6caa00a4b67dbff0aae823e6817c5433 | head
 
 - To enable live rule reloading in Suricata, we need to configure our Suricata configuration file (`suricata.yaml`).
 - In the `suricata.yaml` file, we should locate the `detect-engine` section and set the value of the `reload` parameter to `true`. It looks something like this:
-```
+```txt
 detect-engine:
   - reload: true
 ```
@@ -568,7 +568,7 @@ sudo kill -usr2 $(pidof suricata)
 ```shell
 sudo suricata-update
 ```
-```
+```txt
 6/7/2023 -- 06:46:44 - <Info> -- Using data-directory /var/lib/suricata.
 6/7/2023 -- 06:46:44 - <Info> -- Using Suricata configuration /etc/suricata/suricata.yaml
 6/7/2023 -- 06:46:44 - <Info> -- Using /etc/suricata/rules for Suricata provided rules.
@@ -606,7 +606,7 @@ sudo suricata-update
 ```shell
 sudo suricata-update list-sources
 ```
-```
+```txt
 6/7/2023 -- 06:59:29 - <Info> -- Using data-directory /var/lib/suricata.
 6/7/2023 -- 06:59:29 - <Info> -- Using Suricata configuration /etc/suricata/suricata.yaml
 6/7/2023 -- 06:59:29 - <Info> -- Using /etc/suricata/rules for Suricata provided rules.
@@ -680,7 +680,7 @@ Name: stamus/lateral
 ```shell
 sudo suricata-update enable-source et/open
 ```
-```
+```txt
 6/7/2023 -- 07:02:08 - <Info> -- Using data-directory /var/lib/suricata.
 6/7/2023 -- 07:02:08 - <Info> -- Using Suricata configuration /etc/suricata/suricata.yaml
 6/7/2023 -- 07:02:08 - <Info> -- Using /etc/suricata/rules for Suricata provided rules.
@@ -711,7 +711,7 @@ sudo systemctl restart suricata
 ```shell
 sudo suricata -T -c /etc/suricata/suricata.yaml
 ```
-```
+```txt
 6/7/2023 -- 07:13:29 - <Info> - Running suricata under test mode
 6/7/2023 -- 07:13:29 - <Notice> - This is Suricata version 6.0.13 RELEASE running in SYSTEM mode
 6/7/2023 -- 07:13:29 - <Notice> - Configuration provided was successfully loaded. Exiting.
@@ -911,20 +911,20 @@ alert http $HOME_NET any -> $EXTERNAL_NET any (msg:"ET MALWARE Possible PowerShe
 
 #### Rule Explanation
 
-```
+```txt
 alert http $HOME_NET any -> $EXTERNAL_NET any
 ```
 - **Action**—`alert` (Generate an alert and log the packet).
 - **Protocol**—`http` (Specifically inspects web traffic).
 - **Direction**—From your internal network (`$HOME_NET`) to the outside world (`$EXTERNAL_NET`). This signifies **outbound C2 traffic** (a compromised machine "calling home").
 
-```
+```txt
 flow:established,to_server; content:"GET"; http_method;
 ```
 - **Flow**—The rule only triggers on an active, established connection moving toward the server.
 - **Method**—It looks specifically for an HTTP **GET** request, which Empire agents use to check for new tasks from the attacker.
 
-```
+```txt
 content:"/"; http_uri; depth:1; pcre:"/^(?:login\/process|admin\/get|news)\.php$/RU";
 ```
 - It looks for common default paths used by PowerShell Empire:
@@ -933,7 +933,7 @@ content:"/"; http_uri; depth:1; pcre:"/^(?:login\/process|admin\/get|news)\.php$
 	- `/news.php`
 - The **PCRE** (Perl Compatible Regular Expression) ensures the URI matches one of these three patterns exactly.
 
-```
+```txt
 content:"Mozilla|2f|5.0|20 28|Windows|20|NT|20|6.1"; http_user_agent;
 ```
 - The rule looks for a specific **User-Agent** string.
@@ -941,7 +941,7 @@ content:"Mozilla|2f|5.0|20 28|Windows|20|NT|20|6.1"; http_user_agent;
 	- Translated, it looks for: `Mozilla/5.0 (Windows NT 6.1`.
 	- **Note**—This is an older User-Agent (Windows 7). Attackers often forget to update these defaults, making them easy to spot.
 
-```
+```txt
 content:!".php|20|HTTP|2f|1.1|0d 0a|Cookie|3a 20|session="; fast_pattern;` `content:!"Referer"; content:!"Cache"; content:!"Accept";
 ```
 - This section looks for things that **should not** be there or look "weird":
@@ -957,7 +957,7 @@ content:!".php|20|HTTP|2f|1.1|0d 0a|Cookie|3a 20|session="; fast_pattern;` `cont
 ```shell
 sudo suricata -r /home/htb-student/pcaps/psempire.pcap -l . -k none
 ```
-```
+```txt
 15/7/2023 -- 03:57:42 - <Notice> - This is Suricata version 4.0.0-beta1 RELEASE
 15/7/2023 -- 03:57:42 - <Notice> - all 5 packet processing threads, 4 management threads initialized, engine started.
 15/7/2023 -- 03:57:42 - <Notice> - Signal Received.  Stopping engine.
@@ -967,7 +967,7 @@ sudo suricata -r /home/htb-student/pcaps/psempire.pcap -l . -k none
 ```shell
 cat fast.log
 ```
-```
+```txt
 11/21/2017-05:04:53.950737  [**] [1:2027512:1] ET MALWARE Possible PowerShell Empire Activity Outbound [**] [Classification: (null)] [Priority: 3] {TCP} 192.168.56.14:50447 -> 51.15.197.127:80
 11/21/2017-05:04:01.308390  [**] [1:2027512:1] ET MALWARE Possible PowerShell Empire Activity Outbound [**] [Classification: (null)] [Priority: 3] {TCP} 192.168.56.14:50436 -> 51.15.197.127:80
 11/21/2017-05:05:20.249515  [**] [1:2027512:1] ET MALWARE Possible PowerShell Empire Activity Outbound [**] [Classification: (null)] [Priority: 3] {TCP} 192.168.56.14:50452 -> 51.15.197.127:80
@@ -989,27 +989,27 @@ alert tcp any any -> $HOME_NET any (msg:"detected by body"; content:"<title>Hell
 
 #### Rule Explanation
 
-```
+```txt
 alert tcp any any -> $HOME_NET any
 ```
 - **`alert`**—The action. Suricata will generate a log entry when triggered.
 - **`tcp`**—It is looking specifically at TCP traffic (web traffic, SSH, etc.).
 - **`any any -> $HOME_NET any`**—It watches traffic coming from **any** IP and **any** port, destined for your defined **home network** on **any** port.
 
-```
+```txt
 (msg:"detected by body"; content:"<title>Hello World!</title>"; ...)
 ```
 - **`msg`**—The label that will appear in your logs.
 - **`content`**—The "fingerprint". Suricata is scanning the raw TCP data for the specific string `<title>Hello World!</title>`. This indicates the rule is looking for a specific HTML page title.
 
-```
+```txt
 detection_filter: track by_src, count 4, seconds 10;
 ```
 - **`track by_src`**—It remembers the IP address of the sender.
 - **`count 4`** & **`seconds 10`**—The alert only triggers once the sender has sent that specific content **4 times within a 10-second window**.
 - This is often used to detect **brute-force attacks** or **automated scanners**.
 
-```
+```txt
 priority:1; sid:3000011;
 ```
 - **`priority:1`**—This marks it as high importance (1 is highest, 4 is lowest).
@@ -1019,7 +1019,7 @@ priority:1; sid:3000011;
 ```shell
 sudo suricata -r /home/htb-student/pcaps/covenant.pcap -l . -k none
 ```
-```
+```txt
 15/7/2023 -- 04:47:15 - <Notice> - This is Suricata version 4.0.0-beta1 RELEASE
 15/7/2023 -- 04:47:15 - <Notice> - all 5 packet processing threads, 4 management threads initialized, engine started.
 15/7/2023 -- 04:47:16 - <Notice> - Signal Received.  Stopping engine.
@@ -1029,7 +1029,7 @@ sudo suricata -r /home/htb-student/pcaps/covenant.pcap -l . -k none
 ```shell
 cat fast.log
 ```
-```
+```txt
 01/21/2021-06:38:51.250048  [**] [1:3000011:0] detected by body [**] [Classification: (null)] [Priority: 1] {TCP} 157.230.93.100:80 -> 10.0.0.61:50366
 01/21/2021-06:40:55.021993  [**] [1:3000011:0] detected by body [**] [Classification: (null)] [Priority: 1] {TCP} 157.230.93.100:80 -> 10.0.0.61:50375
 01/21/2021-06:36:21.280144  [**] [1:3000011:0] detected by body [**] [Classification: (null)] [Priority: 1] {TCP} 157.230.93.100:80 -> 10.0.0.61:50358
@@ -1055,7 +1055,7 @@ alert tcp $HOME_NET any -> any any (msg:"detected by size and counter"; dsize:31
 ```shell
 sudo suricata -r <path-to-pcap-file>/covenant.pcap -l . -k none
 ```
-```
+```txt
 15/7/2023 -- 05:29:19 - <Notice> - This is Suricata version 4.0.0-beta1 RELEASE
 15/7/2023 -- 05:29:19 - <Notice> - all 5 packet processing threads, 4 management threads initialized, engine started.
 15/7/2023 -- 05:29:20 - <Notice> - Signal Received.  Stopping engine.
@@ -1065,7 +1065,7 @@ sudo suricata -r <path-to-pcap-file>/covenant.pcap -l . -k none
 ```shell
 cat fast.log
 ```
-```
+```txt
 01/21/2021-06:45:21.609212  [**] [1:3000001:0] detected by size and counter [**] [Classification: (null)] [Priority: 1] {TCP} 157.230.93.100:80 -> 10.0.0.61:
 50386
 01/21/2021-06:48:49.965761  [**] [1:3000001:0] detected by size and counter [**] [Classification: (null)] [Priority: 1] {TCP} 157.230.93.100:80 -> 10.0.0.61:
@@ -1094,13 +1094,13 @@ The Suricata rule above is designed to detect certain variations of [Sliver](ht
 
 #### Rule Explanation
 
-```
+```txt
 alert tcp any any -> any any
 ```
 - The rule monitors **all TCP traffic** moving in **any direction** (inbound or outbound).
 - Since Sliver implants (the "infected" machines) usually communicate with a C2 server over the internet, this ensures no matter where the server is hosted, the traffic is inspected.
 
-```
+```txt
 pcre:"/\/(php|api|upload|actions|rest|v1|oauth2callback|authenticate|oauth2|oauth|auth|database|db|namespaces)(.*?)((login|signin|api|samples|rpc|index|admin|register|sign-up)\.php)\?[a-z_]{1,2}=[a-z0-9]{1,10}/i";
 ```
 - It looks for common-looking API paths like `/php`, `/api`, `/rest`, or `/db`.
@@ -1113,7 +1113,7 @@ pcre:"/\/(php|api|upload|actions|rest|v1|oauth2callback|authenticate|oauth2|oaut
 ```shell
 sudo suricata -r /home/htb-student/pcaps/sliver.pcap -l . -k none
 ```
-```
+```txt
 16/7/2023 -- 02:27:50 - <Notice> - This is Suricata version 4.0.0-beta1 RELEASE
 16/7/2023 -- 02:27:50 - <Notice> - all 5 packet processing threads, 4 management threads initialized, engine started.
 16/7/2023 -- 02:27:50 - <Notice> - Signal Received.  Stopping engine.
@@ -1123,14 +1123,14 @@ sudo suricata -r /home/htb-student/pcaps/sliver.pcap -l . -k none
 ```shell
 cat fast.log
 ```
-```
+```txt
 01/23/2023-15:14:46.988537  [**] [1:1000002:1] Sliver C2 Implant Detected - POST [**] [Classification: (null)] [Priority: 3] {TCP} 192.168.4.90:50681 -> 192.168.4.85:80
 01/23/2023-15:14:47.321224  [**] [1:1000002:1] Sliver C2 Implant Detected - POST [**] [Classification: (null)] [Priority: 3] {TCP} 192.168.4.90:50684 -> 192.168.4.85:80
 01/23/2023-15:14:48.074797  [**] [1:1000002:1] Sliver C2 Implant Detected - POST [**] [Classification: (null)] [Priority: 3] {TCP} 192.168.4.90:50687 -> 192.168.4.85:80
 ```
 
 - Another rule for detecting Silver
-```
+```txt
 alert tcp any any -> any any (msg:"Sliver C2 Implant Detected - Cookie"; content:"Set-Cookie"; pcre:"/(PHPSESSID|SID|SSID|APISID|csrf-state|AWSALBCORS)\=[a-z0-9]{32}\;/"; sid:1000003; rev:1;)
 ```
 
@@ -1165,46 +1165,46 @@ alert tcp any any -> any any (msg:"Sliver C2 Implant Detected - Cookie"; content
 
 ## Suricata Rule Development Example 5: Detecting Dridex (TLS Encrypted)
 
-```
+```txt
 alert tls $EXTERNAL_NET any -> $HOME_NET any (msg:"ET MALWARE ABUSE.CH SSL Blacklist Malicious SSL certificate detected (Dridex)"; flow:established,from_server; content:"|16|"; content:"|0b|"; within:8; byte_test:3,<,1200,0,relative; content:"|03 02 01 02 02 09 00|"; fast_pattern; content:"|30 09 06 03 55 04 06 13 02|"; distance:0; pcre:"/^[A-Z]{2}/R"; content:"|55 04 07|"; distance:0; content:"|55 04 0a|"; distance:0; pcre:"/^.{2}[A-Z][a-z]{3,}\s(?:[A-Z][a-z]{3,}\s)?(?:[A-Z](?:[A-Za-z]{0,4}?[A-Z]|(?:\.[A-Za-z]){1,3})|[A-Z]?[a-z]+|[a-z](?:\.[A-Za-z]){1,3})\.?[01]/Rs"; content:"|55 04 03|"; distance:0; byte_test:1,>,13,1,relative; content:!"www."; distance:2; within:4; pcre:"/^.{2}(?P<CN>(?:(?:\d?[A-Z]?|[A-Z]?\d?)(?:[a-z]{3,20}|[a-z]{3,6}[0-9_][a-z]{3,6})\.){0,2}?(?:\d?[A-Z]?|[A-Z]?\d?)[a-z]{3,}(?:[0-9_-][a-z]{3,})?\.(?!com|org|net|tv)[a-z]{2,9})[01].*?(?P=CN)[01]/Rs"; content:!"|2a 86 48 86 f7 0d 01 09 01|"; content:!"GoDaddy"; sid:2023476; rev:5;)
 ```
 
 ### Rule Explanation
 
-```
+```txt
 alert tls $EXTERNAL_NET any -> $HOME_NET any
 ```
 - It's watching an external server responding/reaching to one of your internal machines.
 
-```
+```txt
 flow:established,from_server
 ```
 - The rule only triggers after a connection is made and the server is sending its "Certificate" packet.
 
-```
+```txt
 content:"|16|"; content:"|0b|"; within:8; byte_test:3,<,1200,0,relative;
 ```
 - `|16|`—This is the hex code for a TLS "Handshake" record.
 - `|0b|`—This is the hex code for the "Certificate" message.
 - `byte_test`—It checks if the certificate is smaller than 1200 bytes. Real certificates (like Google's) are usually much larger because they have long chains of trust. Malicious ones are often small and "self-signed."
 
-```
+```txt
 content:"|30 09 06 03 55 04 06 13 02|"; distance:0; pcre:"/^[A-Z]{2}/R";
 ```
 - This looks for the **Country Code** field in the certificate.
 - `pcre:"/^[A-Z]{2}/R"`—It ensures there are exactly two uppercase letters (e.g., US, UK, RU).
 
-```
+```txt
 pcre:"/^.{2}[A-Z][a-z]{3,}\s.../Rs"
 ```
-```
+```txt
 pcre:"/^.{2}(?P<CN>...)\.(?!com|org|net|tv)[a-z]{2,9})[01].*?(?P=CN)[01]/Rs"
 ```
 
 - **Pseudo-Randomness**—Dridex certificates use a specific formula to generate fake names (e.g., `John Doe LLC` or `RandomService.xyz`). The regex checks for specific patterns of capitalization and word length that humans don't usually use.
 - Non-Standard TLDs—It explicitly looks for domains that **do NOT** end in `.com`, `.org`, `.net`, or `.tv`.
 
-```
+```txt
 content:!"www."; content:!"GoDaddy";
 ```
 - `!` (NOT)—If the certificate contains "www." or was issued by "GoDaddy," the rule stops.
@@ -1218,7 +1218,7 @@ content:!"www."; content:!"GoDaddy";
 ```shell
 sudo suricata -r <path-to-pcap-file>/dridex.pcap -l . -k none
 ```
-```
+```txt
 15/7/2023 -- 20:34:11 - <Notice> - This is Suricata version 6.0.13 RELEASE running in USER mode
 15/7/2023 -- 20:34:11 - <Notice> - all 3 packet processing threads, 4 management threads initialized, engine started.
 15/7/2023 -- 20:34:11 - <Notice> - Signal Received.  Stopping engine.
@@ -1228,7 +1228,7 @@ sudo suricata -r <path-to-pcap-file>/dridex.pcap -l . -k none
 ```shell
 cat fast.log
 ```
-```
+```txt
 07/09/2019-18:26:31.480302  [**] [1:2023476:5] ET MALWARE ABUSE.CH SSL Blacklist Malicious SSL certificate detected (Dridex) [**] [Classification: (null)] [P             riority: 3] {TCP} 188.166.156.241:443 -> 10.7.9.101:49206
 07/09/2019-18:26:33.937036  [**] [1:2023476:5] ET MALWARE ABUSE.CH SSL Blacklist Malicious SSL certificate detected (Dridex) [**] [Classification: (null)] [P             riority: 3] {TCP} 188.166.156.241:443 -> 10.7.9.101:49207
 07/09/2019-18:26:39.373287  [**] [1:2023476:5] ET MALWARE ABUSE.CH SSL Blacklist Malicious SSL certificate detected (Dridex) [**] [Classification: (null)] [P             riority: 3] {TCP} 188.166.156.241:443 -> 10.7.9.101:49208
@@ -1237,7 +1237,7 @@ cat fast.log
 
 ## Suricata Rule Development Example 6: Detecting Sliver (TLS Encrypted)
 
-```
+```txt
 alert tls any any -> any any (msg:"Sliver C2 SSL"; ja3.hash; content:"473cd7cb9faa642487833865d516e578"; sid:1002; rev:1;)
 ```
 
@@ -1283,7 +1283,7 @@ ja3 -a --json <path-to-pcap-file>/sliverenc.pcap
 ```shell
 sudo suricata -r <path-to-pcap-file>/sliverenc.pcap -l . -k none
 ```
-```
+```txt
 15/7/2023 -- 22:30:37 - <Notice> - This is Suricata version 6.0.13 RELEASE running in USER mode
 15/7/2023 -- 22:30:37 - <Notice> - all 3 packet processing threads, 4 management threads initialized, engine started.
 15/7/2023 -- 22:30:37 - <Notice> - Signal Received.  Stopping engine.
@@ -1293,7 +1293,7 @@ sudo suricata -r <path-to-pcap-file>/sliverenc.pcap -l . -k none
 ```shell
 cat fast.log
 ```
-```
+```txt
 10/20/2021-17:04:25.166658  [**] [1:1002:1] Sliver C2 SSL [**] [Classification: (null)] [Priority: 3] {TCP} 10.10.20.101:53225 -> 23.152.0.91:443
 10/20/2021-17:07:25.315183  [**] [1:1002:1] Sliver C2 SSL [**] [Classification: (null)] [Priority: 3] {TCP} 10.10.20.101:53231 -> 23.152.0.91:443
 10/20/2021-17:04:24.700690  [**] [1:1002:1] Sliver C2 SSL [**] [Classification: (null)] [Priority: 3] {TCP} 10.10.20.101:53222 -> 23.152.0.91:443
