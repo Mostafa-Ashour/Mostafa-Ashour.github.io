@@ -4,8 +4,7 @@ date: 2026-04-17T14:33:33+02:00
 draft: false
 toc: false
 images:
-tags:
-  - untagged
+tags: ["cybersecurity", "networking", "traffic-analysis", "IDS", "IPS", "SOC"]
 ---
 
 # Introduction To IDS/IPS

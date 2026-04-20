@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>IDS on Ashour Blog</title>
+    <link>https://mostafa-ashour.github.io/tags/ids/</link>
+    <description>Recent content in IDS on Ashour Blog</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
+    <lastBuildDate>Fri, 17 Apr 2026 14:33:33 +0200</lastBuildDate>
+    <atom:link href="https://mostafa-ashour.github.io/tags/ids/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Working With IDS IPS</title>
+      <link>https://mostafa-ashour.github.io/posts/working-with-ids-ips/</link>
+      <pubDate>Fri, 17 Apr 2026 14:33:33 +0200</pubDate>
+      <guid>https://mostafa-ashour.github.io/posts/working-with-ids-ips/</guid>
+      <description>&lt;h1 id=&#34;introduction-to-idsips&#34;&gt;Introduction To IDS/IPS&lt;/h1&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;em&gt;&lt;strong&gt;Network security monitoring (NSM)&lt;/strong&gt;&lt;/em&gt; relies on &lt;code&gt;Intrusion Detection Systems (IDS)&lt;/code&gt; and &lt;code&gt;Intrusion Prevention Systems (IPS)&lt;/code&gt; to:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Identify potential Threats.&lt;/li&gt;&#xA;&lt;li&gt;Mitigate their impact.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;An &lt;code&gt;Intrusion Detection System (IDS)&lt;/code&gt;:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Monitors network or system activity for malicious behavior and policy violations.&lt;/li&gt;&#xA;&lt;li&gt;Reporting to a management station to provide network visibility.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;While an &lt;code&gt;IDS&lt;/code&gt; alerts to intrusions, it does not prevent them.&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;The IDS operates in two main modes:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Signature-Based Detection.&lt;/li&gt;&#xA;&lt;li&gt;Anomaly-Based Detection.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;In &lt;code&gt;signature-based detection&lt;/code&gt;:&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

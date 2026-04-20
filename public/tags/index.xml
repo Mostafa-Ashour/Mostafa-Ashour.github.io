@@ -16,5 +16,47 @@
       <guid>https://mostafa-ashour.github.io/tags/untagged/</guid>
       <description></description>
     </item>
+    <item>
+      <title>Cybersecurity</title>
+      <link>https://mostafa-ashour.github.io/tags/cybersecurity/</link>
+      <pubDate>Fri, 17 Apr 2026 14:33:33 +0200</pubDate>
+      <guid>https://mostafa-ashour.github.io/tags/cybersecurity/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>IDS</title>
+      <link>https://mostafa-ashour.github.io/tags/ids/</link>
+      <pubDate>Fri, 17 Apr 2026 14:33:33 +0200</pubDate>
+      <guid>https://mostafa-ashour.github.io/tags/ids/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>IPS</title>
+      <link>https://mostafa-ashour.github.io/tags/ips/</link>
+      <pubDate>Fri, 17 Apr 2026 14:33:33 +0200</pubDate>
+      <guid>https://mostafa-ashour.github.io/tags/ips/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Networking</title>
+      <link>https://mostafa-ashour.github.io/tags/networking/</link>
+      <pubDate>Fri, 17 Apr 2026 14:33:33 +0200</pubDate>
+      <guid>https://mostafa-ashour.github.io/tags/networking/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>SOC</title>
+      <link>https://mostafa-ashour.github.io/tags/soc/</link>
+      <pubDate>Fri, 17 Apr 2026 14:33:33 +0200</pubDate>
+      <guid>https://mostafa-ashour.github.io/tags/soc/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Traffic-Analysis</title>
+      <link>https://mostafa-ashour.github.io/tags/traffic-analysis/</link>
+      <pubDate>Fri, 17 Apr 2026 14:33:33 +0200</pubDate>
+      <guid>https://mostafa-ashour.github.io/tags/traffic-analysis/</guid>
+      <description></description>
+    </item>
   </channel>
 </rss>
