@@ -81,7 +81,7 @@ tags:
 
 ---
 
-# Zeek
+# Zeek (previously known as Bro)
 
 - [Zeek](zeek.md/).
 
