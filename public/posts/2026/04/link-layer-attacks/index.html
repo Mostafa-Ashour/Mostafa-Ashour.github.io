@@ -1,0 +1,1113 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="Mostafa Ashour ">
+<meta name="description" content="ARP Spoofing &amp; Abnormality Detection Related PCAP File(s)—ARP_Spoof.pcapng.
+Attackers have long misused the Address Resolution Protocol (ARP) to carry out man-in-the-middle and denial-of-service attacks.
+Because of this common abuse, ARP is a key area/point to examine when analyzing network traffic, and it&rsquo;s often the first protocol we check.
+Many ARP attacks are broadcast to the entire network rather than targeting individual computers, which makes them easier to find using packet sniffing.
+" />
+<meta name="keywords" content="" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="" />
+<link rel="canonical" href="http://localhost:1313/posts/2026/04/link-layer-attacks/" />
+
+
+    <title>
+        
+            Link Layer Attacks :: Ashour Blog  — Hello Friend NG Theme
+        
+    </title>
+
+
+
+
+
+  <link rel="stylesheet" href="http://localhost:1313/main.min.7289daf2e88ea2c7b253a51cc5794c7cc17e7aeb7295a19d978db764a5862f25.css" integrity="sha256-cona8uiOoseyU6UcxXlMfMF&#43;eutylaGdl423ZKWGLyU=" crossorigin="anonymous">
+
+
+
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="http://localhost:1313/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+    <link rel="manifest" href="http://localhost:1313/site.webmanifest">
+    <link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg" color="">
+    <link rel="shortcut icon" href="http://localhost:1313/favicon.ico">
+    <meta name="msapplication-TileColor" content="">
+
+
+
+  <meta itemprop="name" content="Link Layer Attacks">
+  <meta itemprop="description" content="ARP Spoofing &amp; Abnormality Detection Related PCAP File(s)—ARP_Spoof.pcapng.
+Attackers have long misused the Address Resolution Protocol (ARP) to carry out man-in-the-middle and denial-of-service attacks.
+Because of this common abuse, ARP is a key area/point to examine when analyzing network traffic, and it’s often the first protocol we check.
+Many ARP attacks are broadcast to the entire network rather than targeting individual computers, which makes them easier to find using packet sniffing.">
+  <meta itemprop="datePublished" content="2026-04-24T01:51:12+03:00">
+  <meta itemprop="dateModified" content="2026-04-24T01:51:12+03:00">
+  <meta itemprop="wordCount" content="3400">
+  <meta itemprop="image" content="http://localhost:1313/">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="http://localhost:1313/">
+  <meta name="twitter:title" content="Link Layer Attacks">
+  <meta name="twitter:description" content="ARP Spoofing &amp; Abnormality Detection Related PCAP File(s)—ARP_Spoof.pcapng.
+Attackers have long misused the Address Resolution Protocol (ARP) to carry out man-in-the-middle and denial-of-service attacks.
+Because of this common abuse, ARP is a key area/point to examine when analyzing network traffic, and it’s often the first protocol we check.
+Many ARP attacks are broadcast to the entire network rather than targeting individual computers, which makes them easier to find using packet sniffing.">
+
+
+
+    <meta property="og:url" content="http://localhost:1313/posts/2026/04/link-layer-attacks/">
+  <meta property="og:site_name" content="Ashour Blog">
+  <meta property="og:title" content="Link Layer Attacks">
+  <meta property="og:description" content="ARP Spoofing &amp; Abnormality Detection Related PCAP File(s)—ARP_Spoof.pcapng.
+Attackers have long misused the Address Resolution Protocol (ARP) to carry out man-in-the-middle and denial-of-service attacks.
+Because of this common abuse, ARP is a key area/point to examine when analyzing network traffic, and it’s often the first protocol we check.
+Many ARP attacks are broadcast to the entire network rather than targeting individual computers, which makes them easier to find using packet sniffing.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2026-04-24T01:51:12+03:00">
+    <meta property="article:modified_time" content="2026-04-24T01:51:12+03:00">
+    <meta property="og:image" content="http://localhost:1313/">
+
+
+
+
+
+
+    <meta property="article:published_time" content="2026-04-24 01:51:12 &#43;0300 EEST" />
+
+
+
+
+
+
+
+
+
+
+
+
+    </head>
+
+    
+        <body>
+    
+    
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="http://localhost:1313/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">&gt;</span>
+            <span class="logo__text ">
+                mostafa@ashour:~$</span>
+            <span class="logo__cursor" style=
+                  "
+                   
+                   ">
+            </span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+                <nav class="menu">
+    <ul class="menu__inner">
+                <li><a href="http://localhost:1313/about/">About</a></li>
+            
+                <li><a href="http://localhost:1313/posts/">Posts</a></li>
+            
+        <ul class="submenu">
+            <li class="dropdown">
+                <a href="javascript:void(0)" class="dropbtn">en</a>
+                <div class="dropdown-content">
+                        
+                </div>
+            </li>
+        </ul>
+    </ul>
+</nav>
+
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+        </span>
+    </span>
+</header>
+
+
+            
+  <div class="content">
+    <main class="post">
+
+      <div class="post-info">
+        <p>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+            16 minutes
+          
+
+          
+        </p>
+      </div>
+
+      <article>
+        <h1 class="post-title">
+          <a href="http://localhost:1313/posts/2026/04/link-layer-attacks/">Link Layer Attacks</a>
+        </h1>
+
+        
+
+        
+
+        
+
+        <div class="post-content">
+          <h1 id="arp-spoofing--abnormality-detection">ARP Spoofing &amp; Abnormality Detection</h1>
+<ul>
+<li>
+<p>Related PCAP File(s)—<code>ARP_Spoof.pcapng</code>.</p>
+</li>
+<li>
+<p>Attackers have long misused the <code>Address Resolution Protocol (ARP)</code> to carry out man-in-the-middle and denial-of-service attacks.</p>
+</li>
+<li>
+<p>Because of this common abuse, ARP is a key area/point to examine when analyzing network traffic, and it&rsquo;s often the first protocol we check.</p>
+</li>
+<li>
+<p>Many ARP attacks are broadcast to the entire network rather than targeting individual computers, which makes them easier to find using packet sniffing.</p>
+</li>
+</ul>
+<h2 id="how-address-resolution-protocol-works">How Address Resolution Protocol Works</h2>
+<ul>
+<li>
+<p>Firstly, we need to know how this protocol functions in its standard, or &lsquo;vanilla&rsquo;, operation.
+<img src="http://localhost:1313/Network%20Traffic%20Analysis/ARP-protocol.png" alt="ARP-protocol"></p>
+</li>
+<li>
+<p>In our network, hosts must know the physical address (MAC address) to which they must send their data (Destination MAC), which gave the idea to make ARP Protocol.</p>
+</li>
+<li>
+<p>Let&rsquo;s elucidate (وضح) this with a step-by-step process.</p>
+</li>
+</ul>
+<table>
+  <thead>
+      <tr>
+          <th><strong>Step</strong></th>
+          <th><strong>Description</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>1</code></td>
+          <td>Imagine our first computer, or Host A, needs to send data to our second computer, Host B. To achieve successful transmission, Host A must ascertain the physical address of Host B.</td>
+      </tr>
+      <tr>
+          <td><code>2</code></td>
+          <td>Host A begins by consulting its list of known addresses, the ARP cache, to check if it already possesses this physical address.</td>
+      </tr>
+      <tr>
+          <td><code>3</code></td>
+          <td>In the event the address corresponding to the desired IP isn&rsquo;t in the ARP cache, Host A broadcasts an ARP request to all machines in the subnet, inquiring, <code>Who holds the IP x.x.x.x?</code></td>
+      </tr>
+      <tr>
+          <td><code>4</code></td>
+          <td>Host B responds to this message with an ARP reply, <code>Hello, Host A, my IP is x.x.x.x and is mapped to MAC address aa:aa:aa:aa:aa:aa.</code></td>
+      </tr>
+      <tr>
+          <td><code>5</code></td>
+          <td>On receiving this response, Host A updates its ARP cache with the new IP-to-MAC mapping.</td>
+      </tr>
+      <tr>
+          <td><code>6</code></td>
+          <td>Occasionally, a host might install a new interface, or the IP address previously allocated to the host might expire, necessitating an update and remapping of the ARP cache. Such instances could introduce complications when we analyze our network traffic.</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="arp-poisoning--spoofing">ARP Poisoning &amp; Spoofing</h2>
+<ul>
+<li>
+<p>In an ideal scenario, robust controls would be in place to thwart these attacks, but in reality, this isn&rsquo;t always feasible.</p>
+</li>
+<li>
+<p>To comprehend (لفهم) our Indicators of Compromise (IOCs) more effectively, let&rsquo;s delve into the behavior of ARP Poisoning and Spoofing attacks.
+<img src="http://localhost:1313/Network%20Traffic%20Analysis/ARP-spoofing-poisoning.png" alt="ARP-spoofing-poisoning"></p>
+</li>
+<li>
+<p>Detecting these attacks can be challenging, as they mimic the communication structure of standard ARP traffic.</p>
+</li>
+<li>
+<p>Yet, certain ARP requests and replies can reveal their nefarious nature (طبيعة شريرة).</p>
+</li>
+<li>
+<p>Let&rsquo;s illustrate how these attacks function, enabling us to better identify them during our traffic analysis.</p>
+</li>
+</ul>
+<table>
+  <thead>
+      <tr>
+          <th><strong>Step</strong></th>
+          <th><strong>Description</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>1</code></td>
+          <td>Consider a network with three machines: the victim&rsquo;s computer, the router, and the attacker&rsquo;s machine.</td>
+      </tr>
+      <tr>
+          <td><code>2</code></td>
+          <td>The attacker initiates their ARP cache poisoning scheme by dispatching counterfeit ARP messages to both the victim&rsquo;s computer and the router.</td>
+      </tr>
+      <tr>
+          <td><code>3</code></td>
+          <td>The message to the victim&rsquo;s computer asserts that the gateway&rsquo;s (router&rsquo;s) IP address corresponds to the physical address of the attacker&rsquo;s machine.</td>
+      </tr>
+      <tr>
+          <td><code>4</code></td>
+          <td>Conversely, the message to the router claims that the IP address of the victim&rsquo;s machine maps to the physical address of the attacker&rsquo;s machine.</td>
+      </tr>
+      <tr>
+          <td><code>5</code></td>
+          <td>On successfully executing these requests, the attacker may manage to corrupt the ARP cache on both the victim&rsquo;s machine and the router, causing all data to be misdirected to the attacker&rsquo;s machine.</td>
+      </tr>
+      <tr>
+          <td><code>6</code></td>
+          <td>If the attacker configures traffic forwarding, they can escalate the situation from a denial-of-service to a man-in-the-middle attack.</td>
+      </tr>
+      <tr>
+          <td><code>7</code></td>
+          <td>By examining other layers of our network model, we might discover additional attacks. The attacker could conduct DNS spoofing to redirect web requests to a bogus site or perform SSL stripping to attempt the interception of sensitive data in transit.</td>
+      </tr>
+  </tbody>
+</table>
+<ul>
+<li>Recognizing/Detecting these attacks is important, but preventing them is an even greater challenge.</li>
+<li>Here are some ways we might stop these attacks:
+<ol>
+<li><code>Static ARP Entries</code>—We can prevent these attacks by making it harder to rewrite and corrupt the ARP cache. However, this will require more network maintenance and monitoring.</li>
+<li><code>Switch and Router Port Security</code>—Implementing network profile controls and other measures can ensure that only authorized devices can connect to specific ports on our network devices, effectively blocking machines attempting ARP spoofing/poisoning.</li>
+</ol>
+</li>
+</ul>
+<h2 id="finding-arp-spoofing">Finding ARP Spoofing</h2>
+<ul>
+<li>For detecting ARP Spoofing attacks, we&rsquo;ll need to open the related traffic capture file (<code>ARP_Spoof.pcapng</code>) from this module&rsquo;s resources using Wireshark.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>wireshark ARP_Spoof.pcapng
+</span></span></code></pre></div><ul>
+<li>
+<p>Employing this filter <code>arp.opcode</code> streamline our view to focus solely on ARP requests and replies.
+<img src="http://localhost:1313/Network%20Traffic%20Analysis/ARP_Spoof_1.png" alt="ARP_Spoof_1"></p>
+</li>
+<li>
+<p>A key red flag we need to monitor is any anomaly in traffic emanating from a specific host.</p>
+</li>
+<li>
+<p>For instance, one host incessantly broadcasting ARP requests and replies to another host could be a telltale sign of ARP spoofing.</p>
+</li>
+<li>
+<p>In such a scenario, we might identify that the MAC address <code>08:00:27:53:0C:BA is behaving suspiciously</code>.</p>
+</li>
+<li>
+<p>To ascertain this, we can fine-tune our analysis to inspect solely the interactions—both requests and replies—among:</p>
+<ul>
+<li>The attacker&rsquo;s machine.</li>
+<li>The victim&rsquo;s machine.</li>
+<li>The router.</li>
+</ul>
+</li>
+<li>
+<p>The <code>opcode</code> functionality in <code>Wireshark</code> can simplify this process.</p>
+<ol>
+<li><code>Opcode == 1</code>—This represents all types of ARP Requests</li>
+<li><code>Opcode == 2</code>—This signifies all types of ARP Replies</li>
+</ol>
+</li>
+<li>
+<p>As a preliminary step, we could scrutinize the requests dispatched using the following filter.</p>
+<ul>
+<li><code>arp.opcode == 1</code>
+<img src="http://localhost:1313/Network%20Traffic%20Analysis/ARP_Spoof_2.png" alt="ARP_Spoof_2"></li>
+</ul>
+</li>
+<li>
+<p>Almost instantly, we should notice a red flag - an address duplication, accompanied by a warning message.</p>
+</li>
+<li>
+<p>If we delve into the details of the error message within Wireshark, we should be able to extract additional information.
+<img src="http://localhost:1313/Network%20Traffic%20Analysis/ARP_Spoof_3.png" alt="ARP_Spoof_3"></p>
+</li>
+<li>
+<p>Upon immediate inspection, we might discern that one IP address is mapped to two different MAC addresses.</p>
+</li>
+<li>
+<p>We can validate this on a Linux system by executing the appropriate commands.</p>
+</li>
+</ul>
+<h4 id="arp">ARP</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ arp -a | grep 50:eb:f6:ec:0e:7f
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>? <span style="color:#f92672">(</span>192.168.10.4<span style="color:#f92672">)</span> at 50:eb:f6:ec:0e:7f <span style="color:#f92672">[</span>ether<span style="color:#f92672">]</span> on eth0
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ arp -a | grep 08:00:27:53:0c:ba
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>? <span style="color:#f92672">(</span>192.168.10.4<span style="color:#f92672">)</span> at 08:00:27:53:0c:ba <span style="color:#f92672">[</span>ether<span style="color:#f92672">]</span> on eth0
+</span></span></code></pre></div><ul>
+<li>
+<p>In this situation, we might identify that our ARP cache, in fact, contains both MAC addresses allocated to the same IP address - an anomaly that warrants our immediate attention.</p>
+</li>
+<li>
+<p>To sift through more duplicate records, we can utilize the subsequent Wireshark filter.</p>
+<ul>
+<li><code>arp.duplicate-address-detected &amp;&amp; arp.opcode == 2</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="identifying-the-original-ip-addresses">Identifying The Original IP Addresses</h2>
+<ul>
+<li>
+<p>To identify the device that changed its IP address via MAC spoofing, we need to determine the initial IP addresses of the devices.</p>
+</li>
+<li>
+<p>If the attack was solely ARP-based:</p>
+<ul>
+<li>The victim&rsquo;s IP address should remain constant.</li>
+<li>While the attacker&rsquo;s IP address may have changed.</li>
+</ul>
+</li>
+<li>
+<p>This information can be found in ARP requests and quickly located using a Wireshark filter.</p>
+<ul>
+<li><code>(arp.opcode) &amp;&amp; ((eth.src == 08:00:27:53:0c:ba) || (eth.dst == 08:00:27:53:0c:ba))</code>
+<img src="http://localhost:1313/Network%20Traffic%20Analysis/ARP_Spoof_3_1.png" alt="ARP_Spoof_3">
+<img src="http://localhost:1313/Network%20Traffic%20Analysis/ARP_Spoof_4.png" alt="ARP_Spoof_4"></li>
+</ul>
+</li>
+<li>
+<p>We might instantly note that the MAC address <code>08:00:27:53:0c:ba</code> was initially linked to the IP address <code>192.168.10.5</code>, but this was recently switched to <code>192.168.10.4</code>.</p>
+</li>
+<li>
+<p>This transition is indicative of a deliberate attempt at ARP spoofing or cache poisoning.</p>
+</li>
+<li>
+<p>Additionally, examining the traffic from these MAC addresses with the following Wireshark filter can prove insightful:</p>
+<ul>
+<li><code>eth.addr == 50:eb:f6:ec:0e:7f or eth.addr == 08:00:27:53:0c:ba</code>
+<img src="http://localhost:1313/Network%20Traffic%20Analysis/ARP_Spoof_5.png" alt="ARP_Spoof_5"></li>
+</ul>
+</li>
+<li>
+<p>We might notice some inconsistencies with TCP connections.</p>
+</li>
+<li>
+<p>If TCP connections are consistently dropping, it&rsquo;s an indication that the attacker is not forwarding traffic between the victim and the router.</p>
+</li>
+<li>
+<p>If the attacker is, in fact, forwarding the traffic and is operating as a man-in-the-middle, we might observe identical or nearly symmetrical transmissions:</p>
+<ul>
+<li>From the victim to the attacker.</li>
+<li>From the attacker to the router.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h1 id="arp-scanning--denial-of-service">ARP Scanning &amp; Denial-of-Service</h1>
+<ul>
+<li>Unusual patterns in the ARP requests and responses can be found.</li>
+<li>It is common knowledge that poisoning and spoofing form the core of most ARP-based <code>denial-of-service (DoS)</code> and <code>man-in-the-middle (MITM)</code> attacks.</li>
+<li>However, adversaries could also exploit ARP for information gathering.</li>
+</ul>
+<h2 id="arp-scanning-signs">ARP Scanning Signs</h2>
+<ul>
+<li>
+<p>Related PCAP File(s)—<code>ARP_Scan.pcapng</code></p>
+</li>
+<li>
+<p>Some typical red flags indicative of ARP scanning are:</p>
+<ol>
+<li><code>Broadcast ARP requests sent to sequential IP addresses (.1,.2,.3,...)</code></li>
+<li><code>Broadcast ARP requests sent to non-existent hosts</code></li>
+<li><code>Potentially, an unusual volume of ARP traffic originating from a malicious or compromised host</code></li>
+</ol>
+</li>
+</ul>
+<h2 id="finding-arp-scanning">Finding ARP Scanning</h2>
+<ul>
+<li>
+<p>The following traffic is noticed upon appling this filter <code>arp.opcode</code>:
+<img src="http://localhost:1313/Network%20Traffic%20Analysis/ARP_Scan_1.png" alt="ARP_Scan_1"></p>
+</li>
+<li>
+<p>ARP requests propagated sequentially to all IP addresses by a single host indicate ARP scanning, and is a common feature of widely-used scanners such as <code>Nmap</code>.</p>
+</li>
+<li>
+<p>We might notice that active hosts respond to these requests via their ARP replies.</p>
+</li>
+<li>
+<p>This could signal the successful execution of the information-gathering tactic by the attacker.</p>
+</li>
+</ul>
+<h2 id="identifying-denial-of-service">Identifying Denial-of-Service</h2>
+<ul>
+<li>
+<p>Related PCAP File(s)—<code>ARP_Poison.pcapng</code>.</p>
+</li>
+<li>
+<p>An attacker:</p>
+<ul>
+<li>Can use ARP scanning to identify live hosts.</li>
+<li>Then deny service to them by poisoning the subnet and manipulating ARP caches.</li>
+</ul>
+</li>
+<li>
+<p>This strategy also enables man-in-the-middle attacks.
+<img src="http://localhost:1313/Network%20Traffic%20Analysis/ARP_DoS_1.png" alt="ARP_DoS_1"></p>
+</li>
+<li>
+<p>Promptly, we might note that the attacker&rsquo;s ARP traffic may shift its focus towards declaring new physical addresses for all live IP addresses.</p>
+</li>
+<li>
+<p>The intent here is to corrupt the router&rsquo;s ARP cache.</p>
+</li>
+<li>
+<p>Conversely, we may witness the duplicate allocation of <code>192.168.10.1</code> to client devices.</p>
+</li>
+<li>
+<p>This indicates that the attacker is attempting to corrupt the ARP cache of these victim devices with the intention of obstructing traffic in both directions.
+<img src="http://localhost:1313/Network%20Traffic%20Analysis/ARP_DoS_2.png" alt="ARP_DoS_2"></p>
+</li>
+</ul>
+<h2 id="responding-to-arp-attacks">Responding To ARP Attacks</h2>
+<ul>
+<li>
+<p>Upon identifying any of these ARP-related anomalies, we might question the suitable course of action to counter these threats.</p>
+</li>
+<li>
+<p>Here are a couple of possibilities:</p>
+<ol>
+<li><code>Tracing and Identification</code>—The attacker&rsquo;s computer is a real, physical device located somewhere. If we can find its location, we might be able to stop/halt the attack. Sometimes, we discover that the computer launching the attack has also been compromised and is controlled by someone else.</li>
+<li><code>Containment</code>—To prevent the attacker from stealing/exfiltrating more information, we can disconnect or isolate the affected area at the switch or router level. This would stop a DoS or MITM attack where it starts.</li>
+</ol>
+</li>
+<li>
+<p>Link layer attacks often fly under the radar.</p>
+</li>
+<li>
+<p>While they may seem insignificant to identify and investigate, their detection could be pivotal in preventing the exfiltration of data from higher layers of the OSI model.</p>
+</li>
+</ul>
+<hr>
+<h1 id="80211-denial-of-service">802.11 Denial of Service</h1>
+<ul>
+<li>
+<p>Related PCAP File(s)—<code>deauthandbadauth.cap</code>.</p>
+</li>
+<li>
+<p>In traffic analysis, examining link-layer protocols and communications is always crucial.</p>
+</li>
+<li>
+<p>A common link-layer attack targets <code>Wi-Fi (802.11)</code>.</p>
+</li>
+<li>
+<p>We might easily overlook this type of attack, but because human errors can compromise our perimeter security, regular audits of our wireless networks are vital.</p>
+</li>
+</ul>
+<h2 id="capturing-80211-traffic">Capturing 802.11 Traffic</h2>
+<ul>
+<li>
+<p>To analyze raw 802.11 network traffic, you&rsquo;ll need either a <em><strong>Wireless Intrusion Detection System (WIDS)</strong></em> or a <em><strong>Wireless Intrusion Prevention System (WIPS)</strong></em>.</p>
+</li>
+<li>
+<p>Alternatively, you can use a wireless NIC (network interface card) that&rsquo;s set to monitor mode.</p>
+</li>
+<li>
+<p>Monitor mode is similar to promiscuous mode in Wireshark; it allows you to see raw 802.11 frames and other types of network packets that you wouldn&rsquo;t normally be able to see.</p>
+</li>
+<li>
+<p>Let&rsquo;s assume we do possess a Wi-Fi interface capable of monitor mode.</p>
+</li>
+<li>
+<p>We could enumerate our wireless interfaces in Linux using the following command:</p>
+</li>
+</ul>
+<h4 id="wireless-interfaces">Wireless Interfaces</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>iwconfig
+</span></span></code></pre></div><pre tabindex="0"><code>wlan0     IEEE 802.11  ESSID:off/any  
+          Mode:Managed  Access Point: Not-Associated   Tx-Power=20 dBm   
+          Retry short  long limit:2   RTS thr:off   Fragment thr:off
+          Power Management:off
+</code></pre><ul>
+<li>We have a couple of options to set our interface into monitor mode.</li>
+</ul>
+<h4 id="airmon-ng">Airmon-NG</h4>
+<ul>
+<li>Firstly, employing <code>airodump-ng</code>, we can use the ensuing command:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sudo airmon-ng start wlan0
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>Found 2 processes that could cause trouble.
+</span></span><span style="display:flex;"><span>Kill them using &#39;airmon-ng check kill&#39; before putting the card in monitor mode, they will interfere by changing channels and sometimes putting the interface back in managed mode
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    PID Name
+</span></span><span style="display:flex;"><span>    820 NetworkManager
+</span></span><span style="display:flex;"><span>    1389 wpa_supplicant
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>PHY Interface Driver Chipset
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>phy0 wlan0 rt2800usb Ralink Technology, Corp. RT2870/RT3070
+</span></span><span style="display:flex;"><span>            (mac80211 monitor mode vif enabled for [phy0]wlan0 on [phy0]wlan0mon)
+</span></span><span style="display:flex;"><span>            (mac80211 station mode vif disabled for [phy0]wlan0)
+</span></span></code></pre></div><h4 id="monitor-mode">Monitor Mode</h4>
+<ul>
+<li>Secondly, using system utilities, we would need to:
+<ul>
+<li>Deactivate our interface.</li>
+<li>Modify its mode.</li>
+<li>Then reactivate it.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sudo ifconfig wlan0 down
+</span></span><span style="display:flex;"><span>sudo iwconfig wlan0 mode monitor
+</span></span><span style="display:flex;"><span>sudo ifconfig wlan0 up
+</span></span></code></pre></div><ul>
+<li>We could verify if our interface is in <code>monitor mode</code> using the <code>iwconfig</code> utility.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>iwconfig
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>wlan0mon IEEE 802.11 Mode:Monitor Frequency:2.457 GHz Tx-Power=20 dBm
+</span></span><span style="display:flex;"><span>         Retry short long limit:2 RTS thr:off Fragment thr:off
+</span></span><span style="display:flex;"><span>         Power Management:off
+</span></span></code></pre></div><ul>
+<li>
+<p>It&rsquo;s possible that our interface doesn&rsquo;t conform to the <code>wlan0mon</code> convention. Instead, it might bear a name such as the following: <code>wlan0</code>.</p>
+</li>
+<li>
+<p>The crucial factor here is that the mode should be <code>monitor</code>.</p>
+</li>
+<li>
+<p>The name of the interface isn&rsquo;t particularly important, and in many cases, our Linux distribution might assign it a completely different name.</p>
+</li>
+<li>
+<p>To commence/begin capturing traffic from our clients and network, we can employ <code>airodump-ng</code>.</p>
+</li>
+<li>
+<p>We need to specify our AP&rsquo;s:</p>
+<ul>
+<li>Channel with <code>-c</code>.</li>
+<li>Its BSSID with <code>--bssid</code>.</li>
+<li>The output file name with <code>-w</code>.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sudo airodump-ng -c <span style="color:#ae81ff">4</span> --bssid F8:14:FE:4D:E6:F1 wlan0 -w raw
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>BSSID             PWR RXQ Beacons #Data, #/s CH MB ENC   CIPHER AUTH ESSID
+</span></span><span style="display:flex;"><span>F8:14:FE:4D:E6:F1 -23 64  115      6     0   4  130 WPA2 CCMP   PSK HTB-Wireless
+</span></span></code></pre></div><ul>
+<li>We can use <code>tcpdump</code> to achieve similar outcomes, but <code>airodump-ng</code> proves equally effective.</li>
+</ul>
+<h2 id="how-deauthentication-attacks-work">How Deauthentication Attacks Work</h2>
+<ul>
+<li>
+<p>Among the more frequent attacks we might witness or detect is a deauthentication/dissociation attack.</p>
+</li>
+<li>
+<p>This is a common type of attack on network links that attackers might use for various purposes:</p>
+<ol>
+<li><code>To capture the WPA handshake to perform an offline dictionary attack</code></li>
+<li><code>To cause general denial of service conditions</code></li>
+<li><code>To enforce users to disconnect from our network, and potentially join their network to retrieve information</code></li>
+</ol>
+</li>
+<li>
+<p>In essence, the attacker will fabricate an <code>802.11</code> deauthentication frame pretending it originates from our legitimate access point.</p>
+</li>
+<li>
+<p>By doing so, the attacker might manage to disconnect one of our clients from the network.</p>
+</li>
+<li>
+<p>Often, the client will reconnect and go through the handshake process while the attacker is sniffing.
+<img src="http://localhost:1313/Network%20Traffic%20Analysis/deauth-attack.png" alt="deauth-attack"></p>
+</li>
+<li>
+<p>In this attack, the attacker changes the sender&rsquo;s MAC address in a network frame to a fake one.</p>
+</li>
+<li>
+<p>Without extra security measures like IEEE 802.11w (Management Frame Protection), a client device can&rsquo;t easily detect this.</p>
+</li>
+<li>
+<p>Each deauthentication request includes a reason code that explains why the client is being disconnected.</p>
+</li>
+<li>
+<p>In most scenarios, basic tools like <code>aireplay-ng</code> and <code>mdk4</code> employ reason <code>code 7</code> for deauthentication.</p>
+</li>
+</ul>
+<h2 id="finding-deauthentication-attacks">Finding Deauthentication Attacks</h2>
+<ul>
+<li>To detect these potential attacks, we can open the related traffic capture file (<code>deauthandbadauth.cap</code>) as shown below.</li>
+</ul>
+<h4 id="wireshark">Wireshark</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sudo wireshark deauthandbadauth.cap
+</span></span></code></pre></div><ul>
+<li>
+<p>If we wanted to limit our view to traffic from our AP&rsquo;s BSSID (<code>MAC</code>), we could use the following Wireshark filter: <code>wlan.bssid == xx:xx:xx:xx:xx:xx</code>.
+<img src="http://localhost:1313/Network%20Traffic%20Analysis/1-deauth.png" alt="1-deauth"></p>
+</li>
+<li>
+<p>Suppose we wanted to take a look at the deauthentication frames from our BSSID or an attacker pretending to send these from our BSSID, we could use the following Wireshark filter:</p>
+</li>
+<li>
+<p><code>(wlan.bssid == xx:xx:xx:xx:xx:xx) and (wlan.fc.type == 00) and (wlan.fc.type_subtype == 12)</code></p>
+</li>
+<li>
+<p>With this filter, we specify:</p>
+<ul>
+<li>The type of frame (<code>management</code>) with <code>00</code>.</li>
+<li>The subtype (<code>deauthentication</code>) with <code>12</code>.
+<img src="http://localhost:1313/Network%20Traffic%20Analysis/2-deauth.png" alt="2-deauth"></li>
+</ul>
+</li>
+<li>
+<p>We might notice right away that an excessive amount of deauthentication frames were sent to one of our client devices.</p>
+</li>
+<li>
+<p>This would be an immediate indicator of this attack.</p>
+</li>
+<li>
+<p>Additionally, if we were to open the fixed parameters under wireless management, we might notice that reason <code>code 7</code> was utilized.
+<img src="http://localhost:1313/Network%20Traffic%20Analysis/3-deauth.png" alt="3-deauth"></p>
+</li>
+<li>
+<p>As previously mentioned, if we wanted to verify this was done by an attacker, we should be able to filter even further for only deauthentication requests with reason <code>code 7</code>.</p>
+</li>
+<li>
+<p>As mentioned, <code>aireplay-ng</code> and <code>mdk4</code>, which are common attack tools, utilize this reason code by default.</p>
+</li>
+<li>
+<p>We could do with the following Wireshark filter.</p>
+</li>
+<li>
+<p><code>(wlan.bssid == F8:14:FE:4D:E6:F1) and (wlan.fc.type == 00) and (wlan.fc.type_subtype == 12) and (wlan.fixed.reason_code == 7)</code>
+<img src="http://localhost:1313/Network%20Traffic%20Analysis/4-deauth.png" alt="4-deauth"></p>
+</li>
+</ul>
+<h2 id="revolving-reason-codes">Revolving Reason Codes</h2>
+<ul>
+<li>
+<p>A sophisticated attacker might evade detection by rotating/revolving reason codes to avoid triggering alarms from wireless intrusion detection systems.</p>
+</li>
+<li>
+<p>The trick to this technique of detection is incrementing like an attacker script would. We would first start with reason code 1.</p>
+</li>
+<li>
+<p><code>(wlan.bssid == F8:14:FE:4D:E6:F1) and (wlan.fc.type == 00) and (wlan.fc.type_subtype == 12) and (wlan.fixed.reason_code == 1)</code>
+<img src="http://localhost:1313/Network%20Traffic%20Analysis/5-deauth.png" alt="5-deauth"></p>
+</li>
+<li>
+<p>Then we would shift over to reason code 2.</p>
+</li>
+<li>
+<p><code>(wlan.bssid == F8:14:FE:4D:E6:F1) and (wlan.fc.type == 00) and (wlan.fc.type_subtype == 12) and (wlan.fixed.reason_code == 2)</code>
+<img src="http://localhost:1313/Network%20Traffic%20Analysis/6-deauth.png" alt="6-deauth"></p>
+</li>
+<li>
+<p>We would continue this sequence.</p>
+</li>
+<li>
+<p><code>(wlan.bssid == F8:14:FE:4D:E6:F1) and (wlan.fc.type == 00) and (wlan.fc.type_subtype == 12) and (wlan.fixed.reason_code == 3)</code>
+<img src="http://localhost:1313/Network%20Traffic%20Analysis/7-deauth.png" alt="7-deauth"></p>
+</li>
+<li>
+<p>As such, deauthentication can be a pain to deal with, but we have some compensating measures that we can implement to prevent this from occurring in the modern day and age.</p>
+</li>
+<li>
+<p>These are:</p>
+<ol>
+<li><code>Enable IEEE 802.11w (Management Frame Protection) if possible</code></li>
+<li><code>Utilize WPA3-SAE</code></li>
+<li><code>Modify our WIDS/WIPS detection rules</code></li>
+</ol>
+</li>
+</ul>
+<h4 id="finding-failed-authentication-attempts">Finding Failed Authentication Attempts</h4>
+<ul>
+<li>
+<p>Suppose an attacker was to attempt to connect to our wireless network.</p>
+</li>
+<li>
+<p>We might notice an excessive amount of association requests coming from one device.</p>
+</li>
+<li>
+<p>To filter for these we could use the following.</p>
+</li>
+<li>
+<p><code>(wlan.bssid == F8:14:FE:4D:E6:F1) and (wlan.fc.type == 00) and (wlan.fc.type_subtype == 0) or (wlan.fc.type_subtype == 1) or (wlan.fc.type_subtype == 11)</code>
+<img src="http://localhost:1313/Network%20Traffic%20Analysis/1-fakeauth.png" alt="1-fakeauth"></p>
+</li>
+<li>
+<p>Therefore, we need to be able to tell the difference between normal Wi-Fi (802.11) network activity and malicious network activity.</p>
+</li>
+<li>
+<p>From this point of view, having security at the link-layer can determine whether our security is breached.</p>
+</li>
+</ul>
+<hr>
+<h1 id="rogue-access-point--evil-twin-attacks">Rogue Access Point &amp; Evil-Twin Attacks</h1>
+<ul>
+<li>
+<p>Related PCAP File(s)—<code>rogueap.cap</code>.</p>
+</li>
+<li>
+<p>Dealing with rogue/unauthorized access points and evil-twin attacks can be difficult because they are often hard to find.</p>
+</li>
+<li>
+<p>However, with the right methods/strategies, you can identify and handle these illegitimate access points well.</p>
+</li>
+<li>
+<p>When it comes to harmful access points, rogue and evil-twin attacks are always major issues.
+<img src="http://localhost:1313/Network%20Traffic%20Analysis/rogueap.png" alt="rogueap"></p>
+</li>
+<li>
+<p>A rogue access point is mainly used to bypass/cirumvent security measures.</p>
+</li>
+<li>
+<p>Attackers might install one to avoid network restrictions, which could be hotspots or tethered connections.</p>
+</li>
+<li>
+<p>These access points can even infiltrate networks that are supposed to be isolated.</p>
+</li>
+<li>
+<p>Their main purpose is to give unauthorized access to secure parts of a network.</p>
+</li>
+<li>
+<p>It&rsquo;s important to remember that rogue access points are directly connected to the network.</p>
+</li>
+</ul>
+<h2 id="evil-twin">Evil-Twin</h2>
+<ul>
+<li>
+<p>An evil twin, however, is set up by an attacker for various malicious purposes.</p>
+</li>
+<li>
+<p>The main point is that these access points are usually not connected to your network.</p>
+</li>
+<li>
+<p>Instead, they are independent access points that might include a web server or similar component to intercept communications between wireless clients.
+<img src="http://localhost:1313/Network%20Traffic%20Analysis/evil-twin.png" alt="evil-twin"></p>
+</li>
+<li>
+<p>Attackers might set these up to harvest wireless or domain passwords among other pieces of information.</p>
+</li>
+<li>
+<p>Commonly, these attacks might also encompass a hostile portal attack.</p>
+</li>
+</ul>
+<h2 id="airodump-ng-detection">Airodump-ng Detection</h2>
+<ul>
+<li>Right away, we could utilize the ESSID filter for Airodump-ng to detect Evil-Twin style access points.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sudo airodump-ng -c <span style="color:#ae81ff">4</span> --essid HTB-Wireless wlan0 -w raw
+</span></span></code></pre></div><pre tabindex="0"><code>CH  4 ][ Elapsed: 1 min ][ 2023-07-13 16:06    
+ BSSID              PWR RXQ  Beacons    #Data, #/s  CH   MB   ENC CIPHER  AUTH ESSID
+ F8:14:FE:4D:E6:F2   -7 100      470      155    0   4   54   OPN              HTB-Wireless
+ F8:14:FE:4D:E6:F1   -5  96      682        0    0   4  324   WPA2 CCMP   PSK  HTB-Wireless
+</code></pre><ul>
+<li>
+<p>The previous example illustrates how an attacker could create a fake Wi-Fi hotspot with the same name as your network.</p>
+</li>
+<li>
+<p>This is often done to set up a malicious portal, where the attacker tries to steal usernames and passwords from unsuspecting users.</p>
+</li>
+<li>
+<p>You should also watch out for deauthentication attacks, which might indicate that the attacker is trying to force users onto their fake network.</p>
+</li>
+<li>
+<p>To conclusively ascertain whether this is an anomaly or an Airodump-ng error, we can commence our traffic analysis efforts (<code>rogueap.cap</code>).</p>
+</li>
+<li>
+<p>To filter for beacon frames, we could use the following.</p>
+</li>
+<li>
+<p><code>(wlan.fc.type == 00) and (wlan.fc.type_subtype == 8)</code>
+<img src="http://localhost:1313/Network%20Traffic%20Analysis/1-evil-twin.png" alt="1-evil-twin"></p>
+</li>
+<li>
+<p>Beacon analysis is crucial in differentiating between genuine and fraudulent access points.</p>
+</li>
+<li>
+<p>One of the initial places to start is the <code>Robust Security Network (RSN)</code> information.</p>
+</li>
+<li>
+<p>This data communicates valuable information to clients about the supported ciphers, among other things.</p>
+</li>
+<li>
+<p>Suppose we wish to examine our legitimate access point&rsquo;s RSN information.
+<img src="http://localhost:1313/Network%20Traffic%20Analysis/2-evil-twin.png" alt="2-evil-twin"></p>
+</li>
+<li>
+<p>It would indicate that WPA2 is supported with AES and TKIP with PSK as its authentication mechanism.</p>
+</li>
+<li>
+<p>However, when we switch to the illegitimate access point&rsquo;s RSN information, we may find it conspicuously missing.
+<img src="http://localhost:1313/Network%20Traffic%20Analysis/3-evil-twin.png" alt="3-evil-twin"></p>
+</li>
+<li>
+<p>Most of the time, a typical evil-twin attack will have this feature.</p>
+</li>
+<li>
+<p>However, we should always check other details for differences, especially with more advanced evil-twin attacks.</p>
+</li>
+<li>
+<p>For instance, an attacker could use the same encryption method as our access point, making the attack harder to spot.</p>
+</li>
+<li>
+<p>If that happens, we can look at other parts of the beacon frame, like vendor-specific information, which the attacker&rsquo;s access point probably won&rsquo;t have.</p>
+</li>
+</ul>
+<h2 id="finding-a-fallen-user">Finding a Fallen User</h2>
+<ul>
+<li>
+<p>Despite comprehensive security awareness training, some users may fall prey to attacks like these.</p>
+</li>
+<li>
+<p>Fortunately, in the case of open network style evil-twin attacks, we can view most higher-level traffic in an unencrypted format.</p>
+</li>
+<li>
+<p>To filter exclusively for the evil-twin access point, we would employ the following filter.</p>
+</li>
+<li>
+<p><code>(wlan.bssid == F8:14:FE:4D:E6:F2)</code>
+<img src="http://localhost:1313/Network%20Traffic%20Analysis/4-evil-twin.png" alt="4-evil-twin"></p>
+</li>
+<li>
+<p>If we see ARP requests coming from a client device on the suspicious network, it could mean the device is compromised.</p>
+</li>
+<li>
+<p>If this happens, we should save information about the device to help us respond to the incident.</p>
+<ol>
+<li><code>Its MAC address</code></li>
+<li><code>Its host name</code></li>
+</ol>
+</li>
+<li>
+<p>Consequently, we might be able to instigate password resets and other reactive measures to prevent further infringement of our environment.</p>
+</li>
+</ul>
+<h2 id="finding-rogue-access-points">Finding Rogue Access Points</h2>
+<ul>
+<li>On the other hand, detecting rogue access points can often be a simple task of checking our network device lists.</li>
+<li>In the case of hotspot-based rogue access points (such as Windows hotspots), we might scrutinize wireless networks in our immediate vicinity.</li>
+<li>If we encounter an unrecognizable wireless network with a strong signal, particularly if it lacks encryption, this could indicate that a user has established a rogue access point to navigate around our perimeter controls.</li>
+</ul>
+<hr>
+
+        </div>
+      </article>
+
+      <hr />
+
+      <div class="post-info">
+        
+        
+
+        <p>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+            <line x1="16" y1="13" x2="8" y2="13"></line>
+            <line x1="16" y1="17" x2="8" y2="17"></line>
+            <polyline points="10 9 9 9 8 9"></polyline>
+          </svg>
+          3400 Words
+        </p>
+
+        <p>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+            <line x1="16" y1="2" x2="16" y2="6"></line>
+            <line x1="8" y1="2" x2="8" y2="6"></line>
+            <line x1="3" y1="10" x2="21" y2="10"></line>
+          </svg>
+          
+            2026-04-24 01:51
+          
+
+           
+            
+          
+        </p>
+      </div>
+        <hr />
+        <div class="sharing-buttons">
+          
+<a class="resp-sharing-button__link" href="https://facebook.com/sharer/sharer.php?u=http%3a%2f%2flocalhost%3a1313%2fposts%2f2026%2f04%2flink-layer-attacks%2f" target="_blank" rel="noopener" aria-label="" title="Share on facebook">
+  <div class="resp-sharing-button resp-sharing-button--facebook resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+    </div>
+  </div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="https://twitter.com/intent/tweet/?url=http%3a%2f%2flocalhost%3a1313%2fposts%2f2026%2f04%2flink-layer-attacks%2f" target="_blank" rel="noopener" aria-label="" title="Share on twitter">
+  <div class="resp-sharing-button resp-sharing-button--twitter resp-sharing-button--small">
+      <div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg>
+    </div>
+  </div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="https://www.tumblr.com/widgets/share/tool?posttype=link&amp;title=Link%20Layer%20Attacks&amp;caption=Link%20Layer%20Attacks&amp;canonicalUrl=http%3a%2f%2flocalhost%3a1313%2fposts%2f2026%2f04%2flink-layer-attacks%2f" target="_blank" rel="noopener" aria-label="" title="Share on tumblr">
+  <div class="resp-sharing-button resp-sharing-button--tumblr resp-sharing-button--small">
+    <div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.563 24c-5.093 0-7.031-3.756-7.031-6.411V9.747H5.116V6.648c3.63-1.313 4.512-4.596 4.71-6.469C9.84.051 9.941 0 9.999 0h3.517v6.114h4.801v3.633h-4.82v7.47c.016 1.001.375 2.371 2.207 2.371h.09c.631-.02 1.486-.205 1.936-.419l1.156 3.425c-.436.636-2.4 1.374-4.156 1.404h-.178l.011.002z"/></svg>
+    </div>
+  </div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="mailto:?subject=Link%20Layer%20Attacks&amp;body=http%3a%2f%2flocalhost%3a1313%2fposts%2f2026%2f04%2flink-layer-attacks%2f" target="_self" rel="noopener" aria-label="" title="Share via email">
+  <div class="resp-sharing-button resp-sharing-button--email resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+    </div>
+  </div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="https://pinterest.com/pin/create/button/?url=http%3a%2f%2flocalhost%3a1313%2fposts%2f2026%2f04%2flink-layer-attacks%2f&amp;media=http%3a%2f%2flocalhost%3a1313%2fposts%2f2026%2f04%2flink-layer-attacks%2f;description=Link%20Layer%20Attacks" target="_blank" rel="noopener" aria-label="" title="Share on pinterest">
+  <div class="resp-sharing-button resp-sharing-button--pinterest resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.162-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.401.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.354-.629-2.758-1.379l-.749 2.848c-.269 1.045-1.004 2.352-1.498 3.146 1.123.345 2.306.535 3.55.535 6.607 0 11.985-5.365 11.985-11.987C23.97 5.39 18.592.026 11.985.026L12.017 0z"/></svg>
+    </div>
+  </div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="https://www.linkedin.com/shareArticle?mini=true&amp;url=http%3a%2f%2flocalhost%3a1313%2fposts%2f2026%2f04%2flink-layer-attacks%2f&amp;title=Link%20Layer%20Attacks&amp;summary=Link%20Layer%20Attacks&amp;source=http%3a%2f%2flocalhost%3a1313%2fposts%2f2026%2f04%2flink-layer-attacks%2f" target="_blank" rel="noopener" aria-label="" title="Share on linkedin">
+  <div class="resp-sharing-button resp-sharing-button--linkedin resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+    </div>
+  </div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="https://reddit.com/submit/?url=http%3a%2f%2flocalhost%3a1313%2fposts%2f2026%2f04%2flink-layer-attacks%2f&amp;resubmit=true&amp;title=Link%20Layer%20Attacks" target="_blank" rel="noopener" aria-label="" title="Share on reddit">
+  <div class="resp-sharing-button resp-sharing-button--reddit resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm5.01 4.744c.688 0 1.25.561 1.25 1.249a1.25 1.25 0 0 1-2.498.056l-2.597-.547-.8 3.747c1.824.07 3.48.632 4.674 1.488.308-.309.73-.491 1.207-.491.968 0 1.754.786 1.754 1.754 0 .716-.435 1.333-1.01 1.614a3.111 3.111 0 0 1 .042.52c0 2.694-3.13 4.87-7.004 4.87-3.874 0-7.004-2.176-7.004-4.87 0-.183.015-.366.043-.534A1.748 1.748 0 0 1 4.028 12c0-.968.786-1.754 1.754-1.754.463 0 .898.196 1.207.49 1.207-.883 2.878-1.43 4.744-1.487l.885-4.182a.342.342 0 0 1 .14-.197.35.35 0 0 1 .238-.042l2.906.617a1.214 1.214 0 0 1 1.108-.701zM9.25 12C8.561 12 8 12.562 8 13.25c0 .687.561 1.248 1.25 1.248.687 0 1.248-.561 1.248-1.249 0-.688-.561-1.249-1.249-1.249zm5.5 0c-.687 0-1.248.561-1.248 1.25 0 .687.561 1.248 1.249 1.248.688 0 1.249-.561 1.249-1.249 0-.687-.562-1.249-1.25-1.249zm-5.466 3.99a.327.327 0 0 0-.231.094.33.33 0 0 0 0 .463c.842.842 2.484.913 2.961.913.477 0 2.105-.056 2.961-.913a.361.361 0 0 0 .029-.463.33.33 0 0 0-.464 0c-.547.533-1.684.73-2.512.73-.828 0-1.979-.196-2.512-.73a.326.326 0 0 0-.232-.095z"/></svg>
+    </div>
+  </div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="https://www.xing.com/app/user?op=share;url=http%3a%2f%2flocalhost%3a1313%2fposts%2f2026%2f04%2flink-layer-attacks%2f;title=Link%20Layer%20Attacks" target="_blank" rel="noopener" aria-label="" title="Share on xing">
+  <div class="resp-sharing-button resp-sharing-button--xing resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M18.188 0c-.517 0-.741.325-.927.66 0 0-7.455 13.224-7.702 13.657.015.024 4.919 9.023 4.919 9.023.17.308.436.66.967.66h3.454c.211 0 .375-.078.463-.22.089-.151.089-.346-.009-.536l-4.879-8.916c-.004-.006-.004-.016 0-.022L22.139.756c.095-.191.097-.387.006-.535C22.056.078 21.894 0 21.686 0h-3.498zM3.648 4.74c-.211 0-.385.074-.473.216-.09.149-.078.339.02.531l2.34 4.05c.004.01.004.016 0 .021L1.86 16.051c-.099.188-.093.381 0 .529.085.142.239.234.45.234h3.461c.518 0 .766-.348.945-.667l3.734-6.609-2.378-4.155c-.172-.315-.434-.659-.962-.659H3.648v.016z"/></svg>
+    </div>
+  </div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="whatsapp://send?text=Link%20Layer%20Attacks%20http%3a%2f%2flocalhost%3a1313%2fposts%2f2026%2f04%2flink-layer-attacks%2f" target="_blank" rel="noopener" aria-label="" title="Share on whatsapp">
+  <div class="resp-sharing-button resp-sharing-button--whatsapp resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+    </div>
+  </div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="https://news.ycombinator.com/submitlink?u=http%3a%2f%2flocalhost%3a1313%2fposts%2f2026%2f04%2flink-layer-attacks%2f&amp;t=Link%20Layer%20Attacks" target="_blank" rel="noopener" aria-label="" title="Share on hacker news">
+  <div class="resp-sharing-button resp-sharing-button--hackernews resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M0 24V0h24v24H0zM6.951 5.896l4.112 7.708v5.064h1.583v-4.972l4.148-7.799h-1.749l-2.457 4.875c-.372.745-.688 1.434-.688 1.434s-.297-.708-.651-1.434L8.831 5.896h-1.88z"/></svg>
+    </div>
+  </div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="https://telegram.me/share/url?text=Link%20Layer%20Attacks&amp;url=http%3a%2f%2flocalhost%3a1313%2fposts%2f2026%2f04%2flink-layer-attacks%2f" target="_blank" rel="noopener" aria-label="" title="Share on telegram">
+  <div class="resp-sharing-button resp-sharing-button--telegram resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+    </div>
+  </div>
+</a>
+
+        </div>
+
+      
+    <div class="pagination">
+        
+
+        <div class="pagination__buttons">
+            
+            <span class="button previous">
+                <a href="http://localhost:1313/posts/2026/04/detecting-network-abnormalities/">
+                    <span class="button__icon">←</span>
+                    <span class="button__text">Detecting Network Abnormalities</span>
+                </a>
+            </span>
+            
+
+            
+        </div>
+    </div>
+
+
+      
+
+      
+
+      
+
+    </main>
+  </div>
+
+
+            
+                <footer class="footer">
+    
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>&copy; 2026</span>
+            <span><a href="http://localhost:1313/">Mostafa Ashour</a></span>
+            <span><a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a></span>
+            
+            
+        </div>
+    </div>
+    
+    
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>Powered by <a href="https://github.com/Mostafa-Ashour">Ashour</a></span><span>Made with &#10084; by <a href="https://www.linkedin.com/in/mostafa-ashour-b82b0524b">Mostafa Ashour</a></span>
+        </div>
+    </div>
+    
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+<script type="text/javascript" src="http://localhost:1313/bundle.min.08b680078a3cf9c69e3dd217a5aa52cfddd4a1d850f8cdff127fdd7421a71f8b2b474be69386f67819edace92273916e7230c9054f38107db9dc6730b3530ab5.js" integrity="sha512-CLaAB4o8&#43;caePdIXpapSz93UodhQ&#43;M3/En/ddCGnH4srR0vmk4b2eBntrOkic5FucjDJBU84EH253Gcws1MKtQ=="></script>
+
+
+
+
+    </body>
+</html>
