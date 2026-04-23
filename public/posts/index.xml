@@ -10,6 +10,484 @@
         <atom:link href="https://mostafa-ashour.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
         
         <item>
+            <title>Network Traffic Analysis</title>
+            <link>https://mostafa-ashour.github.io/posts/network-traffic-analysis/</link>
+            <pubDate>Fri, 24 Apr 2026 01:51:12 +0300</pubDate>
+            
+            <guid>https://mostafa-ashour.github.io/posts/network-traffic-analysis/</guid>
+            <description>&lt;h1 id=&#34;network-traffic-analysis&#34;&gt;Network Traffic Analysis&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;Network Traffic Analysis (NTA)&lt;/code&gt; can be described as the act of examining network traffic to:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Characterize common ports and protocols utilized.&lt;/li&gt;
+&lt;li&gt;Establish a baseline for our environment.&lt;/li&gt;
+&lt;li&gt;Monitor and respond to threats.&lt;/li&gt;
+&lt;li&gt;Ensure the greatest possible insight into our organization&amp;rsquo;s network.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Network Traffic Analysis (NTA) enables security specialists to quickly identify network anomalies and security threats, facilitating compliance with security guidelines.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Attackers constantly evolve their tactics to evade detection, leverage legitimate credentials with tools that most companies allow in their networks, making detection and, subsequently, response challenging for defenders.&lt;/p&gt;</description>
+            <content type="html"><![CDATA[<h1 id="network-traffic-analysis">Network Traffic Analysis</h1>
+<ul>
+<li>
+<p><code>Network Traffic Analysis (NTA)</code> can be described as the act of examining network traffic to:</p>
+<ul>
+<li>Characterize common ports and protocols utilized.</li>
+<li>Establish a baseline for our environment.</li>
+<li>Monitor and respond to threats.</li>
+<li>Ensure the greatest possible insight into our organization&rsquo;s network.</li>
+</ul>
+</li>
+<li>
+<p>Network Traffic Analysis (NTA) enables security specialists to quickly identify network anomalies and security threats, facilitating compliance with security guidelines.</p>
+</li>
+<li>
+<p>Attackers constantly evolve their tactics to evade detection, leverage legitimate credentials with tools that most companies allow in their networks, making detection and, subsequently, response challenging for defenders.</p>
+</li>
+<li>
+<p>NTA can be invaluable in these scenarios.</p>
+</li>
+<li>
+<p>Everyday use cases of NTA include:</p>
+</li>
+</ul>
+<table>
+  <thead>
+      <tr>
+          <th><code>Collecting</code> real-time traffic within the network to analyze upcoming threats.</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>Setting</code> a baseline for day-to-day network communications.</td>
+      </tr>
+      <tr>
+          <td><code>Identifying</code> and analyzing traffic from non-standard ports, suspicious hosts, and issues with networking protocols such as HTTP errors, problems with TCP, or other networking misconfigurations.</td>
+      </tr>
+      <tr>
+          <td><code>Detecting</code> malware on the wire, such as ransomware, exploits, and non-standard interactions.</td>
+      </tr>
+      <tr>
+          <td>NTA is also useful when investigating past incidents and during threat hunting.</td>
+      </tr>
+  </tbody>
+</table>
+<ul>
+<li>
+<p>Imagine an threat actor targeting and infiltrating our network.</p>
+</li>
+<li>
+<p>To succeed, they must interact with our systems/communicate with our infrastructure.</p>
+</li>
+<li>
+<p>Our network uses many different communication methods (ports and protocols) at the same time, used by employees, devices, and customers.</p>
+</li>
+<li>
+<p>To find malicious activity, we need to understand what normal network traffic looks like.</p>
+</li>
+<li>
+<p>This will help us focus our search and quickly stop the attacker&rsquo;s communication.</p>
+</li>
+<li>
+<p>For example:</p>
+<ul>
+<li>If we detect many <code>SYN</code> packets on ports that we never (or rarely) utilize in our network.</li>
+<li>We can conclude that someone is trying scan open ports on our hosts.</li>
+<li>These actions are indicators of <code>portscan</code>.</li>
+</ul>
+</li>
+<li>
+<p>Performing such an analysis and coming to such conclusions requires specific skills and knowledge.</p>
+</li>
+</ul>
+<h2 id="environment-and-equipment">Environment and Equipment</h2>
+<ul>
+<li>Some Tools and Equipment exist to perform network traffic analysis</li>
+<li>They capture or dissect/analyze traffic, but in different ways.</li>
+<li>Some copy and record data, while others read and process it.</li>
+<li>Tools like this can be used for both purposes, either Administration or malicious purpose.</li>
+</ul>
+<h4 id="common-traffic-analysis-tools">Common Traffic Analysis Tools</h4>
+<table>
+  <thead>
+      <tr>
+          <th><strong>Tool</strong></th>
+          <th><strong>Description</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>tcpdump</code></td>
+          <td><a href="https://www.tcpdump.org/">tcpdump</a> is a command-line utility that, with the aid of LibPcap, captures and interprets network traffic from a network interface or capture file.</td>
+      </tr>
+      <tr>
+          <td><code>Tshark</code></td>
+          <td><a href="https://www.wireshark.org/docs/man-pages/tshark.html">TShark</a> is a network packet analyzer much like TCPDump. It will capture packets from a live network or read and decode from a file. It is the command-line variant of Wireshark.</td>
+      </tr>
+      <tr>
+          <td><code>Wireshark</code></td>
+          <td><a href="https://www.wireshark.org/">Wireshark</a> is a graphical network traffic analyzer. It captures and decodes frames off the wire and allows for an in-depth look into the environment. It can run many different dissectors against the traffic to characterize the protocols and applications and provide insight into what is happening.</td>
+      </tr>
+      <tr>
+          <td><code>NGrep</code></td>
+          <td><a href="https://github.com/jpr5/ngrep">NGrep</a> is a pattern-matching tool built to serve a similar function as grep for Linux distributions. The big difference is that it works with network traffic packets. NGrep understands how to read live traffic or traffic from a PCAP file and utilize regex expressions and BPF syntax. This tool shines best when used to debug traffic from protocols like HTTP and FTP.</td>
+      </tr>
+      <tr>
+          <td><code>tcpick</code></td>
+          <td><a href="http://tcpick.sourceforge.net/index.php?p=home.inc">tcpick</a> is a command-line packet sniffer that specializes in tracking and reassembling TCP streams. The functionality to read a stream and reassemble it back to a file with tcpick is excellent.</td>
+      </tr>
+      <tr>
+          <td><code>Network Taps</code></td>
+          <td>Taps (<a href="https://www.gigamon.com/">Gigamon</a>, <a href="https://www.niagaranetworks.com/products/network-tap">Niagra-taps</a>) are devices capable of taking copies of network traffic and sending them to another place for analysis. These can be in-line or out of band. They can actively capture and analyze the traffic directly or passively by putting the original packet back on the wire as if nothing had changed.</td>
+      </tr>
+      <tr>
+          <td><code>Networking Span Ports</code></td>
+          <td><a href="https://en.wikipedia.org/wiki/Port_mirroring">Span Ports</a> are a way to copy frames from layer two or three networking devices during egress or ingress processing and send them to a collection point. Often a port is mirrored to send those copies to a log server.</td>
+      </tr>
+      <tr>
+          <td><code>Elastic Stack</code></td>
+          <td>The <a href="https://www.elastic.co/elastic-stack">Elastic Stack</a> is a culmination of tools that can take data from many sources, ingest the data, and visualize it, to enable searching and analysis of it.</td>
+      </tr>
+      <tr>
+          <td><code>SIEMS</code></td>
+          <td><code>SIEMS</code> (such as <a href="https://www.splunk.com/en_us">Splunk</a>) are a central point in which data is analyzed and visualized. Alerting, forensic analysis, and day-to-day checks against the traffic are all use cases for a SIEM.</td>
+      </tr>
+      <tr>
+          <td>and others.</td>
+          <td></td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="bpf-syntax">BPF Syntax</h2>
+<ul>
+<li>Most of these tools share a common syntax: <a href="https://en.wikipedia.org/wiki/Berkeley_Packet_Filter">Berkeley Packet Filter (BPF)</a> syntax.</li>
+<li>BPF:
+<ul>
+<li>Is a technology that provides a raw interface for reading and writing data at the Data-Link layer.</li>
+<li>It allows us to filter and decode data.</li>
+</ul>
+</li>
+<li>Therefore, understanding the basics of BPF filter setup will be useful.</li>
+<li>For more details on BPF syntax, refer to this <a href="https://www.ibm.com/docs/en/qsip/7.4?topic=queries-berkeley-packet-filters">reference</a>.</li>
+</ul>
+<h2 id="performing-network-traffic-analysis">Performing Network Traffic Analysis</h2>
+<ul>
+<li>
+<p>Analyzing network activity can be:</p>
+<ul>
+<li>Straightforward/Simple, like observing real-time traffic in our console.</li>
+<li>Or Complex, like capturing data with a tap, sending it to a SIEM for analysis, and examining the pcap data for patterns and alerts related to common attack methods.</li>
+</ul>
+</li>
+<li>
+<p>We must be connected to the network segment to passively monitor traffic we want to observe.</p>
+</li>
+<li>
+<p>This is particularly important in switched networks, where VLANs and switch ports don&rsquo;t forward traffic outside their broadcast domain.</p>
+</li>
+<li>
+<p>Therefore, if we want to capture traffic from a specific VLAN, our monitoring device needs to be connected to that same network.</p>
+</li>
+<li>
+<p>Network taps, switch or router configurations like span ports, and port mirroring allow us to obtain a copy of all traffic passing through a specific link, regardless of its network segment or destination.</p>
+</li>
+</ul>
+<h4 id="nta-workflow">NTA Workflow</h4>
+<ul>
+<li>Traffic analysis is not an exact science.</li>
+<li>NTA can be a very dynamic process and is not a direct loop.</li>
+<li>It is greatly influenced by:
+<ul>
+<li>What we are looking for (network errors vs. malicious actions).</li>
+<li>Where we have visibility into our network.</li>
+</ul>
+</li>
+</ul>
+<h4 id="nta-workflow-1">NTA Workflow</h4>
+<p><img src="/Network%20Traffic%20Analysis/workflow.png" alt="workflow"></p>
+<h4 id="1-ingest-traffic">1. Ingest Traffic</h4>
+<ul>
+<li>Once we have decided on our placement, begin capturing traffic.</li>
+<li>Utilize capture filters if we already have an idea of what we are looking for.</li>
+</ul>
+<h4 id="2-reduce-noise-by-filtering">2. Reduce Noise by Filtering</h4>
+<ul>
+<li>Capturing traffic of a link, especially one in a production environment, can be extremely noisy.</li>
+<li>Once we complete the initial capture, an attempt to filter out unnecessary traffic from our view can make analysis easier. (Broadcast and Multicast traffic, for example.)</li>
+</ul>
+<h4 id="3-analyze-and-explore">3. Analyze and Explore</h4>
+<ul>
+<li>In this step we start to extract traffic relevant to the problem we&rsquo;re trying to solve.</li>
+<li>Look at specific hosts, protocols, even things as specific as flags set in the TCP header.</li>
+<li>The following questions will help us:
+<ol>
+<li>Is the traffic encrypted or plain text? Should it be?</li>
+<li>Can we see users attempting to access resources to which they should not have access?</li>
+<li>Are different hosts talking to each other that typically do not?</li>
+</ol>
+</li>
+</ul>
+<h4 id="4-detect-and-alert">4. Detect and Alert</h4>
+<ol>
+<li>Are we seeing any errors? Is a device not responding that should be?</li>
+<li>Use our analysis to decide if what we see is benign or potentially malicious.</li>
+<li>Tools like IDS and IPS can come into play. They can run heuristics and signatures against the traffic to determine if anything within is potentially malicious.</li>
+</ol>
+<h4 id="5-fix-and-monitor">5. Fix and Monitor</h4>
+<ul>
+<li>Fix and monitor is not a part of the loop but should be included in any workflow we perform.</li>
+<li>If we make a change or fix an issue, we should continue to monitor the source for a time to determine if the issue has been resolved.</li>
+</ul>
+<hr>
+<h1 id="networking-primer---layers-1-4">Networking Primer - Layers 1-4</h1>
+<ul>
+<li>The following concepts are at the core of capturing and dissecting/analyzing traffic.</li>
+<li>Without a fundamental understanding of typical network flow and what ports and protocols are used, we cannot accurately analyze any traffic we capture.</li>
+</ul>
+<h2 id="osi--tcp-ip-models">OSI / TCP-IP Models</h2>
+<h4 id="networking-models">Networking Models</h4>
+<p><img src="/Network%20Traffic%20Analysis/net_models4.png" alt="net_models4"></p>
+<ul>
+<li>The image shows a side-by-side comparison of OSI &amp; TCP/IP Models.</li>
+<li>These models visually represent how networked computers communicate.</li>
+</ul>
+<h4 id="model-traits-comparison">Model Traits Comparison.</h4>
+<table>
+  <thead>
+      <tr>
+          <th>Trait</th>
+          <th>OSI</th>
+          <th>TCP-IP</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Layers</td>
+          <td>Seven</td>
+          <td>Four</td>
+      </tr>
+      <tr>
+          <td>Flexibility</td>
+          <td>Strict</td>
+          <td>Loose</td>
+      </tr>
+      <tr>
+          <td>Dependency</td>
+          <td>Protocol independent &amp; generic</td>
+          <td>Based on common communication protocols</td>
+      </tr>
+  </tbody>
+</table>
+<ul>
+<li>
+<p>The OSI model is more segmented than the TCP/IP model, breaking functionality into smaller chunks, and usually used for troubleshooting.</p>
+</li>
+<li>
+<p>The OSI model&rsquo;s:</p>
+<ul>
+<li>Layers 1 through 4 manage data transport between hosts, encompassing the physical medium and communication protocols.</li>
+<li>Layers 5 through 7 handle data interpretation, management, and presentation for the end-user.</li>
+</ul>
+</li>
+<li>
+<p>The OSI model represents a theoretical framework, while the TCP/IP model more closely reflects practical networking.</p>
+</li>
+<li>
+<p>It&rsquo;s important to understand how a Protocol Data Units (PDU) is structured, both in theory and as it appears when transmitted.</p>
+</li>
+<li>
+<p>A PDU is a data packet made up of:</p>
+<ul>
+<li>Control Information.</li>
+<li>Data encapsulated from each layer of the OSI model.</li>
+</ul>
+</li>
+<li>
+<p>The breakout below will show how the layers in the two models match up to a PDU.
+<img src="/Network%20Traffic%20Analysis/net_models_pdu2.png" alt="net_models_pdu2"></p>
+</li>
+</ul>
+<h4 id="encapsulation">Encapsulation</h4>
+<ul>
+<li>
+<p>When examining a Protocol Data Unit (PDU), remember the concept of encapsulation.</p>
+</li>
+<li>
+<p>As data moves down the protocol stack, each layer adds a header to the data from the previous layer, like wrapping it in a bubble.</p>
+</li>
+<li>
+<p>This process is called encapsulation.</p>
+</li>
+<li>
+<p>The header contains information specific to that layer, such as the data from the previous layer, operational flags, communication options, source and destination IP addresses, ports, and transport and application layer protocols.
+<img src="/Network%20Traffic%20Analysis/encapsulation.png" alt="encapsulation"></p>
+</li>
+<li>
+<p>Traffic analysis tools, such as <a href="https://www.wireshark.org/">Wireshark • Go Deep</a> , display data encapsulation.</p>
+</li>
+<li>
+<p>Just be careful in Wireshark’s case, because the layers are displayed in reverse order (the lower layers are displayed first).</p>
+</li>
+<li>
+<p>For example, let’s see how a DNS response looks like in Wireshark, accompanied by encapsulation details.
+<img src="/Network%20Traffic%20Analysis/wireshark_dns_example_1.png" alt="wireshark_dns_example">
+<img src="/Network%20Traffic%20Analysis/wireshark_dns_example_2.png" alt="wireshark_dns_example">
+<img src="/Network%20Traffic%20Analysis/wireshark_dns_example_3.png" alt="wireshark_dns_example">
+<img src="/Network%20Traffic%20Analysis/wireshark_dns_example_4.png" alt="wireshark_dns_example">
+<img src="/Network%20Traffic%20Analysis/wireshark_dns_example_5.png" alt="wireshark_dns_example">
+<img src="/Network%20Traffic%20Analysis/wireshark_dns_example_6.png" alt="wireshark_dns_example"></p>
+</li>
+<li>
+<p>What is important to understand, is that what we see in Wireshark is Wireshark’s interpretation.</p>
+</li>
+<li>
+<p>As you can imagine, there is margin for error.</p>
+</li>
+<li>
+<p>Hopefully, Wireshark and other tools feature packet bytes panes (displaying the whole frame).</p>
+</li>
+<li>
+<p>By taking the displayed hexadecimal values in those panes and interpreting them ourselves, we can be 100% certain of the interpretation result.
+<img src="/Network%20Traffic%20Analysis/wireshark_dns_example_7.png" alt="wireshark_dns_example"></p>
+</li>
+</ul>
+<h4 id="pdu-packet-breakdown">PDU Packet Breakdown</h4>
+<p><img src="/Network%20Traffic%20Analysis/pdu-wireshark.png" alt="pdu-wireshark"></p>
+<ul>
+<li>The image above shows us the makeup of a PDU side by side with a packet breakout from Wireshark&rsquo;s Packet Details pane.</li>
+<li>Wireshark shows us the PDU in reverse because it is in the order that it was de-encapsulated.</li>
+</ul>
+<h4 id="de-encapsulation">De-encapsulation</h4>
+<ul>
+<li>
+<p>For example, the Network Access layer will:</p>
+<ul>
+<li>Receive the frame.</li>
+<li>Analyze the data.</li>
+<li>Strip the frame header off.</li>
+<li>Finally, pass the IP header and accompanying data to the Internet layer.</li>
+</ul>
+</li>
+<li>
+<p>Each layer deals only with the data that are meant to be handled by it.</p>
+</li>
+<li>
+<p>Most of the time, a protocol identifier exists which can be found in the previous layer.</p>
+</li>
+<li>
+<p>It should be noted:</p>
+<ul>
+<li>That some layer headers are of fixed size.</li>
+<li>While others are of variable length size and are accompanied by length details (this is useful to discriminate optional data or know where a layer ends).</li>
+</ul>
+</li>
+<li>
+<p>Based on this knowledge, each current layer knows:</p>
+<ul>
+<li>Where to start and stop processing data.</li>
+<li>And subsequently what it should pass to the upper layer.</li>
+</ul>
+</li>
+<li>
+<p>To conclude the topic of how each layer knows what to process, option fields also exist, residing in IP and TCP headers, that are used to identify where current layer options start and end.</p>
+</li>
+<li>
+<p>Let’s briefly see a frame de-encapsulation example.</p>
+</li>
+<li>
+<p>Let’s suppose a network access card supports the Ethernet (802.3) link layer protocol.</p>
+</li>
+<li>
+<p>This means that the card understands the format and all the fields in the frame header.
+<img src="/Network%20Traffic%20Analysis/deencapsulation_example.png" alt="deencapsulation_example"></p>
+</li>
+<li>
+<p>Same example, but a little deeper…
+<img src="/Network%20Traffic%20Analysis/deencapsulation_example_1.png" alt="deencapsulation_example"></p>
+</li>
+</ul>
+<h4 id="rfc">RFC</h4>
+<ul>
+<li>
+<p>Knowing how normal traffic looks like is of great importance.</p>
+</li>
+<li>
+<p>Then, and only then, you will be able to spot abnormalities when analyzing traffic.</p>
+</li>
+<li>
+<p>For this matter, Request For Comments (RFC) is an invaluable resource.</p>
+</li>
+<li>
+<p>RFC are documents that strictly describe the expected standards for a particular protocol.</p>
+</li>
+<li>
+<p>For example, RFC 793 –Transmission Control Protocol describes TCP functionality and implementation details as well as the interface using which TCP services are requested.</p>
+</li>
+<li>
+<p>However, RFC documents can sometimes be unclear or incomplete.</p>
+</li>
+<li>
+<p>As an analyst, you will have to combine RFC with environment context in order to conclude if something poses as a threat or not.</p>
+</li>
+</ul>
+<hr>
+<h1 id="intermediate-network-traffic-analysis">Intermediate Network Traffic Analysis</h1>
+<h2 id="intermediate-network-traffic-analysis-overview">Intermediate Network Traffic Analysis Overview</h2>
+<ul>
+<li>
+<p>In today&rsquo;s fast-paced and complex network environments, understanding/mastering network traffic analysis is crucial.</p>
+</li>
+<li>
+<p>The sheer amount (كمية هائلة) of traffic flowing through our networks can be overwhelming, making us feel unprepared. This is a challenge we must address/overcome.</p>
+</li>
+<li>
+<p>A wide range of attacks targeting crucial components of network infrastructure, will be covered.</p>
+</li>
+<li>
+<p>Attacks on the link, IP, transport, network, and application layers will be covered as well.</p>
+</li>
+<li>
+<p>Our aim is to identify patterns in these attacks so we can effectively detect and respond to these threats in an efficacious manner..</p>
+</li>
+<li>
+<p>Additional skills to augment our abilities (تعزيز قدراتنا) will be discussed.</p>
+</li>
+<li>
+<p>We will touch upon:</p>
+<ul>
+<li>Anomaly detection techniques.</li>
+<li>Delve into facets of log analysis (تعمّق في جوانب تحليل السجلات).</li>
+<li>Investigate some Indicators of Compromise (IOCs).</li>
+</ul>
+</li>
+<li>
+<p>This comprehensive approach improves both:</p>
+<ul>
+<li>Proactive threat identification (how we find threats before they happen).</li>
+<li>Enhances our reactive measures (how we handle them when they do).</li>
+</ul>
+</li>
+<li>
+<p>Which will empower us to identify, report, and respond to threats more effectively and within a shorter time frame.</p>
+</li>
+</ul>
+<h2 id="analyzing--detecting-ieee-802x-link-layer-attacks">Analyzing &amp; Detecting IEEE 802.x Link Layer Attacks</h2>
+<ul>
+<li><a href="/posts/2026/04/link-layer-attacks/">Link Layer Attacks</a>.</li>
+</ul>
+<h2 id="detecting-network-abnormalities">Detecting Network Abnormalities</h2>
+<ul>
+<li><a href="/posts/2026/04/detecting-network-abnormalities/">Detecting Network Abnormalities</a>.</li>
+</ul>
+<hr>
+]]></content>
+        </item>
+        
+        <item>
             <title>Working With IDS IPS</title>
             <link>https://mostafa-ashour.github.io/posts/working-with-ids-ips/</link>
             <pubDate>Fri, 17 Apr 2026 14:33:33 +0200</pubDate>

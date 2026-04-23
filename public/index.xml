@@ -7,8 +7,22 @@
     <generator>Hugo</generator>
     <language>en-us</language>
     <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-    <lastBuildDate>Fri, 17 Apr 2026 14:34:26 +0200</lastBuildDate>
+    <lastBuildDate>Fri, 24 Apr 2026 01:51:12 +0300</lastBuildDate>
     <atom:link href="https://mostafa-ashour.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Detecting Network Abnormalities</title>
+      <link>https://mostafa-ashour.github.io/posts/2026/04/detecting-network-abnormalities/</link>
+      <pubDate>Fri, 24 Apr 2026 01:51:12 +0300</pubDate>
+      <guid>https://mostafa-ashour.github.io/posts/2026/04/detecting-network-abnormalities/</guid>
+      <description>&lt;h1 id=&#34;fragmentation-attacks&#34;&gt;Fragmentation Attacks&lt;/h1&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;Related PCAP File(s)—&lt;code&gt;nmap_frag_fw_bypass.pcapng&lt;/code&gt;.&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;When investigating network anomalies, start by examining the IP layer&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;The IP layer is:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Responsible for transferring data packets between network points (from one hop to another).&lt;/li&gt;&#xA;&lt;li&gt;Using source and destination IP addresses to facilitate communication between hosts (inter-hosts communication).&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;IP addresses can be found within the IP header of each packet when analyzing network traffic.&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;Keep in mind that the IP layer itself doesn&amp;rsquo;t detect lost, dropped, or altered/tampered packets.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Link Layer Attacks</title>
+      <link>https://mostafa-ashour.github.io/posts/2026/04/link-layer-attacks/</link>
+      <pubDate>Fri, 24 Apr 2026 01:51:12 +0300</pubDate>
+      <guid>https://mostafa-ashour.github.io/posts/2026/04/link-layer-attacks/</guid>
+      <description>&lt;h1 id=&#34;arp-spoofing--abnormality-detection&#34;&gt;ARP Spoofing &amp;amp; Abnormality Detection&lt;/h1&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;Related PCAP File(s)—&lt;code&gt;ARP_Spoof.pcapng&lt;/code&gt;.&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;Attackers have long misused the &lt;code&gt;Address Resolution Protocol (ARP)&lt;/code&gt; to carry out man-in-the-middle and denial-of-service attacks.&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;Because of this common abuse, ARP is a key area/point to examine when analyzing network traffic, and it&amp;rsquo;s often the first protocol we check.&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;Many ARP attacks are broadcast to the entire network rather than targeting individual computers, which makes them easier to find using packet sniffing.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Zeek</title>
       <link>https://mostafa-ashour.github.io/posts/2026/04/zeek/</link>

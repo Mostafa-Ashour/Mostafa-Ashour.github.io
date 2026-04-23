@@ -1,20 +1,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>Network Traffic Analysis on Ashour Blog</title>
-        <link>http://localhost:1313/posts/network-traffic-analysis/</link>
+        <link>https://mostafa-ashour.github.io/posts/network-traffic-analysis/</link>
         <description>Recent content in Network Traffic Analysis on Ashour Blog</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
         <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
         <lastBuildDate>Fri, 24 Apr 2026 01:51:12 +0300</lastBuildDate>
-        <atom:link href="http://localhost:1313/posts/network-traffic-analysis/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="https://mostafa-ashour.github.io/posts/network-traffic-analysis/index.xml" rel="self" type="application/rss+xml" />
         
         <item>
             <title>Detecting Network Abnormalities</title>
-            <link>http://localhost:1313/posts/2026/04/detecting-network-abnormalities/</link>
+            <link>https://mostafa-ashour.github.io/posts/2026/04/detecting-network-abnormalities/</link>
             <pubDate>Fri, 24 Apr 2026 01:51:12 +0300</pubDate>
             
-            <guid>http://localhost:1313/posts/2026/04/detecting-network-abnormalities/</guid>
+            <guid>https://mostafa-ashour.github.io/posts/2026/04/detecting-network-abnormalities/</guid>
             <description>&lt;h1 id=&#34;fragmentation-attacks&#34;&gt;Fragmentation Attacks&lt;/h1&gt;
 &lt;ul&gt;
 &lt;li&gt;
@@ -1673,10 +1673,10 @@
         
         <item>
             <title>Link Layer Attacks</title>
-            <link>http://localhost:1313/posts/2026/04/link-layer-attacks/</link>
+            <link>https://mostafa-ashour.github.io/posts/2026/04/link-layer-attacks/</link>
             <pubDate>Fri, 24 Apr 2026 01:51:12 +0300</pubDate>
             
-            <guid>http://localhost:1313/posts/2026/04/link-layer-attacks/</guid>
+            <guid>https://mostafa-ashour.github.io/posts/2026/04/link-layer-attacks/</guid>
             <description>&lt;h1 id=&#34;arp-spoofing--abnormality-detection&#34;&gt;ARP Spoofing &amp;amp; Abnormality Detection&lt;/h1&gt;
 &lt;ul&gt;
 &lt;li&gt;
