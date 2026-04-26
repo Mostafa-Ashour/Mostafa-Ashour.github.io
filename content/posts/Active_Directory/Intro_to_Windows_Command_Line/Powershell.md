@@ -2,7 +2,6 @@
 title: "Powershell"
 date: 2026-04-26T19:29:11+03:00
 draft: false
-images:
 tags: ["Windows", "Powershell"]
 ---
 

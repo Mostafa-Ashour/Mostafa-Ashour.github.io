@@ -2,7 +2,6 @@
 title: "Intro_to_Windows_Command_Line"
 date: 2026-04-26T19:27:57+03:00
 draft: false
-images:
 tags: ["Windows", "cmd", "powershell"]
 ---
 

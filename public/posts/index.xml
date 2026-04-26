@@ -10,6 +10,25 @@
         <atom:link href="https://mostafa-ashour.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
         
         <item>
+            <title>Active Directory</title>
+            <link>https://mostafa-ashour.github.io/posts/active_directory/</link>
+            <pubDate>Sun, 26 Apr 2026 19:20:24 +0300</pubDate>
+            
+            <guid>https://mostafa-ashour.github.io/posts/active_directory/</guid>
+            <description>&lt;h1 id=&#34;introduction-to-windows-command-line&#34;&gt;Introduction to Windows Command Line&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://mostafa-ashour.github.io/posts/active_directory/intro_to_windows_command_line/&#34;&gt;Introduction to Windows Command Line&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;</description>
+            <content type="html"><![CDATA[<h1 id="introduction-to-windows-command-line">Introduction to Windows Command Line</h1>
+<ul>
+<li><a href="/posts/active_directory/intro_to_windows_command_line/">Introduction to Windows Command Line</a>.</li>
+</ul>
+<hr>
+]]></content>
+        </item>
+        
+        <item>
             <title>Network Traffic Analysis</title>
             <link>https://mostafa-ashour.github.io/posts/network-traffic-analysis/</link>
             <pubDate>Fri, 24 Apr 2026 01:51:12 +0300</pubDate>
