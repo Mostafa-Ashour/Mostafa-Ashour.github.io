@@ -3,7 +3,7 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://mostafa-ashour.github.io/</loc>
-    <lastmod>2026-04-24T01:51:12+03:00</lastmod>
+    <lastmod>2026-04-26T19:29:11+03:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="fr"
@@ -15,20 +15,17 @@
                 href="https://mostafa-ashour.github.io/"
                 />
   </url><url>
-    <loc>https://mostafa-ashour.github.io/posts/2026/04/detecting-network-abnormalities/</loc>
-    <lastmod>2026-04-24T01:51:12+03:00</lastmod>
-  </url><url>
-    <loc>https://mostafa-ashour.github.io/posts/2026/04/link-layer-attacks/</loc>
-    <lastmod>2026-04-24T01:51:12+03:00</lastmod>
-  </url><url>
-    <loc>https://mostafa-ashour.github.io/posts/network-traffic-analysis/</loc>
-    <lastmod>2026-04-24T01:51:12+03:00</lastmod>
-  </url><url>
     <loc>https://mostafa-ashour.github.io/posts/</loc>
-    <lastmod>2026-04-24T01:51:12+03:00</lastmod>
+    <lastmod>2026-04-26T19:29:11+03:00</lastmod>
+  </url><url>
+    <loc>https://mostafa-ashour.github.io/posts/2026/04/powershell/</loc>
+    <lastmod>2026-04-26T19:29:11+03:00</lastmod>
+  </url><url>
+    <loc>https://mostafa-ashour.github.io/tags/powershell/</loc>
+    <lastmod>2026-04-26T19:29:11+03:00</lastmod>
   </url><url>
     <loc>https://mostafa-ashour.github.io/tags/</loc>
-    <lastmod>2026-04-17T14:34:26+02:00</lastmod>
+    <lastmod>2026-04-26T19:29:11+03:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="fr"
@@ -39,6 +36,27 @@
                 hreflang="en-us"
                 href="https://mostafa-ashour.github.io/tags/"
                 />
+  </url><url>
+    <loc>https://mostafa-ashour.github.io/tags/windows/</loc>
+    <lastmod>2026-04-26T19:29:11+03:00</lastmod>
+  </url><url>
+    <loc>https://mostafa-ashour.github.io/tags/cmd/</loc>
+    <lastmod>2026-04-26T19:28:58+03:00</lastmod>
+  </url><url>
+    <loc>https://mostafa-ashour.github.io/posts/2026/04/cmd/</loc>
+    <lastmod>2026-04-26T19:28:58+03:00</lastmod>
+  </url><url>
+    <loc>https://mostafa-ashour.github.io/posts/active_directory/intro_to_windows_command_line/</loc>
+    <lastmod>2026-04-26T19:27:57+03:00</lastmod>
+  </url><url>
+    <loc>https://mostafa-ashour.github.io/posts/2026/04/detecting-network-abnormalities/</loc>
+    <lastmod>2026-04-24T01:51:12+03:00</lastmod>
+  </url><url>
+    <loc>https://mostafa-ashour.github.io/posts/2026/04/link-layer-attacks/</loc>
+    <lastmod>2026-04-24T01:51:12+03:00</lastmod>
+  </url><url>
+    <loc>https://mostafa-ashour.github.io/posts/network-traffic-analysis/</loc>
+    <lastmod>2026-04-24T01:51:12+03:00</lastmod>
   </url><url>
     <loc>https://mostafa-ashour.github.io/tags/untagged/</loc>
     <lastmod>2026-04-17T14:34:26+02:00</lastmod>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Windows on Ashour Blog</title>
+    <link>https://mostafa-ashour.github.io/tags/windows/</link>
+    <description>Recent content in Windows on Ashour Blog</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
+    <lastBuildDate>Sun, 26 Apr 2026 19:29:11 +0300</lastBuildDate>
+    <atom:link href="https://mostafa-ashour.github.io/tags/windows/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Powershell</title>
+      <link>https://mostafa-ashour.github.io/posts/2026/04/powershell/</link>
+      <pubDate>Sun, 26 Apr 2026 19:29:11 +0300</pubDate>
+      <guid>https://mostafa-ashour.github.io/posts/2026/04/powershell/</guid>
+      <description>&lt;h1 id=&#34;cmd-vs-powershell&#34;&gt;CMD Vs. PowerShell&lt;/h1&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;It&amp;rsquo;s time to look at Windows&amp;rsquo; modern successor to CMD, &lt;a href=&#34;https://learn.microsoft.com/en-us/powershell/scripting/overview?view=powershell-7.2&#34;&gt;PowerShell&lt;/a&gt;.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;differences&#34;&gt;Differences&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;PowerShell and CMD are included natively on any Windows host.&lt;/li&gt;&#xA;&lt;li&gt;Therefore, Why would I use one over the other?&lt;/li&gt;&#xA;&lt;li&gt;Observe the following table to know the differences/comparison between PowerShell &amp;amp; CMD.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;table&gt;&#xA;  &lt;thead&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;th&gt;&lt;strong&gt;Feature&lt;/strong&gt;&lt;/th&gt;&#xA;          &lt;th&gt;&lt;strong&gt;CMD&lt;/strong&gt;&lt;/th&gt;&#xA;          &lt;th&gt;&lt;strong&gt;PowerShell&lt;/strong&gt;&lt;/th&gt;&#xA;      &lt;/tr&gt;&#xA;  &lt;/thead&gt;&#xA;  &lt;tbody&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;Language&lt;/td&gt;&#xA;          &lt;td&gt;Batch and basic CMD commands only.&lt;/td&gt;&#xA;          &lt;td&gt;PowerShell can interpret Batch, CMD, PS cmdlets, and aliases.&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;Command utilization&lt;/td&gt;&#xA;          &lt;td&gt;The output from one command cannot be passed into another directly as a structured object, due to the limitation of handling the text output.&lt;/td&gt;&#xA;          &lt;td&gt;The output from one command can be passed into another directly as a structured object resulting in more sophisticated commands.&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;Command Output&lt;/td&gt;&#xA;          &lt;td&gt;Text only.&lt;/td&gt;&#xA;          &lt;td&gt;PowerShell outputs in object formatting.&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;Parallel Execution&lt;/td&gt;&#xA;          &lt;td&gt;CMD must finish one command before running another.&lt;/td&gt;&#xA;          &lt;td&gt;PowerShell can multi-thread commands to run in parallel.&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;  &lt;/tbody&gt;&#xA;&lt;/table&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;PowerShell is more than a command-line interface (CLI); it&amp;rsquo;s also a versatile scripting language designed for extensibility and integration with various tools.&lt;/li&gt;&#xA;&lt;li&gt;Unlike CMD, the traditional Windows CLI, PowerShell is &lt;a href=&#34;https://github.com/PowerShell/PowerShell&#34;&gt;open-source project&lt;/a&gt; and cross-platform, supporting both Windows and Linux systems.&lt;/li&gt;&#xA;&lt;li&gt;Built on the &lt;code&gt;.NET&lt;/code&gt; framework, it leverages an object-based model for interaction and output, moving beyond simple text-based methods.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;why-choose-powershell-over-cmdexe&#34;&gt;Why Choose PowerShell Over cmd.exe?&lt;/h3&gt;&#xA;&lt;p&gt;&lt;code&gt;Why does PowerShell matter for IT admins, Offensive &amp;amp; Defensive Infosec pros&lt;/code&gt;?&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>CMD</title>
+      <link>https://mostafa-ashour.github.io/posts/2026/04/cmd/</link>
+      <pubDate>Sun, 26 Apr 2026 19:28:58 +0300</pubDate>
+      <guid>https://mostafa-ashour.github.io/posts/2026/04/cmd/</guid>
+      <description>&lt;h1 id=&#34;command-prompt-basics&#34;&gt;Command Prompt Basics&lt;/h1&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;To begin developing command-line skills, we&amp;rsquo;ll start with &lt;code&gt;cmd.exe&lt;/code&gt; (the Command Prompt) which includes:&#xA;&lt;ul&gt;&#xA;&lt;li&gt;What &lt;code&gt;cmd.exe&lt;/code&gt; is.&lt;/li&gt;&#xA;&lt;li&gt;How to access it.&lt;/li&gt;&#xA;&lt;li&gt;How the shell functions.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;cmdexe&#34;&gt;CMD.exe&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;The Command Prompt (&lt;a href=&#34;https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/cmd&#34;&gt;cmd.exe&lt;/a&gt; or CMD) is the default command-line interpreter for Windows OS, evolved from DOS&amp;rsquo;s &lt;code&gt;COMMAND.COM&lt;/code&gt;.&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;Found in nearly all Windows OSs versions, it allows users to execute commands directly, performing tasks like password changes or network interface status checks.&#xA;- This also reduces system resources, as graphical-based programs require more CPU and memory.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Intro_to_Windows_Command_Line</title>
+      <link>https://mostafa-ashour.github.io/posts/active_directory/intro_to_windows_command_line/</link>
+      <pubDate>Sun, 26 Apr 2026 19:27:57 +0300</pubDate>
+      <guid>https://mostafa-ashour.github.io/posts/active_directory/intro_to_windows_command_line/</guid>
+      <description>&lt;h1 id=&#34;introduction&#34;&gt;Introduction&lt;/h1&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;CMD.exe and PowerShell, included in all Windows hosts, offer:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Direct OS access.&lt;/li&gt;&#xA;&lt;li&gt;Automate tasks.&lt;/li&gt;&#xA;&lt;li&gt;Provide granular control over computers and applications.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;This blog equips you with the skills to effectively administer Windows hosts via the command line.&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;From a penetration testing perspective, we will learn how to use built-in Windows tools, commands, and third-party scripts to help us with reconnaissance, exploitation, and data exfiltration from within a Windows environments.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

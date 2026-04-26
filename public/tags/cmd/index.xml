@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Cmd on Ashour Blog</title>
+    <link>https://mostafa-ashour.github.io/tags/cmd/</link>
+    <description>Recent content in Cmd on Ashour Blog</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
+    <lastBuildDate>Sun, 26 Apr 2026 19:28:58 +0300</lastBuildDate>
+    <atom:link href="https://mostafa-ashour.github.io/tags/cmd/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>CMD</title>
+      <link>https://mostafa-ashour.github.io/posts/2026/04/cmd/</link>
+      <pubDate>Sun, 26 Apr 2026 19:28:58 +0300</pubDate>
+      <guid>https://mostafa-ashour.github.io/posts/2026/04/cmd/</guid>
+      <description>&lt;h1 id=&#34;command-prompt-basics&#34;&gt;Command Prompt Basics&lt;/h1&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;To begin developing command-line skills, we&amp;rsquo;ll start with &lt;code&gt;cmd.exe&lt;/code&gt; (the Command Prompt) which includes:&#xA;&lt;ul&gt;&#xA;&lt;li&gt;What &lt;code&gt;cmd.exe&lt;/code&gt; is.&lt;/li&gt;&#xA;&lt;li&gt;How to access it.&lt;/li&gt;&#xA;&lt;li&gt;How the shell functions.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;cmdexe&#34;&gt;CMD.exe&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;The Command Prompt (&lt;a href=&#34;https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/cmd&#34;&gt;cmd.exe&lt;/a&gt; or CMD) is the default command-line interpreter for Windows OS, evolved from DOS&amp;rsquo;s &lt;code&gt;COMMAND.COM&lt;/code&gt;.&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;Found in nearly all Windows OSs versions, it allows users to execute commands directly, performing tasks like password changes or network interface status checks.&#xA;- This also reduces system resources, as graphical-based programs require more CPU and memory.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Intro_to_Windows_Command_Line</title>
+      <link>https://mostafa-ashour.github.io/posts/active_directory/intro_to_windows_command_line/</link>
+      <pubDate>Sun, 26 Apr 2026 19:27:57 +0300</pubDate>
+      <guid>https://mostafa-ashour.github.io/posts/active_directory/intro_to_windows_command_line/</guid>
+      <description>&lt;h1 id=&#34;introduction&#34;&gt;Introduction&lt;/h1&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;CMD.exe and PowerShell, included in all Windows hosts, offer:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Direct OS access.&lt;/li&gt;&#xA;&lt;li&gt;Automate tasks.&lt;/li&gt;&#xA;&lt;li&gt;Provide granular control over computers and applications.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;This blog equips you with the skills to effectively administer Windows hosts via the command line.&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;From a penetration testing perspective, we will learn how to use built-in Windows tools, commands, and third-party scripts to help us with reconnaissance, exploitation, and data exfiltration from within a Windows environments.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

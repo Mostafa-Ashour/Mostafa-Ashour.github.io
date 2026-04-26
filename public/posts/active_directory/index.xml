@@ -1,0 +1,130 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Active Directory on Ashour Blog</title>
+        <link>http://localhost:1313/posts/active_directory/</link>
+        <description>Recent content in Active Directory on Ashour Blog</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en-us</language>
+        <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
+        <lastBuildDate>Sun, 26 Apr 2026 19:20:24 +0300</lastBuildDate>
+        <atom:link href="http://localhost:1313/posts/active_directory/index.xml" rel="self" type="application/rss+xml" />
+        
+        <item>
+            <title>Intro_to_Windows_Command_Line</title>
+            <link>http://localhost:1313/posts/active_directory/intro_to_windows_command_line/</link>
+            <pubDate>Sun, 26 Apr 2026 19:27:57 +0300</pubDate>
+            
+            <guid>http://localhost:1313/posts/active_directory/intro_to_windows_command_line/</guid>
+            <description>&lt;h1 id=&#34;introduction&#34;&gt;Introduction&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;CMD.exe and PowerShell, included in all Windows hosts, offer:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Direct OS access.&lt;/li&gt;
+&lt;li&gt;Automate tasks.&lt;/li&gt;
+&lt;li&gt;Provide granular control over computers and applications.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;This blog equips you with the skills to effectively administer Windows hosts via the command line.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;From a penetration testing perspective, we will learn how to use built-in Windows tools, commands, and third-party scripts to help us with reconnaissance, exploitation, and data exfiltration from within a Windows environments.&lt;/p&gt;</description>
+            <content type="html"><![CDATA[<h1 id="introduction">Introduction</h1>
+<ul>
+<li>
+<p>CMD.exe and PowerShell, included in all Windows hosts, offer:</p>
+<ul>
+<li>Direct OS access.</li>
+<li>Automate tasks.</li>
+<li>Provide granular control over computers and applications.</li>
+</ul>
+</li>
+<li>
+<p>This blog equips you with the skills to effectively administer Windows hosts via the command line.</p>
+</li>
+<li>
+<p>From a penetration testing perspective, we will learn how to use built-in Windows tools, commands, and third-party scripts to help us with reconnaissance, exploitation, and data exfiltration from within a Windows environments.</p>
+</li>
+</ul>
+<h2 id="command-prompt-vs-powershell">Command Prompt Vs. PowerShell</h2>
+<p><img src="/Active_Directory/Intro_to_Windows_Command_Line/powershell-vs-command-prompt.webp" alt="powershell-vs-command-prompt"></p>
+<ul>
+<li>Key differences exist between Windows Command Prompt and PowerShell.</li>
+<li>While Command Prompt commands can be executed within PowerShell, running PowerShell commands in Command Prompt requires prefixing them with <code>powershell</code> (e.g., <code>powershell get-alias</code>).</li>
+<li>The table below highlights further differences.</li>
+</ul>
+<table>
+  <thead>
+      <tr>
+          <th>PowerShell</th>
+          <th>Command Prompt</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Introduced in 2006</td>
+          <td>Introduced in 1981</td>
+      </tr>
+      <tr>
+          <td>Can run both batch commands and PowerShell cmdlets</td>
+          <td>Can only run batch commands</td>
+      </tr>
+      <tr>
+          <td>Supports the use of command aliases</td>
+          <td>Does not support command aliases</td>
+      </tr>
+      <tr>
+          <td>Cmdlet output can be passed to other cmdlets</td>
+          <td>Command output cannot be passed to other commands</td>
+      </tr>
+      <tr>
+          <td>All output is in the form of an object</td>
+          <td>Output of commands is text</td>
+      </tr>
+      <tr>
+          <td>Able to execute a sequence of cmdlets in a script</td>
+          <td>A command must finish before the next command can run</td>
+      </tr>
+      <tr>
+          <td>Has an Integrated Scripting Environment (ISE)</td>
+          <td>Does not have an ISE</td>
+      </tr>
+      <tr>
+          <td>Can access programming libraries because it is built on the .NET framework</td>
+          <td>Cannot access these libraries</td>
+      </tr>
+      <tr>
+          <td>Can be run on Linux systems</td>
+          <td>Can only be run on Windows systems</td>
+      </tr>
+  </tbody>
+</table>
+<ul>
+<li><em><strong>Command Prompt</strong></em> offers a static interface of interacting with the OS.</li>
+<li>Whereas <em><strong>PowerShell</strong></em> is a powerful scripting language suitable for both simple and complex tasks.</li>
+</ul>
+<h2 id="scenario">Scenario</h2>
+<ul>
+<li>Consider this Scenario in order to see how these tools and commands can aid us.</li>
+</ul>
+<blockquote>
+<p>As a system administrator aiming to transition into Pentesting, I need to develop a strong understanding of PowerShell and Command Prompt.
+Demonstrating proficiency in these Windows command-line interfaces will strengthen my case for apprenticing with the Internal Red Team.</p>
+</blockquote>
+<hr>
+<h1 id="cmd">CMD</h1>
+<ul>
+<li><a href="/posts/2026/04/cmd/">CMD</a>.</li>
+</ul>
+<hr>
+<h1 id="powershell">Powershell</h1>
+<ul>
+<li><a href="/posts/2026/04/powershell/">Powershell</a>.</li>
+</ul>
+<hr>
+]]></content>
+        </item>
+        
+    </channel>
+</rss>
