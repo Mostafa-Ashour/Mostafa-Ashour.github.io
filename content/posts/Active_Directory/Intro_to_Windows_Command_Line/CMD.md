@@ -2,7 +2,6 @@
 title: "CMD"
 date: 2026-04-26T19:28:58+03:00
 draft: false
-toc: false
 images:
 tags: ["Windows", "CMD"]
 ---
