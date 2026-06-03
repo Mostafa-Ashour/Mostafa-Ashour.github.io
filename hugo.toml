@@ -267,3 +267,8 @@ disableHugoGeneratorInject = false
     identifier = "posts"
     name       = "Posts"
     url        = "posts/"
+
+  [[menu.main]]
+    name = "CV"
+    url = "/assets/mostafa-ashour-cv.pdf"
+    weight = 50
