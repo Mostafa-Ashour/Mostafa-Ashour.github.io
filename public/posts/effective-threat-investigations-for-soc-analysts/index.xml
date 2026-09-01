@@ -1,0 +1,484 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Effective Threat Investigation for SOC Analysts on Ashour Blog</title>
+        <link>https://mostafa-ashour.github.io/posts/effective-threat-investigations-for-soc-analysts/</link>
+        <description>Recent content in Effective Threat Investigation for SOC Analysts on Ashour Blog</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en-us</language>
+        <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
+        <lastBuildDate>Tue, 01 Sep 2026 00:00:00 +0000</lastBuildDate>
+        <atom:link href="https://mostafa-ashour.github.io/posts/effective-threat-investigations-for-soc-analysts/index.xml" rel="self" type="application/rss+xml" />
+        
+        <item>
+            <title>1  Investigating Email Threats</title>
+            <link>https://mostafa-ashour.github.io/posts/2026/09/1-investigating-email-threats/</link>
+            <pubDate>Tue, 01 Sep 2026 19:55:00 +0300</pubDate>
+            
+            <guid>https://mostafa-ashour.github.io/posts/2026/09/1-investigating-email-threats/</guid>
+            <description>&lt;h1 id=&#34;architecture-overview&#34;&gt;Architecture Overview&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;A Home Lab for Chapter 1: Investigating Email Threats.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;network-topology&#34;&gt;Network Topology&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&#34;https://mostafa-ashour.github.io/Effective%20Threat%20Investigations%20for%20SOC%20Analysts/1-%20Investigating%20Email%20Threats/home_lab_topology.png&#34; alt=&#34;home_lab_topology&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;All components reside on an isolated internal network (&lt;code&gt;192.168.150.0/24&lt;/code&gt;) to ensure complete lab safety while maintaining realistic cross-tier communications:
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Subnet&lt;/strong&gt;—&lt;code&gt;192.168.150.0/24&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Domain Name&lt;/strong&gt;—&lt;code&gt;lab.local&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Mail FQDN&lt;/strong&gt;—&lt;code&gt;mail.lab.local&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;node-inventory--specifications&#34;&gt;Node Inventory &amp;amp; Specifications&lt;/h2&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th style=&#34;text-align: left&#34;&gt;Node / Hostname&lt;/th&gt;
+          &lt;th style=&#34;text-align: left&#34;&gt;Management IP&lt;/th&gt;
+          &lt;th style=&#34;text-align: left&#34;&gt;Operating System&lt;/th&gt;
+          &lt;th style=&#34;text-align: left&#34;&gt;Primary Software &amp;amp; Services&lt;/th&gt;
+          &lt;th style=&#34;text-align: left&#34;&gt;Role / Purpose&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;Splunk SIEM&lt;/strong&gt; (&lt;code&gt;siem-solution&lt;/code&gt;)&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;code&gt;192.168.150.10&lt;/code&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;Ubuntu Server&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;Splunk Enterprise (UDP &lt;code&gt;514&lt;/code&gt; / &lt;code&gt;1514&lt;/code&gt;)&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;Centralized log collection, indexing, and threat detection.&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;Services VM&lt;/strong&gt; (&lt;code&gt;mail.lab.local&lt;/code&gt;)&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;code&gt;192.168.150.20&lt;/code&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;Ubuntu Server&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;iRedMail (Postfix, Dovecot, Nginx, Roundcube, MariaDB, Fail2ban), &lt;code&gt;rsyslog&lt;/code&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;Corporate mail environment hosting victim mailboxes and sending syslog events.&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;Windows Victim&lt;/strong&gt; (&lt;code&gt;Win-Victim&lt;/code&gt;)&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;code&gt;192.168.150.30&lt;/code&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;Windows 10&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;Splunk Universal Forwarder, Sysmon, Mail Client / Web Browser&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;Monitored victim endpoint consuming emails and interacting with payloads.&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;Kali Attacker&lt;/strong&gt; (&lt;code&gt;kali&lt;/code&gt;)&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;code&gt;192.168.150.50&lt;/code&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;Ubuntu&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;code&gt;swaks&lt;/code&gt; (SMTP Swiss Army Knife), Gophish Framework&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;Red Team / Threat Emulation node generating spoofed and phishing emails.&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;how-to-start-services-and-check-connectivity&#34;&gt;How to start services and check connectivity&lt;/h2&gt;
+&lt;h3 id=&#34;1-virtual-machine-startup-order&#34;&gt;1. Virtual Machine Startup Order&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;To prevent connection timeouts and service errors, boot your Virtual Machines in this exact sequence:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1. Splunk SIEM (192.168.150.10)   --&amp;gt; Start 1st (Collector must be ready)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;2. Services VM (192.168.150.20)   --&amp;gt; Start 2nd (Mail Infrastructure)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;3. Windows Victim (192.168.150.30) --&amp;gt; Start 3rd (Client Endpoint)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;4. Kali Attacker (Dynamic IP)     --&amp;gt; Start 4th (Attack Platform)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;2-service-management-starting--verification&#34;&gt;2. Service Management (Starting &amp;amp; Verification)&lt;/h3&gt;
+&lt;h4 id=&#34;a-splunk-siem-vm-19216815010&#34;&gt;A. Splunk SIEM VM (&lt;code&gt;192.168.150.10&lt;/code&gt;)&lt;/h4&gt;
+&lt;p&gt;&lt;strong&gt;Start Service:&lt;/strong&gt;&lt;/p&gt;</description>
+            <content type="html"><![CDATA[<h1 id="architecture-overview">Architecture Overview</h1>
+<ul>
+<li>A Home Lab for Chapter 1: Investigating Email Threats.</li>
+</ul>
+<h2 id="network-topology">Network Topology</h2>
+<p><img src="/Effective%20Threat%20Investigations%20for%20SOC%20Analysts/1-%20Investigating%20Email%20Threats/home_lab_topology.png" alt="home_lab_topology"></p>
+<ul>
+<li>All components reside on an isolated internal network (<code>192.168.150.0/24</code>) to ensure complete lab safety while maintaining realistic cross-tier communications:
+<ul>
+<li><strong>Subnet</strong>—<code>192.168.150.0/24</code></li>
+<li><strong>Domain Name</strong>—<code>lab.local</code></li>
+<li><strong>Mail FQDN</strong>—<code>mail.lab.local</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="node-inventory--specifications">Node Inventory &amp; Specifications</h2>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: left">Node / Hostname</th>
+          <th style="text-align: left">Management IP</th>
+          <th style="text-align: left">Operating System</th>
+          <th style="text-align: left">Primary Software &amp; Services</th>
+          <th style="text-align: left">Role / Purpose</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left"><strong>Splunk SIEM</strong> (<code>siem-solution</code>)</td>
+          <td style="text-align: left"><code>192.168.150.10</code></td>
+          <td style="text-align: left">Ubuntu Server</td>
+          <td style="text-align: left">Splunk Enterprise (UDP <code>514</code> / <code>1514</code>)</td>
+          <td style="text-align: left">Centralized log collection, indexing, and threat detection.</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>Services VM</strong> (<code>mail.lab.local</code>)</td>
+          <td style="text-align: left"><code>192.168.150.20</code></td>
+          <td style="text-align: left">Ubuntu Server</td>
+          <td style="text-align: left">iRedMail (Postfix, Dovecot, Nginx, Roundcube, MariaDB, Fail2ban), <code>rsyslog</code></td>
+          <td style="text-align: left">Corporate mail environment hosting victim mailboxes and sending syslog events.</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>Windows Victim</strong> (<code>Win-Victim</code>)</td>
+          <td style="text-align: left"><code>192.168.150.30</code></td>
+          <td style="text-align: left">Windows 10</td>
+          <td style="text-align: left">Splunk Universal Forwarder, Sysmon, Mail Client / Web Browser</td>
+          <td style="text-align: left">Monitored victim endpoint consuming emails and interacting with payloads.</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>Kali Attacker</strong> (<code>kali</code>)</td>
+          <td style="text-align: left"><code>192.168.150.50</code></td>
+          <td style="text-align: left">Ubuntu</td>
+          <td style="text-align: left"><code>swaks</code> (SMTP Swiss Army Knife), Gophish Framework</td>
+          <td style="text-align: left">Red Team / Threat Emulation node generating spoofed and phishing emails.</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h2 id="how-to-start-services-and-check-connectivity">How to start services and check connectivity</h2>
+<h3 id="1-virtual-machine-startup-order">1. Virtual Machine Startup Order</h3>
+<ul>
+<li>To prevent connection timeouts and service errors, boot your Virtual Machines in this exact sequence:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>1. Splunk SIEM (192.168.150.10)   --&gt; Start 1st (Collector must be ready)
+</span></span><span style="display:flex;"><span>2. Services VM (192.168.150.20)   --&gt; Start 2nd (Mail Infrastructure)
+</span></span><span style="display:flex;"><span>3. Windows Victim (192.168.150.30) --&gt; Start 3rd (Client Endpoint)
+</span></span><span style="display:flex;"><span>4. Kali Attacker (Dynamic IP)     --&gt; Start 4th (Attack Platform)
+</span></span></code></pre></div><h3 id="2-service-management-starting--verification">2. Service Management (Starting &amp; Verification)</h3>
+<h4 id="a-splunk-siem-vm-19216815010">A. Splunk SIEM VM (<code>192.168.150.10</code>)</h4>
+<p><strong>Start Service:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo /opt/splunk/bin/splunk start --run-as-root
+</span></span></code></pre></div><p><strong>Verify Service Status:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo /opt/splunk/bin/splunk status --run-as-root
+</span></span></code></pre></div><p><strong>Verify Listening Ports:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo netstat -tulnp | grep -E <span style="color:#e6db74">&#39;8000|514|9997&#39;</span>
+</span></span></code></pre></div><p><em>(Check that port <code>8000</code> for Web UI, <code>514</code> for Syslog, and <code>9997</code> for Windows Forwarder are active).</em></p>
+<h4 id="b-services-vm---iredmail-19216815020">B. Services VM - iRedMail (<code>192.168.150.20</code>)</h4>
+<p><strong>Start Services (if not set to auto-start):</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo systemctl start postfix dovecot nginx mariadb rsyslog
+</span></span></code></pre></div><p><strong>Verify Service Status:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo systemctl status postfix dovecot nginx mariadb rsyslog --no-pager
+</span></span></code></pre></div><p><strong>Restart Log Forwarding Service:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo systemctl restart rsyslog
+</span></span></code></pre></div><h4 id="c-windows-victim-vm-19216815030">C. Windows Victim VM (<code>192.168.150.30</code>)</h4>
+<p><strong>Verify Splunk Universal Forwarder Service (PowerShell):</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>Get-Service -Name SplunkForwarder
+</span></span></code></pre></div><p><strong>Start Service (if stopped):</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>Start-Service -Name SplunkForwarder
+</span></span></code></pre></div><h4 id="d-attacker-vm">D. Attacker VM</h4>
+<p><strong>Start Gophish Service (Optional):</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo gophish
+</span></span></code></pre></div><h3 id="3-cross-node-connectivity--inter-service-verification">3. Cross-Node Connectivity &amp; Inter-Service Verification</h3>
+<ul>
+<li>Execute these verification checks to ensure all nodes can communicate with each other.</li>
+</ul>
+<h4 id="step-1-network-ping-matrix-icmp-reachability">Step 1: Network Ping Matrix (ICMP Reachability)</h4>
+<ul>
+<li>Run <code>ping</code> tests between nodes to ensure basic network connectivity across <code>192.168.150.0/24</code>:</li>
+</ul>
+<ul>
+<li>
+<p><strong>From Services VM (<code>.20</code>):</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ping -c <span style="color:#ae81ff">2</span> 192.168.150.10   <span style="color:#75715e"># Ping Splunk SIEM</span>
+</span></span><span style="display:flex;"><span>ping -c <span style="color:#ae81ff">2</span> 192.168.150.30   <span style="color:#75715e"># Ping Windows Victim</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>From Kali Attacker:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ping -c <span style="color:#ae81ff">2</span> 192.168.150.20   <span style="color:#75715e"># Ping Services VM</span>
+</span></span><span style="display:flex;"><span>ping -c <span style="color:#ae81ff">2</span> 192.168.150.10   <span style="color:#75715e"># Ping Splunk SIEM</span>
+</span></span></code></pre></div></li>
+</ul>
+<h4 id="step-2-service-port-reachability-checks">Step 2: Service Port Reachability Checks</h4>
+<p>Verify that application ports are open and accepting remote requests across VMs using <code>nc</code> (netcat) or PowerShell:</p>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: left">Source Node</th>
+          <th style="text-align: left">Target Node &amp; Port</th>
+          <th style="text-align: left">Command</th>
+          <th style="text-align: left">Expected Output</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left"><strong>Services VM</strong></td>
+          <td style="text-align: left">Splunk UDP <code>514</code></td>
+          <td style="text-align: left"><code>nc -zuv 192.168.150.10 514</code></td>
+          <td style="text-align: left"><code>Connection succeeded!</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>Windows Victim</strong></td>
+          <td style="text-align: left">Services HTTP <code>80</code></td>
+          <td style="text-align: left"><code>Test-NetConnection -ComputerName 192.168.150.20 -Port 80</code></td>
+          <td style="text-align: left"><code>TcpTestSucceeded : True</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>Windows Victim</strong></td>
+          <td style="text-align: left">Splunk TCP <code>9997</code></td>
+          <td style="text-align: left"><code>Test-NetConnection -ComputerName 192.168.150.10 -Port 9997</code></td>
+          <td style="text-align: left"><code>TcpTestSucceeded : True</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>Kali Attacker</strong></td>
+          <td style="text-align: left">Services SMTP <code>25</code></td>
+          <td style="text-align: left"><code>nc -zv 192.168.150.20 25</code></td>
+          <td style="text-align: left"><code>Connection open</code></td>
+      </tr>
+  </tbody>
+</table>
+<h4 id="step-3-end-to-end-log-telemetry-pipeline-test">Step 3: End-to-End Log Telemetry Pipeline Test</h4>
+<h5 id="a-test-mail-syslog-forwarding-services-vm---splunk">A. Test Mail Syslog Forwarding (Services VM -&gt; Splunk)</h5>
+<ol>
+<li>Send a manual syslog payload from the <strong>Services VM</strong>:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>logger -p mail.info <span style="color:#e6db74">&#34;HOMELAB STARTUP TEST: rsyslog integration verified&#34;</span>
+</span></span></code></pre></div></li>
+<li>Open Splunk Web (<code>http://192.168.150.10:8000</code>) and search:
+<pre tabindex="0"><code class="language-spl" data-lang="spl">index=main &#34;HOMELAB STARTUP TEST&#34;
+</code></pre></li>
+</ol>
+<h5 id="b-test-windows-endpoint-telemetry-windows---splunk">B. Test Windows Endpoint Telemetry (Windows -&gt; Splunk)</h5>
+<ol>
+<li>Trigger a test Security Event on the <strong>Windows Victim</strong> via PowerShell:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>Write-EventLog -LogName Application -Source <span style="color:#e6db74">&#34;Application Error&#34;</span> -EventID <span style="color:#ae81ff">999</span> -EntryType Information -Message <span style="color:#e6db74">&#34;HOMELAB STARTUP TEST: Windows Universal Forwarder active&#34;</span>
+</span></span></code></pre></div></li>
+<li>Search in Splunk Web:
+<pre tabindex="0"><code class="language-spl" data-lang="spl">index=main host=&#34;Win-Victim&#34; &#34;HOMELAB STARTUP TEST&#34;
+</code></pre></li>
+</ol>
+<hr>
+<h1 id="attack-scenario-and-experimentation">Attack Scenario and Experimentation</h1>
+<ul>
+<li>For now, I&rsquo;m gonna stick with the four Email Threat Types stated by the first chapter (might add more in the future), which are:
+<ol>
+<li>Spearphishing Attachments.</li>
+<li>Spearphishing Links.</li>
+<li>Blackmail Email.</li>
+<li>Business Email Compromise.</li>
+</ol>
+</li>
+</ul>
+<h2 id="1-spearphishing-attachment">1. Spearphishing Attachment</h2>
+<h4 id="main-idea">Main Idea</h4>
+<ul>
+<li>The Main Idea of Spearphishing Attachment that the attacker send a malicious attachment to the victim and trick him into clicking/interacting with it.</li>
+<li>The purpose of the attacker is to either:
+<ul>
+<li>Gain initial foothold/access into the victim&rsquo;s system and subsequently into the corporate&rsquo;s network.</li>
+<li>Harvest the victim&rsquo;s credentials.</li>
+</ul>
+</li>
+<li>Multiple attachments types can be used, for instance, Microsoft Office Documents, PDF files, or HTML Files, etc.</li>
+</ul>
+<h4 id="attack-scenario">Attack Scenario</h4>
+<ul>
+<li>
+<p>I&rsquo;m gonna send an Invoice to the victim by the HR email in order to trick him to click on the attached file.</p>
+</li>
+<li>
+<p>Template used by attacker:
+<img src="/Effective%20Threat%20Investigations%20for%20SOC%20Analysts/1-%20Investigating%20Email%20Threats/spearphishing_attachment_1.png" alt="spearphishing_attachment_1"></p>
+</li>
+<li>
+<p>HR Profile:
+<img src="/Effective%20Threat%20Investigations%20for%20SOC%20Analysts/1-%20Investigating%20Email%20Threats/spearphishing_attachment_2.png" alt="spearphishing_attachment_2"></p>
+</li>
+<li>
+<p>Victim Email added to a group:
+<img src="/Effective%20Threat%20Investigations%20for%20SOC%20Analysts/1-%20Investigating%20Email%20Threats/spearphishing_attachment_3.png" alt="spearphishing_attachment_3"></p>
+</li>
+<li>
+<p>Preparing the campaign to launch it.
+<img src="/Effective%20Threat%20Investigations%20for%20SOC%20Analysts/1-%20Investigating%20Email%20Threats/spearphishing_attachment_4.png" alt="spearphishing_attachment_4"></p>
+</li>
+<li>
+<p>The Victim has received the Email from the HR.
+<img src="/Effective%20Threat%20Investigations%20for%20SOC%20Analysts/1-%20Investigating%20Email%20Threats/spearphishing_attachment_victim_received_email.png" alt="spearphishing_attachment_victim_received_email"></p>
+</li>
+<li>
+<p>The victim clicking the/interacting with attachment depends on his security awareness or trainings.</p>
+</li>
+</ul>
+<h2 id="2-spearphishing-link">2. Spearphishing Link</h2>
+<h4 id="main-idea-1">Main Idea</h4>
+<ul>
+<li>Spearphishing Link&rsquo;s idea is the same as Spearphishing Attachment but instead of sending an malicious attachment within the email, the attacker will send a malicious link.</li>
+<li>After the victim clicking the/interacting with the malicious link, the attacker&rsquo;s purpose is to either:
+<ul>
+<li>The link is pointing to an attacker controlled server, hence downloading a malware on the victim&rsquo;s host and therefore gaining initial access to the victim&rsquo;s system.</li>
+<li>The link is pointing to a landing page, a login form maybe, and this login form will look like the corporate&rsquo;s login form, therefore the victim will not notice any difference and might enter his own credentials. If so, the attacker will harvest the victim&rsquo;s credentials.</li>
+</ul>
+</li>
+</ul>
+<h4 id="attack-scenario-1">Attack Scenario</h4>
+<ul>
+<li>
+<p>Firstly, create the landing page, a vital constraint that the created landing page must be typical to the corporate&rsquo;s login page, therefore the victim will not notice any difference.
+<img src="/Effective%20Threat%20Investigations%20for%20SOC%20Analysts/1-%20Investigating%20Email%20Threats/spearphishing_link_1.png" alt="spearphishing_link_1"></p>
+</li>
+<li>
+<p>Create a customized template, where the IT Support send an Urgent Password Verification Check to the Victim with the crafted Landing Page created in the previous step.
+<img src="/Effective%20Threat%20Investigations%20for%20SOC%20Analysts/1-%20Investigating%20Email%20Threats/spearphishing_link_2.png" alt="spearphishing_link_2"></p>
+</li>
+<li>
+<p>Customize the campaign then launch it.
+<img src="/Effective%20Threat%20Investigations%20for%20SOC%20Analysts/1-%20Investigating%20Email%20Threats/spearphishing_link_3.png" alt="spearphishing_link_3"></p>
+</li>
+<li>
+<p>The email has been sent to the victim.
+<img src="/Effective%20Threat%20Investigations%20for%20SOC%20Analysts/1-%20Investigating%20Email%20Threats/spearphishing_link_4.png" alt="spearphishing_link_4"></p>
+</li>
+<li>
+<p>The victim has clicked the link.
+<img src="/Effective%20Threat%20Investigations%20for%20SOC%20Analysts/1-%20Investigating%20Email%20Threats/spearphishing_link_5.png" alt="spearphishing_link_5"></p>
+</li>
+<li>
+<p>You&rsquo;ll notice that the attacker has received the victim&rsquo;s creds after he has entered them in the landing page.
+<img src="/Effective%20Threat%20Investigations%20for%20SOC%20Analysts/1-%20Investigating%20Email%20Threats/spearphishing_link_6.png" alt="spearphishing_link_6"></p>
+</li>
+</ul>
+<h2 id="3-blackmail-email">3. Blackmail Email</h2>
+<h4 id="main-idea-2">Main Idea</h4>
+<ul>
+<li>
+<p>The main idea here, that the attacker will send an email to the victim (doesn&rsquo;t has to be a spoofed email) indicating that his system is compromised (might not be compromised but the attacker is trying to trick him) and that the attacker has exfiltrated sexual or confidential data from the victim&rsquo;s system.</p>
+</li>
+<li>
+<p>And for the attacker to not publish these data, he&rsquo;ll demand a payment.</p>
+</li>
+<li>
+<p>For the victim to believe that the attacker has exfiltrated sensitive data from his device, the attacker has two methods to prove infections:</p>
+<ol>
+<li>Screenshots from the breached data (the attacker can have it from previous breaches he has bought it previously, for instance) or from the victim&rsquo;s machine (if the attacker has actually compromised the victim&rsquo;s machine).</li>
+<li>Spoofing the target victim&rsquo;s email address, where the attacker will trick the victim into believing that the email came from his own email address.</li>
+</ol>
+</li>
+</ul>
+<h4 id="attack-scenario-2">Attack Scenario</h4>
+<ul>
+<li>
+<p>Create a customized template for Blackmail Email purpose.
+<img src="/Effective%20Threat%20Investigations%20for%20SOC%20Analysts/1-%20Investigating%20Email%20Threats/blackmail_email_1.png" alt="blackmail_email_1"></p>
+</li>
+<li>
+<p>Create the campaign and launch it.
+<img src="/Effective%20Threat%20Investigations%20for%20SOC%20Analysts/1-%20Investigating%20Email%20Threats/blackmail_email_2.png" alt="blackmail_email_2"></p>
+</li>
+<li>
+<p>The victim has received the email, and he either pay or not, this depends on the investigations of the security team.
+<img src="/Effective%20Threat%20Investigations%20for%20SOC%20Analysts/1-%20Investigating%20Email%20Threats/blackmail_email_3.png" alt="blackmail_email_3"></p>
+</li>
+</ul>
+<h2 id="4-business-email-compromise-bec">4. Business Email Compromise (BEC)</h2>
+<h4 id="main-idea-3">Main Idea</h4>
+<ul>
+<li>It has the main idea as the blackmail email, but instead of making the claim that you&rsquo;ve exfiltrated the victim&rsquo;s data and demand payments; the attacker will spoof the CEO&rsquo;s Email, for instance and it can be the email of any important person in the company, then send an email to the finance team, for instance, demanding a bank transaction for any reason.</li>
+<li>Take into consideration any variations of this scenario.</li>
+</ul>
+<hr>
+<h1 id="logs-investigations">Logs Investigations</h1>
+<h4 id="note">Note</h4>
+<ul>
+<li>In some investigation steps, I couldn&rsquo;t apply it manually.</li>
+<li>Because it&rsquo;s a local lab, therefore applying it will not yield a meaningful results.</li>
+</ul>
+<h2 id="initial-discovery">Initial Discovery</h2>
+<ul>
+<li>Firstly, you must isolate the suspicious email, which usually begins with a user report (e.g., <code>victim@lab.local</code> reporting a strange invoice) or by hunting for anomalous inbound traffic.</li>
+</ul>
+<pre tabindex="0"><code class="language-SPL" data-lang="SPL">index=main &#34;victim@lab.local&#34; (&#34;Passed CLEAN&#34; OR postfix/smtpd)
+</code></pre><ul>
+<li>This query filters out the noise and pulls up the exact mail server transaction logs for emails received by the victim.</li>
+</ul>
+<h4 id="query-breakdown">Query Breakdown</h4>
+<ul>
+<li><em><strong><code>index=main</code></strong></em>—Directs Splunk to search only within the <code>main</code> index, which is the default storage database where your lab&rsquo;s syslog data is being forwarded.</li>
+<li><em><strong><code>&quot;victim@lab.local&quot;</code></strong></em>—A free-text keyword search. It filters the results to only show log events that contain this exact email address anywhere in the text.</li>
+<li><em><strong><code>(&quot;Passed CLEAN&quot; OR smtpd)</code></strong></em>—A logical filter that narrows the search down to specific mail server actions. It requires the log to contain <em>either</em>:
+<ul>
+<li><em><strong><code>&quot;Passed CLEAN&quot;</code></strong></em>—A tag content filter confirming the email was scanned and allowed through without being blocked.</li>
+<li><em><strong><code>smtpd</code></strong></em>—The tag for the Postfix SMTP daemon, showing the exact moment the server received the inbound email connection from Kali.</li>
+</ul>
+</li>
+</ul>
+<h2 id="step-1-investigating-the-email-sender-domain-and-smtp-server-reputation">Step 1: Investigating the Email Sender Domain and SMTP Server Reputation</h2>
+<ul>
+<li>
+<p>You need to identify the true origin of the email to see if the sending server is malicious.</p>
+</li>
+<li>
+<p>In this step, I&rsquo;m looking for two things:</p>
+<ul>
+<li>Email Sender Domain.</li>
+<li>SMTP Server IP Address.</li>
+</ul>
+</li>
+</ul>
+<pre tabindex="0"><code class="language-SPL" data-lang="SPL">index=main smtpd &#34;victim@lab.local&#34;
+| rex field=_raw &#34;RCPT from [^\[]*\[(?&lt;src_ip&gt;[^\]]+)\]&#34;
+| stats count by helo, src_ip
+| table helo, src_ip, count
+</code></pre><p><img src="/Effective%20Threat%20Investigations%20for%20SOC%20Analysts/1-%20Investigating%20Email%20Threats/investigation_1.png" alt="investigation_1"></p>
+<ul>
+<li>
+<p>The <code>helo</code> field declares the self-declared hostname or domain used by the sending server (attacker vm) during SMTP Handshake.</p>
+</li>
+<li>
+<p>The <code>src_ip</code> is extracted from raw logs as it&rsquo;s the SMTP Server IP Address.</p>
+</li>
+<li>
+<p>Take each value, and search them on MXToolBox Online tool to check their reputation.</p>
+</li>
+</ul>
+<blockquote>
+<p>[!note]
+Since both of them are self-made (by me), you might not find them having a bad reputation, I&rsquo;ve just made them for testing.</p>
+</blockquote>
+<h2 id="step-2-spoofing-validation">Step 2: Spoofing Validation</h2>
+<ul>
+<li>Since you&rsquo;ve both the SMTP Server IP Address, and the Email Sender Domain.</li>
+<li>Therefore, you&rsquo;re going to do 2 things:
+<ul>
+<li>Check the <code>MX Record</code> (which is a type of DNS Record that tells the internet is responsible for accepting email on behalf of your domain) for the Email Sender Domain through MXToolBox.</li>
+<li>Check the <code>WHOIS Record</code> (which is a public directory entry that details who owns and manages: domain names, IP Addresses, and network blocks) for the SMTP Server IP Address that sent the email.</li>
+</ul>
+</li>
+<li>Finally, cross reference both results in order to see if attacker has spoofed the Email Domain or not.</li>
+</ul>
+<h2 id="step-3-email-sender-behavior">Step 3: Email Sender Behavior</h2>
+<ul>
+<li>If the previous two steps couldn&rsquo;t validate to you that the email is suspicious, you can ask yourself the following questions:</li>
+</ul>
+<ol>
+<li>Have the recipient received previous Emails from the same Email Sender or it&rsquo;s Domain?</li>
+<li>Check whether the same email subject formula is being used by the email sender?</li>
+<li>Check whether the email subject formula is related to their duties/job or not?</li>
+</ol>
+<h2 id="step-4-investigating-suspicious-email-content">Step 4: Investigating Suspicious Email Content</h2>
+<ul>
+<li>
+<p>We&rsquo;ve agreed that the attacker has two methods to either gain initial access to our system or to harvest the victim&rsquo;s credentials, which are by supplying the victim with either a Link or an Attachment.</p>
+</li>
+<li>
+<p>Either methods used, we should analyze them.</p>
+</li>
+<li>
+<p>In case of supplying a Link, you should scan it on tools like <code>urlscan.io</code> to check if it&rsquo;s has a bad reputation or not.</p>
+</li>
+<li>
+<p>The same thing in case the attacker has supplied the victim with a malicious attachment.</p>
+</li>
+</ul>
+<hr>
+]]></content>
+        </item>
+        
+    </channel>
+</rss>

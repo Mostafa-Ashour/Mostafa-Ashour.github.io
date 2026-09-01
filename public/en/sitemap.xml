@@ -2,8 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://mostafa-ashour.github.io/posts/2026/09/1-investigating-email-threats/</loc>
+    <lastmod>2026-09-01T19:55:00+03:00</lastmod>
+  </url><url>
     <loc>https://mostafa-ashour.github.io/</loc>
-    <lastmod>2026-04-26T19:29:11+03:00</lastmod>
+    <lastmod>2026-09-01T19:55:00+03:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="fr"
@@ -15,17 +18,20 @@
                 href="https://mostafa-ashour.github.io/"
                 />
   </url><url>
+    <loc>https://mostafa-ashour.github.io/tags/email-spoofing/</loc>
+    <lastmod>2026-09-01T19:55:00+03:00</lastmod>
+  </url><url>
+    <loc>https://mostafa-ashour.github.io/tags/email-threats/</loc>
+    <lastmod>2026-09-01T19:55:00+03:00</lastmod>
+  </url><url>
+    <loc>https://mostafa-ashour.github.io/tags/phishing/</loc>
+    <lastmod>2026-09-01T19:55:00+03:00</lastmod>
+  </url><url>
     <loc>https://mostafa-ashour.github.io/posts/</loc>
-    <lastmod>2026-04-26T19:29:11+03:00</lastmod>
-  </url><url>
-    <loc>https://mostafa-ashour.github.io/posts/2026/04/powershell/</loc>
-    <lastmod>2026-04-26T19:29:11+03:00</lastmod>
-  </url><url>
-    <loc>https://mostafa-ashour.github.io/tags/powershell/</loc>
-    <lastmod>2026-04-26T19:29:11+03:00</lastmod>
+    <lastmod>2026-09-01T19:55:00+03:00</lastmod>
   </url><url>
     <loc>https://mostafa-ashour.github.io/tags/</loc>
-    <lastmod>2026-04-26T19:29:11+03:00</lastmod>
+    <lastmod>2026-09-01T19:55:00+03:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="fr"
@@ -37,13 +43,22 @@
                 href="https://mostafa-ashour.github.io/tags/"
                 />
   </url><url>
+    <loc>https://mostafa-ashour.github.io/posts/effective-threat-investigations-for-soc-analysts/</loc>
+    <lastmod>2026-09-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://mostafa-ashour.github.io/posts/2026/04/powershell/</loc>
+    <lastmod>2026-04-26T19:29:11+03:00</lastmod>
+  </url><url>
+    <loc>https://mostafa-ashour.github.io/tags/powershell/</loc>
+    <lastmod>2026-04-26T19:29:11+03:00</lastmod>
+  </url><url>
     <loc>https://mostafa-ashour.github.io/tags/windows/</loc>
     <lastmod>2026-04-26T19:29:11+03:00</lastmod>
   </url><url>
-    <loc>https://mostafa-ashour.github.io/tags/cmd/</loc>
+    <loc>https://mostafa-ashour.github.io/posts/2026/04/cmd/</loc>
     <lastmod>2026-04-26T19:28:58+03:00</lastmod>
   </url><url>
-    <loc>https://mostafa-ashour.github.io/posts/2026/04/cmd/</loc>
+    <loc>https://mostafa-ashour.github.io/tags/cmd/</loc>
     <lastmod>2026-04-26T19:28:58+03:00</lastmod>
   </url><url>
     <loc>https://mostafa-ashour.github.io/posts/active_directory/intro_to_windows_command_line/</loc>

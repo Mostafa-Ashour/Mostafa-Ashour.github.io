@@ -6,8 +6,18 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
         <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-        <lastBuildDate>Sun, 26 Apr 2026 19:29:11 +0300</lastBuildDate>
+        <lastBuildDate>Tue, 01 Sep 2026 19:55:00 +0300</lastBuildDate>
         <atom:link href="https://mostafa-ashour.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+        
+        <item>
+            <title>Effective Threat Investigation for SOC Analysts</title>
+            <link>https://mostafa-ashour.github.io/posts/effective-threat-investigations-for-soc-analysts/</link>
+            <pubDate>Tue, 01 Sep 2026 00:00:00 +0000</pubDate>
+            
+            <guid>https://mostafa-ashour.github.io/posts/effective-threat-investigations-for-soc-analysts/</guid>
+            <description></description>
+            <content type="html"><![CDATA[]]></content>
+        </item>
         
         <item>
             <title>Active Directory</title>
