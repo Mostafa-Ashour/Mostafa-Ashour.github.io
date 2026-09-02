@@ -8,7 +8,7 @@
 <meta name="author" content="Mostafa Ashour ">
 <meta name="description" content="Architecture Overview A Home Lab for Chapter 1: Investigating Email Threats. Network Topology All components reside on an isolated internal network (192.168.150.0/24) to ensure complete lab safety while maintaining realistic cross-tier communications: Subnet—192.168.150.0/24 Domain Name—lab.local Mail FQDN—mail.lab.local Node Inventory &amp; Specifications Node / Hostname Management IP Operating System Primary Software &amp; Services Role / Purpose Splunk SIEM (siem-solution) 192.168.150.10 Ubuntu Server Splunk Enterprise (UDP 514 / 1514) Centralized log collection, indexing, and threat detection. Services VM (mail.lab.local) 192.168.150.20 Ubuntu Server iRedMail (Postfix, Dovecot, Nginx, Roundcube, MariaDB, Fail2ban), rsyslog Corporate mail environment hosting victim mailboxes and sending syslog events. Windows Victim (Win-Victim) 192.168.150.30 Windows 10 Splunk Universal Forwarder, Sysmon, Mail Client / Web Browser Monitored victim endpoint consuming emails and interacting with payloads. Kali Attacker (kali) 192.168.150.50 Ubuntu swaks (SMTP Swiss Army Knife), Gophish Framework Red Team / Threat Emulation node generating spoofed and phishing emails. How to start services and check connectivity 1. Virtual Machine Startup Order To prevent connection timeouts and service errors, boot your Virtual Machines in this exact sequence: 1. Splunk SIEM (192.168.150.10) --&gt; Start 1st (Collector must be ready) 2. Services VM (192.168.150.20) --&gt; Start 2nd (Mail Infrastructure) 3. Windows Victim (192.168.150.30) --&gt; Start 3rd (Client Endpoint) 4. Kali Attacker (Dynamic IP) --&gt; Start 4th (Attack Platform) 2. Service Management (Starting &amp; Verification) A. Splunk SIEM VM (192.168.150.10) Start Service:
 " />
-<meta name="keywords" content=", Email Threats, Email Spoofing, Phishing" />
+<meta name="keywords" content=", Email Threat Vectors, Email Threats, Email Spoofing, Phishing" />
 <meta name="robots" content="noodp" />
 <meta name="theme-color" content="" />
 <link rel="canonical" href="https://mostafa-ashour.github.io/posts/2026/09/1-investigating-email-threats/" />
@@ -44,9 +44,9 @@
   <meta itemprop="description" content="Architecture Overview A Home Lab for Chapter 1: Investigating Email Threats. Network Topology All components reside on an isolated internal network (192.168.150.0/24) to ensure complete lab safety while maintaining realistic cross-tier communications: Subnet—192.168.150.0/24 Domain Name—lab.local Mail FQDN—mail.lab.local Node Inventory &amp; Specifications Node / Hostname Management IP Operating System Primary Software &amp; Services Role / Purpose Splunk SIEM (siem-solution) 192.168.150.10 Ubuntu Server Splunk Enterprise (UDP 514 / 1514) Centralized log collection, indexing, and threat detection. Services VM (mail.lab.local) 192.168.150.20 Ubuntu Server iRedMail (Postfix, Dovecot, Nginx, Roundcube, MariaDB, Fail2ban), rsyslog Corporate mail environment hosting victim mailboxes and sending syslog events. Windows Victim (Win-Victim) 192.168.150.30 Windows 10 Splunk Universal Forwarder, Sysmon, Mail Client / Web Browser Monitored victim endpoint consuming emails and interacting with payloads. Kali Attacker (kali) 192.168.150.50 Ubuntu swaks (SMTP Swiss Army Knife), Gophish Framework Red Team / Threat Emulation node generating spoofed and phishing emails. How to start services and check connectivity 1. Virtual Machine Startup Order To prevent connection timeouts and service errors, boot your Virtual Machines in this exact sequence: 1. Splunk SIEM (192.168.150.10) --&gt; Start 1st (Collector must be ready) 2. Services VM (192.168.150.20) --&gt; Start 2nd (Mail Infrastructure) 3. Windows Victim (192.168.150.30) --&gt; Start 3rd (Client Endpoint) 4. Kali Attacker (Dynamic IP) --&gt; Start 4th (Attack Platform) 2. Service Management (Starting &amp; Verification) A. Splunk SIEM VM (192.168.150.10) Start Service:">
   <meta itemprop="datePublished" content="2026-09-01T19:55:00+03:00">
   <meta itemprop="dateModified" content="2026-09-01T19:55:00+03:00">
-  <meta itemprop="wordCount" content="1819">
+  <meta itemprop="wordCount" content="2059">
   <meta itemprop="image" content="https://mostafa-ashour.github.io/">
-  <meta itemprop="keywords" content="Email Threats,Email Spoofing,Phishing">
+  <meta itemprop="keywords" content="Email Threat Vectors,Email Threats,Email Spoofing,Phishing">
 
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="https://mostafa-ashour.github.io/">
@@ -64,6 +64,7 @@
     <meta property="article:section" content="posts">
     <meta property="article:published_time" content="2026-09-01T19:55:00+03:00">
     <meta property="article:modified_time" content="2026-09-01T19:55:00+03:00">
+    <meta property="article:tag" content="Email Threat Vectors">
     <meta property="article:tag" content="Email Threats">
     <meta property="article:tag" content="Email Spoofing">
     <meta property="article:tag" content="Phishing">
@@ -154,7 +155,7 @@
               <circle cx="12" cy="12" r="10"></circle>
               <polyline points="12 6 12 12 16 14"></polyline>
             </svg>
-            9 minutes
+            10 minutes
           
 
           
@@ -481,20 +482,45 @@
 <ul>
 <li>Firstly, you must isolate the suspicious email, which usually begins with a user report (e.g., <code>victim@lab.local</code> reporting a strange invoice) or by hunting for anomalous inbound traffic.</li>
 </ul>
-<pre tabindex="0"><code class="language-SPL" data-lang="SPL">index=main &#34;victim@lab.local&#34; (&#34;Passed CLEAN&#34; OR postfix/smtpd)
+<pre tabindex="0"><code class="language-SPL" data-lang="SPL">index=main &#34;victim@lab.local&#34;
 </code></pre><ul>
-<li>This query filters out the noise and pulls up the exact mail server transaction logs for emails received by the victim.</li>
+<li>
+<p>Firstly, I want to analyze traffic that includes our employee email, which is <code>victim@lab.local</code>.
+<img src="https://mostafa-ashour.github.io/Effective%20Threat%20Investigations%20for%20SOC%20Analysts/1-%20Investigating%20Email%20Threats/investigation_2.png" alt="investigation_2"></p>
+</li>
+<li>
+<p>You&rsquo;ll notice that there&rsquo;s something called <em><strong>Queue Code</strong></em>, which is <strong>unique tracking identifier</strong> for a specific email message as it moves through the mail system.</p>
+</li>
+<li>
+<p>I can use the queue code field with our victim&rsquo;s email to track all email sent to him.</p>
+</li>
+<li>
+<p>To check how many email the victim has received:</p>
+</li>
 </ul>
+<pre tabindex="0"><code class="language-SPL" data-lang="SPL">index=main &#34;victim@lab.local&#34; Queue-ID
+</code></pre><p><img src="https://mostafa-ashour.github.io/Effective%20Threat%20Investigations%20for%20SOC%20Analysts/1-%20Investigating%20Email%20Threats/investigation_3.png" alt="investigation_3"></p>
+<ul>
+<li>
+<p>You&rsquo;ll notice that he has received four emails.</p>
+</li>
+<li>
+<p>Therefore, I want to extract those four Queue-IDs for further analysis:</p>
+</li>
+</ul>
+<pre tabindex="0"><code class="language-SPL" data-lang="SPL">index=main &#34;victim@lab.local&#34;
+| rex &#34;Queue-ID:\s*(?&lt;Queue_ID&gt;[A-Za-z0-9]+)&#34;
+| table Queue_ID
+| where Queue_ID != &#34;&#34;
+</code></pre><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>4hYZQw153nz6yXV
+</span></span><span style="display:flex;"><span>4hYbqV5BrJz6ybn
+</span></span><span style="display:flex;"><span>4hYbRT4SYvz6ybf
+</span></span><span style="display:flex;"><span>4hYb1q4gy5z6ybg
+</span></span></code></pre></div><p><img src="https://mostafa-ashour.github.io/Effective%20Threat%20Investigations%20for%20SOC%20Analysts/1-%20Investigating%20Email%20Threats/investigation_4.png" alt="investigation_4"></p>
 <h4 id="query-breakdown">Query Breakdown</h4>
 <ul>
-<li><em><strong><code>index=main</code></strong></em>—Directs Splunk to search only within the <code>main</code> index, which is the default storage database where your lab&rsquo;s syslog data is being forwarded.</li>
-<li><em><strong><code>&quot;victim@lab.local&quot;</code></strong></em>—A free-text keyword search. It filters the results to only show log events that contain this exact email address anywhere in the text.</li>
-<li><em><strong><code>(&quot;Passed CLEAN&quot; OR smtpd)</code></strong></em>—A logical filter that narrows the search down to specific mail server actions. It requires the log to contain <em>either</em>:
-<ul>
-<li><em><strong><code>&quot;Passed CLEAN&quot;</code></strong></em>—A tag content filter confirming the email was scanned and allowed through without being blocked.</li>
-<li><em><strong><code>smtpd</code></strong></em>—The tag for the Postfix SMTP daemon, showing the exact moment the server received the inbound email connection from Kali.</li>
-</ul>
-</li>
+<li><em><strong><code>index=main</code></strong></em>—This tells Splunk to search only inside the default <code>main</code> database, which is where all your lab&rsquo;s syslog data is forwarded and stored.</li>
+<li><em><strong><code>&quot;victim@lab.local&quot;</code></strong></em>—This acts as a strict keyword filter. It ensures Splunk only returns log events that contain this exact email address anywhere in the text. Which is our main focus right now.</li>
 </ul>
 <h2 id="step-1-investigating-the-email-sender-domain-and-smtp-server-reputation">Step 1: Investigating the Email Sender Domain and SMTP Server Reputation</h2>
 <ul>
@@ -509,7 +535,7 @@
 </ul>
 </li>
 </ul>
-<pre tabindex="0"><code class="language-SPL" data-lang="SPL">index=main smtpd &#34;victim@lab.local&#34;
+<pre tabindex="0"><code class="language-SPL" data-lang="SPL">index=main &#34;victim@lab.local&#34;
 | rex field=_raw &#34;RCPT from [^\[]*\[(?&lt;src_ip&gt;[^\]]+)\]&#34;
 | stats count by helo, src_ip
 | table helo, src_ip, count
@@ -524,11 +550,21 @@
 <li>
 <p>Take each value, and search them on MXToolBox Online tool to check their reputation.</p>
 </li>
+<li>
+<p>Checking Email Sender Domain (in normal case, the tool will output the hostname and corresponding IP Address).
+<img src="https://mostafa-ashour.github.io/Effective%20Threat%20Investigations%20for%20SOC%20Analysts/1-%20Investigating%20Email%20Threats/investigation_5.png" alt="investigation_5"></p>
+</li>
+<li>
+<p>When checking the email domain, if you found the IP Address found using our Search Query, therefore it&rsquo;s normal and not suspicious.</p>
+</li>
+<li>
+<p>But if not, you&rsquo;ll have to check it against blacklisted IP Addresses.
+<img src="https://mostafa-ashour.github.io/Effective%20Threat%20Investigations%20for%20SOC%20Analysts/1-%20Investigating%20Email%20Threats/investigation_6.png" alt="investigation_6"></p>
+</li>
+<li>
+<p>Since it&rsquo;s a home-lab and the network is private, you&rsquo;ll not find any thing suspicious.</p>
+</li>
 </ul>
-<blockquote>
-<p>[!note]
-Since both of them are self-made (by me), you might not find them having a bad reputation, I&rsquo;ve just made them for testing.</p>
-</blockquote>
 <h2 id="step-2-spoofing-validation">Step 2: Spoofing Validation</h2>
 <ul>
 <li>Since you&rsquo;ve both the SMTP Server IP Address, and the Email Sender Domain.</li>
@@ -549,6 +585,45 @@ Since both of them are self-made (by me), you might not find them having a bad r
 <li>Check whether the same email subject formula is being used by the email sender?</li>
 <li>Check whether the email subject formula is related to their duties/job or not?</li>
 </ol>
+<ul>
+<li>In order to analyze the Email Sender Behavior; let&rsquo;s return to the four email that was sent to our victim and analyze them.</li>
+</ul>
+<pre tabindex="0"><code class="language-SPL" data-lang="SPL">index=main &#34;victim@lab.local&#34; Queue-ID
+</code></pre><p><img src="https://mostafa-ashour.github.io/Effective%20Threat%20Investigations%20for%20SOC%20Analysts/1-%20Investigating%20Email%20Threats/investigation_7.png" alt="investigation_7"></p>
+<ul>
+<li>
+<p>In this case, I&rsquo;ll focus on the subject field (marked inside the red rectangle).</p>
+</li>
+<li>
+<p>To Extract it:</p>
+</li>
+</ul>
+<pre tabindex="0"><code class="language-SPL" data-lang="SPL">index=main &#34;victim@lab.local&#34; Queue-ID
+| rex &#34;Subject:\s*\&#34;(?&lt;Email_Subject&gt;[^\&#34;]+)\&#34;&#34;
+| table Email_Subject
+</code></pre><p><img src="https://mostafa-ashour.github.io/Effective%20Threat%20Investigations%20for%20SOC%20Analysts/1-%20Investigating%20Email%20Threats/investigation_8.png" alt="investigation_8"></p>
+<ul>
+<li>I want to add the email sender address, in order to map the email sender and be able to analyze it&rsquo;s behavior.</li>
+</ul>
+<pre tabindex="0"><code class="language-SPL" data-lang="SPL">index=main &#34;victim@lab.local&#34; Queue-ID
+| rex &#34;Subject:\s*\&#34;(?&lt;Email_Subject&gt;[A-Za-z0-9])\&#34;&#34;
+| rename helo as Email_Sender
+| table Email_Sender, Email_Subject
+</code></pre><p><img src="https://mostafa-ashour.github.io/Effective%20Threat%20Investigations%20for%20SOC%20Analysts/1-%20Investigating%20Email%20Threats/investigation_9.png" alt="investigation_9"></p>
+<ul>
+<li>Since that the first 3 email subjects are suspicious enough, to validate that the emails sent from <code>attacker.lab.local</code> are malicious.</li>
+<li>But I wanted to add the email sender that appeared to our victim in our search query:</li>
+</ul>
+<pre tabindex="0"><code class="language-SPL" data-lang="SPL">index=main &#34;victim@lab.local&#34; Queue-ID
+| rex &#34;Subject:\s*\&#34;(?&lt;Email_Subject&gt;[^\&#34;]+)\&#34;&#34;
+| rex &#34;From:\s*&lt;*(?&lt;Spoofed_Email_Sender&gt;[^&gt;]+)&#34;
+| rename helo as Real_Email_Sender
+| table Real_Email_Sender, Spoofed_Email_Sender, Email_Subject
+</code></pre><p><img src="https://mostafa-ashour.github.io/Effective%20Threat%20Investigations%20for%20SOC%20Analysts/1-%20Investigating%20Email%20Threats/investigation_10.png" alt="investigation_10"></p>
+<ul>
+<li>Since every email the attacker spoofs the email sender address, and the Email Subjects are suspicious.</li>
+<li>Therefore, I can consider this email sender as malicious.</li>
+</ul>
 <h2 id="step-4-investigating-suspicious-email-content">Step 4: Investigating Suspicious Email Content</h2>
 <ul>
 <li>
@@ -576,6 +651,7 @@ Since both of them are self-made (by me), you might not find them having a bad r
     <p>
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg>
 
+        <span class="tag"><a href="https://mostafa-ashour.github.io/tags/email-threat-vectors/">Email Threat Vectors</a></span>
         <span class="tag"><a href="https://mostafa-ashour.github.io/tags/email-threats/">Email Threats</a></span>
         <span class="tag"><a href="https://mostafa-ashour.github.io/tags/email-spoofing/">Email Spoofing</a></span>
         <span class="tag"><a href="https://mostafa-ashour.github.io/tags/phishing/">Phishing</a></span>
@@ -592,7 +668,7 @@ Since both of them are self-made (by me), you might not find them having a bad r
             <line x1="16" y1="17" x2="8" y2="17"></line>
             <polyline points="10 9 9 9 8 9"></polyline>
           </svg>
-          1819 Words
+          2059 Words
         </p>
 
         <p>

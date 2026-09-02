@@ -5,6 +5,7 @@ draft: false
 toc: false
 images:
 tags:
+  - Email Threat Vectors
   - Email Threats
   - Email Spoofing
   - Phishing
@@ -16,7 +17,7 @@ tags:
 
 ## Network Topology
 
-![home_lab_topology](/Effective%20Threat%20Investigations%20for%20SOC%20Analysts/1-%20Investigating%20Email%20Threats/home_lab_topology.png) 
+![home_lab_topology](/Effective%20Threat%20Investigations%20for%20SOC%20Analysts/1-%20Investigating%20Email%20Threats/home_lab_topology.png)
 
 - All components reside on an isolated internal network (`192.168.150.0/24`) to ensure complete lab safety while maintaining realistic cross-tier communications:
 	* **Subnet**—`192.168.150.0/24`
@@ -269,18 +270,40 @@ Verify that application ports are open and accepting remote requests across VMs 
 - Firstly, you must isolate the suspicious email, which usually begins with a user report (e.g., `victim@lab.local` reporting a strange invoice) or by hunting for anomalous inbound traffic.
 
 ```SPL
-index=main "victim@lab.local" ("Passed CLEAN" OR postfix/smtpd)
+index=main "victim@lab.local"
 ```
 
-- This query filters out the noise and pulls up the exact mail server transaction logs for emails received by the victim.
+- Firstly, I want to analyze traffic that includes our employee email, which is `victim@lab.local`.
+![investigation_2](/Effective%20Threat%20Investigations%20for%20SOC%20Analysts/1-%20Investigating%20Email%20Threats/investigation_2.png)
 
+- You'll notice that there's something called ***Queue Code***, which is **unique tracking identifier** for a specific email message as it moves through the mail system.
+- I can use the queue code field with our victim's email to track all email sent to him.
+
+- To check how many email the victim has received:
+```SPL
+index=main "victim@lab.local" Queue-ID
+```
+![investigation_3](/Effective%20Threat%20Investigations%20for%20SOC%20Analysts/1-%20Investigating%20Email%20Threats/investigation_3.png)
+- You'll notice that he has received four emails.
+
+- Therefore, I want to extract those four Queue-IDs for further analysis:
+```SPL
+index=main "victim@lab.local"
+| rex "Queue-ID:\s*(?<Queue_ID>[A-Za-z0-9]+)"
+| table Queue_ID
+| where Queue_ID != ""
+```
+```txt
+4hYZQw153nz6yXV
+4hYbqV5BrJz6ybn
+4hYbRT4SYvz6ybf
+4hYb1q4gy5z6ybg
+```
+![investigation_4](/Effective%20Threat%20Investigations%20for%20SOC%20Analysts/1-%20Investigating%20Email%20Threats/investigation_4.png)
 #### Query Breakdown
 
-- ***`index=main`***—Directs Splunk to search only within the `main` index, which is the default storage database where your lab's syslog data is being forwarded.
-- ***`"victim@lab.local"`***—A free-text keyword search. It filters the results to only show log events that contain this exact email address anywhere in the text.
-- ***`("Passed CLEAN" OR smtpd)`***—A logical filter that narrows the search down to specific mail server actions. It requires the log to contain _either_:
-    - ***`"Passed CLEAN"`***—A tag content filter confirming the email was scanned and allowed through without being blocked.
-	- ***`smtpd`***—The tag for the Postfix SMTP daemon, showing the exact moment the server received the inbound email connection from Kali.
+- ***`index=main`***—This tells Splunk to search only inside the default `main` database, which is where all your lab's syslog data is forwarded and stored.
+- ***`"victim@lab.local"`***—This acts as a strict keyword filter. It ensures Splunk only returns log events that contain this exact email address anywhere in the text. Which is our main focus right now.
 
 ## Step 1: Investigating the Email Sender Domain and SMTP Server Reputation
 
@@ -291,7 +314,7 @@ index=main "victim@lab.local" ("Passed CLEAN" OR postfix/smtpd)
 	- SMTP Server IP Address.
 
 ```SPL
-index=main smtpd "victim@lab.local"
+index=main "victim@lab.local"
 | rex field=_raw "RCPT from [^\[]*\[(?<src_ip>[^\]]+)\]"
 | stats count by helo, src_ip
 | table helo, src_ip, count
@@ -302,8 +325,15 @@ index=main smtpd "victim@lab.local"
 - The `src_ip` is extracted from raw logs as it's the SMTP Server IP Address.
 
 - Take each value, and search them on MXToolBox Online tool to check their reputation.
-> [!note]
-> Since both of them are self-made (by me), you might not find them having a bad reputation, I've just made them for testing.
+
+- Checking Email Sender Domain (in normal case, the tool will output the hostname and corresponding IP Address).
+![investigation_5](/Effective%20Threat%20Investigations%20for%20SOC%20Analysts/1-%20Investigating%20Email%20Threats/investigation_5.png)
+
+- When checking the email domain, if you found the IP Address found using our Search Query, therefore it's normal and not suspicious.
+- But if not, you'll have to check it against blacklisted IP Addresses.
+![investigation_6](/Effective%20Threat%20Investigations%20for%20SOC%20Analysts/1-%20Investigating%20Email%20Threats/investigation_6.png)
+
+- Since it's a home-lab and the network is private, you'll not find any thing suspicious.
 
 ## Step 2: Spoofing Validation
 
@@ -320,6 +350,41 @@ index=main smtpd "victim@lab.local"
 1. Have the recipient received previous Emails from the same Email Sender or it's Domain?
 2. Check whether the same email subject formula is being used by the email sender?
 3. Check whether the email subject formula is related to their duties/job or not?
+
+- In order to analyze the Email Sender Behavior; let's return to the four email that was sent to our victim and analyze them.
+```SPL
+index=main "victim@lab.local" Queue-ID
+```
+![investigation_7](/Effective%20Threat%20Investigations%20for%20SOC%20Analysts/1-%20Investigating%20Email%20Threats/investigation_7.png)
+- In this case, I'll focus on the subject field (marked inside the red rectangle).
+
+- To Extract it:
+```SPL
+index=main "victim@lab.local" Queue-ID
+| rex "Subject:\s*\"(?<Email_Subject>[^\"]+)\""
+| table Email_Subject
+```
+![investigation_8](/Effective%20Threat%20Investigations%20for%20SOC%20Analysts/1-%20Investigating%20Email%20Threats/investigation_8.png)
+- I want to add the email sender address, in order to map the email sender and be able to analyze it's behavior.
+```SPL
+index=main "victim@lab.local" Queue-ID
+| rex "Subject:\s*\"(?<Email_Subject>[A-Za-z0-9])\""
+| rename helo as Email_Sender
+| table Email_Sender, Email_Subject
+```
+![investigation_9](/Effective%20Threat%20Investigations%20for%20SOC%20Analysts/1-%20Investigating%20Email%20Threats/investigation_9.png)
+- Since that the first 3 email subjects are suspicious enough, to validate that the emails sent from `attacker.lab.local` are malicious.
+- But I wanted to add the email sender that appeared to our victim in our search query:
+```SPL
+index=main "victim@lab.local" Queue-ID
+| rex "Subject:\s*\"(?<Email_Subject>[^\"]+)\""
+| rex "From:\s*<*(?<Spoofed_Email_Sender>[^>]+)"
+| rename helo as Real_Email_Sender
+| table Real_Email_Sender, Spoofed_Email_Sender, Email_Subject
+```
+![investigation_10](/Effective%20Threat%20Investigations%20for%20SOC%20Analysts/1-%20Investigating%20Email%20Threats/investigation_10.png)
+- Since every email the attacker spoofs the email sender address, and the Email Subjects are suspicious.
+- Therefore, I can consider this email sender as malicious.
 
 ## Step 4: Investigating Suspicious Email Content
 
