@@ -543,13 +543,76 @@
 <li>
 <p>Either methods used, we should analyze them.</p>
 </li>
+</ul>
+<h3 id="in-case-of-spearphishing-attachment">In case of Spearphishing Attachment</h3>
+<ul>
+<li>I&rsquo;m going to utilize the following query to know the time when each email was sent to our victim.</li>
+<li>Then I&rsquo;m gonna analyze Event Codes generated on the victim&rsquo;s machine in order to know if any process related to file interaction happened in the same time the email was sent or after the email was sent by a small interval of time.</li>
+</ul>
+<pre tabindex="0"><code class="language-SPL" data-lang="SPL">index=main &#34;victim@lab.local&#34; Queue-ID
+| rex &#34;Subject:\s*\&#34;(?&lt;Email_Subject&gt;[^\&#34;]+)\&#34;&#34;
+| rex &#34;Queue-ID:\s*(?&lt;queue_id&gt;[A-Za-z0-9]+)&#34;
+| table _time, queue_id, Email_Subject
+</code></pre><p><img src="/Effective%20Threat%20Investigations%20for%20SOC%20Analysts/1-%20Investigating%20Email%20Threats/investigation_11.png" alt="investigation_11"></p>
+<ul>
+<li>I&rsquo;m going to know which Event Codes generated on the Victim&rsquo;s host.</li>
+</ul>
+<pre tabindex="0"><code class="language-SPL" data-lang="SPL">index=main host=Win-victim
+| stats count by EventCode
+| table EventCode, count
+| sort EventCode
+</code></pre><p><img src="/Effective%20Threat%20Investigations%20for%20SOC%20Analysts/1-%20Investigating%20Email%20Threats/investigation_12.png" alt="investigation_12"></p>
+<ul>
 <li>
-<p>In case of supplying a Link, you should scan it on tools like <code>urlscan.io</code> to check if it&rsquo;s has a bad reputation or not.</p>
+<p>The following are the only event codes related to a user interacting with an attachment:</p>
+<ul>
+<li><strong>EventCode 1 — Process Creation</strong>—Logs when a user or application launches a file or script, capturing execution details like the parent process and command-line parameters.</li>
+<li><strong>EventCode 15 — FileCreateStreamHash</strong>—Logs when a file is saved or downloaded from an untrusted source (like webmail or a browser), capturing the file&rsquo;s hash, target path, and source URL via the Windows <em>Mark of the Web</em> stream.</li>
+<li><strong>EventCode 27 — FileBlockExecutable</strong>—Logs when Sysmon detects and prevents an executable file from being dropped or written to disk.</li>
+</ul>
 </li>
 <li>
-<p>The same thing in case the attacker has supplied the victim with a malicious attachment.</p>
+<p>Begin your time trimming, and begin to compare between the times the emails were sent and the time the event codes were generated.</p>
 </li>
 </ul>
+<pre tabindex="0"><code class="language-SPL" data-lang="SPL">index=main host=Win-victim (EventCode=1 OR EventCode=15 OR EventCode=27) earliest=1725122249 latest=1788210000
+| stats count by EventCode
+| table count, EventCode
+| sort - count
+</code></pre><p><img src="/Effective%20Threat%20Investigations%20for%20SOC%20Analysts/1-%20Investigating%20Email%20Threats/investigation_13.png" alt="investigation_13"></p>
+<ul>
+<li>
+<p>Since the timeframe between the first sent email and the last email is small, therefore I stated:</p>
+<ul>
+<li>The earliest time for logs as the time for the first sent email.</li>
+<li>While the latest time you can make it after the last sent email with a considerable amount of time, because it&rsquo;s not mandatory that the victim has interacted with the attached attachment/link once he&rsquo;s received the email from the attacker.</li>
+</ul>
+</li>
+<li>
+<p>From now on, I&rsquo;m gonna proceed with event code 15, because it&rsquo;s the logic event code to be used when you want to detect if the user has saved/downloaded an attachment from untrusted source, in our case an email.</p>
+</li>
+<li>
+<p>I&rsquo;m gonna use this <code>sourcetype</code> <code>XmlWinEventLog:Microsoft-Windows-Sysmon/Operational</code> as event code 15 is logged under it.
+<img src="/Effective%20Threat%20Investigations%20for%20SOC%20Analysts/1-%20Investigating%20Email%20Threats/investigation_14.png" alt="investigation_14"></p>
+</li>
+<li>
+<p>I&rsquo;m going to extract the following fields in order to be able to analyze the attachment.</p>
+<ul>
+<li>The two hashes if you wanted to check it on any online tool.</li>
+<li>The Link to attachment if you wanted to download the document and analyze it either manually, or via any online tool.</li>
+<li>The target file name and the EventCode.</li>
+</ul>
+</li>
+</ul>
+<pre tabindex="0"><code class="language-SPL" data-lang="SPL">index=main sourcetype=&#34;XmlWinEventLog&#34; &#34;&lt;EventID&gt;15&lt;/EventID&gt;&#34; earliest=1725122249 latest=1788210000
+| rex &#34;EventID&gt;(?&lt;EventCode&gt;[0-9]+)&#34;
+| rex &#34;TargetFilename&#39;&gt;(?&lt;TargetFilename&gt;[A-Za-z0-9.:\\\s*]+)&#34;
+| rex &#34;MD5=(?&lt;MD5_Hash&gt;[A-Za-z0-9]+)&#34;
+| rex &#34;SHA256=(?&lt;SHA256_Hash&gt;[A-Za-z0-9]+)&#34;
+| rex &#34;HostUrl=(?&lt;Link_to_attachment&gt;[^ ]+)&#34;
+| eval TargetFilename=replace(TargetFilename, &#34;:Zone\.Identifier$&#34;, &#34;&#34;)
+| stats values(EventCode) as EventCode, values(Link_to_attachment) as Link_to_attachment, values(MD5_Hash) as MD5_Hash, values(SHA256_Hash) as SHA256_Hash by TargetFilename
+</code></pre><p><img src="/Effective%20Threat%20Investigations%20for%20SOC%20Analysts/1-%20Investigating%20Email%20Threats/investigation_15.png" alt="investigation_15"></p>
 <hr>
 ]]></content>
         </item>

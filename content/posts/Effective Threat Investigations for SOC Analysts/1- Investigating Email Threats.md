@@ -392,7 +392,63 @@ index=main "victim@lab.local" Queue-ID
 
 - Either methods used, we should analyze them.
 
-- In case of supplying a Link, you should scan it on tools like `urlscan.io` to check if it's has a bad reputation or not.
-- The same thing in case the attacker has supplied the victim with a malicious attachment.
+### In case of Spearphishing Attachment
+
+- I'm going to utilize the following query to know the time when each email was sent to our victim.
+- Then I'm gonna analyze Event Codes generated on the victim's machine in order to know if any process related to file interaction happened in the same time the email was sent or after the email was sent by a small interval of time.
+
+```SPL
+index=main "victim@lab.local" Queue-ID
+| rex "Subject:\s*\"(?<Email_Subject>[^\"]+)\""
+| rex "Queue-ID:\s*(?<queue_id>[A-Za-z0-9]+)"
+| table _time, queue_id, Email_Subject
+```
+![investigation_11](/Effective%20Threat%20Investigations%20for%20SOC%20Analysts/1-%20Investigating%20Email%20Threats/investigation_11.png)
+
+- I'm going to know which Event Codes generated on the Victim's host.
+```SPL
+index=main host=Win-victim
+| stats count by EventCode
+| table EventCode, count
+| sort EventCode
+```
+![investigation_12](/Effective%20Threat%20Investigations%20for%20SOC%20Analysts/1-%20Investigating%20Email%20Threats/investigation_12.png)
+
+- The following are the only event codes related to a user interacting with an attachment:
+	- **EventCode 1 — Process Creation**—Logs when a user or application launches a file or script, capturing execution details like the parent process and command-line parameters.
+	- **EventCode 15 — FileCreateStreamHash**—Logs when a file is saved or downloaded from an untrusted source (like webmail or a browser), capturing the file's hash, target path, and source URL via the Windows _Mark of the Web_ stream.
+	- **EventCode 27 — FileBlockExecutable**—Logs when Sysmon detects and prevents an executable file from being dropped or written to disk.
+
+- Begin your time trimming, and begin to compare between the times the emails were sent and the time the event codes were generated.
+```SPL
+index=main host=Win-victim (EventCode=1 OR EventCode=15 OR EventCode=27) earliest=1725122249 latest=1788210000
+| stats count by EventCode
+| table count, EventCode
+| sort - count
+```
+![investigation_13](/Effective%20Threat%20Investigations%20for%20SOC%20Analysts/1-%20Investigating%20Email%20Threats/investigation_13.png)
+- Since the timeframe between the first sent email and the last email is small, therefore I stated:
+	- The earliest time for logs as the time for the first sent email.
+	- While the latest time you can make it after the last sent email with a considerable amount of time, because it's not mandatory that the victim has interacted with the attached attachment/link once he's received the email from the attacker.
+
+- From now on, I'm gonna proceed with event code 15, because it's the logic event code to be used when you want to detect if the user has saved/downloaded an attachment from untrusted source, in our case an email.
+- I'm gonna use this `sourcetype` `XmlWinEventLog:Microsoft-Windows-Sysmon/Operational` as event code 15 is logged under it.
+![investigation_14](/Effective%20Threat%20Investigations%20for%20SOC%20Analysts/1-%20Investigating%20Email%20Threats/investigation_14.png)
+
+- I'm going to extract the following fields in order to be able to analyze the attachment.
+	- The two hashes if you wanted to check it on any online tool.
+	- The Link to attachment if you wanted to download the document and analyze it either manually, or via any online tool.
+	- The target file name and the EventCode.
+```SPL
+index=main sourcetype="XmlWinEventLog" "<EventID>15</EventID>" earliest=1725122249 latest=1788210000
+| rex "EventID>(?<EventCode>[0-9]+)"
+| rex "TargetFilename'>(?<TargetFilename>[A-Za-z0-9.:\\\s*]+)"
+| rex "MD5=(?<MD5_Hash>[A-Za-z0-9]+)"
+| rex "SHA256=(?<SHA256_Hash>[A-Za-z0-9]+)"
+| rex "HostUrl=(?<Link_to_attachment>[^ ]+)"
+| eval TargetFilename=replace(TargetFilename, ":Zone\.Identifier$", "")
+| stats values(EventCode) as EventCode, values(Link_to_attachment) as Link_to_attachment, values(MD5_Hash) as MD5_Hash, values(SHA256_Hash) as SHA256_Hash by TargetFilename
+```
+![investigation_15](/Effective%20Threat%20Investigations%20for%20SOC%20Analysts/1-%20Investigating%20Email%20Threats/investigation_15.png)
 
 ---
