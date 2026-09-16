@@ -13,7 +13,7 @@ tags:
 
 # Architecture Overview
 
-- A Home Lab for Chapter 1: Investigating Email Threats.
+- A Home Lab Investigating Email Threats.
 
 ## Network Topology
 

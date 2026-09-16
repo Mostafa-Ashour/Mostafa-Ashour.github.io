@@ -17,7 +17,7 @@
             <guid>https://mostafa-ashour.github.io/posts/2026/09/1-investigating-email-threats/</guid>
             <description>&lt;h1 id=&#34;architecture-overview&#34;&gt;Architecture Overview&lt;/h1&gt;
 &lt;ul&gt;
-&lt;li&gt;A Home Lab for Chapter 1: Investigating Email Threats.&lt;/li&gt;
+&lt;li&gt;A Home Lab Investigating Email Threats.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;network-topology&#34;&gt;Network Topology&lt;/h2&gt;
 &lt;p&gt;&lt;img src=&#34;https://mostafa-ashour.github.io/Effective%20Threat%20Investigations%20for%20SOC%20Analysts/1-%20Investigating%20Email%20Threats/home_lab_topology.png&#34; alt=&#34;home_lab_topology&#34;&gt;&lt;/p&gt;
@@ -87,7 +87,7 @@
 &lt;p&gt;&lt;strong&gt;Start Service:&lt;/strong&gt;&lt;/p&gt;</description>
             <content type="html"><![CDATA[<h1 id="architecture-overview">Architecture Overview</h1>
 <ul>
-<li>A Home Lab for Chapter 1: Investigating Email Threats.</li>
+<li>A Home Lab Investigating Email Threats.</li>
 </ul>
 <h2 id="network-topology">Network Topology</h2>
 <p><img src="/Effective%20Threat%20Investigations%20for%20SOC%20Analysts/1-%20Investigating%20Email%20Threats/home_lab_topology.png" alt="home_lab_topology"></p>
