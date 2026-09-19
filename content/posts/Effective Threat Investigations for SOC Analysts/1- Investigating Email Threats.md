@@ -1,5 +1,5 @@
 ---
-title: "1  Investigating Email Threats"
+title: "1 Investigating Email Threats"
 date: 2026-09-01T19:55:00+03:00
 draft: false
 toc: false

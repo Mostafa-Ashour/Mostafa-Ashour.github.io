@@ -1,26 +1,386 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>Effective Threat Investigation for SOC Analysts on Ashour Blog</title>
-        <link>https://mostafa-ashour.github.io/posts/effective-threat-investigations-for-soc-analysts/</link>
+        <link>http://localhost:1313/posts/effective-threat-investigations-for-soc-analysts/</link>
         <description>Recent content in Effective Threat Investigation for SOC Analysts on Ashour Blog</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
         <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
         <lastBuildDate>Tue, 01 Sep 2026 00:00:00 +0000</lastBuildDate>
-        <atom:link href="https://mostafa-ashour.github.io/posts/effective-threat-investigations-for-soc-analysts/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="http://localhost:1313/posts/effective-threat-investigations-for-soc-analysts/index.xml" rel="self" type="application/rss+xml" />
         
         <item>
-            <title>1  Investigating Email Threats</title>
-            <link>https://mostafa-ashour.github.io/posts/2026/09/1-investigating-email-threats/</link>
+            <title>2 Email Header Analysis</title>
+            <link>http://localhost:1313/posts/2026/09/2-email-header-analysis/</link>
+            <pubDate>Sat, 19 Sep 2026 17:24:25 +0300</pubDate>
+            
+            <guid>http://localhost:1313/posts/2026/09/2-email-header-analysis/</guid>
+            <description>&lt;ul&gt;
+&lt;li&gt;Email Flow and Header Analysis&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;email-flow&#34;&gt;Email Flow&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;&lt;strong&gt;Email Flow&lt;/strong&gt;&lt;/em&gt; means the path/hops the email passes through when it&amp;rsquo;s sent from the Sender until it&amp;rsquo;s delivered to the Recipient.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/Effective%20Threat%20Investigations%20for%20SOC%20Analysts/2-%20Email%20Header%20Analysis/email_flow.png&#34; alt=&#34;email_flow&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;&lt;strong&gt;MUA (Mail User Agent)&lt;/strong&gt;&lt;/em&gt;—The agent used by the client to send the email. For instance, Outlook or browsers like Microsoft Edge.&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;&lt;strong&gt;MSA (Mail Submission Agent)&lt;/strong&gt;&lt;/em&gt;—the agent that will receive the mail after the client has submitted it to the MUA.&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;&lt;strong&gt;MTA (Mail Transfer Agent)&lt;/strong&gt;&lt;/em&gt;—this is the mail server that receives the mail from the sender&amp;rsquo;s MSA and passes it to one/several MTA servers until the mail is delivered to the recipient MX Server. It can also be called Relay Server.&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;&lt;strong&gt;MX (Mail Exchange)&lt;/strong&gt;&lt;/em&gt;—This is the email server responsible of receiving messages for a particular domain after it has been transferred from one MTA to another until it reaches the recipient MX Server. This type of servers is identified by MX Records in the DNS records of the specified Domain.&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;&lt;strong&gt;MDA (Mail Delivery Agent)&lt;/strong&gt;&lt;/em&gt;—this server is responsible of providing the recipient with the email sent to him after a successful authentication.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h1 id=&#34;email-authentication&#34;&gt;Email Authentication&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;&lt;strong&gt;Email Authentication&lt;/strong&gt;&lt;/em&gt; is the process of checking that the sender&amp;rsquo;s identity and domain are not spoofed before delivering the email to the recipient.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;how-does-email-authentication-works&#34;&gt;How does Email Authentication works?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;The authentication of emails rely on the domain owner, he must ensure that their domain is not spoofed or impersonated by a malicious actor.&lt;/li&gt;
+&lt;li&gt;Therefore, the process is going to be something like this:
+&lt;ul&gt;
+&lt;li&gt;the domain owner must add email authentication protocol records to it&amp;rsquo;s DNS records and rules to be followed in order to check the legitimacy of received emails.&lt;/li&gt;
+&lt;li&gt;Whenever any email server receives any email from that specific domain it tries to authenticate it using the published authentication protocols and rules&lt;/li&gt;
+&lt;li&gt;Finally, the receiving mail server determines the legitimacy of the received email and whether to deliver it to the recipient or to drop it.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;email-authentication-protocols&#34;&gt;Email Authentication Protocols&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;We&amp;rsquo;ve three Email Authentication Protocols:
+&lt;ul&gt;
+&lt;li&gt;SPF.&lt;/li&gt;
+&lt;li&gt;DKIM.&lt;/li&gt;
+&lt;li&gt;DMARC.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;spf-sender-policy-framework&#34;&gt;SPF (Sender Policy Framework)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;This email authentication protocol provides a DNS TXT Record in the specified Domain&amp;rsquo;s DNS Record that specifies which IP Addresses or Hostnames are allowed/authorized to send emails for and on behalf of this domain.&lt;/p&gt;</description>
+            <content type="html"><![CDATA[<ul>
+<li>Email Flow and Header Analysis</li>
+</ul>
+<h1 id="email-flow">Email Flow</h1>
+<ul>
+<li><em><strong>Email Flow</strong></em> means the path/hops the email passes through when it&rsquo;s sent from the Sender until it&rsquo;s delivered to the Recipient.</li>
+</ul>
+<p><img src="/Effective%20Threat%20Investigations%20for%20SOC%20Analysts/2-%20Email%20Header%20Analysis/email_flow.png" alt="email_flow"></p>
+<ul>
+<li><em><strong>MUA (Mail User Agent)</strong></em>—The agent used by the client to send the email. For instance, Outlook or browsers like Microsoft Edge.</li>
+<li><em><strong>MSA (Mail Submission Agent)</strong></em>—the agent that will receive the mail after the client has submitted it to the MUA.</li>
+<li><em><strong>MTA (Mail Transfer Agent)</strong></em>—this is the mail server that receives the mail from the sender&rsquo;s MSA and passes it to one/several MTA servers until the mail is delivered to the recipient MX Server. It can also be called Relay Server.</li>
+<li><em><strong>MX (Mail Exchange)</strong></em>—This is the email server responsible of receiving messages for a particular domain after it has been transferred from one MTA to another until it reaches the recipient MX Server. This type of servers is identified by MX Records in the DNS records of the specified Domain.</li>
+<li><em><strong>MDA (Mail Delivery Agent)</strong></em>—this server is responsible of providing the recipient with the email sent to him after a successful authentication.</li>
+</ul>
+<hr>
+<h1 id="email-authentication">Email Authentication</h1>
+<ul>
+<li><em><strong>Email Authentication</strong></em> is the process of checking that the sender&rsquo;s identity and domain are not spoofed before delivering the email to the recipient.</li>
+</ul>
+<h3 id="how-does-email-authentication-works">How does Email Authentication works?</h3>
+<ul>
+<li>The authentication of emails rely on the domain owner, he must ensure that their domain is not spoofed or impersonated by a malicious actor.</li>
+<li>Therefore, the process is going to be something like this:
+<ul>
+<li>the domain owner must add email authentication protocol records to it&rsquo;s DNS records and rules to be followed in order to check the legitimacy of received emails.</li>
+<li>Whenever any email server receives any email from that specific domain it tries to authenticate it using the published authentication protocols and rules</li>
+<li>Finally, the receiving mail server determines the legitimacy of the received email and whether to deliver it to the recipient or to drop it.</li>
+</ul>
+</li>
+</ul>
+<h2 id="email-authentication-protocols">Email Authentication Protocols</h2>
+<ul>
+<li>We&rsquo;ve three Email Authentication Protocols:
+<ul>
+<li>SPF.</li>
+<li>DKIM.</li>
+<li>DMARC.</li>
+</ul>
+</li>
+</ul>
+<h3 id="spf-sender-policy-framework">SPF (Sender Policy Framework)</h3>
+<ul>
+<li>
+<p>This email authentication protocol provides a DNS TXT Record in the specified Domain&rsquo;s DNS Record that specifies which IP Addresses or Hostnames are allowed/authorized to send emails for and on behalf of this domain.</p>
+</li>
+<li>
+<p>According to this authentication protocol, it allows the receiving email server to:</p>
+<ul>
+<li>Retrieve the sender domain&rsquo;s SPF record in it&rsquo;s DNS Records which contains authorized IP Address or Hostname.</li>
+<li>Look up the IP Address or Hostname sent with the email message.</li>
+<li>Cross-reference both results.</li>
+<li>If they match, the receiving email server passes the received email, if not, it will block it.</li>
+</ul>
+</li>
+</ul>
+<p><img src="/Effective%20Threat%20Investigations%20for%20SOC%20Analysts/2-%20Email%20Header%20Analysis/SPF_authentication_protocol.png" alt="SPF_authentication_protocol"></p>
+<h3 id="spf-record-example">SPF Record Example</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>v=spf1 ip4:192.0.2.0/24 include:_spf.google.com -all
+</span></span></code></pre></div><ul>
+<li><code>v=spf1</code>—specifies the version of the SPF Protocol used.</li>
+<li><code>ip4:192.0.2.0/24</code>—Specifies that this IPv4 range is authorized to send emails for the specified domain.</li>
+<li><code>include:_spf.google.com</code>—Authorizes Google’s mail servers to send emails on behalf of the domain.</li>
+<li><code>-all</code>—this indicates a &ldquo;Hard Fail&rdquo; which means that if the email sender IP Address or Hostname doesn&rsquo;t match the domain&rsquo;s SPF records, the email will be rejected.</li>
+</ul>
+<h3 id="spf-example-from-an-email-header">SPF example from an email header</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>Received-SPF: pass (google.com: domain of sender@example.com designates 192.0.2.1 as permitted sender) client-ip=192.0.2.1;
+</span></span></code></pre></div><ul>
+<li>This is an example of SPF Protocol existing in the received email header.</li>
+<li>As you notice, that the IP Address <code>192.0.2.1</code> is specified in the SPF records of the email sender domain to be authorized to send emails on behalf of the email sender domain.</li>
+</ul>
+<h2 id="dkim-domainkeys-identified-email">DKIM (DomainKeys Identified Email)</h2>
+<ul>
+<li><em><strong>DKIM</strong></em> is an Encryption Methodology or Digital Signature.</li>
+<li>It&rsquo;s added to email header as email authentication to prevent spoofing.</li>
+</ul>
+<h3 id="dkim-algorithm">DKIM Algorithm</h3>
+<ol>
+<li>Hash the Email Message Body.</li>
+<li>Encrypts the hashed email message body., alongside with a list of email header parameters using the private key.</li>
+<li>The public key is published in the DNS records of the signer&rsquo;s domain.</li>
+<li>For the recipient email server, it&rsquo;ll retrieve the public key from the domain&rsquo;s DNS records and verify whether the signature is valid or not.</li>
+</ol>
+<ul>
+<li>DKIM Authentication Process
+<img src="/Effective%20Threat%20Investigations%20for%20SOC%20Analysts/2-%20Email%20Header%20Analysis/dkim_authentication_process.png" alt="dkim_authentication_process"></li>
+</ul>
+<h3 id="dkim-signature-example-from-email-header">DKIM Signature Example from Email Header</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>DKIM-Signature: v=1; a=rsa-sha256; d=example.com; s=selector1;
+</span></span><span style="display:flex;"><span>  c=relaxed/simple;q=dns/txt; i=@example.com; t=1255993973;
+</span></span><span style="display:flex;"><span>  h=From:Sender:Reply-To:Subject:Date:Message-Id:To:Cc:
+</span></span><span style="display:flex;"><span>  MIME-Version:Content-Type:Content-Transfer-Encoding:Content-ID:
+</span></span><span style="display:flex;"><span>  Content-Description:Resent-Date:Resent-From:Resent-Sender:
+</span></span><span style="display:flex;"><span>  Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
+</span></span><span style="display:flex;"><span>  List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:
+</span></span><span style="display:flex;"><span>  List-Archive; bh=+7qxGePcmmrtZAIVQAtkSSGHfQ/ftNuvUTWJ3vXC9Zc=;
+</span></span><span style="display:flex;"><span>  b=dB85+qM+If1KGQmqMLNpqLgNtUaG5dhGjYjQD6/QXtXmViJx8tf9gLEjcHr+musL
+</span></span><span style="display:flex;"><span>  CAvr0Fsn1DA3ZLLlUxpf4ARCRftffOIp55Mj5EtDMm8v1UkcuftmgY9vcvpoPLDz
+</span></span><span style="display:flex;"><span>  yV/7EG/Gnmat6N7qrlC5Ip5sQqSaaaDwenkvOGGuDqs=;
+</span></span></code></pre></div><ul>
+<li><em><strong>v=1</strong></em>—Version, which is always 1.</li>
+<li><em><strong>a=rsa-sha256</strong></em>—This value refers to the algorithm that&rsquo;s used for both encryption and hashing to generate the digital signature.</li>
+<li><em><strong>d=example.com</strong></em>—This is the domain that is claiming to be authorized to send the email. This is where the receiving mail servers will fetch the public key to check the signature validity from.</li>
+<li><em><strong>s=selector1</strong></em>—This defines which value is used in the DNS lookup to determine which public key was used to sign the message. In this case public key would be stored in <code>selector1._domainkey.dkim-test1.com</code>.</li>
+<li><em><strong>c=relaxed/simple</strong></em>—this field refers to the canonicalization algorithm that determines how the body and the header are prepared for either the hashing/encryption algorithm. The first part is for the header and the second is for the body. <code>relaxed</code> means that certain modifications can be made to the email while preserving the essential content of the message. <code>simple</code> this canonicalization algorithm removes trailing spaces white spaces from email header fields and doesn&rsquo;t modify the message body before hashing.</li>
+<li><em><strong>t=1255993973</strong></em>—The epoch timestamp marking when the message was signed.</li>
+<li><em><strong>h</strong></em>—the value of this field is a colon-separated list of email headers included in the signature.</li>
+<li><em><strong>bh</strong></em>—This is the base64 encoded hash of the message body after it has been canonicalized via the method in <code>c</code> and then run through the hash function in <code>a</code>.</li>
+<li><em><strong>b</strong></em>—Finally, this is the DKIM signature itself. Everything else up to this point has been meta information on how this value was calculated.</li>
+</ul>
+<h2 id="dmarc-domain-based-message-authentication-reporting-and-conformance">DMARC (Domain-Based Message Authentication, Reporting, and Conformance)</h2>
+<ul>
+<li>It&rsquo;s an Email Authentication, Policy, and Reporting protocol, which depends on the SPF and DKIM authentication protocols results.</li>
+<li>If one of them or both of them fail, DMARC will do two things:
+<ul>
+<li>Apply predefined policies by the Sender Domain Owner.</li>
+<li>Reports the violation to the Sender Domain Owner.</li>
+</ul>
+</li>
+<li>DMARC policies are published in the Sender Domain&rsquo;s DNS records as TXT record.</li>
+</ul>
+<p><img src="/Effective%20Threat%20Investigations%20for%20SOC%20Analysts/2-%20Email%20Header%20Analysis/dmarc_policy.png" alt="dmarc_policy"></p>
+<h3 id="dmarc-example">DMARC Example</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>&#34;v=DMARC1;p=reject;pct=100;rua=mailto:mailmaster@example.com&#34;
+</span></span></code></pre></div><ul>
+<li><em><strong><code>v</code></strong></em>—this field holds the version of the DMARC the domain uses.</li>
+<li><em><strong><code>p</code></strong></em>—this field&rsquo;s value tells the email recipient server which policy to apply in case that email fails authentication.</li>
+<li><em><strong><code>pct</code></strong></em>—the value of emails subjected to the policy. In our case, 100% of emails will be rejected if it fails authentication.</li>
+<li><em><strong><code>rua</code></strong></em>—specifies the URI of the mailbox that will receive DMARC reports.</li>
+</ul>
+<h3 id="authentication-results-of-an-email">Authentication Results of an Email</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>Authentication-Results: mx.google.com;
+</span></span><span style="display:flex;"><span>       dkim=pass header.i=@valimail.com header.s=google2048 header.b=Z8L6tjHb;
+</span></span><span style="display:flex;"><span>       spf=pass (google.com: domain of [redacted]@valimail.com designates 209.85.220.41 as permitted sender) smtp.mailfrom=[redacted]@valimail.com;
+</span></span><span style="display:flex;"><span>       dmarc=pass (p=REJECT sp=REJECT dis=NONE) header.from=valimail.com
+</span></span></code></pre></div><hr>
+<h1 id="email-authentication-analysis">Email Authentication Analysis</h1>
+<h3 id="in-case-of-success">In case of Success</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>Authentication-Results: mx.google.com;
+</span></span><span style="display:flex;"><span>       spf=pass (google.com: domain of sender@example.com designates
+</span></span><span style="display:flex;"><span>192.0.2.1 as permitted sender) smtp.mailfrom=sender@example.com;
+</span></span><span style="display:flex;"><span>       dkim=pass header.i=@example.com header.s=selector1 header.b=Gw+yUxcC;
+</span></span><span style="display:flex;"><span>       dmarc=pass (p=NONE) header.from=example.com
+</span></span></code></pre></div><h3 id="in-case-of-failure">In case of Failure</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>Authentication-Results: mx.google.com;
+</span></span><span style="display:flex;"><span>       spf=fail (google.com: domain of sender@example.com does not designate
+</span></span><span style="display:flex;"><span>192.0.2.1 as permitted sender) smtp.mailfrom=sender@example.com;
+</span></span><span style="display:flex;"><span>       dkim=fail (signature did not verify) header.i=@example.com header.s=selector1 header.b=Gw+yUxcC;
+</span></span><span style="display:flex;"><span>       dmarc=fail (p=QUARANTINE) header.from=example.com
+</span></span></code></pre></div><hr>
+<h1 id="email-header-analysis-example">Email Header Analysis Example</h1>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>Delivered-To: &lt;REDACTED-RECIPIENT&gt;@gmail.com
+</span></span><span style="display:flex;"><span>Received: by 2002:a17:907:985b:b0:c29:4c8d:3190 with SMTP id &lt;REDACTED-ID&gt;;
+</span></span><span style="display:flex;"><span>        Tue, 15 Sep 2026 03:10:10 -0700 (PDT)
+</span></span><span style="display:flex;"><span>X-Received: by 2002:a05:690e:130d:b0:671:4af3:8de with SMTP id &lt;REDACTED-ID&gt;;
+</span></span><span style="display:flex;"><span>        Tue, 15 Sep 2026 03:10:10 -0700 (PDT)
+</span></span><span style="display:flex;"><span>ARC-Seal: i=1; a=rsa-sha256; t=1789467010; cv=none;
+</span></span><span style="display:flex;"><span>        d=google.com; s=arc-20260327;
+</span></span><span style="display:flex;"><span>        b=WFr9PmMvkE0KyuMN3AoLDS5dDdSucVsgpE...[truncated]
+</span></span><span style="display:flex;"><span>ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+</span></span><span style="display:flex;"><span>        h=to:from:subject:message-id:gmsai:date:mime-version:dkim-signature;
+</span></span><span style="display:flex;"><span>        bh=6+T61JzDwDj/Z+Ic5GCUMwq0JXe4JGL73herfFAVy+o=;
+</span></span><span style="display:flex;"><span>        fh=Hlz6O2ltZMIp395qayYjj6VRNrpMD5nex6cPGW/qsa0=;
+</span></span><span style="display:flex;"><span>        b=Lrv8Ri+2OOAtXhkpNLJ/2uzLoPjPXyS+506H...[truncated];
+</span></span><span style="display:flex;"><span>        dara=google.com
+</span></span><span style="display:flex;"><span>ARC-Authentication-Results: i=1; mx.google.com;
+</span></span><span style="display:flex;"><span>       dkim=pass header.i=@google.com header.s=20251104 header.b=uJtm9Hhi;
+</span></span><span style="display:flex;"><span>       spf=pass (google.com: domain of &lt;REDACTED-VERP-ADDRESS&gt;@chime-notifications.bounces.google.com designates 209.85.220.69 as permitted sender) smtp.mailfrom=&lt;REDACTED-VERP-ADDRESS&gt;@chime-notifications.bounces.google.com;
+</span></span><span style="display:flex;"><span>       dmarc=pass (p=REJECT sp=REJECT dis=NONE) header.from=google.com;
+</span></span><span style="display:flex;"><span>Return-Path: &lt;&lt;REDACTED-VERP-ADDRESS&gt;@chime-notifications.bounces.google.com&gt;
+</span></span><span style="display:flex;"><span>Received: from mail-sor-f69.google.com (mail-sor-f69.google.com. [209.85.220.69])
+</span></span><span style="display:flex;"><span>        by mx.google.com with SMTPS id &lt;REDACTED-ID&gt;
+</span></span><span style="display:flex;"><span>        for &lt;&lt;REDACTED-RECIPIENT&gt;@gmail.com&gt;
+</span></span><span style="display:flex;"><span>        (Google Transport Security);
+</span></span><span style="display:flex;"><span>        Tue, 15 Sep 2026 03:10:10 -0700 (PDT)
+</span></span><span style="display:flex;"><span>Received-SPF: pass (google.com: domain of &lt;REDACTED-VERP-ADDRESS&gt;@chime-notifications.bounces.google.com designates 209.85.220.69 as permitted sender) client-ip=209.85.220.69;
+</span></span><span style="display:flex;"><span>Authentication-Results: mx.google.com;
+</span></span><span style="display:flex;"><span>       dkim=pass header.i=@google.com header.s=20251104 header.b=uJtm9Hhi;
+</span></span><span style="display:flex;"><span>       spf=pass (google.com: domain of &lt;REDACTED-VERP-ADDRESS&gt;@chime-notifications.bounces.google.com designates 209.85.220.69 as permitted sender) smtp.mailfrom=&lt;REDACTED-VERP-ADDRESS&gt;@chime-notifications.bounces.google.com;
+</span></span><span style="display:flex;"><span>       dmarc=pass (p=REJECT sp=REJECT dis=NONE) header.from=google.com;
+</span></span><span style="display:flex;"><span>DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+</span></span><span style="display:flex;"><span>        d=google.com; s=20251104; t=1789467010; x=1790071810; dara=google.com;
+</span></span><span style="display:flex;"><span>        h=content-type:to:from:subject:message-id:gmsai:date:mime-version
+</span></span><span style="display:flex;"><span>         :from:to:cc:subject:date:message-id:reply-to:content-type;
+</span></span><span style="display:flex;"><span>        bh=6+T61JzDwDj/Z+Ic5GCUMwq0JXe4JGL73herfFAVy+o=;
+</span></span><span style="display:flex;"><span>        b=uJtm9Hhi5DNbItz96W4CMtA+bgiJj5BDJs...[truncated]
+</span></span><span style="display:flex;"><span>X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+</span></span><span style="display:flex;"><span>        d=1e100.net; s=20260707; t=1789467010; x=1790071810;
+</span></span><span style="display:flex;"><span>        h=content-type:to:from:subject:message-id:gmsai:date:mime-version
+</span></span><span style="display:flex;"><span>         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+</span></span><span style="display:flex;"><span>         :content-type;
+</span></span><span style="display:flex;"><span>        bh=6+T61JzDwDj/Z+Ic5GCUMwq0JXe4JGL73herfFAVy+o=;
+</span></span><span style="display:flex;"><span>        b=ricQwXLGyaha2iC58JrEM9ofd7L1oAz5vA...[truncated]
+</span></span><span style="display:flex;"><span>X-Gm-Message-State: &lt;REDACTED-TOKEN&gt;
+</span></span><span style="display:flex;"><span>MIME-Version: 1.0
+</span></span><span style="display:flex;"><span>X-Received: by 2002:a05:690e:13c9:b0:671:3f16:cd3 with SMTP id &lt;REDACTED-ID&gt;;
+</span></span><span style="display:flex;"><span>        Tue, 15 Sep 2026 03:10:10 -0700 (PDT)
+</span></span><span style="display:flex;"><span>Date: Tue, 15 Sep 2026 03:10:10 -0700
+</span></span><span style="display:flex;"><span>gmsai: true
+</span></span><span style="display:flex;"><span>X-Google-Notification-Metadata: &lt;REDACTED-TOKEN&gt;
+</span></span><span style="display:flex;"><span>X-Notifications: &lt;REDACTED-TOKEN&gt;
+</span></span><span style="display:flex;"><span>X-Notifications-Bounce-Info: &lt;REDACTED-TOKEN&gt;
+</span></span><span style="display:flex;"><span>Message-ID: &lt;REDACTED-MESSAGE-ID&gt;@notifications.google.com
+</span></span><span style="display:flex;"><span>Subject: Get started with Google services for families by inviting family members
+</span></span><span style="display:flex;"><span>From: Google &lt;families-noreply@google.com&gt;
+</span></span><span style="display:flex;"><span>To: &lt;REDACTED-RECIPIENT&gt;@gmail.com
+</span></span><span style="display:flex;"><span>Content-Type: multipart/alternative; boundary=&#34;0000000000007ae7f0065b82c1e3&#34;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>--0000000000007ae7f0065b82c1e3
+</span></span><span style="display:flex;"><span>Content-Type: text/plain; charset=&#34;UTF-8&#34;
+</span></span><span style="display:flex;"><span>Content-Transfer-Encoding: 7bit
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Hi Mostafa,
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>This is a sample message used for email header analysis.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Regards,
+</span></span><span style="display:flex;"><span>Sample Sender
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>--0000000000007ae7f0065b82c1e3
+</span></span><span style="display:flex;"><span>Content-Type: text/html; charset=&#34;UTF-8&#34;
+</span></span><span style="display:flex;"><span>Content-Transfer-Encoding: 7bit
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&lt;html&gt;
+</span></span><span style="display:flex;"><span>&lt;body&gt;
+</span></span><span style="display:flex;"><span>&lt;p&gt;Hi Mostafa,&lt;/p&gt;
+</span></span><span style="display:flex;"><span>&lt;p&gt;This is a sample message used for email header analysis.&lt;/p&gt;
+</span></span><span style="display:flex;"><span>&lt;p&gt;Regards,&lt;br&gt;Sample Sender&lt;/p&gt;
+</span></span><span style="display:flex;"><span>&lt;/body&gt;
+</span></span><span style="display:flex;"><span>&lt;/html&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>--0000000000007ae7f0065b82c1e3--
+</span></span></code></pre></div><h3 id="first-part">First Part</h3>
+<ul>
+<li>Email Headers are read from Bottom to Top.</li>
+<li>Firstly, you&rsquo;ll find:
+<ul>
+<li>Email Content.</li>
+<li>Content-Type, To, From, and Subject fields.</li>
+</ul>
+</li>
+<li>Which is the first part of the email headers where the sender normally inputs through his Mail User Agent, for instant, Outlook.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>Message-ID: &lt;REDACTED-MESSAGE-ID&gt;@notifications.google.com
+</span></span><span style="display:flex;"><span>Subject: Get started with Google services for families by inviting family members
+</span></span><span style="display:flex;"><span>From: Google &lt;families-noreply@google.com&gt;
+</span></span><span style="display:flex;"><span>To: &lt;REDACTED-RECIPIENT&gt;@gmail.com
+</span></span><span style="display:flex;"><span>Content-Type: multipart/alternative; boundary=&#34;0000000000007ae7f0065b82c1e3&#34;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>--0000000000007ae7f0065b82c1e3
+</span></span><span style="display:flex;"><span>Content-Type: text/plain; charset=&#34;UTF-8&#34;
+</span></span><span style="display:flex;"><span>Content-Transfer-Encoding: 7bit
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Hi Mostafa,
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>This is a sample message used for email header analysis.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Regards,
+</span></span><span style="display:flex;"><span>Sample Sender
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>--0000000000007ae7f0065b82c1e3
+</span></span><span style="display:flex;"><span>Content-Type: text/html; charset=&#34;UTF-8&#34;
+</span></span><span style="display:flex;"><span>Content-Transfer-Encoding: 7bit
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&lt;html&gt;
+</span></span><span style="display:flex;"><span>&lt;body&gt;
+</span></span><span style="display:flex;"><span>&lt;p&gt;Hi Mostafa,&lt;/p&gt;
+</span></span><span style="display:flex;"><span>&lt;p&gt;This is a sample message used for email header analysis.&lt;/p&gt;
+</span></span><span style="display:flex;"><span>&lt;p&gt;Regards,&lt;br&gt;Sample Sender&lt;/p&gt;
+</span></span><span style="display:flex;"><span>&lt;/body&gt;
+</span></span><span style="display:flex;"><span>&lt;/html&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>--0000000000007ae7f0065b82c1e3--
+</span></span></code></pre></div><h3 id="second-part">Second Part</h3>
+<ul>
+<li>
+<p><strong>X-headers are custom, non-standard email headers.</strong></p>
+</li>
+<li>
+<p>Mail servers, spam filters, and email clients add them to record extra information that the official email standards don&rsquo;t define.</p>
+</li>
+<li>
+<p>Take <code>X-Received</code> for example, <code>X-Received</code> is a Google-specific header that logs an internal hop inside Google&rsquo;s own systems.</p>
+</li>
+<li>
+<p>In our example:</p>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>X-Received: by 2002:a05:690e:130d:b0:671:4af3:8de with SMTP id ...;
+</span></span><span style="display:flex;"><span>        Tue, 15 Sep 2026 03:10:10 -0700 (PDT)
+</span></span></code></pre></div><ul>
+<li><strong><code>by 2002:a05:...</code></strong>—This is the internal Google system that received the message. It looks like an IPv6 address, but it is an internal identifier, not a real public IP, so it doesn&rsquo;t help with tracing the sender.</li>
+<li><strong>The trailing ID</strong>—This is an internal identifier for that step.</li>
+<li><strong>The timestamp</strong>—This shows when that internal handoff happened.</li>
+</ul>
+<h3 id="third-part">Third Part</h3>
+<ul>
+<li>You&rsquo;ll find the Authentication Results which upon it will result the action taken on that email.</li>
+<li>In our case, our email passed authentication protocols specified by google.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>Authentication-Results: mx.google.com;
+</span></span><span style="display:flex;"><span>       dkim=pass header.i=@google.com header.s=20251104 header.b=uJtm9Hhi;
+</span></span><span style="display:flex;"><span>       spf=pass (google.com: domain of &lt;REDACTED-VERP-ADDRESS&gt;@chime-notifications.bounces.google.com designates 209.85.220.69 as permitted sender) smtp.mailfrom=&lt;REDACTED-VERP-ADDRESS&gt;@chime-notifications.bounces.google.com;
+</span></span><span style="display:flex;"><span>       dmarc=pass (p=REJECT sp=REJECT dis=NONE) header.from=google.com;
+</span></span><span style="display:flex;"><span>DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+</span></span></code></pre></div><hr>
+]]></content>
+        </item>
+        
+        <item>
+            <title>1 Investigating Email Threats</title>
+            <link>http://localhost:1313/posts/2026/09/1-investigating-email-threats/</link>
             <pubDate>Tue, 01 Sep 2026 19:55:00 +0300</pubDate>
             
-            <guid>https://mostafa-ashour.github.io/posts/2026/09/1-investigating-email-threats/</guid>
+            <guid>http://localhost:1313/posts/2026/09/1-investigating-email-threats/</guid>
             <description>&lt;h1 id=&#34;architecture-overview&#34;&gt;Architecture Overview&lt;/h1&gt;
 &lt;ul&gt;
 &lt;li&gt;A Home Lab Investigating Email Threats.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;network-topology&#34;&gt;Network Topology&lt;/h2&gt;
-&lt;p&gt;&lt;img src=&#34;https://mostafa-ashour.github.io/Effective%20Threat%20Investigations%20for%20SOC%20Analysts/1-%20Investigating%20Email%20Threats/home_lab_topology.png&#34; alt=&#34;home_lab_topology&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/Effective%20Threat%20Investigations%20for%20SOC%20Analysts/1-%20Investigating%20Email%20Threats/home_lab_topology.png&#34; alt=&#34;home_lab_topology&#34;&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;All components reside on an isolated internal network (&lt;code&gt;192.168.150.0/24&lt;/code&gt;) to ensure complete lab safety while maintaining realistic cross-tier communications:
 &lt;ul&gt;

@@ -2,144 +2,150 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://mostafa-ashour.github.io/posts/2026/09/1-investigating-email-threats/</loc>
-    <lastmod>2026-09-01T19:55:00+03:00</lastmod>
+    <loc>http://localhost:1313/posts/2026/09/2.-email-header-analysis/</loc>
+    <lastmod>2026-09-19T17:24:25+03:00</lastmod>
   </url><url>
-    <loc>https://mostafa-ashour.github.io/</loc>
-    <lastmod>2026-09-01T19:55:00+03:00</lastmod>
+    <loc>http://localhost:1313/</loc>
+    <lastmod>2026-09-19T17:24:25+03:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="fr"
-                href="https://mostafa-ashour.github.io/fr/"
+                href="http://localhost:1313/fr/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en-us"
-                href="https://mostafa-ashour.github.io/"
+                href="http://localhost:1313/"
                 />
   </url><url>
-    <loc>https://mostafa-ashour.github.io/tags/email-spoofing/</loc>
-    <lastmod>2026-09-01T19:55:00+03:00</lastmod>
+    <loc>http://localhost:1313/tags/email-headers/</loc>
+    <lastmod>2026-09-19T17:24:25+03:00</lastmod>
   </url><url>
-    <loc>https://mostafa-ashour.github.io/tags/email-threat-vectors/</loc>
-    <lastmod>2026-09-01T19:55:00+03:00</lastmod>
+    <loc>http://localhost:1313/posts/</loc>
+    <lastmod>2026-09-19T17:24:25+03:00</lastmod>
   </url><url>
-    <loc>https://mostafa-ashour.github.io/tags/email-threats/</loc>
-    <lastmod>2026-09-01T19:55:00+03:00</lastmod>
-  </url><url>
-    <loc>https://mostafa-ashour.github.io/tags/phishing/</loc>
-    <lastmod>2026-09-01T19:55:00+03:00</lastmod>
-  </url><url>
-    <loc>https://mostafa-ashour.github.io/posts/</loc>
-    <lastmod>2026-09-01T19:55:00+03:00</lastmod>
-  </url><url>
-    <loc>https://mostafa-ashour.github.io/tags/</loc>
-    <lastmod>2026-09-01T19:55:00+03:00</lastmod>
+    <loc>http://localhost:1313/tags/</loc>
+    <lastmod>2026-09-19T17:24:25+03:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="fr"
-                href="https://mostafa-ashour.github.io/fr/tags/"
+                href="http://localhost:1313/fr/tags/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en-us"
-                href="https://mostafa-ashour.github.io/tags/"
+                href="http://localhost:1313/tags/"
                 />
   </url><url>
-    <loc>https://mostafa-ashour.github.io/posts/effective-threat-investigations-for-soc-analysts/</loc>
+    <loc>http://localhost:1313/posts/2026/09/1-investigating-email-threats/</loc>
+    <lastmod>2026-09-01T19:55:00+03:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/tags/email-spoofing/</loc>
+    <lastmod>2026-09-01T19:55:00+03:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/tags/email-threat-vectors/</loc>
+    <lastmod>2026-09-01T19:55:00+03:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/tags/email-threats/</loc>
+    <lastmod>2026-09-01T19:55:00+03:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/tags/phishing/</loc>
+    <lastmod>2026-09-01T19:55:00+03:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/posts/effective-threat-investigations-for-soc-analysts/</loc>
     <lastmod>2026-09-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://mostafa-ashour.github.io/posts/2026/04/powershell/</loc>
+    <loc>http://localhost:1313/posts/2026/04/powershell/</loc>
     <lastmod>2026-04-26T19:29:11+03:00</lastmod>
   </url><url>
-    <loc>https://mostafa-ashour.github.io/tags/powershell/</loc>
+    <loc>http://localhost:1313/tags/powershell/</loc>
     <lastmod>2026-04-26T19:29:11+03:00</lastmod>
   </url><url>
-    <loc>https://mostafa-ashour.github.io/tags/windows/</loc>
+    <loc>http://localhost:1313/tags/windows/</loc>
     <lastmod>2026-04-26T19:29:11+03:00</lastmod>
   </url><url>
-    <loc>https://mostafa-ashour.github.io/posts/2026/04/cmd/</loc>
+    <loc>http://localhost:1313/posts/2026/04/cmd/</loc>
     <lastmod>2026-04-26T19:28:58+03:00</lastmod>
   </url><url>
-    <loc>https://mostafa-ashour.github.io/tags/cmd/</loc>
+    <loc>http://localhost:1313/tags/cmd/</loc>
     <lastmod>2026-04-26T19:28:58+03:00</lastmod>
   </url><url>
-    <loc>https://mostafa-ashour.github.io/posts/active_directory/intro_to_windows_command_line/</loc>
+    <loc>http://localhost:1313/posts/active_directory/intro_to_windows_command_line/</loc>
     <lastmod>2026-04-26T19:27:57+03:00</lastmod>
   </url><url>
-    <loc>https://mostafa-ashour.github.io/posts/active_directory/</loc>
+    <loc>http://localhost:1313/posts/active_directory/</loc>
     <lastmod>2026-04-26T19:20:24+03:00</lastmod>
   </url><url>
-    <loc>https://mostafa-ashour.github.io/tags/windows-cmd/powershell/</loc>
+    <loc>http://localhost:1313/tags/windows-cmd/powershell/</loc>
     <lastmod>2026-04-26T19:20:24+03:00</lastmod>
   </url><url>
-    <loc>https://mostafa-ashour.github.io/posts/2026/04/detecting-network-abnormalities/</loc>
+    <loc>http://localhost:1313/posts/2026/04/detecting-network-abnormalities/</loc>
     <lastmod>2026-04-24T01:51:12+03:00</lastmod>
   </url><url>
-    <loc>https://mostafa-ashour.github.io/posts/2026/04/link-layer-attacks/</loc>
+    <loc>http://localhost:1313/posts/2026/04/link-layer-attacks/</loc>
     <lastmod>2026-04-24T01:51:12+03:00</lastmod>
   </url><url>
-    <loc>https://mostafa-ashour.github.io/posts/network-traffic-analysis/</loc>
+    <loc>http://localhost:1313/posts/network-traffic-analysis/</loc>
     <lastmod>2026-04-24T01:51:12+03:00</lastmod>
   </url><url>
-    <loc>https://mostafa-ashour.github.io/tags/untagged/</loc>
+    <loc>http://localhost:1313/tags/untagged/</loc>
     <lastmod>2026-04-17T14:34:26+02:00</lastmod>
   </url><url>
-    <loc>https://mostafa-ashour.github.io/posts/2026/04/zeek/</loc>
+    <loc>http://localhost:1313/posts/2026/04/zeek/</loc>
     <lastmod>2026-04-17T14:34:26+02:00</lastmod>
   </url><url>
-    <loc>https://mostafa-ashour.github.io/posts/2026/04/suricata/</loc>
+    <loc>http://localhost:1313/posts/2026/04/suricata/</loc>
     <lastmod>2026-04-17T14:34:19+02:00</lastmod>
   </url><url>
-    <loc>https://mostafa-ashour.github.io/posts/2026/04/snort/</loc>
+    <loc>http://localhost:1313/posts/2026/04/snort/</loc>
     <lastmod>2026-04-17T14:34:05+02:00</lastmod>
   </url><url>
-    <loc>https://mostafa-ashour.github.io/tags/cybersecurity/</loc>
+    <loc>http://localhost:1313/tags/cybersecurity/</loc>
     <lastmod>2026-04-17T14:33:33+02:00</lastmod>
   </url><url>
-    <loc>https://mostafa-ashour.github.io/tags/ids/</loc>
+    <loc>http://localhost:1313/tags/ids/</loc>
     <lastmod>2026-04-17T14:33:33+02:00</lastmod>
   </url><url>
-    <loc>https://mostafa-ashour.github.io/tags/ips/</loc>
+    <loc>http://localhost:1313/tags/ips/</loc>
     <lastmod>2026-04-17T14:33:33+02:00</lastmod>
   </url><url>
-    <loc>https://mostafa-ashour.github.io/tags/networking/</loc>
+    <loc>http://localhost:1313/tags/networking/</loc>
     <lastmod>2026-04-17T14:33:33+02:00</lastmod>
   </url><url>
-    <loc>https://mostafa-ashour.github.io/tags/soc/</loc>
+    <loc>http://localhost:1313/tags/soc/</loc>
     <lastmod>2026-04-17T14:33:33+02:00</lastmod>
   </url><url>
-    <loc>https://mostafa-ashour.github.io/tags/traffic-analysis/</loc>
+    <loc>http://localhost:1313/tags/traffic-analysis/</loc>
     <lastmod>2026-04-17T14:33:33+02:00</lastmod>
   </url><url>
-    <loc>https://mostafa-ashour.github.io/posts/working-with-ids-ips/</loc>
+    <loc>http://localhost:1313/posts/working-with-ids-ips/</loc>
     <lastmod>2026-04-17T14:33:33+02:00</lastmod>
   </url><url>
-    <loc>https://mostafa-ashour.github.io/about/</loc>
+    <loc>http://localhost:1313/about/</loc>
     <lastmod>2026-04-17T13:57:08+02:00</lastmod>
   </url><url>
-    <loc>https://mostafa-ashour.github.io/categories/</loc>
+    <loc>http://localhost:1313/categories/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="fr"
-                href="https://mostafa-ashour.github.io/fr/categories/"
+                href="http://localhost:1313/fr/categories/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en-us"
-                href="https://mostafa-ashour.github.io/categories/"
+                href="http://localhost:1313/categories/"
                 />
   </url><url>
-    <loc>https://mostafa-ashour.github.io/series/</loc>
+    <loc>http://localhost:1313/series/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="fr"
-                href="https://mostafa-ashour.github.io/fr/series/"
+                href="http://localhost:1313/fr/series/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en-us"
-                href="https://mostafa-ashour.github.io/series/"
+                href="http://localhost:1313/series/"
                 />
   </url>
 </urlset>

@@ -2,116 +2,123 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Ashour Blog</title>
-    <link>https://mostafa-ashour.github.io/tags/</link>
+    <link>http://localhost:1313/tags/</link>
     <description>Recent content in Tags on Ashour Blog</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-    <lastBuildDate>Tue, 01 Sep 2026 19:55:00 +0300</lastBuildDate>
-    <atom:link href="https://mostafa-ashour.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 19 Sep 2026 17:24:25 +0300</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Email Headers</title>
+      <link>http://localhost:1313/tags/email-headers/</link>
+      <pubDate>Sat, 19 Sep 2026 17:24:25 +0300</pubDate>
+      <guid>http://localhost:1313/tags/email-headers/</guid>
+      <description></description>
+    </item>
     <item>
       <title>Email Spoofing</title>
-      <link>https://mostafa-ashour.github.io/tags/email-spoofing/</link>
+      <link>http://localhost:1313/tags/email-spoofing/</link>
       <pubDate>Tue, 01 Sep 2026 19:55:00 +0300</pubDate>
-      <guid>https://mostafa-ashour.github.io/tags/email-spoofing/</guid>
+      <guid>http://localhost:1313/tags/email-spoofing/</guid>
       <description></description>
     </item>
     <item>
       <title>Email Threat Vectors</title>
-      <link>https://mostafa-ashour.github.io/tags/email-threat-vectors/</link>
+      <link>http://localhost:1313/tags/email-threat-vectors/</link>
       <pubDate>Tue, 01 Sep 2026 19:55:00 +0300</pubDate>
-      <guid>https://mostafa-ashour.github.io/tags/email-threat-vectors/</guid>
+      <guid>http://localhost:1313/tags/email-threat-vectors/</guid>
       <description></description>
     </item>
     <item>
       <title>Email Threats</title>
-      <link>https://mostafa-ashour.github.io/tags/email-threats/</link>
+      <link>http://localhost:1313/tags/email-threats/</link>
       <pubDate>Tue, 01 Sep 2026 19:55:00 +0300</pubDate>
-      <guid>https://mostafa-ashour.github.io/tags/email-threats/</guid>
+      <guid>http://localhost:1313/tags/email-threats/</guid>
       <description></description>
     </item>
     <item>
       <title>Phishing</title>
-      <link>https://mostafa-ashour.github.io/tags/phishing/</link>
+      <link>http://localhost:1313/tags/phishing/</link>
       <pubDate>Tue, 01 Sep 2026 19:55:00 +0300</pubDate>
-      <guid>https://mostafa-ashour.github.io/tags/phishing/</guid>
+      <guid>http://localhost:1313/tags/phishing/</guid>
       <description></description>
     </item>
     <item>
       <title>Powershell</title>
-      <link>https://mostafa-ashour.github.io/tags/powershell/</link>
+      <link>http://localhost:1313/tags/powershell/</link>
       <pubDate>Sun, 26 Apr 2026 19:29:11 +0300</pubDate>
-      <guid>https://mostafa-ashour.github.io/tags/powershell/</guid>
+      <guid>http://localhost:1313/tags/powershell/</guid>
       <description></description>
     </item>
     <item>
       <title>Windows</title>
-      <link>https://mostafa-ashour.github.io/tags/windows/</link>
+      <link>http://localhost:1313/tags/windows/</link>
       <pubDate>Sun, 26 Apr 2026 19:29:11 +0300</pubDate>
-      <guid>https://mostafa-ashour.github.io/tags/windows/</guid>
+      <guid>http://localhost:1313/tags/windows/</guid>
       <description></description>
     </item>
     <item>
       <title>CMD</title>
-      <link>https://mostafa-ashour.github.io/tags/cmd/</link>
+      <link>http://localhost:1313/tags/cmd/</link>
       <pubDate>Sun, 26 Apr 2026 19:28:58 +0300</pubDate>
-      <guid>https://mostafa-ashour.github.io/tags/cmd/</guid>
+      <guid>http://localhost:1313/tags/cmd/</guid>
       <description></description>
     </item>
     <item>
       <title>Windows CMD/Powershell</title>
-      <link>https://mostafa-ashour.github.io/tags/windows-cmd/powershell/</link>
+      <link>http://localhost:1313/tags/windows-cmd/powershell/</link>
       <pubDate>Sun, 26 Apr 2026 19:20:24 +0300</pubDate>
-      <guid>https://mostafa-ashour.github.io/tags/windows-cmd/powershell/</guid>
+      <guid>http://localhost:1313/tags/windows-cmd/powershell/</guid>
       <description></description>
     </item>
     <item>
       <title>Untagged</title>
-      <link>https://mostafa-ashour.github.io/tags/untagged/</link>
+      <link>http://localhost:1313/tags/untagged/</link>
       <pubDate>Fri, 17 Apr 2026 14:34:26 +0200</pubDate>
-      <guid>https://mostafa-ashour.github.io/tags/untagged/</guid>
+      <guid>http://localhost:1313/tags/untagged/</guid>
       <description></description>
     </item>
     <item>
       <title>Cybersecurity</title>
-      <link>https://mostafa-ashour.github.io/tags/cybersecurity/</link>
+      <link>http://localhost:1313/tags/cybersecurity/</link>
       <pubDate>Fri, 17 Apr 2026 14:33:33 +0200</pubDate>
-      <guid>https://mostafa-ashour.github.io/tags/cybersecurity/</guid>
+      <guid>http://localhost:1313/tags/cybersecurity/</guid>
       <description></description>
     </item>
     <item>
       <title>IDS</title>
-      <link>https://mostafa-ashour.github.io/tags/ids/</link>
+      <link>http://localhost:1313/tags/ids/</link>
       <pubDate>Fri, 17 Apr 2026 14:33:33 +0200</pubDate>
-      <guid>https://mostafa-ashour.github.io/tags/ids/</guid>
+      <guid>http://localhost:1313/tags/ids/</guid>
       <description></description>
     </item>
     <item>
       <title>IPS</title>
-      <link>https://mostafa-ashour.github.io/tags/ips/</link>
+      <link>http://localhost:1313/tags/ips/</link>
       <pubDate>Fri, 17 Apr 2026 14:33:33 +0200</pubDate>
-      <guid>https://mostafa-ashour.github.io/tags/ips/</guid>
+      <guid>http://localhost:1313/tags/ips/</guid>
       <description></description>
     </item>
     <item>
       <title>Networking</title>
-      <link>https://mostafa-ashour.github.io/tags/networking/</link>
+      <link>http://localhost:1313/tags/networking/</link>
       <pubDate>Fri, 17 Apr 2026 14:33:33 +0200</pubDate>
-      <guid>https://mostafa-ashour.github.io/tags/networking/</guid>
+      <guid>http://localhost:1313/tags/networking/</guid>
       <description></description>
     </item>
     <item>
       <title>SOC</title>
-      <link>https://mostafa-ashour.github.io/tags/soc/</link>
+      <link>http://localhost:1313/tags/soc/</link>
       <pubDate>Fri, 17 Apr 2026 14:33:33 +0200</pubDate>
-      <guid>https://mostafa-ashour.github.io/tags/soc/</guid>
+      <guid>http://localhost:1313/tags/soc/</guid>
       <description></description>
     </item>
     <item>
       <title>Traffic-Analysis</title>
-      <link>https://mostafa-ashour.github.io/tags/traffic-analysis/</link>
+      <link>http://localhost:1313/tags/traffic-analysis/</link>
       <pubDate>Fri, 17 Apr 2026 14:33:33 +0200</pubDate>
-      <guid>https://mostafa-ashour.github.io/tags/traffic-analysis/</guid>
+      <guid>http://localhost:1313/tags/traffic-analysis/</guid>
       <description></description>
     </item>
   </channel>

@@ -2,52 +2,52 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://mostafa-ashour.github.io/fr/</loc>
+    <loc>http://localhost:1313/fr/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-us"
-                href="https://mostafa-ashour.github.io/"
+                href="http://localhost:1313/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="fr"
-                href="https://mostafa-ashour.github.io/fr/"
+                href="http://localhost:1313/fr/"
                 />
   </url><url>
-    <loc>https://mostafa-ashour.github.io/fr/categories/</loc>
+    <loc>http://localhost:1313/fr/categories/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-us"
-                href="https://mostafa-ashour.github.io/categories/"
+                href="http://localhost:1313/categories/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="fr"
-                href="https://mostafa-ashour.github.io/fr/categories/"
+                href="http://localhost:1313/fr/categories/"
                 />
   </url><url>
-    <loc>https://mostafa-ashour.github.io/fr/series/</loc>
+    <loc>http://localhost:1313/fr/series/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-us"
-                href="https://mostafa-ashour.github.io/series/"
+                href="http://localhost:1313/series/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="fr"
-                href="https://mostafa-ashour.github.io/fr/series/"
+                href="http://localhost:1313/fr/series/"
                 />
   </url><url>
-    <loc>https://mostafa-ashour.github.io/fr/tags/</loc>
+    <loc>http://localhost:1313/fr/tags/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-us"
-                href="https://mostafa-ashour.github.io/tags/"
+                href="http://localhost:1313/tags/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="fr"
-                href="https://mostafa-ashour.github.io/fr/tags/"
+                href="http://localhost:1313/fr/tags/"
                 />
   </url>
 </urlset>

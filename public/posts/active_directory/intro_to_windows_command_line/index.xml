@@ -1,20 +1,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>Intro_to_Windows_Command_Line on Ashour Blog</title>
-        <link>https://mostafa-ashour.github.io/posts/active_directory/intro_to_windows_command_line/</link>
+        <link>http://localhost:1313/posts/active_directory/intro_to_windows_command_line/</link>
         <description>Recent content in Intro_to_Windows_Command_Line on Ashour Blog</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
         <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
         <lastBuildDate>Sun, 26 Apr 2026 19:27:57 +0300</lastBuildDate>
-        <atom:link href="https://mostafa-ashour.github.io/posts/active_directory/intro_to_windows_command_line/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="http://localhost:1313/posts/active_directory/intro_to_windows_command_line/index.xml" rel="self" type="application/rss+xml" />
         
         <item>
             <title>Powershell</title>
-            <link>https://mostafa-ashour.github.io/posts/2026/04/powershell/</link>
+            <link>http://localhost:1313/posts/2026/04/powershell/</link>
             <pubDate>Sun, 26 Apr 2026 19:29:11 +0300</pubDate>
             
-            <guid>https://mostafa-ashour.github.io/posts/2026/04/powershell/</guid>
+            <guid>http://localhost:1313/posts/2026/04/powershell/</guid>
             <description>&lt;h1 id=&#34;cmd-vs-powershell&#34;&gt;CMD Vs. PowerShell&lt;/h1&gt;
 &lt;ul&gt;
 &lt;li&gt;It&amp;rsquo;s time to look at Windows&amp;rsquo; modern successor to CMD, &lt;a href=&#34;https://learn.microsoft.com/en-us/powershell/scripting/overview?view=powershell-7.2&#34;&gt;PowerShell&lt;/a&gt;.&lt;/li&gt;
@@ -4139,10 +4139,10 @@
         
         <item>
             <title>CMD</title>
-            <link>https://mostafa-ashour.github.io/posts/2026/04/cmd/</link>
+            <link>http://localhost:1313/posts/2026/04/cmd/</link>
             <pubDate>Sun, 26 Apr 2026 19:28:58 +0300</pubDate>
             
-            <guid>https://mostafa-ashour.github.io/posts/2026/04/cmd/</guid>
+            <guid>http://localhost:1313/posts/2026/04/cmd/</guid>
             <description>&lt;h1 id=&#34;command-prompt-basics&#34;&gt;Command Prompt Basics&lt;/h1&gt;
 &lt;ul&gt;
 &lt;li&gt;To begin developing command-line skills, we&amp;rsquo;ll start with &lt;code&gt;cmd.exe&lt;/code&gt; (the Command Prompt) which includes:
