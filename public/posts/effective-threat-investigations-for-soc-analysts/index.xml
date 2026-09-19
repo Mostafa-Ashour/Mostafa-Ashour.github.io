@@ -1,20 +1,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>Effective Threat Investigation for SOC Analysts on Ashour Blog</title>
-        <link>http://localhost:1313/posts/effective-threat-investigations-for-soc-analysts/</link>
+        <link>https://mostafa-ashour.github.io/posts/effective-threat-investigations-for-soc-analysts/</link>
         <description>Recent content in Effective Threat Investigation for SOC Analysts on Ashour Blog</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
         <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
         <lastBuildDate>Tue, 01 Sep 2026 00:00:00 +0000</lastBuildDate>
-        <atom:link href="http://localhost:1313/posts/effective-threat-investigations-for-soc-analysts/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="https://mostafa-ashour.github.io/posts/effective-threat-investigations-for-soc-analysts/index.xml" rel="self" type="application/rss+xml" />
         
         <item>
             <title>2 Email Header Analysis</title>
-            <link>http://localhost:1313/posts/2026/09/2-email-header-analysis/</link>
+            <link>https://mostafa-ashour.github.io/posts/2026/09/2-email-header-analysis/</link>
             <pubDate>Sat, 19 Sep 2026 17:24:25 +0300</pubDate>
             
-            <guid>http://localhost:1313/posts/2026/09/2-email-header-analysis/</guid>
+            <guid>https://mostafa-ashour.github.io/posts/2026/09/2-email-header-analysis/</guid>
             <description>&lt;ul&gt;
 &lt;li&gt;Email Flow and Header Analysis&lt;/li&gt;
 &lt;/ul&gt;
@@ -22,7 +22,7 @@
 &lt;ul&gt;
 &lt;li&gt;&lt;em&gt;&lt;strong&gt;Email Flow&lt;/strong&gt;&lt;/em&gt; means the path/hops the email passes through when it&amp;rsquo;s sent from the Sender until it&amp;rsquo;s delivered to the Recipient.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/Effective%20Threat%20Investigations%20for%20SOC%20Analysts/2-%20Email%20Header%20Analysis/email_flow.png&#34; alt=&#34;email_flow&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://mostafa-ashour.github.io/Effective%20Threat%20Investigations%20for%20SOC%20Analysts/2-%20Email%20Header%20Analysis/email_flow.png&#34; alt=&#34;email_flow&#34;&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;em&gt;&lt;strong&gt;MUA (Mail User Agent)&lt;/strong&gt;&lt;/em&gt;—The agent used by the client to send the email. For instance, Outlook or browsers like Microsoft Edge.&lt;/li&gt;
 &lt;li&gt;&lt;em&gt;&lt;strong&gt;MSA (Mail Submission Agent)&lt;/strong&gt;&lt;/em&gt;—the agent that will receive the mail after the client has submitted it to the MUA.&lt;/li&gt;
@@ -371,16 +371,16 @@
         
         <item>
             <title>1 Investigating Email Threats</title>
-            <link>http://localhost:1313/posts/2026/09/1-investigating-email-threats/</link>
+            <link>https://mostafa-ashour.github.io/posts/2026/09/1-investigating-email-threats/</link>
             <pubDate>Tue, 01 Sep 2026 19:55:00 +0300</pubDate>
             
-            <guid>http://localhost:1313/posts/2026/09/1-investigating-email-threats/</guid>
+            <guid>https://mostafa-ashour.github.io/posts/2026/09/1-investigating-email-threats/</guid>
             <description>&lt;h1 id=&#34;architecture-overview&#34;&gt;Architecture Overview&lt;/h1&gt;
 &lt;ul&gt;
 &lt;li&gt;A Home Lab Investigating Email Threats.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;network-topology&#34;&gt;Network Topology&lt;/h2&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/Effective%20Threat%20Investigations%20for%20SOC%20Analysts/1-%20Investigating%20Email%20Threats/home_lab_topology.png&#34; alt=&#34;home_lab_topology&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://mostafa-ashour.github.io/Effective%20Threat%20Investigations%20for%20SOC%20Analysts/1-%20Investigating%20Email%20Threats/home_lab_topology.png&#34; alt=&#34;home_lab_topology&#34;&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;All components reside on an isolated internal network (&lt;code&gt;192.168.150.0/24&lt;/code&gt;) to ensure complete lab safety while maintaining realistic cross-tier communications:
 &lt;ul&gt;
