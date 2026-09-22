@@ -3,6 +3,7 @@ title: "2 Email Header Analysis"
 date: 2026-09-19T17:24:25+03:00
 draft: false
 toc: false
+cover: "/Effective%20Threat%20Investigations%20for%20SOC%20Analysts/2-%20Email%20Header%20Analysis/2.%20thumb.jpg"
 images:
 tags:
   - Email Headers
