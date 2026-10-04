@@ -10,10 +10,10 @@
     <lastBuildDate>Sun, 04 Oct 2026 18:35:50 +0300</lastBuildDate>
     <atom:link href="https://mostafa-ashour.github.io/tags/kerberos-protocol/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>3  Tracking Accoung Login</title>
-      <link>https://mostafa-ashour.github.io/posts/2026/10/3-tracking-accoung-login/</link>
+      <title>3 Tracking Account Login</title>
+      <link>https://mostafa-ashour.github.io/posts/2026/10/3-tracking-account-login/</link>
       <pubDate>Sun, 04 Oct 2026 18:35:50 +0300</pubDate>
-      <guid>https://mostafa-ashour.github.io/posts/2026/10/3-tracking-accoung-login/</guid>
+      <guid>https://mostafa-ashour.github.io/posts/2026/10/3-tracking-account-login/</guid>
       <description>&lt;ul&gt;&#xA;&lt;li&gt;Almost Everything and every action in a Windows Environment is mapped to an account and logged.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h1 id=&#34;1-how-to-track-account-loggings&#34;&gt;1. How to track Account Loggings&lt;/h1&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;I need to be able to detect and investigate compromised account activities.&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;I&amp;rsquo;ll be able to do so, by firstly tracking the account Login.&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;In a windows environment, Login Event (either succeeded of failed) is recorded as event log.&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;This event log includes valuable information, for instance:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Timestamp.&lt;/li&gt;&#xA;&lt;li&gt;Account Name.&lt;/li&gt;&#xA;&lt;li&gt;Authentication Method.&lt;/li&gt;&#xA;&lt;li&gt;etc.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;in-case-of-a-successful-login&#34;&gt;In case of a Successful Login&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;The Event Id responsible for recording successful logins is &lt;code&gt;Event Id 4624(S): An account was successfully logged on&lt;/code&gt;.&lt;/li&gt;&#xA;&lt;li&gt;Microsoft docs: &lt;a href=&#34;https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/auditing/event-4624&#34;&gt;4624(S) An account was successfully logged on&lt;/a&gt;.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;&lt;img src=&#34;https://mostafa-ashour.github.io/Effective%20Threat%20Investigations%20for%20SOC%20Analysts/3-%20Tracking%20Account%20Login/event-4624.png&#34; alt=&#34;event-4624&#34;&gt;&lt;/p&gt;</description>
     </item>
   </channel>
