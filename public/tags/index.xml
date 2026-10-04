@@ -7,8 +7,29 @@
     <generator>Hugo</generator>
     <language>en-us</language>
     <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-    <lastBuildDate>Sat, 19 Sep 2026 17:24:25 +0300</lastBuildDate>
+    <lastBuildDate>Sun, 04 Oct 2026 18:35:50 +0300</lastBuildDate>
     <atom:link href="https://mostafa-ashour.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Kerberos Protocol</title>
+      <link>https://mostafa-ashour.github.io/tags/kerberos-protocol/</link>
+      <pubDate>Sun, 04 Oct 2026 18:35:50 +0300</pubDate>
+      <guid>https://mostafa-ashour.github.io/tags/kerberos-protocol/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>NTLM Protocol</title>
+      <link>https://mostafa-ashour.github.io/tags/ntlm-protocol/</link>
+      <pubDate>Sun, 04 Oct 2026 18:35:50 +0300</pubDate>
+      <guid>https://mostafa-ashour.github.io/tags/ntlm-protocol/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>User Logon Attempts</title>
+      <link>https://mostafa-ashour.github.io/tags/user-logon-attempts/</link>
+      <pubDate>Sun, 04 Oct 2026 18:35:50 +0300</pubDate>
+      <guid>https://mostafa-ashour.github.io/tags/user-logon-attempts/</guid>
+      <description></description>
+    </item>
     <item>
       <title>Email Headers</title>
       <link>https://mostafa-ashour.github.io/tags/email-headers/</link>

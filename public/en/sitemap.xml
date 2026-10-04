@@ -2,11 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://mostafa-ashour.github.io/posts/2026/09/2-email-header-analysis/</loc>
-    <lastmod>2026-09-19T17:24:25+03:00</lastmod>
+    <loc>https://mostafa-ashour.github.io/posts/2026/10/3-tracking-accoung-login/</loc>
+    <lastmod>2026-10-04T18:35:50+03:00</lastmod>
   </url><url>
     <loc>https://mostafa-ashour.github.io/</loc>
-    <lastmod>2026-09-19T17:24:25+03:00</lastmod>
+    <lastmod>2026-10-04T18:35:50+03:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="fr"
@@ -18,14 +18,17 @@
                 href="https://mostafa-ashour.github.io/"
                 />
   </url><url>
-    <loc>https://mostafa-ashour.github.io/tags/email-headers/</loc>
-    <lastmod>2026-09-19T17:24:25+03:00</lastmod>
+    <loc>https://mostafa-ashour.github.io/tags/kerberos-protocol/</loc>
+    <lastmod>2026-10-04T18:35:50+03:00</lastmod>
+  </url><url>
+    <loc>https://mostafa-ashour.github.io/tags/ntlm-protocol/</loc>
+    <lastmod>2026-10-04T18:35:50+03:00</lastmod>
   </url><url>
     <loc>https://mostafa-ashour.github.io/posts/</loc>
-    <lastmod>2026-09-19T17:24:25+03:00</lastmod>
+    <lastmod>2026-10-04T18:35:50+03:00</lastmod>
   </url><url>
     <loc>https://mostafa-ashour.github.io/tags/</loc>
-    <lastmod>2026-09-19T17:24:25+03:00</lastmod>
+    <lastmod>2026-10-04T18:35:50+03:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="fr"
@@ -36,6 +39,15 @@
                 hreflang="en-us"
                 href="https://mostafa-ashour.github.io/tags/"
                 />
+  </url><url>
+    <loc>https://mostafa-ashour.github.io/tags/user-logon-attempts/</loc>
+    <lastmod>2026-10-04T18:35:50+03:00</lastmod>
+  </url><url>
+    <loc>https://mostafa-ashour.github.io/posts/2026/09/2-email-header-analysis/</loc>
+    <lastmod>2026-09-19T17:24:25+03:00</lastmod>
+  </url><url>
+    <loc>https://mostafa-ashour.github.io/tags/email-headers/</loc>
+    <lastmod>2026-09-19T17:24:25+03:00</lastmod>
   </url><url>
     <loc>https://mostafa-ashour.github.io/posts/2026/09/1-investigating-email-threats/</loc>
     <lastmod>2026-09-01T19:55:00+03:00</lastmod>

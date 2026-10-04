@@ -10,6 +10,441 @@
         <atom:link href="https://mostafa-ashour.github.io/posts/effective-threat-investigations-for-soc-analysts/index.xml" rel="self" type="application/rss+xml" />
         
         <item>
+            <title>3  Tracking Accoung Login</title>
+            <link>https://mostafa-ashour.github.io/posts/2026/10/3-tracking-accoung-login/</link>
+            <pubDate>Sun, 04 Oct 2026 18:35:50 +0300</pubDate>
+            
+            <guid>https://mostafa-ashour.github.io/posts/2026/10/3-tracking-accoung-login/</guid>
+            <description>&lt;ul&gt;
+&lt;li&gt;Almost Everything and every action in a Windows Environment is mapped to an account and logged.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;1-how-to-track-account-loggings&#34;&gt;1. How to track Account Loggings&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;I need to be able to detect and investigate compromised account activities.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;I&amp;rsquo;ll be able to do so, by firstly tracking the account Login.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;In a windows environment, Login Event (either succeeded of failed) is recorded as event log.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;This event log includes valuable information, for instance:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Timestamp.&lt;/li&gt;
+&lt;li&gt;Account Name.&lt;/li&gt;
+&lt;li&gt;Authentication Method.&lt;/li&gt;
+&lt;li&gt;etc.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;in-case-of-a-successful-login&#34;&gt;In case of a Successful Login&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;The Event Id responsible for recording successful logins is &lt;code&gt;Event Id 4624(S): An account was successfully logged on&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Microsoft docs: &lt;a href=&#34;https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/auditing/event-4624&#34;&gt;4624(S) An account was successfully logged on&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://mostafa-ashour.github.io/Effective%20Threat%20Investigations%20for%20SOC%20Analysts/3-%20Tracking%20Account%20Login/event-4624.png&#34; alt=&#34;event-4624&#34;&gt;&lt;/p&gt;</description>
+            <content type="html"><![CDATA[<ul>
+<li>Almost Everything and every action in a Windows Environment is mapped to an account and logged.</li>
+</ul>
+<h1 id="1-how-to-track-account-loggings">1. How to track Account Loggings</h1>
+<ul>
+<li>
+<p>I need to be able to detect and investigate compromised account activities.</p>
+</li>
+<li>
+<p>I&rsquo;ll be able to do so, by firstly tracking the account Login.</p>
+</li>
+<li>
+<p>In a windows environment, Login Event (either succeeded of failed) is recorded as event log.</p>
+</li>
+<li>
+<p>This event log includes valuable information, for instance:</p>
+<ul>
+<li>Timestamp.</li>
+<li>Account Name.</li>
+<li>Authentication Method.</li>
+<li>etc.</li>
+</ul>
+</li>
+</ul>
+<h3 id="in-case-of-a-successful-login">In case of a Successful Login</h3>
+<ul>
+<li>The Event Id responsible for recording successful logins is <code>Event Id 4624(S): An account was successfully logged on</code>.</li>
+<li>Microsoft docs: <a href="https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/auditing/event-4624">4624(S) An account was successfully logged on</a>.</li>
+</ul>
+<p><img src="/Effective%20Threat%20Investigations%20for%20SOC%20Analysts/3-%20Tracking%20Account%20Login/event-4624.png" alt="event-4624"></p>
+<ul>
+<li>Windows Logon Type:
+<img src="/Effective%20Threat%20Investigations%20for%20SOC%20Analysts/3-%20Tracking%20Account%20Login/windows_logon_type.png" alt="windows_logon_type"></li>
+</ul>
+<h3 id="in-case-of-a-failed-login">In case of a failed Login</h3>
+<ul>
+<li>The Event Id responsible for recording successful logins is <code># 4625(F): An account failed to log on</code>.</li>
+<li>Microsoft docs: <a href="https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/auditing/event-4625">4625(F) An account failed to log on</a></li>
+</ul>
+<p><img src="/Effective%20Threat%20Investigations%20for%20SOC%20Analysts/3-%20Tracking%20Account%20Login/event_id_4625.png" alt="event_id_4625"></p>
+<p><img src="/Effective%20Threat%20Investigations%20for%20SOC%20Analysts/3-%20Tracking%20Account%20Login/windows_logon_failure_status_and_substatus_codes.png" alt="windows_logon_failure_status_and_substatus_codes"></p>
+<h3 id="in-case-of-a-blocked-account">In case of a blocked account</h3>
+<ul>
+<li>
+<p>Depending on the company security policy, after a number of failed logins attempts, the account will be locked for a certain time or until unlocked by the system administrator which is also predefined by the company security policy.</p>
+</li>
+<li>
+<p>Windows log the account lock event in <code>Event ID 4740(S): A user account was locked out</code>.</p>
+</li>
+<li>
+<p>Windows docs: <a href="https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/auditing/event-4740">4740(S) A user account was locked out</a>.</p>
+</li>
+</ul>
+<p><img src="/Effective%20Threat%20Investigations%20for%20SOC%20Analysts/3-%20Tracking%20Account%20Login/event_id_4740.png" alt="event_id_4740"></p>
+<h3 id="how-to-know-if-the-successfully-logged-in-user-is-an-administrator">How to know if the successfully logged in user is an Administrator</h3>
+<ul>
+<li>
+<p>Since Administrative privileged accounts are of top sensitive accounts.</p>
+</li>
+<li>
+<p>Therefore, tracking this accounts&rsquo; actions are important.</p>
+</li>
+<li>
+<p>To know if the newly logged in user is an Administrator.</p>
+</li>
+<li>
+<p>After checking the presented creds of the user and <code>Event ID 4624</code> is generated.</p>
+</li>
+<li>
+<p>Another event indicating that this account has privileges, which is <code>Event ID 4672(S): Special privileges assigned to new logon</code>.</p>
+</li>
+<li>
+<p>Windows docs: <a href="https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/auditing/event-4672">4672(S) Special privileges assigned to new logon</a>.</p>
+</li>
+<li>
+<p>which means that the newly logged in user is granted special privileges, ofc according to the company&rsquo;s security policy.</p>
+</li>
+</ul>
+<p><img src="/Effective%20Threat%20Investigations%20for%20SOC%20Analysts/3-%20Tracking%20Account%20Login/event_id_4672.png" alt="event_id_4672"></p>
+<h3 id="logon-sessions-tracking">Logon Sessions Tracking</h3>
+<ul>
+<li>
+<p>After knowing the state of the user whois trying to log in, either a successful or failed login attempt.</p>
+</li>
+<li>
+<p>In case of a successful login attempt, I want to track this login session specifically when this user is going to log off.</p>
+</li>
+<li>
+<p>In case I want to track logon sessions, I want to know:</p>
+<ul>
+<li>When the session started (the time of login, event 4624).</li>
+<li>When the session ended (the time of logoff, event 4647 or 4634).</li>
+<li>Compare timestamps between both events.</li>
+</ul>
+</li>
+<li>
+<p>Windows docs for both events:</p>
+<ul>
+<li><a href="https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/auditing/event-4647">4647(S) User initiated logoff</a>.</li>
+<li><a href="https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/auditing/event-4634">4634(S) An account was logged off</a>.</li>
+</ul>
+</li>
+<li>
+<p>To track the session timeframe, you firstly need to identify the <code>Logon ID</code>, which is a unique identifier for each logon session, from event id 4624.</p>
+</li>
+<li>
+<p>Then compare the timestamp between the Login event and Logoff Event.</p>
+</li>
+</ul>
+<p><em><strong>Event ID 4647</strong></em></p>
+<p><img src="/Effective%20Threat%20Investigations%20for%20SOC%20Analysts/3-%20Tracking%20Account%20Login/event_id_4647.png" alt="event_id_4647"></p>
+<p><em><strong>Event ID 4634</strong></em></p>
+<p><img src="/Effective%20Threat%20Investigations%20for%20SOC%20Analysts/3-%20Tracking%20Account%20Login/event-4634.png" alt="event-4634"></p>
+<hr>
+<h1 id="2-login-validation-events">2. Login Validation Events</h1>
+<ul>
+<li>
+<p>After going through logon events, we want to know the result of the presented credentials by the user, are they valid or invalid.</p>
+</li>
+<li>
+<p>Here where <code>Login Validation Events</code> comes into play.</p>
+</li>
+<li>
+<p>We have two scenarios:</p>
+<ul>
+<li><em><strong><code>Domain Account Authentication</code></strong></em>—where the Domain Controller serves as the authentication server, and logs the login validation events.</li>
+<li><em><strong><code>Local Account Authentication</code></strong></em>—where the workstation itself serves as the authentication server which authenticates the presented credentials using the SAM database, and the logs of the login validation events are logged on the workstation itself.</li>
+</ul>
+</li>
+</ul>
+<h3 id="local-account-authentication">Local Account Authentication</h3>
+<ul>
+<li>Previously discussed Logon Event Logs are logged locally on the workstation that was presented the credentials in both cases.</li>
+</ul>
+<h3 id="domain-account-authentication">Domain Account Authentication</h3>
+<ul>
+<li>In case of Domain Account Authentication, there&rsquo;re two authentication protocols to use one of them:
+<ul>
+<li>NTLM Protocol.</li>
+<li>Kerberos Protocol.</li>
+</ul>
+</li>
+<li>Based on the used authentication protocol, different logs will exist on the DC.</li>
+</ul>
+<h4 id="ntlm-protocol">NTLM Protocol</h4>
+<ul>
+<li>For both successful and failed logon events, Microsoft Logs only one Event which is <em><strong><code>Event ID 4776(S, F): The computer attempted to validate the credentials for an account</code></strong></em>.</li>
+<li>Microsoft docs: <a href="https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/auditing/event-4776">4776(S, F) The computer attempted to validate the credentials for an account</a>.</li>
+</ul>
+<p><img src="/Effective%20Threat%20Investigations%20for%20SOC%20Analysts/3-%20Tracking%20Account%20Login/event-4776.png" alt="event-4776"></p>
+<ul>
+<li>The Error Code is equivalent to the sub-status code of failed login or event Id 4625.</li>
+</ul>
+<h4 id="kerberos-protocol">Kerberos Protocol</h4>
+<p><img src="/Effective%20Threat%20Investigations%20for%20SOC%20Analysts/3-%20Tracking%20Account%20Login/Kerb_auth.png" alt="Kerb_auth"></p>
+<ul>
+<li>There&rsquo;re three event IDs generated here:</li>
+</ul>
+<ol>
+<li>
+<p><em><strong><code>4768(S, F): A Kerberos authentication ticket (TGT) was requested</code>:</strong></em></p>
+<ul>
+<li>This Event records either the TGT request has succeeded or failed.</li>
+<li>But in our case it&rsquo;ll represent a <strong>Ticket Granting Ticker (TGT)</strong> is created successfully.</li>
+<li>Windows docs: <a href="https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/auditing/event-4768">4768(S, F) A Kerberos authentication ticket (TGT) was requested</a>.
+<img src="/Effective%20Threat%20Investigations%20for%20SOC%20Analysts/3-%20Tracking%20Account%20Login/event_id_4768.png" alt="event_id_4768"></li>
+</ul>
+</li>
+<li>
+<p><em><strong><code>Event ID 4769(S, F): A Kerberos service ticket was requested.</code>:</strong></em></p>
+<ul>
+<li>This event generates every time Key Distribution Center gets a Kerberos Ticket Granting Service (TGS) ticket request.</li>
+<li>This event is generated only on domain controllers.
+<img src="/Effective%20Threat%20Investigations%20for%20SOC%20Analysts/3-%20Tracking%20Account%20Login/event_id_4769.png" alt="event_id_4769"></li>
+</ul>
+</li>
+<li>
+<p><em><strong><code>Event ID 4771(F): Kerberos pre-authentication failed</code>:</strong></em></p>
+<ul>
+<li>This event record pre-authentication failures, which means that the DC failed to validate the provided credentials.</li>
+<li>Therefore, the DC won&rsquo;t grant TGT or TGS.
+<img src="/Effective%20Threat%20Investigations%20for%20SOC%20Analysts/3-%20Tracking%20Account%20Login/event-4771.png" alt="event-4771"></li>
+</ul>
+</li>
+</ol>
+<ul>
+<li>Failure Codes</li>
+</ul>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: left">Failure Code</th>
+          <th>Description</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left"><code>0x6</code></td>
+          <td>Client not found in Kerberos database</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>0x9</code></td>
+          <td>Password must reset</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>0x12</code></td>
+          <td>Account Disabled/Expired/locked-out, or out of logon hours</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>0x17</code></td>
+          <td>Password Expired</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>0x18</code></td>
+          <td>Wrong Password</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>0x20</code></td>
+          <td>Ticket Expired</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h1 id="logs-investigations">Logs Investigations</h1>
+<h2 id="1-track-account-logons">1. Track Account Logons</h2>
+<h3 id="track-successful-logon-attempts">Track Successful Logon Attempts</h3>
+<ul>
+<li>Firstly, I want to check successful logon activities for possible anomalies.</li>
+<li>SPL used:</li>
+</ul>
+<pre tabindex="0"><code class="language-SPL" data-lang="SPL">index=botsv3 sourcetype=WinEventLog EventCode=4624
+| stats count by Logon_Type
+| sort - count
+</code></pre><p><img src="/Effective%20Threat%20Investigations%20for%20SOC%20Analysts/3-%20Tracking%20Account%20Login/investigation_1.png" alt="investigation_1"></p>
+<ul>
+<li>
+<p>As you&rsquo;ll notice that Logon Type 5 is the dominant type across all other types.</p>
+</li>
+<li>
+<p><em><strong>Logon Type 5:</strong></em></p>
+<ul>
+<li>This is activated when the Windows Service Control Manager initiates a service using a specific user or an integrated service account like LOCAL SERVICE or NETWORK SERVICE.</li>
+<li>Highly noisy and usually benign, but can be a red flag is a standard user account generates these type of logon, because it can indicate persistence via newly registered malicious service.</li>
+</ul>
+</li>
+<li>
+<p><em><strong>Logon Type 2</strong></em>—indicates interactive logon, the user is logging on at the local console.</p>
+</li>
+<li>
+<p>I&rsquo;m going to check the process that initiated the logon activity:</p>
+</li>
+</ul>
+<pre tabindex="0"><code class="language-SPL" data-lang="SPL">index=&#34;botsv3&#34; sourcetype=&#34;WinEventLog&#34; EventCode=4624
+| stats count by Process_Name
+| sort - count
+</code></pre><p><img src="/Effective%20Threat%20Investigations%20for%20SOC%20Analysts/3-%20Tracking%20Account%20Login/investigation_2.png" alt="investigation_2"></p>
+<ul>
+<li>Check fields from the Successful Logon Screenshot.</li>
+</ul>
+<pre tabindex="0"><code class="language-SPL" data-lang="SPL">index=&#34;botsv3&#34; sourcetype=&#34;WinEventLog&#34; EventCode=4624
+| eval user=mvindex(Account_Name,1), Logon_ID=mvindex(Logon_ID, 1)
+| table _time host user Logon_ID Logon_Type Source_Network_address Workstation_Name
+| sort _time
+</code></pre><p><img src="/Effective%20Threat%20Investigations%20for%20SOC%20Analysts/3-%20Tracking%20Account%20Login/investigation_3.png" alt="investigation_3"></p>
+<h3 id="track-failed-logon-attempts">Track Failed Logon Attempts</h3>
+<ul>
+<li>Firstly, I&rsquo;ve noticed that there&rsquo;s only 5 failed logon events.</li>
+</ul>
+<pre tabindex="0"><code class="language-SPL" data-lang="SPL">index=&#34;botsv3&#34; sourcetype=&#34;WinEventLog&#34; EventCode=4625
+</code></pre><p><img src="/Effective%20Threat%20Investigations%20for%20SOC%20Analysts/3-%20Tracking%20Account%20Login/investigation_4.png" alt="investigation_4"></p>
+<ul>
+<li>Tracking accounts which failed the authentication:</li>
+</ul>
+<pre tabindex="0"><code class="language-SPL" data-lang="SPL">index=botsv3 sourcetype=&#34;WinEventLog&#34; EventCode=4625
+| eval user=mvindex(Account_Name,1)
+| stats count values(Logon_Type) as types by user Source_Network_Address host
+| table user host types Source_Network_Address count
+| sort - count
+</code></pre><p><img src="/Effective%20Threat%20Investigations%20for%20SOC%20Analysts/3-%20Tracking%20Account%20Login/investigation_5.png" alt="investigation_5"></p>
+<ul>
+<li>Checking the failure reason:</li>
+</ul>
+<pre tabindex="0"><code class="language-SPL" data-lang="SPL">index=&#34;botsv3&#34; sourcetype=&#34;WinEventLog&#34; EventCode=4625
+| eval user=mvindex(Account_Name,1)
+| stats count by user host Logon_Type Failure_Reason Sub_Status
+| where isnotnull(user) AND isnotnull(Logon_Type)
+</code></pre><p><img src="/Effective%20Threat%20Investigations%20for%20SOC%20Analysts/3-%20Tracking%20Account%20Login/investigation_6.png" alt="investigation_6"></p>
+<h3 id="tracking-blocked-account">Tracking Blocked Account</h3>
+<ul>
+<li>I&rsquo;m gonna track Event ID 4740:</li>
+</ul>
+<pre tabindex="0"><code class="language-SPL" data-lang="SPL">index=&#34;botsv3&#34; sourcetype=&#34;WinEventLog&#34; EventCode=4740
+</code></pre><p><img src="/Effective%20Threat%20Investigations%20for%20SOC%20Analysts/3-%20Tracking%20Account%20Login/investigation_7.png" alt="investigation_7"></p>
+<ul>
+<li>Since there&rsquo;s no results to our search queries, therefore there&rsquo;s no blocked accounts to investigate in.</li>
+</ul>
+<h3 id="tracking-administrator-login">Tracking Administrator Login</h3>
+<ul>
+<li>Track Event ID 4672, which indicates that the logon is granted special privileges:</li>
+</ul>
+<pre tabindex="0"><code class="language-SPL" data-lang="SPL">index=&#34;botsv3&#34; sourcetype=&#34;WinEventLog&#34; EventCode=4672
+| stats count by Account_Name ComputerName
+| sort - count
+</code></pre><p><img src="/Effective%20Threat%20Investigations%20for%20SOC%20Analysts/3-%20Tracking%20Account%20Login/investigation_8.png" alt="investigation_8"></p>
+<ul>
+<li>I want to see administrative account logon, therefor I&rsquo;m going to neglect service accounts.</li>
+<li>Note: I&rsquo;m just traversing the logs not investigating any attack technique.</li>
+</ul>
+<pre tabindex="0"><code class="language-SPL" data-lang="SPL">index=&#34;botsv3&#34; sourcetype=&#34;WinEventLog&#34; EventCode=4672
+| stats count by Account_Name ComputerName
+| where NOT match(Account_Name,&#34;^(SYSTEM|LOCAL SERVICE|NETWORK SERVICE|DWM-\d+|UMFD-\d+)$&#34;) AND NOT match(Account_Name,&#34;\$$&#34;)
+| sort - count
+</code></pre><p><img src="/Effective%20Threat%20Investigations%20for%20SOC%20Analysts/3-%20Tracking%20Account%20Login/investigation_9.png" alt="investigation_9"></p>
+<h3 id="logon-session-tracking">Logon Session Tracking</h3>
+<ul>
+<li>Firstly, I need to identify two things:
+<ul>
+<li>The Target User Name of the user I want to track his logon session.</li>
+<li>The corresponding Logon ID.</li>
+</ul>
+</li>
+</ul>
+<pre tabindex="0"><code class="language-SPL" data-lang="SPL">index=&#34;botsv3&#34; sourcetype=&#34;WinEventLog&#34; EventCode=4624
+| eval user=mvindex(Account_Name,1), logon_id=mvindex(Logon_ID,1)
+| where NOT match(user,&#34;^(SYSTEM|LOCAL SERVICE|NETWORK SERVICE|DWM-\d+|UMFD-\d+)$&#34;) AND NOT match(user,&#34;\\$$&#34;)
+| table _time user logon_id Logon_Type
+</code></pre><p><img src="/Effective%20Threat%20Investigations%20for%20SOC%20Analysts/3-%20Tracking%20Account%20Login/investigation_10.png" alt="investigation_10"></p>
+<ul>
+<li>Let&rsquo;s make an assumption that I want to know the session duration for the first successful logon attempt.</li>
+<li>Therefore:
+<ul>
+<li>Take the logon ID for that specific logon event.</li>
+<li>Search using it for events 4647 or 4634.</li>
+<li>Take the timestamp for the event result.</li>
+<li>Finally, you have the starting and ending timestamps, and you can calculate the logon session timing.</li>
+</ul>
+</li>
+</ul>
+<pre tabindex="0"><code class="language-SPL" data-lang="SPL">index=&#34;botsv3&#34; sourcetype=&#34;WinEventLog&#34; Logon_ID=&#34;0x7797E&#34; EventCode IN (4647 , 4634)
+| table _time Account_Name Logon_ID
+</code></pre><p><img src="/Effective%20Threat%20Investigations%20for%20SOC%20Analysts/3-%20Tracking%20Account%20Login/investigation_11.png" alt="investigation_11"></p>
+<h2 id="2-logon-validation-events">2. Logon Validation Events</h2>
+<h3 id="ntlm-protocol-1">NTLM Protocol</h3>
+<ul>
+<li>Let&rsquo;s see the:
+<ul>
+<li>Logon Account.</li>
+<li>Source Workstation</li>
+<li>Error Code</li>
+</ul>
+</li>
+</ul>
+<pre tabindex="0"><code class="language-SPL" data-lang="SPL">index=t1110_003 EventCode=4776
+| stats count by Logon_Account Source_Workstation Error_Code 
+| sort - count
+</code></pre><p><img src="/Effective%20Threat%20Investigations%20for%20SOC%20Analysts/3-%20Tracking%20Account%20Login/investigation_12.png" alt="investigation_12"></p>
+<ul>
+<li>Let&rsquo;s see the most occurred error codes and look at their relevant meaning from the table.</li>
+</ul>
+<pre tabindex="0"><code class="language-SPL" data-lang="SPL">index=t1110_003 EventCode=4776
+| stats count by Error_Code 
+| sort - count
+</code></pre><p><img src="/Effective%20Threat%20Investigations%20for%20SOC%20Analysts/3-%20Tracking%20Account%20Login/investigation_13.png" alt="investigation_13"></p>
+<ul>
+<li>
+<p>I&rsquo;ve noticed that:</p>
+<ul>
+<li>80 logon attempts with wrong password.</li>
+<li>40 logon attempts with wrong username.</li>
+</ul>
+</li>
+<li>
+<p>Let&rsquo;s see which accounts are responsible for those failed logon attempts.</p>
+</li>
+</ul>
+<pre tabindex="0"><code class="language-SPL" data-lang="SPL">index=t1110_003 sourcetype=* EventCode=4776
+| stats count by Logon_Account Error_Code
+| sort - count
+```[cite: 3]
+</code></pre><p><img src="/Effective%20Threat%20Investigations%20for%20SOC%20Analysts/3-%20Tracking%20Account%20Login/investigation_14.png" alt="investigation_14"></p>
+<h3 id="kerberos-protocol-1">Kerberos Protocol</h3>
+<ul>
+<li>Traversing Event Codes 4768,4769</li>
+</ul>
+<pre tabindex="0"><code class="language-SPL" data-lang="SPL">index=t1110_003 sourcetype=* EventCode IN (4768,4769)
+| stats count by EventCode Account_Name Client_Address Result_Code
+| sort - count
+</code></pre><p><img src="/Effective%20Threat%20Investigations%20for%20SOC%20Analysts/3-%20Tracking%20Account%20Login/investigation_15.png" alt="investigation_15"></p>
+<ul>
+<li>Traversing Pre-Authentication Failures:</li>
+</ul>
+<pre tabindex="0"><code class="language-SPL" data-lang="SPL">index=t1110_003 sourcetype=* EventCode=4771
+| stats count by EventCode Account_Name Client_Address Failure_Code
+| sort - count
+</code></pre><p><img src="/Effective%20Threat%20Investigations%20for%20SOC%20Analysts/3-%20Tracking%20Account%20Login/investigation_16.png" alt="investigation_16"></p>
+<hr>
+]]></content>
+        </item>
+        
+        <item>
             <title>2 Email Header Analysis</title>
             <link>https://mostafa-ashour.github.io/posts/2026/09/2-email-header-analysis/</link>
             <pubDate>Sat, 19 Sep 2026 17:24:25 +0300</pubDate>
